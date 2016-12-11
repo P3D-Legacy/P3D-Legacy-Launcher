@@ -1,6 +1,6 @@
 ﻿namespace P3D.Legacy.Launcher.Forms
 {
-    partial class DirectDownloaderForm
+    partial class DirectUpdaterForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DirectDownloaderForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DirectUpdaterForm));
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.Label_ProgressBar1 = new System.Windows.Forms.Label();
             this.Label_ProgressBar2 = new System.Windows.Forms.Label();

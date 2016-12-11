@@ -13,7 +13,7 @@ using FileMode = System.IO.FileMode;
 
 namespace P3D.Legacy.Launcher.Forms
 {
-    public partial class DirectDownloaderForm : Form
+    public partial class DirectUpdaterForm : Form
     {
         private WebClient Downloader { get; } = new WebClient();
         private Thread Extractor { get; set; }
@@ -27,7 +27,7 @@ namespace P3D.Legacy.Launcher.Forms
         private int _filesExtracted;
 
 
-        public DirectDownloaderForm(ReleaseAsset releaseAsset, string extractionFolder)
+        public DirectUpdaterForm(ReleaseAsset releaseAsset, string extractionFolder)
         {
             ReleaseAsset = releaseAsset;
             ExtractionFolder = extractionFolder;

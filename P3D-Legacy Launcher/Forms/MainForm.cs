@@ -87,8 +87,8 @@ namespace P3D.Legacy.Launcher.Forms
                     switch (MessageBox.Show(MBLang.LauncherUpdateAvailable, MBLang.LauncherUpdateAvailableTitle, MessageBoxButtons.YesNo))
                     {
                         case DialogResult.Yes:
-                            using (var directDownloader = new DirectDownloaderForm(latestRelease.GetRelease(), FileSystemInfo.UpdateFolderPath))
-                                directDownloader.ShowDialog();
+                            using (var directUpdater = new DirectUpdaterForm(latestRelease.GetRelease(), FileSystemInfo.UpdateFolderPath))
+                                directUpdater.ShowDialog();
 
                             Program.ActionsBeforeExit.Add(() =>
                                 new Process
@@ -268,9 +268,9 @@ namespace P3D.Legacy.Launcher.Forms
             switch (MessageBox.Show(string.Format(MBLang.NotDownloaded, CurrentProfile.Name), MBLang.NotDownloadedTitle, MessageBoxButtons.YesNo))
             {
                 case DialogResult.Yes:
-                    using (var directDownloader = new DirectDownloaderForm(onlineRelease.ReleaseAsset, Path.Combine(FileSystemInfo.GameReleasesFolderPath, CurrentProfile.Name)))
+                    using (var directUpdater = new DirectUpdaterForm(onlineRelease.ReleaseAsset, Path.Combine(FileSystemInfo.GameReleasesFolderPath, CurrentProfile.Name)))
                     {
-                        var state = directDownloader.ShowDialog();
+                        var state = directUpdater.ShowDialog();
                         return state != DialogResult.Abort && state != DialogResult.Cancel;
                     }
 
@@ -292,8 +292,8 @@ namespace P3D.Legacy.Launcher.Forms
                     break;
 
                 case DialogResult.No:
-                    using (var directDownloader = new DirectDownloaderForm(onlineRelease.ReleaseAsset, Path.Combine(FileSystemInfo.GameReleasesFolderPath, CurrentProfile.Name)))
-                        directDownloader.ShowDialog();
+                    using (var directUpdater = new DirectUpdaterForm(onlineRelease.ReleaseAsset, Path.Combine(FileSystemInfo.GameReleasesFolderPath, CurrentProfile.Name)))
+                        directUpdater.ShowDialog();
                     break;
 
                 case DialogResult.Cancel:
