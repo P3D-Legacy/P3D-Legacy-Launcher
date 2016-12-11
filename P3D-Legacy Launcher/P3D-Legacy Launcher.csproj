@@ -107,6 +107,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\ReleaseExtensions.cs" />
     <Compile Include="Data\Settings.cs" />
+    <EmbeddedResource Include="Forms\DirectUpdaterForm.de.resx">
+      <DependentUpon>DirectUpdaterForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\DirectUpdaterForm.es.resx">
       <DependentUpon>DirectUpdaterForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -121,6 +124,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DirectUpdaterForm.ru.resx">
       <DependentUpon>DirectUpdaterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainForm.de.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.es.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -137,12 +143,16 @@
     <EmbeddedResource Include="Forms\MainForm.ru.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MBLang.de.resx" />
     <EmbeddedResource Include="Forms\MBLang.es.resx" />
     <EmbeddedResource Include="Forms\MBLang.lt.resx" />
     <EmbeddedResource Include="Forms\MBLang.nl.resx" />
     <EmbeddedResource Include="Forms\MBLang.ru.resx" />
     <EmbeddedResource Include="Forms\NAppUpdaterForm.resx">
       <DependentUpon>NAppUpdaterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProfileForm.de.resx">
+      <DependentUpon>ProfileForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ProfileForm.es.resx">
       <DependentUpon>ProfileForm.cs</DependentUpon>

@@ -11,7 +11,11 @@ namespace P3D.Legacy.Launcher.Data
         public static SerializerBuilder SerializerBuilder { get; } = new SerializerBuilder().WithTypeConverter(new CultureInfoConverter());
         public static DeserializerBuilder DeserializerBuilder { get; } = new DeserializerBuilder().WithTypeConverter(new CultureInfoConverter());
 
-        public static CultureInfo[] AvailableCultureInfo { get; } = { new CultureInfo("en"), new CultureInfo("ru"), new CultureInfo("lt"), new CultureInfo("nl"), new CultureInfo("es") };
+        public static CultureInfo[] AvailableCultureInfo { get; } = {
+            new CultureInfo("en"), new CultureInfo("ru"), new CultureInfo("lt"),
+            new CultureInfo("lt"), new CultureInfo("nl"), new CultureInfo("es"),
+            new CultureInfo("de"),
+        };
 
         public static Settings Default => new Settings { GameUpdates = true, Language = new CultureInfo("en") };
 
