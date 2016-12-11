@@ -149,6 +149,7 @@ namespace P3D.Legacy.Launcher.Forms
 
         private void Button_CheckForUpdates_Click(object sender, EventArgs e)
         {
+            GitHubInfo.Update();
             CheckForUpdates();
         }
 
@@ -306,7 +307,7 @@ namespace P3D.Legacy.Launcher.Forms
                 File.Create(SettingsPath).Dispose();
 
             var deserializer = Settings.DeserializerBuilder.Build();
-            return deserializer.Deserialize<Settings>(File.ReadAllText(SettingsPath)) ?? new Settings();
+            return deserializer.Deserialize<Settings>(File.ReadAllText(SettingsPath)) ?? Settings.Default;
         }
 
         public static void SaveProfiles(Profiles profiles)

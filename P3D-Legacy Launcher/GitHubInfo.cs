@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 using Octokit;
 
@@ -13,13 +11,9 @@ namespace P3D.Legacy.Launcher
         private const string GitHubRepoName = "P3D-Legacy";
         private static GitHubClient GitHubClient => new GitHubClient(new ProductHeaderValue(GitHubClientHeader));
 
-        public static IEnumerable<Release> GetAllReleases
-        {
-            get
-            {
-                try { return GitHubClient.Repository.Release.GetAll(GitHubOrgName, GitHubRepoName).Result.ToList(); }
-                catch (Exception) { return new List<Release>(); }
-            }
-        }
+        private static IEnumerable<Release> _getAllReleases;
+        public static IEnumerable<Release> GetAllReleases => _getAllReleases ?? (_getAllReleases = GitHubClient.Repository.Release.GetAll(GitHubOrgName, GitHubRepoName).Result);
+
+        public static void Update() => _getAllReleases = null;
     }
 }
