@@ -139,7 +139,7 @@
     <value>Check voor updates bij het opstarten</value>
   </data>
   <data name="GroupBox_Startup.Text" xml:space="preserve">
-    <value>Gebruikelijk</value>
+    <value>Algemeen</value>
   </data>
   <data name="Label_Language.Text" xml:space="preserve">
     <value>Taal</value>
