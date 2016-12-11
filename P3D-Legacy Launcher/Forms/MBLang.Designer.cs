@@ -90,6 +90,25 @@ namespace P3D.Legacy.Launcher.Forms {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A new Launcher version is available!
+        ///Would you like to update?.
+        /// </summary>
+        internal static string LauncherUpdateAvailable {
+            get {
+                return ResourceManager.GetString("LauncherUpdateAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update is Available!.
+        /// </summary>
+        internal static string LauncherUpdateAvailableTitle {
+            get {
+                return ResourceManager.GetString("LauncherUpdateAvailableTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Could not connect to GitHub! Is Internet connection available?.
         /// </summary>
         internal static string NoInternet {

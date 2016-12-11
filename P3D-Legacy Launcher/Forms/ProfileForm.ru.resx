@@ -132,7 +132,7 @@
   <data name="Label_ProfileName.Text" xml:space="preserve">
     <value>Имя профиля:</value>
   </data>
-  <data name="label_Version.Text" xml:space="preserve">
+  <data name="Label_Version.Text" xml:space="preserve">
     <value>Версия:</value>
   </data>
 </root>

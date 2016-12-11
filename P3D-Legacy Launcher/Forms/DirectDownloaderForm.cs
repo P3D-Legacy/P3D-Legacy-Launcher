@@ -7,38 +7,37 @@ using System.Windows.Forms;
 
 using Ionic.Zip;
 
-using P3D.Legacy.Launcher.Data;
+using Octokit;
+
+using FileMode = System.IO.FileMode;
 
 namespace P3D.Legacy.Launcher.Forms
 {
     public partial class DirectDownloaderForm : Form
     {
-        private const string TempName = "Temp";
-        private static string TempFolderPath { get; } = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, TempName);
-        private string TempFilePath => Path.Combine(TempFolderPath, OnlineGameRelease.ReleaseAsset.Name);
-
         private WebClient Downloader { get; } = new WebClient();
         private Thread Extractor { get; set; }
         private bool Cancelled { get; set; }
-        private OnlineGameRelease OnlineGameRelease { get; }
-        private Profile Profile { get; }
-        private string ProfileFolderPath => Path.Combine(MainForm.GameReleasesPath, Profile.Name);
+
+        private ReleaseAsset ReleaseAsset { get; }
+        private string TempFilePath => FileSystemInfo.TempFilePath(ReleaseAsset.Name);
+        private string ExtractionFolder { get; }
 
         private int _totalFiles;
         private int _filesExtracted;
-        
 
-        public DirectDownloaderForm(Profile profile, OnlineGameRelease onlineRelease)
+
+        public DirectDownloaderForm(ReleaseAsset releaseAsset, string extractionFolder)
         {
-            Profile = profile;
-            OnlineGameRelease = onlineRelease;
+            ReleaseAsset = releaseAsset;
+            ExtractionFolder = extractionFolder;
 
             InitializeComponent();
         }
         private void DirectDownloaderForm_Load(object sender, EventArgs e)
         {
-            if (!Directory.Exists(TempFolderPath))
-                Directory.CreateDirectory(TempFolderPath);
+            if (!Directory.Exists(FileSystemInfo.TempFolderPath))
+                Directory.CreateDirectory(FileSystemInfo.TempFolderPath);
 
             DownloadFile();
         }
@@ -49,7 +48,7 @@ namespace P3D.Legacy.Launcher.Forms
                 File.Delete(TempFilePath);
 
             Downloader.DownloadProgressChanged += client_DownloadProgressChanged;
-            Downloader.DownloadFileAsync(new Uri(OnlineGameRelease.ReleaseAsset.BrowserDownloadUrl), TempFilePath);
+            Downloader.DownloadFileAsync(new Uri(ReleaseAsset.BrowserDownloadUrl), TempFilePath);
             Downloader.DownloadFileCompleted += client_DownloadFileCompleted;
         }
         private void client_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
@@ -64,7 +63,7 @@ namespace P3D.Legacy.Launcher.Forms
 
             Invoke((MethodInvoker) delegate
             {
-                progressBar1.Maximum = OnlineGameRelease.Size / 100;
+                progressBar1.Maximum = ReleaseAsset.Size / 100;
                 progressBar1.Value = (int) e.BytesReceived / 100;
             });
         }
@@ -73,8 +72,8 @@ namespace P3D.Legacy.Launcher.Forms
         {
             Label_ProgressBar1.Text = Label_ProgressBar2.Text;
 
-            if (!Directory.Exists(ProfileFolderPath))
-                Directory.CreateDirectory(ProfileFolderPath);
+            if (!Directory.Exists(ExtractionFolder))
+                Directory.CreateDirectory(ExtractionFolder);
 
             if(Extractor != null && Extractor.ThreadState != ThreadState.Stopped)
                 Extractor.Abort();
@@ -96,7 +95,7 @@ namespace P3D.Legacy.Launcher.Forms
 
                     // -- We skip the Main folder.
                     foreach (var entry in result)
-                        entry.Extract(ProfileFolderPath, ExtractExistingFileAction.OverwriteSilently);
+                        entry.Extract(ExtractionFolder, ExtractExistingFileAction.OverwriteSilently);
                 }
 
                 File.Delete(TempFilePath);

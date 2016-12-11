@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P3D-Legacy Launcher", "P3D-Legacy Launcher\P3D-Legacy Launcher.csproj", "{D2A9C01E-686F-4AEA-8B8C-5AE04387F0E0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P3D-Legacy Launcher Updater", "P3D-Legacy Launcher Updater\P3D-Legacy Launcher Updater.csproj", "{6EE47050-ED83-4944-ACBB-D7F74E8C14F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D2A9C01E-686F-4AEA-8B8C-5AE04387F0E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2A9C01E-686F-4AEA-8B8C-5AE04387F0E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2A9C01E-686F-4AEA-8B8C-5AE04387F0E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EE47050-ED83-4944-ACBB-D7F74E8C14F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EE47050-ED83-4944-ACBB-D7F74E8C14F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EE47050-ED83-4944-ACBB-D7F74E8C14F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EE47050-ED83-4944-ACBB-D7F74E8C14F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

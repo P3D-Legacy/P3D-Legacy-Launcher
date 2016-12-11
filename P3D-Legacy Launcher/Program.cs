@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 using P3D.Legacy.Launcher.Forms;
@@ -7,6 +9,8 @@ namespace P3D.Legacy.Launcher
 {
     public static class Program
     {
+        public static List<Action> ActionsBeforeExit { get; } = new List<Action>();
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -23,6 +27,11 @@ namespace P3D.Legacy.Launcher
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
+
+            if(ActionsBeforeExit.Any())
+                foreach (var action in ActionsBeforeExit)
+                    action();
+            Environment.Exit(0);
         }
     }
 }

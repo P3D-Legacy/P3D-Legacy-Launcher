@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
@@ -19,27 +20,6 @@ namespace P3D.Legacy.Launcher.Forms
 {
     public partial class MainForm : Form
     {
-        #region FileSystem
-
-        private const string ExeFilename = "Pokemon3D.exe";
-
-        private const string SettingsFilename = "Settings.yml";
-
-        private static string SettingsPath { get; } = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-            SettingsFilename);
-
-        private const string ProfilesFilename = "Profiles.yml";
-
-        private static string ProfilesPath { get; } = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-            ProfilesFilename);
-
-        private const string GameReleasesFoldername = "Releases";
-
-        public static string GameReleasesPath { get; } = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-            GameReleasesFoldername);
-
-        #endregion Strings
-
         #region GitHub
 
         private Version OnlineLastGameReleaseVersion => OnlineLastGameRelease?.Version ?? new Version("0.0");
@@ -90,8 +70,46 @@ namespace P3D.Legacy.Launcher.Forms
         }
         private void MainForm_Shown(object sender, EventArgs e)
         {
+            CheckLauncherForUpdate();
+
             if (Settings.GameUpdates)
                 CheckForUpdates();
+        }
+        private void CheckLauncherForUpdate()
+        {
+            var launcherReleases = GitHubInfo.GetAllLauncherReleases.ToList();
+
+            if (launcherReleases.Any())
+            {
+                var latestRelease = launcherReleases.First();
+                if (Assembly.GetExecutingAssembly().GetName().Version < new Version(latestRelease.TagName))
+                {
+                    switch (MessageBox.Show(MBLang.LauncherUpdateAvailable, MBLang.LauncherUpdateAvailableTitle, MessageBoxButtons.YesNo))
+                    {
+                        case DialogResult.Yes:
+                            using (var directDownloader = new DirectDownloaderForm(latestRelease.GetRelease(), FileSystemInfo.UpdateFolderPath))
+                                directDownloader.ShowDialog();
+
+                            Program.ActionsBeforeExit.Add(() =>
+                                new Process
+                                {
+                                    StartInfo =
+                                    {
+                                        UseShellExecute = false,
+                                        FileName = Path.Combine(FileSystemInfo.MainFolderPath, FileSystemInfo.UpdaterExeFilename),
+                                        CreateNoWindow = true
+                                    }
+                                }.Start());
+                            Close();
+                            break;
+
+                        default:
+                            return;
+                    }
+                }
+            }
+            else
+                MessageBox.Show(MBLang.NoInternet, MBLang.NoInternetTitle, MessageBoxButtons.OK);
         }
 
         private void Button_Start_Click(object sender, EventArgs e)
@@ -112,8 +130,8 @@ namespace P3D.Legacy.Launcher.Forms
 
 
 
-            var path = Path.Combine(GameReleasesPath, CurrentProfile.Name);
-            var pathexe = Path.Combine(path, ExeFilename);
+            var path = Path.Combine(FileSystemInfo.GameReleasesFolderPath, CurrentProfile.Name);
+            var pathexe = Path.Combine(path, FileSystemInfo.ExeFilename);
             if (Directory.Exists(path) && File.Exists(pathexe))
             {
                 Process.Start(pathexe);
@@ -250,7 +268,7 @@ namespace P3D.Legacy.Launcher.Forms
             switch (MessageBox.Show(string.Format(MBLang.NotDownloaded, CurrentProfile.Name), MBLang.NotDownloadedTitle, MessageBoxButtons.YesNo))
             {
                 case DialogResult.Yes:
-                    using (var directDownloader = new DirectDownloaderForm(CurrentProfile, onlineRelease))
+                    using (var directDownloader = new DirectDownloaderForm(onlineRelease.ReleaseAsset, Path.Combine(FileSystemInfo.GameReleasesFolderPath, CurrentProfile.Name)))
                     {
                         var state = directDownloader.ShowDialog();
                         return state != DialogResult.Abort && state != DialogResult.Cancel;
@@ -274,7 +292,7 @@ namespace P3D.Legacy.Launcher.Forms
                     break;
 
                 case DialogResult.No:
-                    using (var directDownloader = new DirectDownloaderForm(CurrentProfile, onlineRelease))
+                    using (var directDownloader = new DirectDownloaderForm(onlineRelease.ReleaseAsset, Path.Combine(FileSystemInfo.GameReleasesFolderPath, CurrentProfile.Name)))
                         directDownloader.ShowDialog();
                     break;
 
@@ -295,36 +313,36 @@ namespace P3D.Legacy.Launcher.Forms
 
         public static void SaveSettings(Settings settings)
         {
-            if (!File.Exists(SettingsPath))
-                File.Create(SettingsPath).Dispose();
+            if (!File.Exists(FileSystemInfo.SettingsFilePath))
+                File.Create(FileSystemInfo.SettingsFilePath).Dispose();
 
             var serializer = Settings.SerializerBuilder.Build();
-            File.WriteAllText(SettingsPath, serializer.Serialize(settings));
+            File.WriteAllText(FileSystemInfo.SettingsFilePath, serializer.Serialize(settings));
         }
         public static Settings LoadSettings()
         {
-            if (!File.Exists(SettingsPath))
-                File.Create(SettingsPath).Dispose();
+            if (!File.Exists(FileSystemInfo.SettingsFilePath))
+                File.Create(FileSystemInfo.SettingsFilePath).Dispose();
 
             var deserializer = Settings.DeserializerBuilder.Build();
-            return deserializer.Deserialize<Settings>(File.ReadAllText(SettingsPath)) ?? Settings.Default;
+            return deserializer.Deserialize<Settings>(File.ReadAllText(FileSystemInfo.SettingsFilePath)) ?? Settings.Default;
         }
 
         public static void SaveProfiles(Profiles profiles)
         {
-            if (!File.Exists(ProfilesPath))
-                File.Create(ProfilesPath).Dispose();
+            if (!File.Exists(FileSystemInfo.ProfilesFilePath))
+                File.Create(FileSystemInfo.ProfilesFilePath).Dispose();
 
             var serializer = Profiles.SerializerBuilder.Build();
-            File.WriteAllText(ProfilesPath, serializer.Serialize(profiles));
+            File.WriteAllText(FileSystemInfo.ProfilesFilePath, serializer.Serialize(profiles));
         }
         public static Profiles LoadProfiles()
         {
-            if (!File.Exists(ProfilesPath))
-                File.Create(ProfilesPath).Dispose();
+            if (!File.Exists(FileSystemInfo.ProfilesFilePath))
+                File.Create(FileSystemInfo.ProfilesFilePath).Dispose();
 
             var deserializer = Profiles.DeserializerBuilder.Build();
-            return deserializer.Deserialize<Profiles>(File.ReadAllText(ProfilesPath)) ?? Profiles.Default;
+            return deserializer.Deserialize<Profiles>(File.ReadAllText(FileSystemInfo.ProfilesFilePath)) ?? Profiles.Default;
         }
     }
 }

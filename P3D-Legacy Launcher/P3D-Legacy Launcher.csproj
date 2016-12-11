@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\ControlExtensions.cs" />
+    <Compile Include="FileSystemInfo.cs" />
     <Compile Include="GitHubInfo.cs" />
     <Compile Include="Data\Profile.cs" />
     <Compile Include="Forms\MBLang.Designer.cs">
