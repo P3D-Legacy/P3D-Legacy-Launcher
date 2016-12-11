@@ -107,7 +107,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\ReleaseExtensions.cs" />
     <Compile Include="Data\Settings.cs" />
+    <EmbeddedResource Include="Forms\DirectUpdaterForm.es.resx">
+      <DependentUpon>DirectUpdaterForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\DirectUpdaterForm.lt.resx">
+      <DependentUpon>DirectUpdaterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DirectUpdaterForm.nl.resx">
       <DependentUpon>DirectUpdaterForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DirectUpdaterForm.resx">
@@ -116,7 +122,13 @@
     <EmbeddedResource Include="Forms\DirectUpdaterForm.ru.resx">
       <DependentUpon>DirectUpdaterForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainForm.es.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.lt.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainForm.nl.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
@@ -125,12 +137,20 @@
     <EmbeddedResource Include="Forms\MainForm.ru.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MBLang.es.resx" />
     <EmbeddedResource Include="Forms\MBLang.lt.resx" />
+    <EmbeddedResource Include="Forms\MBLang.nl.resx" />
     <EmbeddedResource Include="Forms\MBLang.ru.resx" />
     <EmbeddedResource Include="Forms\NAppUpdaterForm.resx">
       <DependentUpon>NAppUpdaterForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProfileForm.es.resx">
+      <DependentUpon>ProfileForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ProfileForm.lt.resx">
+      <DependentUpon>ProfileForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProfileForm.nl.resx">
       <DependentUpon>ProfileForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ProfileForm.resx">

@@ -59,6 +59,7 @@ namespace P3D.Legacy.Launcher.Forms
         }
         private void FormInitialize()
         {
+            Label_Version.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             TabPage_Settings.VisibleChanged += TabPage_Settings_VisibleChanged;
 
             ReloadProfileList();

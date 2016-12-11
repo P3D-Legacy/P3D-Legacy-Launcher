@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 using P3D.Legacy.Launcher.Forms;
@@ -17,9 +19,12 @@ namespace P3D.Legacy.Launcher
         [STAThread]
         public static void Main()
         {
+
             //var ci = new CultureInfo("en");
             //var ci = new CultureInfo("ru");
             //var ci = new CultureInfo("lt");
+            //var ci = new CultureInfo("nl");
+            //var ci = new CultureInfo("es");
             //Thread.CurrentThread.CurrentCulture = ci;
             //Thread.CurrentThread.CurrentUICulture = ci;
             //CultureInfo.DefaultThreadCurrentCulture = ci;

@@ -51,6 +51,7 @@ namespace P3D.Legacy.Launcher.Forms
             this.TabPage_About = new System.Windows.Forms.TabPage();
             this.LinkLabel_Pokemon3D = new System.Windows.Forms.LinkLabel();
             this.TextBox_About = new System.Windows.Forms.TextBox();
+            this.Label_Version = new System.Windows.Forms.Label();
             this.TabControl.SuspendLayout();
             this.TabPage_News.SuspendLayout();
             this.TabPage_Logger.SuspendLayout();
@@ -180,6 +181,7 @@ namespace P3D.Legacy.Launcher.Forms
             // 
             // TabPage_About
             // 
+            this.TabPage_About.Controls.Add(this.Label_Version);
             this.TabPage_About.Controls.Add(this.LinkLabel_Pokemon3D);
             this.TabPage_About.Controls.Add(this.TextBox_About);
             resources.ApplyResources(this.TabPage_About, "TabPage_About");
@@ -201,6 +203,11 @@ namespace P3D.Legacy.Launcher.Forms
             resources.ApplyResources(this.TextBox_About, "TextBox_About");
             this.TextBox_About.Name = "TextBox_About";
             this.TextBox_About.ReadOnly = true;
+            // 
+            // Label_Version
+            // 
+            resources.ApplyResources(this.Label_Version, "Label_Version");
+            this.Label_Version.Name = "Label_Version";
             // 
             // MainForm
             // 
@@ -251,6 +258,7 @@ namespace P3D.Legacy.Launcher.Forms
         private Label Label_Language;
         private ComboBox ComboBox_Language;
         private Button Button_SaveSettings;
+        private Label Label_Version;
     }
 }
 
