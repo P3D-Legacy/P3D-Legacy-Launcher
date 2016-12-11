@@ -49,9 +49,9 @@ namespace P3D.Legacy.Launcher.Forms
             this.ComboBox_Language = new System.Windows.Forms.ComboBox();
             this.Check_Updates = new System.Windows.Forms.CheckBox();
             this.TabPage_About = new System.Windows.Forms.TabPage();
+            this.Label_Version = new System.Windows.Forms.Label();
             this.LinkLabel_Pokemon3D = new System.Windows.Forms.LinkLabel();
             this.TextBox_About = new System.Windows.Forms.TextBox();
-            this.Label_Version = new System.Windows.Forms.Label();
             this.TabControl.SuspendLayout();
             this.TabPage_News.SuspendLayout();
             this.TabPage_Logger.SuspendLayout();
@@ -188,6 +188,11 @@ namespace P3D.Legacy.Launcher.Forms
             this.TabPage_About.Name = "TabPage_About";
             this.TabPage_About.UseVisualStyleBackColor = true;
             // 
+            // Label_Version
+            // 
+            resources.ApplyResources(this.Label_Version, "Label_Version");
+            this.Label_Version.Name = "Label_Version";
+            // 
             // LinkLabel_Pokemon3D
             // 
             resources.ApplyResources(this.LinkLabel_Pokemon3D, "LinkLabel_Pokemon3D");
@@ -204,11 +209,6 @@ namespace P3D.Legacy.Launcher.Forms
             this.TextBox_About.Name = "TextBox_About";
             this.TextBox_About.ReadOnly = true;
             // 
-            // Label_Version
-            // 
-            resources.ApplyResources(this.Label_Version, "Label_Version");
-            this.Label_Version.Name = "Label_Version";
-            // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
@@ -221,6 +221,7 @@ namespace P3D.Legacy.Launcher.Forms
             this.Controls.Add(this.Button_CheckForUpdates);
             this.Controls.Add(this.Putton_StartGame);
             this.Name = "MainForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.TabControl.ResumeLayout(false);

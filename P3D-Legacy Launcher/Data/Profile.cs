@@ -18,8 +18,8 @@ namespace P3D.Legacy.Launcher.Data
         public static Profiles Default => new Profiles { ProfileIndex = 0, ProfileList = new List<Profile> { Profile.Default } };
 
 
-        public int ProfileIndex { get; set; } = 0;
-        public List<Profile> ProfileList { get; private set; } = new List<Profile>();
+        public int ProfileIndex { get; set; }
+        public List<Profile> ProfileList { get; private set; }
 
         public Profile GetProfile() => ProfileList[ProfileIndex];
     }

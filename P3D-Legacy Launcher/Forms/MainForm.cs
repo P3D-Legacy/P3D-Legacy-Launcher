@@ -76,41 +76,9 @@ namespace P3D.Legacy.Launcher.Forms
             if (Settings.GameUpdates)
                 CheckForUpdates();
         }
-        private void CheckLauncherForUpdate()
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            var launcherReleases = GitHubInfo.GetAllLauncherReleases.ToList();
-
-            if (launcherReleases.Any())
-            {
-                var latestRelease = launcherReleases.First();
-                if (Assembly.GetExecutingAssembly().GetName().Version < new Version(latestRelease.TagName))
-                {
-                    switch (MessageBox.Show(MBLang.LauncherUpdateAvailable, MBLang.LauncherUpdateAvailableTitle, MessageBoxButtons.YesNo))
-                    {
-                        case DialogResult.Yes:
-                            using (var directUpdater = new DirectUpdaterForm(latestRelease.GetRelease(), FileSystemInfo.UpdateFolderPath))
-                                directUpdater.ShowDialog();
-
-                            Program.ActionsBeforeExit.Add(() =>
-                                new Process
-                                {
-                                    StartInfo =
-                                    {
-                                        UseShellExecute = false,
-                                        FileName = Path.Combine(FileSystemInfo.MainFolderPath, FileSystemInfo.UpdaterExeFilename),
-                                        CreateNoWindow = true
-                                    }
-                                }.Start());
-                            Close();
-                            break;
-
-                        default:
-                            return;
-                    }
-                }
-            }
-            else
-                MessageBox.Show(MBLang.NoInternet, MBLang.NoInternetTitle, MessageBoxButtons.OK);
+            SaveProfiles(Profiles);
         }
 
         private void Button_Start_Click(object sender, EventArgs e)
@@ -245,6 +213,42 @@ namespace P3D.Legacy.Launcher.Forms
         }
 
 
+        private void CheckLauncherForUpdate()
+        {
+            var launcherReleases = GitHubInfo.GetAllLauncherReleases.ToList();
+
+            if (launcherReleases.Any())
+            {
+                var latestRelease = launcherReleases.First();
+                if (Assembly.GetExecutingAssembly().GetName().Version < new Version(latestRelease.TagName))
+                {
+                    switch (MessageBox.Show(MBLang.LauncherUpdateAvailable, MBLang.LauncherUpdateAvailableTitle, MessageBoxButtons.YesNo))
+                    {
+                        case DialogResult.Yes:
+                            using (var directUpdater = new DirectUpdaterForm(latestRelease.GetRelease(), FileSystemInfo.UpdateFolderPath))
+                                directUpdater.ShowDialog();
+
+                            Program.ActionsBeforeExit.Add(() =>
+                                new Process
+                                {
+                                    StartInfo =
+                                    {
+                                        UseShellExecute = false,
+                                        FileName = Path.Combine(FileSystemInfo.MainFolderPath, FileSystemInfo.UpdaterExeFilename),
+                                        CreateNoWindow = true
+                                    }
+                                }.Start());
+                            Close();
+                            break;
+
+                        default:
+                            return;
+                    }
+                }
+            }
+            else
+                MessageBox.Show(MBLang.NoInternet, MBLang.NoInternetTitle, MessageBoxButtons.OK);
+        }
         private void CheckForUpdates()
         {
             OnlineGameReleases = GetOnlineGameReleases().ToList();
