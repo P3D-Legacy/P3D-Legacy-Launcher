@@ -142,7 +142,7 @@
     <value>Bendras</value>
   </data>
   <data name="Label_Language.Text" xml:space="preserve">
-    <value>Kalba</value>
+    <value>Kalba:</value>
   </data>
   <data name="LinkLabel_Pokemon3D.Text" xml:space="preserve">
     <value>Pokemonai 3D</value>

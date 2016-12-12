@@ -125,6 +125,13 @@ Ar norėtumėte atidaryti puslapį dabar?</value>
   <data name="DotNetErrorTitle" xml:space="preserve">
     <value>Klaida!</value>
   </data>
+  <data name="LauncherUpdateAvailable" xml:space="preserve">
+    <value>Nauja paleidėjo versija jau pasiekiama!
+Ar norėtumėte atnaujinti?</value>
+  </data>
+  <data name="LauncherUpdateAvailableTitle" xml:space="preserve">
+    <value>Pasiekiamas Atnaujinimas!</value>
+  </data>
   <data name="NoInternet" xml:space="preserve">
     <value>Nepavyko prisijungti prie GitHub! Ar jūs prisijungę prie interneto?</value>
   </data>
@@ -147,7 +154,7 @@ Ar norėtumėte atidaryti puslapį dabar?</value>
     <value>Klaida!</value>
   </data>
   <data name="ProfileUpToDate" xml:space="preserve">
-    <value>Profilis '{0}' yra naujausias!</value>
+    <value>Profilis '{0}' turi naujausią versiją!</value>
   </data>
   <data name="ProfileUpToDateTitle" xml:space="preserve">
     <value>Atnaujinimo Tikrinimas</value>

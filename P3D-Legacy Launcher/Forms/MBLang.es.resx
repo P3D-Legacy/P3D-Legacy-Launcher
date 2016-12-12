@@ -120,9 +120,6 @@
   <data name="DotNetError" xml:space="preserve">
     <value>Pokémon 3D requiere Microsoft .NET Framework 4.0 Por favor, visite http://www.microsoft.com/en-us/download/details.aspx?id=17851 to para descargarlo. ¿Le gustaría abrir dicha página web ahora?</value>
   </data>
-  <data name="DotNetErrorLink" xml:space="preserve">
-    <value>http://www.microsoft.com/en-us/download/details.aspx?id=17851</value>
-  </data>
   <data name="DotNetErrorTitle" xml:space="preserve">
     <value>¡Error!</value>
   </data>
@@ -151,9 +148,6 @@
     <value>Pokémon 3D requiere OpenAL.
 Por favor, visite https://www.openal.org/downloads/ para descargarlo.
 ¿Le gustaría abrir dicha página web ahora?</value>
-  </data>
-  <data name="OpenALErrorLink" xml:space="preserve">
-    <value>https://www.openal.org/downloads/</value>
   </data>
   <data name="OpenALErrorTitle" xml:space="preserve">
     <value>¡Error!</value>

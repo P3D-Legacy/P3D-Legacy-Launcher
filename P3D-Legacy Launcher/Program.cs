@@ -25,6 +25,10 @@ namespace P3D.Legacy.Launcher
             //var ci = new CultureInfo("lt");
             //var ci = new CultureInfo("nl");
             //var ci = new CultureInfo("es");
+            //var ci = new CultureInfo("fr");
+            //var ci = new CultureInfo("pl");
+            //var ci = new CultureInfo("it");
+            //var ci = new CultureInfo("pt");
             //Thread.CurrentThread.CurrentCulture = ci;
             //Thread.CurrentThread.CurrentUICulture = ci;
             //CultureInfo.DefaultThreadCurrentCulture = ci;

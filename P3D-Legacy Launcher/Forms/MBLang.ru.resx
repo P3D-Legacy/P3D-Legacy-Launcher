@@ -125,6 +125,13 @@
   <data name="DotNetErrorTitle" xml:space="preserve">
     <value>Ошибка!</value>
   </data>
+  <data name="LauncherUpdateAvailable" xml:space="preserve">
+    <value>Доступна новая версия лаунчера!
+Хотите обновиться?</value>
+  </data>
+  <data name="LauncherUpdateAvailableTitle" xml:space="preserve">
+    <value>Доступно обновление!</value>
+  </data>
   <data name="NoInternet" xml:space="preserve">
     <value>Не мог подключиться к GitHub! Вы подключены к интернеу?</value>
   </data>

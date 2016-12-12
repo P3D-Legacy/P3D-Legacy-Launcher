@@ -13,7 +13,6 @@ namespace P3D.Legacy.Launcher.Data
         public ReleaseAsset UpdateFeedAsset => Release.GetUpdateFeed();
 
         public Version Version => new Version(Release.TagName ?? "0.0");
-        public int Size => ReleaseAsset.Size;
         public DateTime ReleaseDate => Release.CreatedAt.DateTime;
 
         public OnlineGameRelease(Release release) { Release = release; }

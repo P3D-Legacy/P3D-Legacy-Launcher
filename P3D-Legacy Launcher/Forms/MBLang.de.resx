@@ -122,9 +122,6 @@
 Besuche folgende Seite zum Download:  http://www.microsoft.com/en-us/download/details.aspx?id=17851
 Möchtest du die Seite jetzt öffnen?</value>
   </data>
-  <data name="DotNetErrorLink" xml:space="preserve">
-    <value>http://www.microsoft.com/en-us/download/details.aspx?id=17851</value>
-  </data>
   <data name="DotNetErrorTitle" xml:space="preserve">
     <value>Fehler!</value>
   </data>
@@ -152,9 +149,6 @@ Möchtest du es jetzt herunterladen?</value>
     <value>Pokémon 3D benötigt OpenAL.
 Besuche folgende Seite zum Download: https://www.openal.org/downloads/
 Möchtest du die Seite jetzt öffnen?</value>
-  </data>
-  <data name="OpenALErrorLink" xml:space="preserve">
-    <value>https://www.openal.org/downloads/</value>
   </data>
   <data name="OpenALErrorTitle" xml:space="preserve">
     <value>Fehler!</value>
