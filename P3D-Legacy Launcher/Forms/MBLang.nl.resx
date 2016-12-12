@@ -145,10 +145,6 @@ Wil je de pagina openen?</value>
   <data name="NotDownloadedTitle" xml:space="preserve">
     <value>Niet gedownload!</value>
   </data>
-  <data name="NotInstalled" xml:space="preserve">
-    <value>{0} is niet geinstalleerd! Wil je {0} installeren?
-</value>
-  </data>
   <data name="OpenALError" xml:space="preserve">
     <value>Pokémon 3D heeft OpenAL nodig. Je kunt OpenAL hier downloaden: https://www.openal.org/downloads/ to download.
 Wil je naar deze pagina gaan?</value>

@@ -148,10 +148,6 @@ Möchtest du es jetzt herunterladen?</value>
   <data name="NotDownloadedTitle" xml:space="preserve">
     <value>Nicht heruntergeladen!</value>
   </data>
-  <data name="NotInstalled" xml:space="preserve">
-    <value>{0} ist nicht installiert!
-Möchtest du gerne {0} installieren?</value>
-  </data>
   <data name="OpenALError" xml:space="preserve">
     <value>Pokémon 3D benötigt OpenAL.
 Besuche folgende Seite zum Download: https://www.openal.org/downloads/

@@ -146,16 +146,6 @@ namespace P3D.Legacy.Launcher.Forms {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} is not installed!
-        ///Would you like to install {0}?.
-        /// </summary>
-        internal static string NotInstalled {
-            get {
-                return ResourceManager.GetString("NotInstalled", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Pokémon 3D requires OpenAL.
         ///Please visit https://www.openal.org/downloads/ to download.
         ///Would you like to open the webpage now?.

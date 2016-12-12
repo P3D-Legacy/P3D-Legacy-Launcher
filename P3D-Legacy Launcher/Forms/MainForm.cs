@@ -74,7 +74,7 @@ namespace P3D.Legacy.Launcher.Forms
             CheckLauncherForUpdate();
 
             if (Settings.GameUpdates)
-                CheckForUpdates();
+                CheckForUpdates(true);
         }
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -249,8 +249,16 @@ namespace P3D.Legacy.Launcher.Forms
             else
                 MessageBox.Show(MBLang.NoInternet, MBLang.NoInternetTitle, MessageBoxButtons.OK);
         }
-        private void CheckForUpdates()
+        private void CheckForUpdates(bool onStartup = false)
         {
+            var path = Path.Combine(FileSystemInfo.GameReleasesFolderPath, CurrentProfile.Name);
+            var pathexe = Path.Combine(path, FileSystemInfo.ExeFilename);
+            if (!onStartup && (!Directory.Exists(path) || !File.Exists(pathexe)))
+                DownloadCurrentProfile();
+
+            if (!Directory.Exists(path) || !File.Exists(pathexe))
+                return;
+
             OnlineGameReleases = GetOnlineGameReleases().ToList();
 
             if (OnlineGameReleases.Any())

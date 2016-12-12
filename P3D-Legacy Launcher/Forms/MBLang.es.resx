@@ -147,10 +147,6 @@
   <data name="NotDownloadedTitle" xml:space="preserve">
     <value>No descargado</value>
   </data>
-  <data name="NotInstalled" xml:space="preserve">
-    <value>{0} no se encuenta instalado.
-¿Le gustaría instalar {0}?</value>
-  </data>
   <data name="OpenALError" xml:space="preserve">
     <value>Pokémon 3D requiere OpenAL.
 Por favor, visite https://www.openal.org/downloads/ para descargarlo.
