@@ -297,21 +297,6 @@
   <data name="&gt;&gt;Button_DeleteProfile.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="WebBrowser_News.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="WebBrowser_News.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="WebBrowser_News.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>20, 20</value>
-  </data>
-  <data name="WebBrowser_News.Size" type="System.Drawing.Size, System.Drawing">
-    <value>830, 380</value>
-  </data>
-  <data name="WebBrowser_News.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
   <data name="&gt;&gt;WebBrowser_News.Name" xml:space="preserve">
     <value>WebBrowser_News</value>
   </data>
@@ -349,21 +334,6 @@
     <value>TabControl</value>
   </data>
   <data name="&gt;&gt;TabPage_News.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="TextBox_Logger.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="TextBox_Logger.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="TextBox_Logger.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="TextBox_Logger.Size" type="System.Drawing.Size, System.Drawing">
-    <value>830, 380</value>
-  </data>
-  <data name="TextBox_Logger.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="&gt;&gt;TextBox_Logger.Name" xml:space="preserve">
@@ -405,14 +375,11 @@
   <data name="&gt;&gt;TabPage_Logger.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="ComboBox_SelectedDL.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
   <data name="ComboBox_SelectedDL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>82, 20</value>
+    <value>216, 19</value>
   </data>
   <data name="ComboBox_SelectedDL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>733, 21</value>
+    <value>600, 21</value>
   </data>
   <data name="ComboBox_SelectedDL.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -538,10 +505,10 @@
     <value>Top, Left, Right</value>
   </data>
   <data name="ComboBox_Language.Location" type="System.Drawing.Point, System.Drawing">
-    <value>70, 42</value>
+    <value>216, 42</value>
   </data>
   <data name="ComboBox_Language.Size" type="System.Drawing.Size, System.Drawing">
-    <value>746, 21</value>
+    <value>600, 21</value>
   </data>
   <data name="ComboBox_Language.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -636,6 +603,159 @@
   <data name="&gt;&gt;TabPage_Settings.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="&gt;&gt;TextBox_Credits.Name" xml:space="preserve">
+    <value>TextBox_Credits</value>
+  </data>
+  <data name="&gt;&gt;TextBox_Credits.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TextBox_Credits.Parent" xml:space="preserve">
+    <value>TabPage_About</value>
+  </data>
+  <data name="&gt;&gt;TextBox_Credits.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;Label_Version.Name" xml:space="preserve">
+    <value>Label_Version</value>
+  </data>
+  <data name="&gt;&gt;Label_Version.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label_Version.Parent" xml:space="preserve">
+    <value>TabPage_About</value>
+  </data>
+  <data name="&gt;&gt;Label_Version.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;LinkLabel_Pokemon3D.Name" xml:space="preserve">
+    <value>LinkLabel_Pokemon3D</value>
+  </data>
+  <data name="&gt;&gt;LinkLabel_Pokemon3D.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LinkLabel_Pokemon3D.Parent" xml:space="preserve">
+    <value>TabPage_About</value>
+  </data>
+  <data name="&gt;&gt;LinkLabel_Pokemon3D.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;TextBox_About.Name" xml:space="preserve">
+    <value>TextBox_About</value>
+  </data>
+  <data name="&gt;&gt;TextBox_About.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TextBox_About.Parent" xml:space="preserve">
+    <value>TabPage_About</value>
+  </data>
+  <data name="&gt;&gt;TextBox_About.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="TabPage_About.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabPage_About.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="TabPage_About.Size" type="System.Drawing.Size, System.Drawing">
+    <value>836, 386</value>
+  </data>
+  <data name="TabPage_About.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="TabPage_About.Text" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="&gt;&gt;TabPage_About.Name" xml:space="preserve">
+    <value>TabPage_About</value>
+  </data>
+  <data name="&gt;&gt;TabPage_About.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TabPage_About.Parent" xml:space="preserve">
+    <value>TabControl</value>
+  </data>
+  <data name="&gt;&gt;TabPage_About.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="TabControl.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Top</value>
+  </data>
+  <data name="TabControl.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="TabControl.Size" type="System.Drawing.Size, System.Drawing">
+    <value>844, 412</value>
+  </data>
+  <data name="TabControl.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;TabControl.Name" xml:space="preserve">
+    <value>TabControl</value>
+  </data>
+  <data name="&gt;&gt;TabControl.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TabControl.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;TabControl.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="WebBrowser_News.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="WebBrowser_News.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="WebBrowser_News.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>20, 20</value>
+  </data>
+  <data name="WebBrowser_News.Size" type="System.Drawing.Size, System.Drawing">
+    <value>830, 380</value>
+  </data>
+  <data name="WebBrowser_News.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;WebBrowser_News.Name" xml:space="preserve">
+    <value>WebBrowser_News</value>
+  </data>
+  <data name="&gt;&gt;WebBrowser_News.Type" xml:space="preserve">
+    <value>System.Windows.Forms.WebBrowser, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;WebBrowser_News.Parent" xml:space="preserve">
+    <value>TabPage_News</value>
+  </data>
+  <data name="&gt;&gt;WebBrowser_News.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="TextBox_Logger.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="TextBox_Logger.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="TextBox_Logger.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="TextBox_Logger.Size" type="System.Drawing.Size, System.Drawing">
+    <value>830, 380</value>
+  </data>
+  <data name="TextBox_Logger.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;TextBox_Logger.Name" xml:space="preserve">
+    <value>TextBox_Logger</value>
+  </data>
+  <data name="&gt;&gt;TextBox_Logger.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TextBox_Logger.Parent" xml:space="preserve">
+    <value>TabPage_Logger</value>
+  </data>
+  <data name="&gt;&gt;TextBox_Logger.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="TextBox_Credits.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
   </data>
@@ -654,7 +774,7 @@
   <data name="TextBox_Credits.Text" xml:space="preserve">
     <value>Launcher by Aragas
 Translation:
-SViper, Capt_Segis, Biggda76, Blurgaro, Aragas
+SViper, Capt_Segis, Biggda76, Blurgaro, Persuer, Aragas
 </value>
   </data>
   <data name="&gt;&gt;TextBox_Credits.Name" xml:space="preserve">
@@ -765,57 +885,6 @@ Pokémon 3D and The P3D Team neither owns nor claims to own any portion of the P
   </data>
   <data name="&gt;&gt;TextBox_About.ZOrder" xml:space="preserve">
     <value>3</value>
-  </data>
-  <data name="TabPage_About.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="TabPage_About.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="TabPage_About.Size" type="System.Drawing.Size, System.Drawing">
-    <value>836, 386</value>
-  </data>
-  <data name="TabPage_About.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="TabPage_About.Text" xml:space="preserve">
-    <value>About</value>
-  </data>
-  <data name="&gt;&gt;TabPage_About.Name" xml:space="preserve">
-    <value>TabPage_About</value>
-  </data>
-  <data name="&gt;&gt;TabPage_About.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TabPage_About.Parent" xml:space="preserve">
-    <value>TabControl</value>
-  </data>
-  <data name="&gt;&gt;TabPage_About.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="TabControl.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
-  <data name="TabControl.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="TabControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>844, 412</value>
-  </data>
-  <data name="TabControl.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;TabControl.Name" xml:space="preserve">
-    <value>TabControl</value>
-  </data>
-  <data name="&gt;&gt;TabControl.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TabControl.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;TabControl.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

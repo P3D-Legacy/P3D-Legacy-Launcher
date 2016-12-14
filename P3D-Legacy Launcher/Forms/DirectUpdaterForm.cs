@@ -2,20 +2,18 @@
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Ionic.Zip;
 
 using Octokit;
+using P3D.Legacy.Launcher.Extensions;
 
 namespace P3D.Legacy.Launcher.Forms
 {
     public partial class DirectUpdaterForm : Form
     {
-        private SynchronizationContext SynchronizationContext { get; } = SynchronizationContext.Current;
-
         private WebClient Downloader { get; set; }
         private bool Cancelled { get; set; }
 
@@ -68,14 +66,14 @@ namespace P3D.Legacy.Launcher.Forms
         }
         private void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            SynchronizationContext.Send(delegate { ProgressBar.Maximum = ReleaseAsset.Size / 100; ProgressBar.Value = (int) e.BytesReceived / 100; }, null);
+            this.SafeInvoke(delegate { ProgressBar.Maximum = ReleaseAsset.Size; ProgressBar.Value = (int) e.BytesReceived; });
         }
 
         private void ExtractFile()
         {
             if (Cancelled) return;
 
-            SynchronizationContext.Send(obj => Label_ProgressBar1.Text = Label_ProgressBar2.Text, null);
+            this.SafeInvoke(() => Label_ProgressBar1.Text = Label_ProgressBar2.Text);
 
             if (!Directory.Exists(ExtractionFolder))
                 Directory.CreateDirectory(ExtractionFolder);
@@ -95,10 +93,10 @@ namespace P3D.Legacy.Launcher.Forms
                 _filesExtracted = 0;
 
                 // -- We skip the Main folder.
-                foreach (var entry in result)
+                foreach (var zipEntry in result)
                 {
                     if (Cancelled) return;
-                    entry.Extract(ExtractionFolder, ExtractExistingFileAction.OverwriteSilently);
+                    zipEntry.Extract(ExtractionFolder, ExtractExistingFileAction.OverwriteSilently);
                 }
             }
 
@@ -107,15 +105,15 @@ namespace P3D.Legacy.Launcher.Forms
 
         private void zip_ExtractProgress(object sender, ExtractProgressEventArgs e)
         {
-            SynchronizationContext.Send(delegate
+            this.SafeInvoke(delegate
             {
                 if (e.EventType != ZipProgressEventType.Extracting_BeforeExtractEntry)
                     return;
                 _filesExtracted++;
 
-                ProgressBar.Maximum = _totalFiles / 100;
-                ProgressBar.Value = _filesExtracted / 100;
-            }, null);
+                ProgressBar.Maximum = _totalFiles;
+                ProgressBar.Value = _filesExtracted;
+            });
         }
 
         private async void DirectDownloaderForm_FormClosing(object sender, FormClosingEventArgs e)

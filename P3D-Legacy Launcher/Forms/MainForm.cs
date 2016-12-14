@@ -67,13 +67,13 @@ namespace P3D.Legacy.Launcher.Forms
 
             Label_Version.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             TabPage_Settings.VisibleChanged += TabPage_Settings_VisibleChanged;
+
+            ReloadProfileList();
+            ReloadSettings();
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
         {
-            ReloadSettings();
-            ReloadProfileList();
-
             CheckLauncherForUpdate();
 
             if (Settings.GameUpdates)

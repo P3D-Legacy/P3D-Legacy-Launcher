@@ -138,11 +138,17 @@
   <data name="Check_Updates.Text" xml:space="preserve">
     <value>Автоматически проверять обновления при запуске</value>
   </data>
+  <data name="GroupBox_Netwok.Text" xml:space="preserve">
+    <value>Сеть</value>
+  </data>
   <data name="GroupBox_Startup.Text" xml:space="preserve">
     <value>Общее</value>
   </data>
   <data name="Label_Language.Text" xml:space="preserve">
-    <value>Язык</value>
+    <value>Язык:</value>
+  </data>
+  <data name="Label_SelectedDL.Text" xml:space="preserve">
+    <value>Ссылка для скачивания:</value>
   </data>
   <data name="LinkLabel_Pokemon3D.Text" xml:space="preserve">
     <value>Pokémon 3D</value>

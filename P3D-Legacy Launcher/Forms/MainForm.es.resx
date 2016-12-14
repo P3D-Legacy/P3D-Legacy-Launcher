@@ -139,7 +139,7 @@
     <value>Buscar actualizaciones al iniciar</value>
   </data>
   <data name="GroupBox_Netwok.Text" xml:space="preserve">
-    <value>Network</value>
+    <value>Conexión</value>
   </data>
   <data name="GroupBox_Startup.Text" xml:space="preserve">
     <value>Común</value>
@@ -148,7 +148,7 @@
     <value>Idioma:</value>
   </data>
   <data name="Label_SelectedDL.Text" xml:space="preserve">
-    <value>Selected DL:</value>
+    <value>Enlace de descarga elegido:</value>
   </data>
   <data name="LinkLabel_Pokemon3D.Text" xml:space="preserve">
     <value>Pokémon3D</value>

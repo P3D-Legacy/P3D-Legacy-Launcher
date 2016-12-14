@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,13 +12,12 @@ using DamienG.Security.Cryptography;
 using Octokit;
 
 using P3D.Legacy.Launcher.Data;
+using P3D.Legacy.Launcher.Extensions;
 
 namespace P3D.Legacy.Launcher.Forms
 {
     public partial class CustomUpdaterForm : Form
     {
-        private SynchronizationContext SynchronizationContext { get; } =  SynchronizationContext.Current;
-
         private WebClient Downloader { get; set; }
         private bool Cancelled { get; set; }
 
@@ -27,7 +25,6 @@ namespace P3D.Legacy.Launcher.Forms
         private string ReleaseInfoFilePath => FileSystemInfo.TempFilePath(UpdateInfoAsset.Name);
         private string UpdatedFolderPath { get; }
         private Uri DLUri { get; }
-        private long DLSize { get; set; }
 
         public CustomUpdaterForm(ReleaseAsset updateInfoAsset, string updatedFolderPath, Uri dlUri)
         {
@@ -52,18 +49,16 @@ namespace P3D.Legacy.Launcher.Forms
             if (File.Exists(ReleaseInfoFilePath))
                 File.Delete(ReleaseInfoFilePath);
 
-            DLSize = UpdateInfoAsset.Size;
-
             try
             {
+                ProgressBar.SafeInvoke(() => ProgressBar.Maximum = UpdateInfoAsset.Size);
                 using (Downloader = new WebClient())
                 {
                     Downloader.DownloadProgressChanged += client_DownloadProgressChanged;
                     await Downloader.DownloadFileTaskAsync(UpdateInfoAsset.BrowserDownloadUrl, ReleaseInfoFilePath);
-                    Downloader.DownloadProgressChanged -= client_DownloadProgressChanged;
                 }
             }
-            catch (Exception) { DownloadErrorMessage(); return; }
+            catch (WebException) { DownloadErrorMessage(); return; }
             if (Cancelled) return;
 
 
@@ -74,7 +69,7 @@ namespace P3D.Legacy.Launcher.Forms
 
                 if (list.Any())
                 {
-                    await UpdateFiles(list);
+                    UpdateFiles(list);
                     if (Cancelled) return;
                     UpdatedMessage();
                 }
@@ -84,12 +79,16 @@ namespace P3D.Legacy.Launcher.Forms
             else
                 DownloadErrorMessage();
         }
+        private void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            ProgressBar.SafeInvoke(() => ProgressBar.Value = (int) e.BytesReceived);
+        }
 
         private List<UpdateFileEntry> StartUpdate()
         {
             if (Cancelled) return new List<UpdateFileEntry>();
 
-            SynchronizationContext.Send(obj => Label_ProgressBar1.Text = Label_ProgressBar2.Text, null);
+            Label_ProgressBar1.SafeInvoke(() => Label_ProgressBar1.Text = Label_ProgressBar2.Text);
 
             var releaseInfoContent = File.ReadAllText(ReleaseInfoFilePath);
             var deserializer = UpdateInfo.DeserializerBuilder.Build();
@@ -98,74 +97,76 @@ namespace P3D.Legacy.Launcher.Forms
             var crc32 = new Crc32();
             var sha1 = new SHA1Managed();
             var notValidFileEntries = new List<UpdateFileEntry>();
-            SynchronizationContext.Send(delegate { ProgressBar.Value = 0; ProgressBar.Step = 1; ProgressBar.Maximum = updateInfo.Files.Count; }, null);
-            foreach (var updateFileEntry in updateInfo.Files)
+            ProgressBar.SafeInvoke(delegate { ProgressBar.Maximum = updateInfo.Files.Count; ProgressBar.Step = 1; ProgressBar.Value = 0; });
+            Parallel.ForEach(updateInfo.Files, (updateFileEntry, state) =>
             {
-                if (Cancelled) return new List<UpdateFileEntry>();
+                if(Cancelled) state.Stop();
 
-                SynchronizationContext.Send(obj => ProgressBar.PerformStep(), null);
+                this.SafeInvoke(() => ProgressBar.PerformStep());
 
                 var filePath = Path.Combine(UpdatedFolderPath, updateFileEntry.AbsoluteFilePath);
                 if (!File.Exists(filePath))
                 {
                     notValidFileEntries.Add(updateFileEntry);
-                    continue;
+                    return;
                 }
                 using (var fs = File.Open(filePath, System.IO.FileMode.Open, FileAccess.Read))
                 {
                     var crc32Hash = string.Empty;
                     var sha1Hash = string.Empty;
-                    crc32Hash = crc32.ComputeHash(fs)
-                        .Aggregate(crc32Hash, (current, b) => current + b.ToString("x2").ToLower());
+                    crc32Hash = crc32.ComputeHash(fs).Aggregate(crc32Hash, (current, b) => current + b.ToString("x2").ToLower());
                     if (crc32Hash == updateFileEntry.CRC32)
                     {
-                        sha1Hash = sha1.ComputeHash(fs)
-                            .Aggregate(sha1Hash, (current, b) => current + b.ToString("x2").ToLower());
+                        sha1Hash = sha1.ComputeHash(fs).Aggregate(sha1Hash, (current, b) => current + b.ToString("x2").ToLower());
                         if (sha1Hash == updateFileEntry.SHA1)
-                            continue;
+                            return;
                         else
                         {
                             notValidFileEntries.Add(updateFileEntry);
-                            continue;
+                            return;
                         }
                     }
                     else
                     {
                         notValidFileEntries.Add(updateFileEntry);
-                        continue;
+                        return;
                     }
                 }
-            }
+            });
 
             return notValidFileEntries;
         }
-
-        private async Task UpdateFiles(List<UpdateFileEntry> updateFileEntries)
+        private void UpdateFiles(List<UpdateFileEntry> updateFileEntries)
         {
             if (Cancelled) return;
 
-            SynchronizationContext.Send(obj => Label_ProgressBar1.Text = Label_ProgressBar3.Text, null);
+            this.SafeInvoke(() => Label_ProgressBar1.Text = Label_ProgressBar3.Text);
 
             try
             {
-                DLSize = updateFileEntries.Sum(updateFileEntry => updateFileEntry.Size);
-                foreach (var updateFileEntry in updateFileEntries)
+                this.SafeInvoke(delegate { ProgressBar.Maximum = updateFileEntries.Count; ProgressBar.Step = 1; ProgressBar.Value = 0; });
+                Parallel.ForEach(updateFileEntries, (updateFileEntry, state) =>
                 {
-                    if (Cancelled) return;
+                    if (Cancelled) state.Stop();
 
                     var dlUri = new Uri(DLUri, updateFileEntry.AbsoluteFilePath);
                     var tempFilePath = FileSystemInfo.TempFilePath(updateFileEntry.AbsoluteFilePath);
+                    var tempFolderpath = Path.GetDirectoryName(tempFilePath);
+                    if (!string.IsNullOrEmpty(tempFolderpath) && !Directory.Exists(tempFolderpath))
+                        Directory.CreateDirectory(tempFolderpath);
 
-                    using (Downloader = new WebClient())
+                    using (var downloader = new WebClient())
                     {
-                        Downloader.DownloadProgressChanged += client_DownloadProgressChanged;
-                        await Downloader.DownloadFileTaskAsync(dlUri, tempFilePath);
-                        Downloader.DownloadProgressChanged -= client_DownloadProgressChanged;
+                        downloader.DownloadFile(dlUri, tempFilePath);
+                        this.SafeInvoke(() => ProgressBar.PerformStep());
                     }
-                }
+                });
             }
-            catch (Exception) { DownloadErrorMessage(); return; }
-
+            catch (UriFormatException)          { DownloadErrorMessage(); return; }
+            catch (UnauthorizedAccessException) { DownloadErrorMessage(); return; }
+            catch (IOException)                 { DownloadErrorMessage(); return; }
+            catch (WebException)                { DownloadErrorMessage(); return; }
+            
             ReplaceFiles(updateFileEntries);
         }
         private void ReplaceFiles(List<UpdateFileEntry> updateFileEntries)
@@ -174,9 +175,9 @@ namespace P3D.Legacy.Launcher.Forms
 
             try
             {
-                foreach (var updateFileEntry in updateFileEntries)
+                Parallel.ForEach(updateFileEntries, (updateFileEntry, state) =>
                 {
-                    if (Cancelled) return;
+                    if (Cancelled) state.Break();
 
                     var tempFilePath = FileSystemInfo.TempFilePath(updateFileEntry.AbsoluteFilePath);
                     var filePath = Path.Combine(UpdatedFolderPath, updateFileEntry.AbsoluteFilePath);
@@ -185,25 +186,15 @@ namespace P3D.Legacy.Launcher.Forms
                         File.Delete(filePath);
                     File.Move(tempFilePath, filePath);
                     File.Delete(tempFilePath);
-                }
+                });
             }
-            catch (Exception) { FileReplacementErrorMessage(); return; }
+            catch (UnauthorizedAccessException) { FileReplacementErrorMessage(); return; }
+            catch (IOException) { FileReplacementErrorMessage(); return; }
         }
-
-        private void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
-        {
-            SynchronizationContext.Send(delegate
-            {
-                ProgressBar.Maximum = (int) DLSize;
-                ProgressBar.Value = (int) e.BytesReceived;
-            }, null);
-        }
-
         private void NAppUpdaterForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Downloader.DownloadProgressChanged -= client_DownloadProgressChanged;
-            Downloader?.CancelAsync();
             Cancelled = true;
+            Downloader?.CancelAsync();
         }
 
 
@@ -211,25 +202,25 @@ namespace P3D.Legacy.Launcher.Forms
         {
             MessageBox.Show(MBLang.DownloadError, MBLang.DownloadErrorTitle, MessageBoxButtons.OK);
             if (Cancelled) return;
-            SynchronizationContext.Send(obj => Close(), null);
+            this.SafeInvoke(Close);
         }
         private void FileReplacementErrorMessage()
         {
             MessageBox.Show(MBLang.FileReplacementError, MBLang.FileReplacementErrorTitle, MessageBoxButtons.OK);
             if (Cancelled) return;
-            SynchronizationContext.Send(obj => Close(), null);
+            this.SafeInvoke(Close);
         }
         private void NoUpdateNeededMessage()
         {
             MessageBox.Show(MBLang.NoUpdateNeeded, MBLang.NoUpdateNeededTitle, MessageBoxButtons.OK);
             if (Cancelled) return;
-            SynchronizationContext.Send(obj => Close(), null);
+            this.SafeInvoke(Close);
         }
         private void UpdatedMessage()
         {
             MessageBox.Show(MBLang.Updated, MBLang.UpdatedTitle, MessageBoxButtons.OK);
             if (Cancelled) return;
-            SynchronizationContext.Send(obj => Close(), null);
+            this.SafeInvoke(Close);
         }
     }
 }

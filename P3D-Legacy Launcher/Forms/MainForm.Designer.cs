@@ -162,8 +162,8 @@ namespace P3D.Legacy.Launcher.Forms
             // 
             // ComboBox_SelectedDL
             // 
-            resources.ApplyResources(this.ComboBox_SelectedDL, "ComboBox_SelectedDL");
             this.ComboBox_SelectedDL.FormattingEnabled = true;
+            resources.ApplyResources(this.ComboBox_SelectedDL, "ComboBox_SelectedDL");
             this.ComboBox_SelectedDL.Name = "ComboBox_SelectedDL";
             // 
             // Label_SelectedDL

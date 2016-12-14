@@ -14,9 +14,9 @@ namespace P3D.Legacy.Launcher.Data
 
         public static CultureInfo[] AvailableCultureInfo { get; } = {
             new CultureInfo("en"), new CultureInfo("ru"), new CultureInfo("lt"),
-            new CultureInfo("nl"), new CultureInfo("es"), new CultureInfo("de"), 
-            /* new CultureInfo("fr"), new CultureInfo("it"), new CultureInfo("pl"), 
-            new CultureInfo("pt") */
+            new CultureInfo("nl"), new CultureInfo("es"), new CultureInfo("de"),
+            new CultureInfo("pl") 
+            /* new CultureInfo("fr"), new CultureInfo("it"), new CultureInfo("pt") */
         };
 
         public static Settings Default => new Settings { GameUpdates = true, Language = new CultureInfo("en") };

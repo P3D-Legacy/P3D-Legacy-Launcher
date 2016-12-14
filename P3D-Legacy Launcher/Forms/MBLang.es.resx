@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DLNotSelected" xml:space="preserve">
+    <value>No ha sido posible actualizar. Por favor, seleccione un enlace de descarga en la pestaña de configuración</value>
+  </data>
+  <data name="DLNotSelectedTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
   <data name="DotNetError" xml:space="preserve">
     <value>Pokémon 3D requiere Microsoft .NET Framework 4.0 Por favor, visite http://www.microsoft.com/en-us/download/details.aspx?id=17851 to para descargarlo. ¿Le gustaría abrir dicha página web ahora?</value>
   </data>
@@ -143,8 +149,7 @@
     <value>Hay una actualización disponible</value>
   </data>
   <data name="NoInternet" xml:space="preserve">
-    <value>No ha sido posible conectar con GitHub. ¿Hay conexión a internet disponible?
-</value>
+    <value>No ha sido posible conectar con GitHub. ¿Hay conexión a internet disponible?</value>
   </data>
   <data name="NoInternetTitle" xml:space="preserve">
     <value>Error al verificar actualización</value>
@@ -186,7 +191,6 @@ Por favor, visite https://www.openal.org/downloads/ para descargarlo.
     <value>El perfil ha sido actualizado con éxito.</value>
   </data>
   <data name="UpdatedTitle" xml:space="preserve">
-    <value>Actualización completada
-</value>
+    <value>Actualización completada</value>
   </data>
 </root>

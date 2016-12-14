@@ -90,7 +90,7 @@
             this.MaximumSize = new System.Drawing.Size(300, 100);
             this.MinimumSize = new System.Drawing.Size(300, 100);
             this.Name = "CustomUpdaterForm";
-            this.Text = "NAppUpdater";
+            this.Text = "Updater";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NAppUpdaterForm_FormClosing);
             this.Shown += new System.EventHandler(this.CustomUpdaterForm_Shown);
             this.ResumeLayout(false);
