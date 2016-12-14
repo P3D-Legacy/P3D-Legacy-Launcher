@@ -53,10 +53,9 @@ namespace P3D.Legacy.Launcher.Forms
                 {
                     Downloader.DownloadProgressChanged += client_DownloadProgressChanged;
                     await Downloader.DownloadFileTaskAsync(ReleaseAsset.BrowserDownloadUrl, TempFilePath);
-                    Downloader.DownloadProgressChanged -= client_DownloadProgressChanged;
                 }
             }
-            catch (Exception) { return; }
+            catch (WebException) { return; }
             if (Cancelled) return;
 
             if (File.Exists(TempFilePath))

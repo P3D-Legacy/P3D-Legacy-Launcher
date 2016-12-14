@@ -26,10 +26,8 @@ namespace P3D.Legacy.Launcher.Forms
 
         #region GitHub
 
-        private Version OnlineLastGameReleaseVersion => OnlineLastGameRelease?.Version ?? new Version("0.0");
-
+        private System.Version OnlineLastGameReleaseVersion => OnlineLastGameRelease?.Version ?? new System.Version("0.0");
         private OnlineGameRelease OnlineLastGameRelease => OnlineGameReleases.MaxByOrDefault(release => release.Version);
-
         private List<OnlineGameRelease> OnlineGameReleases { get; set; } = GetOnlineGameReleases().ToList();
         private static IEnumerable<OnlineGameRelease> GetOnlineGameReleases() =>
             GitHubInfo.GetAllReleases.Any() ? GitHubInfo.GetAllReleases.Select(release => new OnlineGameRelease(release)) : new List<OnlineGameRelease>();
@@ -88,7 +86,7 @@ namespace P3D.Legacy.Launcher.Forms
 
         private void Button_Start_Click(object sender, EventArgs e)
         {
-            if (OSInfo.FrameworkVersion >= new Version(4, 0))
+            if (OSInfo.FrameworkVersion >= new System.Version(4, 0))
             {
                 if (!IsOpenALInstalled())
                 {
@@ -124,7 +122,7 @@ namespace P3D.Legacy.Launcher.Forms
             {
                 Putton_StartGame.Enabled = false;
 
-                if(DownloadCurrentProfile())
+                if (DownloadCurrentProfile())
                     Button_Start_Click(sender, e);
                 else
                     Putton_StartGame.Enabled = true;
@@ -132,9 +130,9 @@ namespace P3D.Legacy.Launcher.Forms
         }
         private bool IsOpenALInstalled()
         {
-            if(OSInfo.OperatingSystemType == OperatingSystemType.Windows)
+            if (OSInfo.OperatingSystemType == OperatingSystemType.Windows)
                 return Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall").GetSubKeyNames()
-                    .Select(item =>(string)Registry.LocalMachine.OpenSubKey($@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{item}").GetValue("DisplayName"))
+                    .Select(item => (string) Registry.LocalMachine.OpenSubKey($@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{item}").GetValue("DisplayName"))
                     .Any(programName => programName == "OpenAL");
             if (OSInfo.OperatingSystemType == OperatingSystemType.Unix)
                 return true;
@@ -226,7 +224,7 @@ namespace P3D.Legacy.Launcher.Forms
             if (launcherReleases.Any())
             {
                 var latestRelease = launcherReleases.First();
-                if (Assembly.GetExecutingAssembly().GetName().Version < new Version(latestRelease.TagName))
+                if (Assembly.GetExecutingAssembly().GetName().Version < new System.Version(latestRelease.TagName))
                 {
                     switch (MessageBox.Show(MBLang.LauncherUpdateAvailable, MBLang.LauncherUpdateAvailableTitle, MessageBoxButtons.YesNo))
                     {
@@ -334,7 +332,7 @@ namespace P3D.Legacy.Launcher.Forms
         {
             Settings = LoadSettings();
 
-            if(Controls.Count == 0)
+            if (Controls.Count == 0)
                 return;
 
             Check_Updates.Checked = Settings.GameUpdates;
