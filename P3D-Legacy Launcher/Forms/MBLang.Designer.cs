@@ -61,6 +61,24 @@ namespace P3D.Legacy.Launcher.Forms {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Can&apos;t update! Select a DL first in Settings tab!.
+        /// </summary>
+        internal static string DLNotSelected {
+            get {
+                return ResourceManager.GetString("DLNotSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error!.
+        /// </summary>
+        internal static string DLNotSelectedTitle {
+            get {
+                return ResourceManager.GetString("DLNotSelectedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pokémon 3D requires Microsoft .NET Framework 4.0.
         ///Please visit http://www.microsoft.com/en-us/download/details.aspx?id=17851 to download.
         ///Would you like to open the webpage now?.
@@ -86,6 +104,42 @@ namespace P3D.Legacy.Launcher.Forms {
         internal static string DotNetErrorTitle {
             get {
                 return ResourceManager.GetString("DotNetErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to download a file. Please try again!.
+        /// </summary>
+        internal static string DownloadError {
+            get {
+                return ResourceManager.GetString("DownloadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error!.
+        /// </summary>
+        internal static string DownloadErrorTitle {
+            get {
+                return ResourceManager.GetString("DownloadErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Where was an error while replacing the old files with the new ones!.
+        /// </summary>
+        internal static string FileReplacementError {
+            get {
+                return ResourceManager.GetString("FileReplacementError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error!.
+        /// </summary>
+        internal static string FileReplacementErrorTitle {
+            get {
+                return ResourceManager.GetString("FileReplacementErrorTitle", resourceCulture);
             }
         }
         
@@ -142,6 +196,24 @@ namespace P3D.Legacy.Launcher.Forms {
         internal static string NotDownloadedTitle {
             get {
                 return ResourceManager.GetString("NotDownloadedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Profile doesn&apos;t need an update!.
+        /// </summary>
+        internal static string NoUpdateNeeded {
+            get {
+                return ResourceManager.GetString("NoUpdateNeeded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Done!.
+        /// </summary>
+        internal static string NoUpdateNeededTitle {
+            get {
+                return ResourceManager.GetString("NoUpdateNeededTitle", resourceCulture);
             }
         }
         
@@ -207,6 +279,24 @@ namespace P3D.Legacy.Launcher.Forms {
         internal static string UpdateAvailableTitle {
             get {
                 return ResourceManager.GetString("UpdateAvailableTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Profile was successfully updated!.
+        /// </summary>
+        internal static string Updated {
+            get {
+                return ResourceManager.GetString("Updated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Success!.
+        /// </summary>
+        internal static string UpdatedTitle {
+            get {
+                return ResourceManager.GetString("UpdatedTitle", resourceCulture);
             }
         }
     }

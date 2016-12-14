@@ -3,20 +3,20 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Ionic.Zip;
 
 using Octokit;
 
-using FileMode = System.IO.FileMode;
-
 namespace P3D.Legacy.Launcher.Forms
 {
     public partial class DirectUpdaterForm : Form
     {
-        private WebClient Downloader { get; } = new WebClient();
-        private Thread Extractor { get; set; }
+        private SynchronizationContext SynchronizationContext { get; } = SynchronizationContext.Current;
+
+        private WebClient Downloader { get; set; }
         private bool Cancelled { get; set; }
 
         private ReleaseAsset ReleaseAsset { get; }
@@ -34,106 +34,102 @@ namespace P3D.Legacy.Launcher.Forms
 
             InitializeComponent();
         }
-        private void DirectDownloaderForm_Load(object sender, EventArgs e)
+
+        private async void DirectUpdaterForm_Shown(object sender, EventArgs e)
         {
             if (!Directory.Exists(FileSystemInfo.TempFolderPath))
                 Directory.CreateDirectory(FileSystemInfo.TempFolderPath);
 
-            DownloadFile();
+            await Task.Run(DownloadFile);
+            Close();
         }
 
-        private void DownloadFile()
+        private async Task DownloadFile()
         {
             if (File.Exists(TempFilePath))
                 File.Delete(TempFilePath);
 
-            Downloader.DownloadProgressChanged += client_DownloadProgressChanged;
-            Downloader.DownloadFileAsync(new Uri(ReleaseAsset.BrowserDownloadUrl), TempFilePath);
-            Downloader.DownloadFileCompleted += client_DownloadFileCompleted;
-        }
-        private void client_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
-        {
-            if(!Cancelled)
+            try
+            {
+                using (Downloader = new WebClient())
+                {
+                    Downloader.DownloadProgressChanged += client_DownloadProgressChanged;
+                    await Downloader.DownloadFileTaskAsync(ReleaseAsset.BrowserDownloadUrl, TempFilePath);
+                    Downloader.DownloadProgressChanged -= client_DownloadProgressChanged;
+                }
+            }
+            catch (Exception) { return; }
+            if (Cancelled) return;
+
+            if (File.Exists(TempFilePath))
                 ExtractFile();
+            else
+                ;
         }
         private void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            if (Cancelled || Disposing || IsDisposed)
-                return;
-
-            Invoke((MethodInvoker) delegate
-            {
-                progressBar1.Maximum = ReleaseAsset.Size / 100;
-                progressBar1.Value = (int) e.BytesReceived / 100;
-            });
+            SynchronizationContext.Send(delegate { ProgressBar.Maximum = ReleaseAsset.Size / 100; ProgressBar.Value = (int) e.BytesReceived / 100; }, null);
         }
 
         private void ExtractFile()
         {
-            Label_ProgressBar1.Text = Label_ProgressBar2.Text;
+            if (Cancelled) return;
+
+            SynchronizationContext.Send(obj => Label_ProgressBar1.Text = Label_ProgressBar2.Text, null);
 
             if (!Directory.Exists(ExtractionFolder))
                 Directory.CreateDirectory(ExtractionFolder);
 
-            if(Extractor != null && Extractor.ThreadState != ThreadState.Stopped)
-                Extractor.Abort();
-            Extractor = new Thread(() =>
+            using (var zip = ZipFile.Read(TempFilePath))
             {
-                using (var zip = ZipFile.Read(TempFilePath))
+                zip.ExtractProgress += zip_ExtractProgress;
+
+                var result = zip.Skip(1).Where(entry => entry.FileName.Contains(zip[0].FileName)).ToList();
+                result = result.Select(c =>
                 {
-                    zip.ExtractProgress += zip_ExtractProgress;
+                    c.FileName = c.FileName.Replace(zip[0].FileName, "");
+                    return c;
+                }).ToList();
 
-                    var result = zip.Skip(1).Where(entry => entry.FileName.Contains(zip[0].FileName)).ToList();
-                    result = result.Select(c =>
-                    {
-                        c.FileName = c.FileName.Replace(zip[0].FileName, "");
-                        return c;
-                    }).ToList();
+                _totalFiles = result.Count;
+                _filesExtracted = 0;
 
-                    _totalFiles = result.Count;
-                    _filesExtracted = 0;
-
-                    // -- We skip the Main folder.
-                    foreach (var entry in result)
-                        entry.Extract(ExtractionFolder, ExtractExistingFileAction.OverwriteSilently);
+                // -- We skip the Main folder.
+                foreach (var entry in result)
+                {
+                    if (Cancelled) return;
+                    entry.Extract(ExtractionFolder, ExtractExistingFileAction.OverwriteSilently);
                 }
+            }
 
-                File.Delete(TempFilePath);
-
-
-                if (Cancelled || Disposing || IsDisposed)
-                    return;
-                Invoke((MethodInvoker) Close);
-            });
-            Extractor.Start();
+            File.Delete(TempFilePath);
         }
+
         private void zip_ExtractProgress(object sender, ExtractProgressEventArgs e)
         {
-            if (Cancelled || Disposing || IsDisposed)
-                return;
-
-            Invoke((MethodInvoker) delegate
+            SynchronizationContext.Send(delegate
             {
                 if (e.EventType != ZipProgressEventType.Extracting_BeforeExtractEntry)
                     return;
                 _filesExtracted++;
 
-                progressBar1.Maximum = _totalFiles / 100;
-                progressBar1.Value = _filesExtracted / 100;
-            });
+                ProgressBar.Maximum = _totalFiles / 100;
+                ProgressBar.Value = _filesExtracted / 100;
+            }, null);
         }
 
-        private void DirectDownloaderForm_FormClosing(object sender, FormClosingEventArgs e)
+        private async void DirectDownloaderForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            Downloader.DownloadProgressChanged -= client_DownloadProgressChanged;
+            Downloader?.CancelAsync();
             Cancelled = true;
-            Downloader.CancelAsync();
 
             if (File.Exists(TempFilePath))
             {
                 var x = 0;
                 while (x < 10 && IsFileLocked(TempFilePath)) // -- Wait only 1 second.
                 {
-                    Thread.Sleep(100);
+                    await Task.Delay(100);
                     x++;
                 }
                 File.Delete(TempFilePath);
@@ -143,7 +139,7 @@ namespace P3D.Legacy.Launcher.Forms
         {
             FileStream stream = null;
 
-            try { stream = File.Open(path, FileMode.Open, FileAccess.ReadWrite, FileShare.None); }
+            try { stream = File.Open(path, System.IO.FileMode.Open, FileAccess.ReadWrite, FileShare.None); }
             catch (IOException) { return true; }
             finally { stream?.Close(); }
 

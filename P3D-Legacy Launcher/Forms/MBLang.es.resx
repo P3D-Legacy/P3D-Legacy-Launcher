@@ -121,7 +121,19 @@
     <value>Pokémon 3D requiere Microsoft .NET Framework 4.0 Por favor, visite http://www.microsoft.com/en-us/download/details.aspx?id=17851 to para descargarlo. ¿Le gustaría abrir dicha página web ahora?</value>
   </data>
   <data name="DotNetErrorTitle" xml:space="preserve">
-    <value>¡Error!</value>
+    <value>Error</value>
+  </data>
+  <data name="DownloadError" xml:space="preserve">
+    <value>Error al descargar un archivo. Por favor, intente de nuevo.</value>
+  </data>
+  <data name="DownloadErrorTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="FileReplacementError" xml:space="preserve">
+    <value>Hubo un error al reemplazar los archivos.</value>
+  </data>
+  <data name="FileReplacementErrorTitle" xml:space="preserve">
+    <value>Error</value>
   </data>
   <data name="LauncherUpdateAvailable" xml:space="preserve">
     <value>Una nueva versión del Launcher se encuentra disponible.
@@ -144,16 +156,22 @@
   <data name="NotDownloadedTitle" xml:space="preserve">
     <value>No descargado</value>
   </data>
+  <data name="NoUpdateNeeded" xml:space="preserve">
+    <value>El perfil no necesita ser actualizado.</value>
+  </data>
+  <data name="NoUpdateNeededTitle" xml:space="preserve">
+    <value>Actualización no necesaria</value>
+  </data>
   <data name="OpenALError" xml:space="preserve">
     <value>Pokémon 3D requiere OpenAL.
 Por favor, visite https://www.openal.org/downloads/ para descargarlo.
 ¿Le gustaría abrir dicha página web ahora?</value>
   </data>
   <data name="OpenALErrorTitle" xml:space="preserve">
-    <value>¡Error!</value>
+    <value>Error</value>
   </data>
   <data name="ProfileUpToDate" xml:space="preserve">
-    <value>El profile '{0}' se encuenta actualizado</value>
+    <value>El perfil '{0}' se encuenta actualizado</value>
   </data>
   <data name="ProfileUpToDateTitle" xml:space="preserve">
     <value>Validación de versión</value>
@@ -162,6 +180,13 @@ Por favor, visite https://www.openal.org/downloads/ para descargarlo.
     <value>¿Le gustaría actualizar de la versión [{0}] a la versión [{1}] (Sí) o le gustaría descargarla como una versión independiente (No)?</value>
   </data>
   <data name="UpdateAvailableTitle" xml:space="preserve">
-    <value>¡Hay una actualización disponible!</value>
+    <value>Hay una actualización disponible.</value>
+  </data>
+  <data name="Updated" xml:space="preserve">
+    <value>El perfil ha sido actualizado con éxito.</value>
+  </data>
+  <data name="UpdatedTitle" xml:space="preserve">
+    <value>Actualización completada
+</value>
   </data>
 </root>

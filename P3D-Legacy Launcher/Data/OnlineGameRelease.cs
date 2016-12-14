@@ -10,7 +10,7 @@ namespace P3D.Legacy.Launcher.Data
     {
         private Release Release { get; }
         public ReleaseAsset ReleaseAsset => Release.GetRelease();
-        public ReleaseAsset UpdateFeedAsset => Release.GetUpdateFeed();
+        public ReleaseAsset UpdateInfoAsset => Release.GetUpdateInfo();
 
         public Version Version => new Version(Release.TagName ?? "0.0");
         public DateTime ReleaseDate => Release.CreatedAt.DateTime;

@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 
 using P3D.Legacy.Launcher.Yaml;
 
@@ -8,14 +9,14 @@ namespace P3D.Legacy.Launcher.Data
 {
     public class Settings
     {
-        public static SerializerBuilder SerializerBuilder { get; } = new SerializerBuilder().WithTypeConverter(new CultureInfoConverter());
-        public static DeserializerBuilder DeserializerBuilder { get; } = new DeserializerBuilder().WithTypeConverter(new CultureInfoConverter());
+        public static SerializerBuilder SerializerBuilder { get; } = new SerializerBuilder().WithTypeConverter(new CultureInfoConverter()).WithTypeConverter(new UriConverter());
+        public static DeserializerBuilder DeserializerBuilder { get; } = new DeserializerBuilder().WithTypeConverter(new CultureInfoConverter()).WithTypeConverter(new UriConverter());
 
         public static CultureInfo[] AvailableCultureInfo { get; } = {
             new CultureInfo("en"), new CultureInfo("ru"), new CultureInfo("lt"),
-            new CultureInfo("lt"), new CultureInfo("nl"), new CultureInfo("es"),
-            new CultureInfo("de"), /* new CultureInfo("fr"), new CultureInfo("it"),
-            new CultureInfo("pl"), new CultureInfo("pt") */
+            new CultureInfo("nl"), new CultureInfo("es"), new CultureInfo("de"), 
+            /* new CultureInfo("fr"), new CultureInfo("it"), new CultureInfo("pl"), 
+            new CultureInfo("pt") */
         };
 
         public static Settings Default => new Settings { GameUpdates = true, Language = new CultureInfo("en") };
@@ -23,5 +24,6 @@ namespace P3D.Legacy.Launcher.Data
 
         public bool GameUpdates { get; set; }
         public CultureInfo Language { get; set; }
+        public Uri SelectedDL { get; set; }
     }
 }

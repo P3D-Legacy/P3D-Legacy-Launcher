@@ -151,7 +151,7 @@
     <value>Играть</value>
   </data>
   <data name="TabPage_About.Text" xml:space="preserve">
-    <value>Помощь</value>
+    <value>О программе...</value>
   </data>
   <data name="TabPage_Logger.Text" xml:space="preserve">
     <value>Логгер</value>

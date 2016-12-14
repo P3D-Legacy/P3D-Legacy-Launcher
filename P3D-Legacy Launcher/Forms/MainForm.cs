@@ -20,6 +20,8 @@ namespace P3D.Legacy.Launcher.Forms
 {
     public partial class MainForm : Form
     {
+        public static StringBuilder Logger { get; } = new StringBuilder();
+
         #region GitHub
 
         private Version OnlineLastGameReleaseVersion => OnlineLastGameRelease?.Version ?? new Version("0.0");
@@ -36,41 +38,42 @@ namespace P3D.Legacy.Launcher.Forms
 
         private OperatingSystemInfo OSInfo { get; } = OperatingSystemInfo.GetOperatingSystemInfo();
 
-        private Profiles Profiles { get; set; }
-        private Profile CurrentProfile => Profiles.GetProfile();
-
         private Settings Settings { get; set; } = LoadSettings();
+
+        private Profiles Profiles { get; set; } = LoadProfiles();
+        private Profile CurrentProfile => Profiles.GetProfile();
 
 
         public MainForm()
         {
-            var lang = CultureInfo.CurrentUICulture.DisplayName;
+            FormPreInitialize();
+            InitializeComponent();
+            FormInitialize();
+        }
+        private void FormPreInitialize()
+        {
+            foreach (Control control in Controls)
+                control.Dispose();
+            Controls.Clear();
 
             Thread.CurrentThread.CurrentCulture = Settings.Language;
             Thread.CurrentThread.CurrentUICulture = Settings.Language;
             CultureInfo.DefaultThreadCurrentCulture = Settings.Language;
-
-            InitializeComponent();
-            FormInitialize();
-
-            var builder = new StringBuilder(TextBox_Logger.Text);
-            builder.AppendLine($"System Language: {lang}");
-            TextBox_Logger.Text = builder.ToString();
         }
         private void FormInitialize()
         {
+            Logger.Clear();
+            Log($"System Language: {CultureInfo.InstalledUICulture.EnglishName}");
+
             Label_Version.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             TabPage_Settings.VisibleChanged += TabPage_Settings_VisibleChanged;
-
-            ReloadProfileList();
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-
-        }
         private void MainForm_Shown(object sender, EventArgs e)
         {
+            ReloadSettings();
+            ReloadProfileList();
+
             CheckLauncherForUpdate();
 
             if (Settings.GameUpdates)
@@ -88,13 +91,21 @@ namespace P3D.Legacy.Launcher.Forms
                 if (!IsOpenALInstalled())
                 {
                     if (MessageBox.Show(MBLang.OpenALError, MBLang.OpenALErrorTitle, MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    {
                         Process.Start(MBLang.OpenALErrorLink);
+                        Invoke((MethodInvoker) Close);
+                        return;
+                    }
                 }
             }
             else
             {
                 if (MessageBox.Show(MBLang.DotNetError, MBLang.DotNetErrorTitle, MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
                     Process.Start(MBLang.DotNetErrorLink);
+                    Invoke((MethodInvoker) Close);
+                    return;
+                }
             }
 
 
@@ -104,7 +115,8 @@ namespace P3D.Legacy.Launcher.Forms
             if (Directory.Exists(path) && File.Exists(pathexe))
             {
                 Process.Start(pathexe);
-                Close();
+                Invoke((MethodInvoker) Close);
+                return;
             }
             else
             {
@@ -123,9 +135,6 @@ namespace P3D.Legacy.Launcher.Forms
                     .Select(item =>(string)Registry.LocalMachine.OpenSubKey($@"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{item}").GetValue("DisplayName"))
                     .Any(programName => programName == "OpenAL");
             if (OSInfo.OperatingSystemType == OperatingSystemType.Unix)
-                return true;
-
-            if (OSInfo.OperatingSystemType == OperatingSystemType.Unity5)
                 return true;
 
             if (OSInfo.OperatingSystemType == OperatingSystemType.MacOSX)
@@ -170,15 +179,7 @@ namespace P3D.Legacy.Launcher.Forms
         private void TabPage_Settings_VisibleChanged(object sender, EventArgs e)
         {
             if ((sender as TabPage).Visible)
-            {
-                Settings = LoadSettings();
-
-                Check_Updates.Checked = Settings.GameUpdates;
-                ComboBox_Language.Items.Clear();
-                foreach (var cultureInfo in Settings.AvailableCultureInfo)
-                    ComboBox_Language.Items.Add(cultureInfo.NativeName);
-                ComboBox_Language.SelectedIndex = Array.IndexOf(Settings.AvailableCultureInfo, Settings.Language);
-            }
+                ReloadSettings();
         }
         private void Button_SaveSettings_Click(object sender, EventArgs e)
         {
@@ -187,6 +188,7 @@ namespace P3D.Legacy.Launcher.Forms
             {
                 GameUpdates = Check_Updates.Checked,
                 Language = Settings.AvailableCultureInfo[ComboBox_Language.SelectedIndex],
+                SelectedDL = UpdateInfo.DLUris.Length >= ComboBox_SelectedDL.SelectedIndex ? null : UpdateInfo.DLUris[ComboBox_SelectedDL.SelectedIndex],
             };
 
             SaveSettings(Settings);
@@ -195,11 +197,7 @@ namespace P3D.Legacy.Launcher.Forms
             {
                 var tabIndex = TabControl.SelectedIndex;
 
-                Thread.CurrentThread.CurrentCulture = Settings.Language;
-                Thread.CurrentThread.CurrentUICulture = Settings.Language;
-                CultureInfo.DefaultThreadCurrentCulture = Settings.Language;
-
-                Controls.Clear();
+                FormPreInitialize();
                 InitializeComponent();
                 FormInitialize();
 
@@ -212,6 +210,12 @@ namespace P3D.Legacy.Launcher.Forms
             Process.Start("http://pokemon3d.net/forum/");
         }
 
+
+        private void Log(string message)
+        {
+            Logger.AppendLine(message);
+            TextBox_Logger.Text = Logger.ToString();
+        }
 
         private void CheckLauncherForUpdate()
         {
@@ -229,15 +233,12 @@ namespace P3D.Legacy.Launcher.Forms
                                 directUpdater.ShowDialog();
 
                             Program.ActionsBeforeExit.Add(() =>
-                                new Process
-                                {
-                                    StartInfo =
+                                new Process { StartInfo =
                                     {
                                         UseShellExecute = false,
                                         FileName = Path.Combine(FileSystemInfo.MainFolderPath, FileSystemInfo.UpdaterExeFilename),
                                         CreateNoWindow = true
-                                    }
-                                }.Start());
+                                    } }.Start());
                             Close();
                             break;
 
@@ -293,15 +294,16 @@ namespace P3D.Legacy.Launcher.Forms
         }
         private void UpdateCurrentProfile(OnlineGameRelease onlineRelease)
         {
-            // -- Would you like to update the [%OLDVERSION%] version to [%NEWVERSION%] or would you like to download it as an independent version?
-            // -- If Update, use UpdateManager
-            // -- Else, just download latesr Release.Zip
-
             switch (MessageBox.Show(string.Format(MBLang.UpdateAvailable, CurrentProfile.Version, onlineRelease.Version), MBLang.UpdateAvailableTitle, MessageBoxButtons.YesNoCancel))
             {
                 case DialogResult.Yes:
-                    using (var nAppUpdater = new NAppUpdaterForm(onlineRelease))
-                        nAppUpdater.ShowDialog();
+                    if (Settings.SelectedDL != null && !string.IsNullOrEmpty(Settings.SelectedDL.AbsolutePath))
+                    {
+                        using (var nAppUpdater = new CustomUpdaterForm(onlineRelease.UpdateInfoAsset, Path.Combine(FileSystemInfo.GameReleasesFolderPath, CurrentProfile.Name), new Uri(Settings.SelectedDL, $"{CurrentProfile.Version}/")))
+                            nAppUpdater.ShowDialog();
+                    }
+                    else
+                        MessageBox.Show(MBLang.DLNotSelected, MBLang.DLNotSelectedTitle, MessageBoxButtons.OK);
                     break;
 
                 case DialogResult.No:
@@ -317,14 +319,39 @@ namespace P3D.Legacy.Launcher.Forms
         private void ReloadProfileList()
         {
             Profiles = LoadProfiles();
+
+            if (Controls.Count == 0)
+                return;
+
             ComboBox_CurrentProfile.Items.Clear();
             foreach (var profile in Profiles.ProfileList)
                 ComboBox_CurrentProfile.Items.Add(profile.Name);
             ComboBox_CurrentProfile.SelectedIndex = Profiles.ProfileIndex;
         }
+        private void ReloadSettings()
+        {
+            Settings = LoadSettings();
 
+            if(Controls.Count == 0)
+                return;
 
-        public static void SaveSettings(Settings settings)
+            Check_Updates.Checked = Settings.GameUpdates;
+
+            ComboBox_Language.Items.Clear();
+            foreach (var cultureInfo in Settings.AvailableCultureInfo)
+                ComboBox_Language.Items.Add(cultureInfo.NativeName);
+            ComboBox_Language.SelectedIndex = Array.IndexOf(Settings.AvailableCultureInfo, Settings.Language);
+
+            if (Settings.SelectedDL == null)
+                Settings.SelectedDL = UpdateInfo.DLUris.FirstOrDefault();
+
+            ComboBox_SelectedDL.Items.Clear();
+            foreach (var dlUri in UpdateInfo.DLUris)
+                ComboBox_SelectedDL.Items.Add(dlUri);
+            ComboBox_SelectedDL.SelectedIndex = Array.IndexOf(UpdateInfo.DLUris, Settings.SelectedDL);
+        }
+
+        private static void SaveSettings(Settings settings)
         {
             if (!File.Exists(FileSystemInfo.SettingsFilePath))
                 File.Create(FileSystemInfo.SettingsFilePath).Dispose();
@@ -332,7 +359,7 @@ namespace P3D.Legacy.Launcher.Forms
             var serializer = Settings.SerializerBuilder.Build();
             File.WriteAllText(FileSystemInfo.SettingsFilePath, serializer.Serialize(settings));
         }
-        public static Settings LoadSettings()
+        private static Settings LoadSettings()
         {
             if (!File.Exists(FileSystemInfo.SettingsFilePath))
                 File.Create(FileSystemInfo.SettingsFilePath).Dispose();

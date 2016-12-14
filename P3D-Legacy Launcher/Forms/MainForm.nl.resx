@@ -138,11 +138,17 @@
   <data name="Check_Updates.Text" xml:space="preserve">
     <value>Check voor updates bij het opstarten</value>
   </data>
+  <data name="GroupBox_Netwok.Text" xml:space="preserve">
+    <value>Netwerk</value>
+  </data>
   <data name="GroupBox_Startup.Text" xml:space="preserve">
     <value>Algemeen</value>
   </data>
   <data name="Label_Language.Text" xml:space="preserve">
     <value>Taal</value>
+  </data>
+  <data name="Label_SelectedDL.Text" xml:space="preserve">
+    <value>Geselecteerde download:</value>
   </data>
   <data name="LinkLabel_Pokemon3D.Text" xml:space="preserve">
     <value>Pokémon3D</value>

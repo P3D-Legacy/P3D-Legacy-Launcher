@@ -117,73 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DotNetError" xml:space="preserve">
-    <value>Pokémon 3D heeft Microsoft .NET Framework 4.0 nodig. Deze kun je hier downloaden: http://www.microsoft.com/en-us/download/details.aspx?id=17851 to download.
-Wil je de pagina openen?</value>
+  <data name="Label_ProgressBar1.Text" xml:space="preserve">
+    <value>Update info progres:</value>
   </data>
-  <data name="DotNetErrorTitle" xml:space="preserve">
-    <value>Er ging iets mis!</value>
+  <data name="Label_ProgressBar2.Text" xml:space="preserve">
+    <value>Vergelijking progres:</value>
   </data>
-  <data name="DownloadError" xml:space="preserve">
-    <value>Het downloaden van een bestand is mislukt.
-</value>
-  </data>
-  <data name="DownloadErrorTitle" xml:space="preserve">
-    <value>Er ging iets mis!</value>
-  </data>
-  <data name="FileReplacementError" xml:space="preserve">
-    <value>Er ging iets mis tijdens het vervangen van oude bestanden met nieuwe bestanden!</value>
-  </data>
-  <data name="FileReplacementErrorTitle" xml:space="preserve">
-    <value>Er ging iets mis!</value>
-  </data>
-  <data name="LauncherUpdateAvailable" xml:space="preserve">
-    <value>Er is een nieuwe versie beschikbaar! Wil je het spel updaten?</value>
-  </data>
-  <data name="LauncherUpdateAvailableTitle" xml:space="preserve">
-    <value>Update beschikbaar!</value>
-  </data>
-  <data name="NoInternet" xml:space="preserve">
-    <value>Connectie naar GitHub mislukt! Is er een werkende internetverbinding beschikbaar?</value>
-  </data>
-  <data name="NoInternetTitle" xml:space="preserve">
-    <value>Update check is mislukt!</value>
-  </data>
-  <data name="NotDownloaded" xml:space="preserve">
-    <value>Profiel {0} was niet gedownload! Wil je het downloaden?</value>
-  </data>
-  <data name="NotDownloadedTitle" xml:space="preserve">
-    <value>Niet gedownload!</value>
-  </data>
-  <data name="NoUpdateNeeded" xml:space="preserve">
-    <value>Het profiel heeft geen update nodig!</value>
-  </data>
-  <data name="NoUpdateNeededTitle" xml:space="preserve">
-    <value>Voltooid!</value>
-  </data>
-  <data name="OpenALError" xml:space="preserve">
-    <value>Pokémon 3D heeft OpenAL nodig. Je kunt OpenAL hier downloaden: https://www.openal.org/downloads/ to download.
-Wil je naar deze pagina gaan?</value>
-  </data>
-  <data name="OpenALErrorTitle" xml:space="preserve">
-    <value>Er ging iets mis!</value>
-  </data>
-  <data name="ProfileUpToDate" xml:space="preserve">
-    <value>Profile {0} is up-to-date!</value>
-  </data>
-  <data name="ProfileUpToDateTitle" xml:space="preserve">
-    <value>Update check</value>
-  </data>
-  <data name="UpdateAvailable" xml:space="preserve">
-    <value>Wil je updaten van versie [{0}] naar versie [{1}] (Ja) of wil je het als independent versie downloaden (Nee)</value>
-  </data>
-  <data name="UpdateAvailableTitle" xml:space="preserve">
-    <value>Update is beschikbaar!</value>
-  </data>
-  <data name="Updated" xml:space="preserve">
-    <value>Dit profiel was succesvol geupdated!</value>
-  </data>
-  <data name="UpdatedTitle" xml:space="preserve">
-    <value>Succes!</value>
+  <data name="Label_ProgressBar3.Text" xml:space="preserve">
+    <value>Download progres:</value>
   </data>
 </root>

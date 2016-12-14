@@ -125,6 +125,18 @@
   <data name="DotNetErrorTitle" xml:space="preserve">
     <value>Ошибка!</value>
   </data>
+  <data name="DownloadError" xml:space="preserve">
+    <value>Возникла ошибка при скачивании файла! Повторите попытку!</value>
+  </data>
+  <data name="DownloadErrorTitle" xml:space="preserve">
+    <value>Ошибка!</value>
+  </data>
+  <data name="FileReplacementError" xml:space="preserve">
+    <value>Возникла ошибка во время обновления старых файлов!</value>
+  </data>
+  <data name="FileReplacementErrorTitle" xml:space="preserve">
+    <value>Ошибка!</value>
+  </data>
   <data name="LauncherUpdateAvailable" xml:space="preserve">
     <value>Доступна новая версия лаунчера!
 Хотите обновиться?</value>
@@ -145,6 +157,12 @@
   <data name="NotDownloadedTitle" xml:space="preserve">
     <value>Ошибка!</value>
   </data>
+  <data name="NoUpdateNeeded" xml:space="preserve">
+    <value>Профиль уже был обновлен!</value>
+  </data>
+  <data name="NoUpdateNeededTitle" xml:space="preserve">
+    <value>Готово!</value>
+  </data>
   <data name="OpenALError" xml:space="preserve">
     <value>Pokémon 3D требует OpenAL.
 Вы можете скачать это по данной ссылке https://www.openal.org/downloads/
@@ -160,9 +178,15 @@
     <value>Проверка обновления</value>
   </data>
   <data name="UpdateAvailable" xml:space="preserve">
-    <value>Would you like to update the [{0}] version to [{1}] (Yes) or would you like to download it as an independent version (No)?</value>
+    <value>Вы хотите обновить версию [{0}] до версии [{1}] (Да), или вы хотите скачать версию [{0}] как отдельную версию? (Нет)?</value>
   </data>
   <data name="UpdateAvailableTitle" xml:space="preserve">
     <value>Доступно обновление!</value>
+  </data>
+  <data name="Updated" xml:space="preserve">
+    <value>Профиль был обновлен!</value>
+  </data>
+  <data name="UpdatedTitle" xml:space="preserve">
+    <value>Готово!</value>
   </data>
 </root>

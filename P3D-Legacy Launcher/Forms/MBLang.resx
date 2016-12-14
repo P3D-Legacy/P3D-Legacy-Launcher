@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DLNotSelected" xml:space="preserve">
+    <value>Can't update! Select a DL first in Settings tab!</value>
+  </data>
+  <data name="DLNotSelectedTitle" xml:space="preserve">
+    <value>Error!</value>
+  </data>
   <data name="DotNetError" xml:space="preserve">
     <value>Pokémon 3D requires Microsoft .NET Framework 4.0.
 Please visit http://www.microsoft.com/en-us/download/details.aspx?id=17851 to download.
@@ -126,6 +132,18 @@ Would you like to open the webpage now?</value>
     <value>http://www.microsoft.com/en-us/download/details.aspx?id=17851</value>
   </data>
   <data name="DotNetErrorTitle" xml:space="preserve">
+    <value>Error!</value>
+  </data>
+  <data name="DownloadError" xml:space="preserve">
+    <value>Failed to download a file. Please try again!</value>
+  </data>
+  <data name="DownloadErrorTitle" xml:space="preserve">
+    <value>Error!</value>
+  </data>
+  <data name="FileReplacementError" xml:space="preserve">
+    <value>Where was an error while replacing the old files with the new ones!</value>
+  </data>
+  <data name="FileReplacementErrorTitle" xml:space="preserve">
     <value>Error!</value>
   </data>
   <data name="LauncherUpdateAvailable" xml:space="preserve">
@@ -147,6 +165,12 @@ Would you like to download it?</value>
   </data>
   <data name="NotDownloadedTitle" xml:space="preserve">
     <value>Not Downloaded!</value>
+  </data>
+  <data name="NoUpdateNeeded" xml:space="preserve">
+    <value>The Profile doesn't need an update!</value>
+  </data>
+  <data name="NoUpdateNeededTitle" xml:space="preserve">
+    <value>Done!</value>
   </data>
   <data name="OpenALError" xml:space="preserve">
     <value>Pokémon 3D requires OpenAL.
@@ -170,5 +194,11 @@ Would you like to open the webpage now?</value>
   </data>
   <data name="UpdateAvailableTitle" xml:space="preserve">
     <value>Update is Available!</value>
+  </data>
+  <data name="Updated" xml:space="preserve">
+    <value>The Profile was successfully updated!</value>
+  </data>
+  <data name="UpdatedTitle" xml:space="preserve">
+    <value>Success!</value>
   </data>
 </root>
