@@ -116,32 +116,12 @@ namespace P3D.Legacy.Launcher.Forms
             });
         }
 
-        private async void DirectDownloaderForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void DirectDownloaderForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Downloader.DownloadProgressChanged -= client_DownloadProgressChanged;
-            Downloader?.CancelAsync();
             Cancelled = true;
+            Downloader?.CancelAsync();
 
-            if (File.Exists(TempFilePath))
-            {
-                var x = 0;
-                while (x < 10 && IsFileLocked(TempFilePath)) // -- Wait only 1 second.
-                {
-                    await Task.Delay(100);
-                    x++;
-                }
-                File.Delete(TempFilePath);
-            }
-        }
-        private static bool IsFileLocked(string path)
-        {
-            FileStream stream = null;
-
-            try { stream = File.Open(path, System.IO.FileMode.Open, FileAccess.ReadWrite, FileShare.None); }
-            catch (IOException) { return true; }
-            finally { stream?.Close(); }
-
-            return false;
+            Directory.Delete(FileSystemInfo.TempFolderPath, true);
         }
     }
 }

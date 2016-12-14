@@ -195,6 +195,8 @@ namespace P3D.Legacy.Launcher.Forms
         {
             Cancelled = true;
             Downloader?.CancelAsync();
+
+            Directory.Delete(FileSystemInfo.TempFolderPath, true);
         }
 
 
