@@ -22,6 +22,7 @@ namespace P3D.Legacy.Launcher.Data
         public List<Profile> ProfileList { get; private set; }
 
         public Profile GetProfile() => ProfileList[ProfileIndex];
+        public bool IsValid() => GetProfile() != null && GetProfile().Name != null && GetProfile().Version != null;
     }
 
     public class Profile

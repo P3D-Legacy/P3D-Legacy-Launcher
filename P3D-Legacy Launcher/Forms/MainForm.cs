@@ -16,6 +16,8 @@ using Microsoft.Win32;
 using P3D.Legacy.Launcher.Data;
 using P3D.Legacy.Launcher.Extensions;
 
+using YamlDotNet.Core;
+
 namespace P3D.Legacy.Launcher.Forms
 {
     public partial class MainForm : Form
@@ -365,7 +367,16 @@ namespace P3D.Legacy.Launcher.Forms
                 File.Create(FileSystemInfo.SettingsFilePath).Dispose();
 
             var deserializer = Settings.DeserializerBuilder.Build();
-            return deserializer.Deserialize<Settings>(File.ReadAllText(FileSystemInfo.SettingsFilePath)) ?? Settings.Default;
+            try
+            {
+                var deserialized = deserializer.Deserialize<Settings>(File.ReadAllText(FileSystemInfo.SettingsFilePath));
+                return !deserialized.IsValid() ? Settings.Default : deserialized;
+            }
+            catch (YamlException)
+            {
+                SaveSettings(Settings.Default);
+                return deserializer.Deserialize<Settings>(File.ReadAllText(FileSystemInfo.SettingsFilePath)) ?? Settings.Default;
+            }
         }
 
         public static void SaveProfiles(Profiles profiles)
@@ -382,7 +393,17 @@ namespace P3D.Legacy.Launcher.Forms
                 File.Create(FileSystemInfo.ProfilesFilePath).Dispose();
 
             var deserializer = Profiles.DeserializerBuilder.Build();
-            return deserializer.Deserialize<Profiles>(File.ReadAllText(FileSystemInfo.ProfilesFilePath)) ?? Profiles.Default;
+            try
+            {
+                var deserialized = deserializer.Deserialize<Profiles>(File.ReadAllText(FileSystemInfo.ProfilesFilePath));
+                return !deserialized.IsValid() ? Profiles.Default : deserialized;
+            }
+            catch (YamlException)
+            {
+                SaveProfiles(Profiles.Default);
+                return deserializer.Deserialize<Profiles>(File.ReadAllText(FileSystemInfo.ProfilesFilePath));
+            }
+            
         }
     }
 }
