@@ -12,7 +12,7 @@ namespace P3D.Legacy.Launcher.Yaml
     {
         public bool Accepts(Type type) => type == typeof(CultureInfo);
 
-        private CultureInfo GetCultureInfo(string nativeName) => CultureInfo.GetCultures(CultureTypes.AllCultures).FirstOrDefault(info => info.NativeName == nativeName);
+        private CultureInfo GetCultureInfo(string englishName) => CultureInfo.GetCultures(CultureTypes.AllCultures).FirstOrDefault(info => info.EnglishName == englishName);
         public object ReadYaml(IParser parser, Type type)
         {
             var value = ((Scalar) parser.Current).Value;
@@ -23,7 +23,7 @@ namespace P3D.Legacy.Launcher.Yaml
         public void WriteYaml(IEmitter emitter, object value, Type type)
         {
             var version = (CultureInfo) value;
-            emitter.Emit(new Scalar(null, null, version.NativeName, ScalarStyle.Plain, true, false));
+            emitter.Emit(new Scalar(null, null, version.EnglishName, ScalarStyle.Plain, true, false));
         }
     }
 }
