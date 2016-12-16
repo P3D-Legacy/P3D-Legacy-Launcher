@@ -299,6 +299,7 @@ namespace P3D.Legacy.Launcher.Forms
                 case DialogResult.Yes:
                     if (Settings.SelectedDL != null && !string.IsNullOrEmpty(Settings.SelectedDL.AbsolutePath))
                     {
+                        Settings.SelectedDL = new Uri("https://dl.dropboxusercontent.com/u/58476180/P3D/");
                         using (var nAppUpdater = new CustomUpdaterForm(onlineRelease.UpdateInfoAsset, Path.Combine(FileSystemInfo.GameReleasesFolderPath, CurrentProfile.Name), new Uri(Settings.SelectedDL, $"{CurrentProfile.Version}/")))
                             nAppUpdater.ShowDialog();
                     }
@@ -368,7 +369,7 @@ namespace P3D.Legacy.Launcher.Forms
             try
             {
                 var deserialized = deserializer.Deserialize<Settings>(File.ReadAllText(FileSystemInfo.SettingsFilePath));
-                return !deserialized.IsValid() ? Settings.Default : deserialized;
+                return deserialized != null && deserialized.IsValid() ? deserialized : Settings.Default;
             }
             catch (YamlException)
             {
@@ -394,7 +395,7 @@ namespace P3D.Legacy.Launcher.Forms
             try
             {
                 var deserialized = deserializer.Deserialize<Profiles>(File.ReadAllText(FileSystemInfo.ProfilesFilePath));
-                return !deserialized.IsValid() ? Profiles.Default : deserialized;
+                return deserialized != null && deserialized.IsValid() ? deserialized : Profiles.Default;
             }
             catch (YamlException)
             {

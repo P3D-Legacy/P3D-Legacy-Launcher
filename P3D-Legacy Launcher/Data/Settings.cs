@@ -26,6 +26,6 @@ namespace P3D.Legacy.Launcher.Data
         public CultureInfo Language { get; set; }
         public Uri SelectedDL { get; set; }
 
-        public bool IsValid() => Language != null && SelectedDL != null;
+        public bool IsValid() => Language != null /* && SelectedDL != null*/;
     }
 }
