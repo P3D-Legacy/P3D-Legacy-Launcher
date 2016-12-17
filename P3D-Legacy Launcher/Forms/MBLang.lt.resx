@@ -117,12 +117,30 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DLNotSelected" xml:space="preserve">
+    <value>Negalima atnaujinti! Pirma pasirinkite Parsisiųntimo Kelią Nustatymuose!</value>
+  </data>
+  <data name="DLNotSelectedTitle" xml:space="preserve">
+    <value>Klaida!</value>
+  </data>
   <data name="DotNetError" xml:space="preserve">
     <value>Pokemonai 3D reikalauja Microsoft .NET Framework 4.0.
 Prašome apsilankyti http://www.microsoft.com/en-us/download/details.aspx?id=17851 kad tai parsisiųsti.
 Ar norėtumėte atidaryti puslapį dabar?</value>
   </data>
   <data name="DotNetErrorTitle" xml:space="preserve">
+    <value>Klaida!</value>
+  </data>
+  <data name="DownloadError" xml:space="preserve">
+    <value>Nepavyko parsiųsti failo. Prašau, pabandykite dar kartą!</value>
+  </data>
+  <data name="DownloadErrorTitle" xml:space="preserve">
+    <value>Klaida!</value>
+  </data>
+  <data name="FileReplacementError" xml:space="preserve">
+    <value>Įvyko klaida keičiant senus failus naujais!</value>
+  </data>
+  <data name="FileReplacementErrorTitle" xml:space="preserve">
     <value>Klaida!</value>
   </data>
   <data name="LauncherUpdateAvailable" xml:space="preserve">
@@ -145,6 +163,12 @@ Ar norėtumėte parsisiųsti jį?</value>
   <data name="NotDownloadedTitle" xml:space="preserve">
     <value>Neparsisiųntė!</value>
   </data>
+  <data name="NoUpdateNeeded" xml:space="preserve">
+    <value>Profilio nereikia atnaujinti!</value>
+  </data>
+  <data name="NoUpdateNeededTitle" xml:space="preserve">
+    <value>Padaryta!</value>
+  </data>
   <data name="OpenALError" xml:space="preserve">
     <value>Pokemonai 3D reikalauja OpenAL.
 Prašome apsilankyti https://www.openal.org/downloads/ kad tai parsisiųsti.
@@ -164,5 +188,11 @@ Ar norėtumėte atidaryti puslapį dabar?</value>
   </data>
   <data name="UpdateAvailableTitle" xml:space="preserve">
     <value>Pasiekiamas Atnaujinimas</value>
+  </data>
+  <data name="Updated" xml:space="preserve">
+    <value>Profilis sėkmingai atnaujintas!</value>
+  </data>
+  <data name="UpdatedTitle" xml:space="preserve">
+    <value>Sėkmė!</value>
   </data>
 </root>

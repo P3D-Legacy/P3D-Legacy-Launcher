@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="$this.Text" xml:space="preserve">
-    <value>Žaidimo Parsiųntėjas</value>
+    <value>Parsiųntėjas</value>
   </data>
   <data name="Label_ProgressBar1.Text" xml:space="preserve">
     <value>Parsisiųntimo Progresas</value>

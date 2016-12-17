@@ -120,4 +120,13 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Žaidimo Parsiųntėjas</value>
   </data>
+  <data name="Label_ProgressBar1.Text" xml:space="preserve">
+    <value>Atnaujinamos Informacijos Progresas:</value>
+  </data>
+  <data name="Label_ProgressBar2.Text" xml:space="preserve">
+    <value>Sumažinimo Progresas:</value>
+  </data>
+  <data name="Label_ProgressBar3.Text" xml:space="preserve">
+    <value>Parsiųntimo Progresas:</value>
+  </data>
 </root>

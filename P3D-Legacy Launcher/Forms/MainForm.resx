@@ -119,22 +119,19 @@
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Button_CheckForUpdates.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Button_CheckForUpdates.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+    <value>Top, Right</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="Button_CheckForUpdates.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 8.25pt</value>
   </data>
   <data name="Button_CheckForUpdates.Location" type="System.Drawing.Point, System.Drawing">
-    <value>681, 447</value>
+    <value>682, 445</value>
   </data>
   <data name="Button_CheckForUpdates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>151, 23</value>
+    <value>150, 25</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="Button_CheckForUpdates.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
@@ -154,19 +151,16 @@
     <value>5</value>
   </data>
   <data name="Putton_StartGame.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Right</value>
-  </data>
-  <data name="Putton_StartGame.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+    <value>Top, Right</value>
   </data>
   <data name="Putton_StartGame.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 8.25pt</value>
   </data>
   <data name="Putton_StartGame.Location" type="System.Drawing.Point, System.Drawing">
-    <value>681, 418</value>
+    <value>682, 414</value>
   </data>
   <data name="Putton_StartGame.Size" type="System.Drawing.Size, System.Drawing">
-    <value>151, 23</value>
+    <value>150, 25</value>
   </data>
   <data name="Putton_StartGame.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -187,10 +181,10 @@
     <value>6</value>
   </data>
   <data name="ComboBox_CurrentProfile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 420</value>
+    <value>12, 414</value>
   </data>
   <data name="ComboBox_CurrentProfile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>372, 21</value>
+    <value>462, 21</value>
   </data>
   <data name="ComboBox_CurrentProfile.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -207,17 +201,11 @@
   <data name="&gt;&gt;ComboBox_CurrentProfile.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="Button_NewProfile.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
-  <data name="Button_NewProfile.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="Button_NewProfile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 447</value>
+    <value>12, 445</value>
   </data>
   <data name="Button_NewProfile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 23</value>
+    <value>150, 25</value>
   </data>
   <data name="Button_NewProfile.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -237,17 +225,11 @@
   <data name="&gt;&gt;Button_NewProfile.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="Button_EditProfile.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
-  <data name="Button_EditProfile.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="Button_EditProfile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 447</value>
+    <value>168, 445</value>
   </data>
   <data name="Button_EditProfile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 23</value>
+    <value>150, 25</value>
   </data>
   <data name="Button_EditProfile.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -267,17 +249,11 @@
   <data name="&gt;&gt;Button_EditProfile.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="Button_DeleteProfile.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Bottom, Left</value>
-  </data>
-  <data name="Button_DeleteProfile.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="Button_DeleteProfile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>264, 447</value>
+    <value>324, 445</value>
   </data>
   <data name="Button_DeleteProfile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 23</value>
+    <value>150, 25</value>
   </data>
   <data name="Button_DeleteProfile.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -296,6 +272,24 @@
   </data>
   <data name="&gt;&gt;Button_DeleteProfile.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="TabControl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="WebBrowser_News.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="WebBrowser_News.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="WebBrowser_News.MinimumSize" type="System.Drawing.Size, System.Drawing">
+    <value>20, 20</value>
+  </data>
+  <data name="WebBrowser_News.Size" type="System.Drawing.Size, System.Drawing">
+    <value>830, 376</value>
+  </data>
+  <data name="WebBrowser_News.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;WebBrowser_News.Name" xml:space="preserve">
     <value>WebBrowser_News</value>
@@ -316,7 +310,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="TabPage_News.Size" type="System.Drawing.Size, System.Drawing">
-    <value>836, 386</value>
+    <value>836, 382</value>
   </data>
   <data name="TabPage_News.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -334,6 +328,21 @@
     <value>TabControl</value>
   </data>
   <data name="&gt;&gt;TabPage_News.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="TextBox_Logger.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
+  <data name="TextBox_Logger.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="TextBox_Logger.Multiline" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="TextBox_Logger.Size" type="System.Drawing.Size, System.Drawing">
+    <value>830, 376</value>
+  </data>
+  <data name="TextBox_Logger.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="&gt;&gt;TextBox_Logger.Name" xml:space="preserve">
@@ -355,7 +364,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="TabPage_Logger.Size" type="System.Drawing.Size, System.Drawing">
-    <value>836, 386</value>
+    <value>836, 382</value>
   </data>
   <data name="TabPage_Logger.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -375,6 +384,72 @@
   <data name="&gt;&gt;TabPage_Logger.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="GroupBox_Netwok.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="ComboBox_SelectedDL.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
+  <data name="ComboBox_SelectedDL.Location" type="System.Drawing.Point, System.Drawing">
+    <value>216, 19</value>
+  </data>
+  <data name="ComboBox_SelectedDL.Size" type="System.Drawing.Size, System.Drawing">
+    <value>600, 21</value>
+  </data>
+  <data name="ComboBox_SelectedDL.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ComboBox_SelectedDL.Name" xml:space="preserve">
+    <value>ComboBox_SelectedDL</value>
+  </data>
+  <data name="&gt;&gt;ComboBox_SelectedDL.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ComboBox_SelectedDL.Parent" xml:space="preserve">
+    <value>GroupBox_Netwok</value>
+  </data>
+  <data name="&gt;&gt;ComboBox_SelectedDL.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="Label_SelectedDL.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label_SelectedDL.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 23</value>
+  </data>
+  <data name="Label_SelectedDL.Size" type="System.Drawing.Size, System.Drawing">
+    <value>69, 13</value>
+  </data>
+  <data name="Label_SelectedDL.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="Label_SelectedDL.Text" xml:space="preserve">
+    <value>Selected DL:</value>
+  </data>
+  <data name="&gt;&gt;Label_SelectedDL.Name" xml:space="preserve">
+    <value>Label_SelectedDL</value>
+  </data>
+  <data name="&gt;&gt;Label_SelectedDL.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label_SelectedDL.Parent" xml:space="preserve">
+    <value>GroupBox_Netwok</value>
+  </data>
+  <data name="&gt;&gt;Label_SelectedDL.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="GroupBox_Netwok.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 92</value>
+  </data>
+  <data name="GroupBox_Netwok.Size" type="System.Drawing.Size, System.Drawing">
+    <value>822, 58</value>
+  </data>
+  <data name="GroupBox_Netwok.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="GroupBox_Netwok.Text" xml:space="preserve">
+    <value>Network</value>
+  </data>
   <data name="&gt;&gt;GroupBox_Netwok.Name" xml:space="preserve">
     <value>GroupBox_Netwok</value>
   </data>
@@ -387,6 +462,21 @@
   <data name="&gt;&gt;GroupBox_Netwok.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="Button_SaveSettings.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Bottom, Right</value>
+  </data>
+  <data name="Button_SaveSettings.Location" type="System.Drawing.Point, System.Drawing">
+    <value>680, 353</value>
+  </data>
+  <data name="Button_SaveSettings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>150, 23</value>
+  </data>
+  <data name="Button_SaveSettings.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="Button_SaveSettings.Text" xml:space="preserve">
+    <value>Save</value>
+  </data>
   <data name="&gt;&gt;Button_SaveSettings.Name" xml:space="preserve">
     <value>Button_SaveSettings</value>
   </data>
@@ -398,6 +488,99 @@
   </data>
   <data name="&gt;&gt;Button_SaveSettings.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="GroupBox_Startup.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Top, Left, Right</value>
+  </data>
+  <data name="Label_Language.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Label_Language.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 45</value>
+  </data>
+  <data name="Label_Language.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 13</value>
+  </data>
+  <data name="Label_Language.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="Label_Language.Text" xml:space="preserve">
+    <value>Language:</value>
+  </data>
+  <data name="&gt;&gt;Label_Language.Name" xml:space="preserve">
+    <value>Label_Language</value>
+  </data>
+  <data name="&gt;&gt;Label_Language.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label_Language.Parent" xml:space="preserve">
+    <value>GroupBox_Startup</value>
+  </data>
+  <data name="&gt;&gt;Label_Language.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ComboBox_Language.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+    <value>Left, Right</value>
+  </data>
+  <data name="ComboBox_Language.Location" type="System.Drawing.Point, System.Drawing">
+    <value>216, 42</value>
+  </data>
+  <data name="ComboBox_Language.Size" type="System.Drawing.Size, System.Drawing">
+    <value>600, 21</value>
+  </data>
+  <data name="ComboBox_Language.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ComboBox_Language.Name" xml:space="preserve">
+    <value>ComboBox_Language</value>
+  </data>
+  <data name="&gt;&gt;ComboBox_Language.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ComboBox_Language.Parent" xml:space="preserve">
+    <value>GroupBox_Startup</value>
+  </data>
+  <data name="&gt;&gt;ComboBox_Language.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="Check_Updates.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="Check_Updates.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 19</value>
+  </data>
+  <data name="Check_Updates.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 17</value>
+  </data>
+  <data name="Check_Updates.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="Check_Updates.Text" xml:space="preserve">
+    <value>Check for game updates on startup</value>
+  </data>
+  <data name="&gt;&gt;Check_Updates.Name" xml:space="preserve">
+    <value>Check_Updates</value>
+  </data>
+  <data name="&gt;&gt;Check_Updates.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Check_Updates.Parent" xml:space="preserve">
+    <value>GroupBox_Startup</value>
+  </data>
+  <data name="&gt;&gt;Check_Updates.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="GroupBox_Startup.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 6</value>
+  </data>
+  <data name="GroupBox_Startup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>822, 80</value>
+  </data>
+  <data name="GroupBox_Startup.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="GroupBox_Startup.Text" xml:space="preserve">
+    <value>Common</value>
   </data>
   <data name="&gt;&gt;GroupBox_Startup.Name" xml:space="preserve">
     <value>GroupBox_Startup</value>
@@ -418,7 +601,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="TabPage_Settings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>836, 386</value>
+    <value>836, 382</value>
   </data>
   <data name="TabPage_Settings.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -442,7 +625,7 @@
     <value>Bottom</value>
   </data>
   <data name="TextBox_Credits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 303</value>
+    <value>3, 299</value>
   </data>
   <data name="TextBox_Credits.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -573,7 +756,7 @@ Pokémon 3D and The P3D Team neither owns nor claims to own any portion of the P
     <value>3, 3, 3, 3</value>
   </data>
   <data name="TabPage_About.Size" type="System.Drawing.Size, System.Drawing">
-    <value>836, 386</value>
+    <value>836, 382</value>
   </data>
   <data name="TabPage_About.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -593,14 +776,11 @@ Pokémon 3D and The P3D Team neither owns nor claims to own any portion of the P
   <data name="&gt;&gt;TabPage_About.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="TabControl.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Top</value>
-  </data>
   <data name="TabControl.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
   <data name="TabControl.Size" type="System.Drawing.Size, System.Drawing">
-    <value>844, 412</value>
+    <value>844, 408</value>
   </data>
   <data name="TabControl.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -617,321 +797,9 @@ Pokémon 3D and The P3D Team neither owns nor claims to own any portion of the P
   <data name="&gt;&gt;TabControl.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="WebBrowser_News.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="WebBrowser_News.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="WebBrowser_News.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>20, 20</value>
-  </data>
-  <data name="WebBrowser_News.Size" type="System.Drawing.Size, System.Drawing">
-    <value>830, 380</value>
-  </data>
-  <data name="WebBrowser_News.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;WebBrowser_News.Name" xml:space="preserve">
-    <value>WebBrowser_News</value>
-  </data>
-  <data name="&gt;&gt;WebBrowser_News.Type" xml:space="preserve">
-    <value>System.Windows.Forms.WebBrowser, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;WebBrowser_News.Parent" xml:space="preserve">
-    <value>TabPage_News</value>
-  </data>
-  <data name="&gt;&gt;WebBrowser_News.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="TextBox_Logger.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="TextBox_Logger.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="TextBox_Logger.Multiline" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="TextBox_Logger.Size" type="System.Drawing.Size, System.Drawing">
-    <value>830, 380</value>
-  </data>
-  <data name="TextBox_Logger.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;TextBox_Logger.Name" xml:space="preserve">
-    <value>TextBox_Logger</value>
-  </data>
-  <data name="&gt;&gt;TextBox_Logger.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TextBox_Logger.Parent" xml:space="preserve">
-    <value>TabPage_Logger</value>
-  </data>
-  <data name="&gt;&gt;TextBox_Logger.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ComboBox_SelectedDL.Name" xml:space="preserve">
-    <value>ComboBox_SelectedDL</value>
-  </data>
-  <data name="&gt;&gt;ComboBox_SelectedDL.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ComboBox_SelectedDL.Parent" xml:space="preserve">
-    <value>GroupBox_Netwok</value>
-  </data>
-  <data name="&gt;&gt;ComboBox_SelectedDL.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;Label_SelectedDL.Name" xml:space="preserve">
-    <value>Label_SelectedDL</value>
-  </data>
-  <data name="&gt;&gt;Label_SelectedDL.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label_SelectedDL.Parent" xml:space="preserve">
-    <value>GroupBox_Netwok</value>
-  </data>
-  <data name="&gt;&gt;Label_SelectedDL.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="GroupBox_Netwok.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 92</value>
-  </data>
-  <data name="GroupBox_Netwok.Size" type="System.Drawing.Size, System.Drawing">
-    <value>822, 58</value>
-  </data>
-  <data name="GroupBox_Netwok.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="GroupBox_Netwok.Text" xml:space="preserve">
-    <value>Network</value>
-  </data>
-  <data name="&gt;&gt;GroupBox_Netwok.Name" xml:space="preserve">
-    <value>GroupBox_Netwok</value>
-  </data>
-  <data name="&gt;&gt;GroupBox_Netwok.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;GroupBox_Netwok.Parent" xml:space="preserve">
-    <value>TabPage_Settings</value>
-  </data>
-  <data name="&gt;&gt;GroupBox_Netwok.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ComboBox_SelectedDL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 19</value>
-  </data>
-  <data name="ComboBox_SelectedDL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>600, 21</value>
-  </data>
-  <data name="ComboBox_SelectedDL.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ComboBox_SelectedDL.Name" xml:space="preserve">
-    <value>ComboBox_SelectedDL</value>
-  </data>
-  <data name="&gt;&gt;ComboBox_SelectedDL.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ComboBox_SelectedDL.Parent" xml:space="preserve">
-    <value>GroupBox_Netwok</value>
-  </data>
-  <data name="&gt;&gt;ComboBox_SelectedDL.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="Label_SelectedDL.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label_SelectedDL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 23</value>
-  </data>
-  <data name="Label_SelectedDL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 13</value>
-  </data>
-  <data name="Label_SelectedDL.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="Label_SelectedDL.Text" xml:space="preserve">
-    <value>Selected DL:</value>
-  </data>
-  <data name="&gt;&gt;Label_SelectedDL.Name" xml:space="preserve">
-    <value>Label_SelectedDL</value>
-  </data>
-  <data name="&gt;&gt;Label_SelectedDL.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label_SelectedDL.Parent" xml:space="preserve">
-    <value>GroupBox_Netwok</value>
-  </data>
-  <data name="&gt;&gt;Label_SelectedDL.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Button_SaveSettings.Location" type="System.Drawing.Point, System.Drawing">
-    <value>710, 357</value>
-  </data>
-  <data name="Button_SaveSettings.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 23</value>
-  </data>
-  <data name="Button_SaveSettings.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="Button_SaveSettings.Text" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="&gt;&gt;Button_SaveSettings.Name" xml:space="preserve">
-    <value>Button_SaveSettings</value>
-  </data>
-  <data name="&gt;&gt;Button_SaveSettings.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Button_SaveSettings.Parent" xml:space="preserve">
-    <value>TabPage_Settings</value>
-  </data>
-  <data name="&gt;&gt;Button_SaveSettings.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="GroupBox_Startup.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="&gt;&gt;Label_Language.Name" xml:space="preserve">
-    <value>Label_Language</value>
-  </data>
-  <data name="&gt;&gt;Label_Language.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label_Language.Parent" xml:space="preserve">
-    <value>GroupBox_Startup</value>
-  </data>
-  <data name="&gt;&gt;Label_Language.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ComboBox_Language.Name" xml:space="preserve">
-    <value>ComboBox_Language</value>
-  </data>
-  <data name="&gt;&gt;ComboBox_Language.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ComboBox_Language.Parent" xml:space="preserve">
-    <value>GroupBox_Startup</value>
-  </data>
-  <data name="&gt;&gt;ComboBox_Language.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;Check_Updates.Name" xml:space="preserve">
-    <value>Check_Updates</value>
-  </data>
-  <data name="&gt;&gt;Check_Updates.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Check_Updates.Parent" xml:space="preserve">
-    <value>GroupBox_Startup</value>
-  </data>
-  <data name="&gt;&gt;Check_Updates.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="GroupBox_Startup.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 6</value>
-  </data>
-  <data name="GroupBox_Startup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>822, 80</value>
-  </data>
-  <data name="GroupBox_Startup.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="GroupBox_Startup.Text" xml:space="preserve">
-    <value>Common</value>
-  </data>
-  <data name="&gt;&gt;GroupBox_Startup.Name" xml:space="preserve">
-    <value>GroupBox_Startup</value>
-  </data>
-  <data name="&gt;&gt;GroupBox_Startup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;GroupBox_Startup.Parent" xml:space="preserve">
-    <value>TabPage_Settings</value>
-  </data>
-  <data name="&gt;&gt;GroupBox_Startup.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="Label_Language.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Label_Language.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 45</value>
-  </data>
-  <data name="Label_Language.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 13</value>
-  </data>
-  <data name="Label_Language.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="Label_Language.Text" xml:space="preserve">
-    <value>Language:</value>
-  </data>
-  <data name="&gt;&gt;Label_Language.Name" xml:space="preserve">
-    <value>Label_Language</value>
-  </data>
-  <data name="&gt;&gt;Label_Language.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Label_Language.Parent" xml:space="preserve">
-    <value>GroupBox_Startup</value>
-  </data>
-  <data name="&gt;&gt;Label_Language.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ComboBox_Language.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
-    <value>Top, Left, Right</value>
-  </data>
-  <data name="ComboBox_Language.Location" type="System.Drawing.Point, System.Drawing">
-    <value>216, 42</value>
-  </data>
-  <data name="ComboBox_Language.Size" type="System.Drawing.Size, System.Drawing">
-    <value>600, 21</value>
-  </data>
-  <data name="ComboBox_Language.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;ComboBox_Language.Name" xml:space="preserve">
-    <value>ComboBox_Language</value>
-  </data>
-  <data name="&gt;&gt;ComboBox_Language.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ComboBox_Language.Parent" xml:space="preserve">
-    <value>GroupBox_Startup</value>
-  </data>
-  <data name="&gt;&gt;ComboBox_Language.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="Check_Updates.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="Check_Updates.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 19</value>
-  </data>
-  <data name="Check_Updates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 17</value>
-  </data>
-  <data name="Check_Updates.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="Check_Updates.Text" xml:space="preserve">
-    <value>Check for game updates on startup</value>
-  </data>
-  <data name="&gt;&gt;Check_Updates.Name" xml:space="preserve">
-    <value>Check_Updates</value>
-  </data>
-  <data name="&gt;&gt;Check_Updates.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Check_Updates.Parent" xml:space="preserve">
-    <value>GroupBox_Startup</value>
-  </data>
-  <data name="&gt;&gt;Check_Updates.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
+  <metadata name="backgroundWorker1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1485,8 +1353,17 @@ Pokémon 3D and The P3D Team neither owns nor claims to own any portion of the P
   <data name="$this.MinimumSize" type="System.Drawing.Size, System.Drawing">
     <value>860, 520</value>
   </data>
+  <data name="$this.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>No</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Pokémon 3D Launcher</value>
+  </data>
+  <data name="&gt;&gt;backgroundWorker1.Name" xml:space="preserve">
+    <value>backgroundWorker1</value>
+  </data>
+  <data name="&gt;&gt;backgroundWorker1.Type" xml:space="preserve">
+    <value>System.ComponentModel.BackgroundWorker, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>MainForm</value>

@@ -56,6 +56,7 @@ namespace P3D.Legacy.Launcher.Forms
             this.Label_Version = new System.Windows.Forms.Label();
             this.LinkLabel_Pokemon3D = new System.Windows.Forms.LinkLabel();
             this.TextBox_About = new System.Windows.Forms.TextBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.TabControl.SuspendLayout();
             this.TabPage_News.SuspendLayout();
             this.TabPage_Logger.SuspendLayout();
@@ -109,11 +110,11 @@ namespace P3D.Legacy.Launcher.Forms
             // 
             // TabControl
             // 
+            resources.ApplyResources(this.TabControl, "TabControl");
             this.TabControl.Controls.Add(this.TabPage_News);
             this.TabControl.Controls.Add(this.TabPage_Logger);
             this.TabControl.Controls.Add(this.TabPage_Settings);
             this.TabControl.Controls.Add(this.TabPage_About);
-            resources.ApplyResources(this.TabControl, "TabControl");
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
             // 
@@ -148,22 +149,23 @@ namespace P3D.Legacy.Launcher.Forms
             this.TabPage_Settings.Controls.Add(this.GroupBox_Netwok);
             this.TabPage_Settings.Controls.Add(this.Button_SaveSettings);
             this.TabPage_Settings.Controls.Add(this.GroupBox_Startup);
+            this.TabPage_Settings.Cursor = System.Windows.Forms.Cursors.Default;
             resources.ApplyResources(this.TabPage_Settings, "TabPage_Settings");
             this.TabPage_Settings.Name = "TabPage_Settings";
             this.TabPage_Settings.UseVisualStyleBackColor = true;
             // 
             // GroupBox_Netwok
             // 
+            resources.ApplyResources(this.GroupBox_Netwok, "GroupBox_Netwok");
             this.GroupBox_Netwok.Controls.Add(this.ComboBox_SelectedDL);
             this.GroupBox_Netwok.Controls.Add(this.Label_SelectedDL);
-            resources.ApplyResources(this.GroupBox_Netwok, "GroupBox_Netwok");
             this.GroupBox_Netwok.Name = "GroupBox_Netwok";
             this.GroupBox_Netwok.TabStop = false;
             // 
             // ComboBox_SelectedDL
             // 
-            this.ComboBox_SelectedDL.FormattingEnabled = true;
             resources.ApplyResources(this.ComboBox_SelectedDL, "ComboBox_SelectedDL");
+            this.ComboBox_SelectedDL.FormattingEnabled = true;
             this.ComboBox_SelectedDL.Name = "ComboBox_SelectedDL";
             // 
             // Label_SelectedDL
@@ -269,7 +271,6 @@ namespace P3D.Legacy.Launcher.Forms
             this.TabPage_About.ResumeLayout(false);
             this.TabPage_About.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -299,6 +300,7 @@ namespace P3D.Legacy.Launcher.Forms
         private ComboBox ComboBox_SelectedDL;
         private Label Label_SelectedDL;
         private TextBox TextBox_Credits;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 
