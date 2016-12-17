@@ -5,17 +5,17 @@ os:
 mono:
   - latest
 
-solution: P3D-Legacy Launcher.sln
+solution: 'P3D-Legacy Launcher.sln'
 
 before_install:
   - git submodule update --init --recursive
   
 install:
-  - nuget restore P3D-Legacy Launcher.sln
+  - nuget restore 'P3D-Legacy Launcher.sln'
 
 script:
-  - xbuild /p:Configuration=Release P3D-Legacy Launcher.sln
-  - xbuild /p:Configuration=Debug P3D-Legacy Launcher.sln
+  - xbuild /p:Configuration=Release 'P3D-Legacy Launcher.sln'
+  - xbuild /p:Configuration=Debug 'P3D-Legacy Launcher.sln'
 
 notifications:
   email:
