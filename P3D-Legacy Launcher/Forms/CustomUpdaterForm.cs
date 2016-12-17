@@ -84,19 +84,19 @@ namespace P3D.Legacy.Launcher.Forms
             ProgressBar.SafeInvoke(() => ProgressBar.Value = (int) e.BytesReceived);
         }
 
-        private List<UpdateFileEntry> StartUpdate()
+        private List<UpdateFileEntryYaml> StartUpdate()
         {
-            if (Cancelled) return new List<UpdateFileEntry>();
+            if (Cancelled) return new List<UpdateFileEntryYaml>();
 
             Label_ProgressBar1.SafeInvoke(() => Label_ProgressBar1.Text = Label_ProgressBar2.Text);
 
             var releaseInfoContent = File.ReadAllText(ReleaseInfoFilePath);
-            var deserializer = UpdateInfo.DeserializerBuilder.Build();
-            var updateInfo = deserializer.Deserialize<UpdateInfo>(releaseInfoContent);
+            var deserializer = UpdateInfoYaml.DeserializerBuilder.Build();
+            var updateInfo = deserializer.Deserialize<UpdateInfoYaml>(releaseInfoContent);
 
             var crc32 = new Crc32();
             var sha1 = new SHA1Managed();
-            var notValidFileEntries = new List<UpdateFileEntry>();
+            var notValidFileEntries = new List<UpdateFileEntryYaml>();
             ProgressBar.SafeInvoke(delegate { ProgressBar.Maximum = updateInfo.Files.Count; ProgressBar.Step = 1; ProgressBar.Value = 0; });
             Parallel.ForEach(updateInfo.Files, (updateFileEntry, state) =>
             {
@@ -136,7 +136,7 @@ namespace P3D.Legacy.Launcher.Forms
 
             return notValidFileEntries;
         }
-        private void UpdateFiles(List<UpdateFileEntry> updateFileEntries)
+        private void UpdateFiles(List<UpdateFileEntryYaml> updateFileEntries)
         {
             if (Cancelled) return;
 
@@ -169,7 +169,7 @@ namespace P3D.Legacy.Launcher.Forms
             
             ReplaceFiles(updateFileEntries);
         }
-        private void ReplaceFiles(List<UpdateFileEntry> updateFileEntries)
+        private void ReplaceFiles(List<UpdateFileEntryYaml> updateFileEntries)
         {
             if (Cancelled) return;
 

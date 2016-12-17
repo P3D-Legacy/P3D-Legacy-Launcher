@@ -26,22 +26,22 @@ namespace P3D.Legacy.Launcher.Forms
 
         #region GitHub
 
-        private System.Version OnlineLastGameReleaseVersion => OnlineLastGameRelease?.Version ?? new System.Version("0.0");
-        private OnlineGameRelease OnlineLastGameRelease => OnlineGameReleases.MaxByOrDefault(release => release.Version);
-        private List<OnlineGameRelease> OnlineGameReleases { get; set; } = GetOnlineGameReleases().ToList();
-        private static IEnumerable<OnlineGameRelease> GetOnlineGameReleases() =>
-            GitHubInfo.GetAllReleases.Any() ? GitHubInfo.GetAllReleases.Select(release => new OnlineGameRelease(release)) : new List<OnlineGameRelease>();
+        private System.Version GitHubLastReleaseVersion => GitHubLastRelease?.Version ?? new System.Version("0.0");
+        private GitHubRelease GitHubLastRelease => GitHubReleases.MaxByOrDefault(release => release.Version);
+        private List<GitHubRelease> GitHubReleases { get; set; } = GetGitHubReleases().ToList();
+        private static IEnumerable<GitHubRelease> GetGitHubReleases() =>
+            GitHubInfo.GetAllReleases.Any() ? GitHubInfo.GetAllReleases.Select(release => new GitHubRelease(release)) : new List<GitHubRelease>();
 
-        private bool LocalGameReleaseUpToDate => CurrentProfile.Version >= OnlineLastGameReleaseVersion;
+        private bool CurrentProfileUpToDate => CurrentProfile.Version >= GitHubLastReleaseVersion;
 
         #endregion GitHub
 
         private OperatingSystemInfo OSInfo { get; } = OperatingSystemInfo.GetOperatingSystemInfo();
 
-        private Settings Settings { get; set; } = LoadSettings();
+        private SettingsYaml Settings { get; set; } = LoadSettings();
 
-        private Profiles Profiles { get; set; } = LoadProfiles();
-        private Profile CurrentProfile => Profiles.GetProfile();
+        private ProfilesYaml Profiles { get; set; } = LoadProfiles();
+        private ProfileYaml CurrentProfile => Profiles.GetProfile();
 
 
         public MainForm()
@@ -184,10 +184,10 @@ namespace P3D.Legacy.Launcher.Forms
         private void Button_SaveSettings_Click(object sender, EventArgs e)
         {
             var language = Settings.Language;
-            Settings = new Settings
+            Settings = new SettingsYaml
             {
                 GameUpdates = Check_Updates.Checked,
-                Language = Settings.AvailableCultureInfo[ComboBox_Language.SelectedIndex],
+                Language = SettingsYaml.AvailableCultureInfo[ComboBox_Language.SelectedIndex],
                 SelectedDLIndex = ComboBox_SelectedDL.SelectedIndex
             };
 
@@ -260,12 +260,12 @@ namespace P3D.Legacy.Launcher.Forms
             if (!Directory.Exists(path) || !File.Exists(pathexe))
                 return;
 
-            OnlineGameReleases = GetOnlineGameReleases().ToList();
+            GitHubReleases = GetGitHubReleases().ToList();
 
-            if (OnlineGameReleases.Any())
+            if (GitHubReleases.Any())
             {
-                if (!LocalGameReleaseUpToDate)
-                    UpdateCurrentProfile(OnlineLastGameRelease);
+                if (!CurrentProfileUpToDate)
+                    UpdateCurrentProfile(GitHubLastRelease);
                 else
                 {
                     if (!onStartup)
@@ -280,10 +280,10 @@ namespace P3D.Legacy.Launcher.Forms
         }
         private bool DownloadCurrentProfile()
         {
-            if (!OnlineGameReleases.Any())
+            if (!GitHubReleases.Any())
                 return false;
 
-            var onlineRelease = OnlineGameReleases.First(release => release.Version == CurrentProfile.Version);
+            var onlineRelease = GitHubReleases.First(release => release.Version == CurrentProfile.Version);
 
             switch (MessageBox.Show(string.Format(MBLang.NotDownloaded, CurrentProfile.Name), MBLang.NotDownloadedTitle, MessageBoxButtons.YesNo))
             {
@@ -298,7 +298,7 @@ namespace P3D.Legacy.Launcher.Forms
                     return false;
             }
         }
-        private void UpdateCurrentProfile(OnlineGameRelease onlineRelease)
+        private void UpdateCurrentProfile(GitHubRelease onlineRelease)
         {
             switch (MessageBox.Show(string.Format(MBLang.UpdateAvailable, CurrentProfile.Version, onlineRelease.Version), MBLang.UpdateAvailableTitle, MessageBoxButtons.YesNoCancel))
             {
@@ -344,68 +344,68 @@ namespace P3D.Legacy.Launcher.Forms
             Check_Updates.Checked = Settings.GameUpdates;
 
             ComboBox_Language.Items.Clear();
-            foreach (var cultureInfo in Settings.AvailableCultureInfo)
+            foreach (var cultureInfo in SettingsYaml.AvailableCultureInfo)
                 ComboBox_Language.Items.Add(cultureInfo.NativeName);
-            ComboBox_Language.SelectedIndex = Array.IndexOf(Settings.AvailableCultureInfo, Settings.Language);
+            ComboBox_Language.SelectedIndex = Array.IndexOf(SettingsYaml.AvailableCultureInfo, Settings.Language);
 
             ComboBox_SelectedDL.Items.Clear();
-            if (Settings.DLList.Any())
+            if (SettingsYaml.DLList.Any())
             {
-                foreach (var dlUri in Settings.DLList)
+                foreach (var dlUri in SettingsYaml.DLList)
                     ComboBox_SelectedDL.Items.Add(dlUri);
                 ComboBox_SelectedDL.SelectedIndex = Settings.SelectedDLIndex;
             }
         }
 
-        private static void SaveSettings(Settings settings)
+        private static void SaveSettings(SettingsYaml settings)
         {
             if (!File.Exists(FileSystemInfo.SettingsFilePath))
                 File.Create(FileSystemInfo.SettingsFilePath).Dispose();
 
-            var serializer = Settings.SerializerBuilder.Build();
+            var serializer = SettingsYaml.SerializerBuilder.Build();
             File.WriteAllText(FileSystemInfo.SettingsFilePath, serializer.Serialize(settings));
         }
-        private static Settings LoadSettings()
+        private static SettingsYaml LoadSettings()
         {
             if (!File.Exists(FileSystemInfo.SettingsFilePath))
                 File.Create(FileSystemInfo.SettingsFilePath).Dispose();
 
-            var deserializer = Settings.DeserializerBuilder.Build();
+            var deserializer = SettingsYaml.DeserializerBuilder.Build();
             try
             {
-                var deserialized = deserializer.Deserialize<Settings>(File.ReadAllText(FileSystemInfo.SettingsFilePath));
-                return deserialized != null && deserialized.IsValid() ? deserialized : Settings.Default;
+                var deserialized = deserializer.Deserialize<SettingsYaml>(File.ReadAllText(FileSystemInfo.SettingsFilePath));
+                return deserialized != null && deserialized.IsValid() ? deserialized : SettingsYaml.Default;
             }
             catch (YamlException)
             {
-                SaveSettings(Settings.Default);
-                return deserializer.Deserialize<Settings>(File.ReadAllText(FileSystemInfo.SettingsFilePath)) ?? Settings.Default;
+                SaveSettings(SettingsYaml.Default);
+                return deserializer.Deserialize<SettingsYaml>(File.ReadAllText(FileSystemInfo.SettingsFilePath)) ?? SettingsYaml.Default;
             }
         }
 
-        public static void SaveProfiles(Profiles profiles)
+        public static void SaveProfiles(ProfilesYaml profiles)
         {
             if (!File.Exists(FileSystemInfo.ProfilesFilePath))
                 File.Create(FileSystemInfo.ProfilesFilePath).Dispose();
 
-            var serializer = Profiles.SerializerBuilder.Build();
+            var serializer = ProfilesYaml.SerializerBuilder.Build();
             File.WriteAllText(FileSystemInfo.ProfilesFilePath, serializer.Serialize(profiles));
         }
-        public static Profiles LoadProfiles()
+        public static ProfilesYaml LoadProfiles()
         {
             if (!File.Exists(FileSystemInfo.ProfilesFilePath))
                 File.Create(FileSystemInfo.ProfilesFilePath).Dispose();
 
-            var deserializer = Profiles.DeserializerBuilder.Build();
+            var deserializer = ProfilesYaml.DeserializerBuilder.Build();
             try
             {
-                var deserialized = deserializer.Deserialize<Profiles>(File.ReadAllText(FileSystemInfo.ProfilesFilePath));
-                return deserialized != null && deserialized.IsValid() ? deserialized : Profiles.Default;
+                var deserialized = deserializer.Deserialize<ProfilesYaml>(File.ReadAllText(FileSystemInfo.ProfilesFilePath));
+                return deserialized != null && deserialized.IsValid() ? deserialized : ProfilesYaml.Default;
             }
             catch (YamlException)
             {
-                SaveProfiles(Profiles.Default);
-                return deserializer.Deserialize<Profiles>(File.ReadAllText(FileSystemInfo.ProfilesFilePath));
+                SaveProfiles(ProfilesYaml.Default);
+                return deserializer.Deserialize<ProfilesYaml>(File.ReadAllText(FileSystemInfo.ProfilesFilePath));
             }
             
         }

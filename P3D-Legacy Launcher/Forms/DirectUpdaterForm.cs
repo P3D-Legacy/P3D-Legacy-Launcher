@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using Ionic.Zip;
 
 using Octokit;
+
 using P3D.Legacy.Launcher.Extensions;
 
 namespace P3D.Legacy.Launcher.Forms

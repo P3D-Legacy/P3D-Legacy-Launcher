@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
-
-using P3D.Legacy.Launcher.Yaml;
-
+using P3D.Legacy.Launcher.Converters;
 using YamlDotNet.Serialization;
 
 namespace P3D.Legacy.Launcher.Data
 {
-    public class Settings
+    public class SettingsYaml
     {
         public static SerializerBuilder SerializerBuilder { get; } = new SerializerBuilder().WithTypeConverter(new CultureInfoConverter()).WithTypeConverter(new UriConverter());
         public static DeserializerBuilder DeserializerBuilder { get; } = new DeserializerBuilder().WithTypeConverter(new CultureInfoConverter()).WithTypeConverter(new UriConverter());
@@ -22,7 +20,7 @@ namespace P3D.Legacy.Launcher.Data
             /* new CultureInfo("fr"), new CultureInfo("it"), new CultureInfo("pt") */
         };
 
-        public static Settings Default => new Settings { GameUpdates = true, Language = new CultureInfo("en") };
+        public static SettingsYaml Default => new SettingsYaml { GameUpdates = true, Language = new CultureInfo("en") };
 
 
         public bool GameUpdates { get; set; }

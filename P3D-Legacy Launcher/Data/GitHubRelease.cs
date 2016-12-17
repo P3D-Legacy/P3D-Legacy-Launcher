@@ -6,7 +6,7 @@ using P3D.Legacy.Launcher.Extensions;
 
 namespace P3D.Legacy.Launcher.Data
 {
-    public class OnlineGameRelease
+    public class GitHubRelease
     {
         private Release Release { get; }
         public ReleaseAsset ReleaseAsset => Release.GetRelease();
@@ -15,6 +15,6 @@ namespace P3D.Legacy.Launcher.Data
         public Version Version => new Version(Release.TagName ?? "0.0");
         public DateTime ReleaseDate => Release.CreatedAt.DateTime;
 
-        public OnlineGameRelease(Release release) { Release = release; }
+        public GitHubRelease(Release release) { Release = release; }
     }
 }

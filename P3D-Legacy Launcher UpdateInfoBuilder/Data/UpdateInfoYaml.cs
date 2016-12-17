@@ -4,15 +4,14 @@ using YamlDotNet.Serialization;
 
 namespace P3D.Legacy.Launcher.UpdateInfoBuilder.Data
 {
-    public class UpdateInfo
+    public class UpdateInfoYaml
     {
         public static SerializerBuilder SerializerBuilder { get; } = new SerializerBuilder();
         public static DeserializerBuilder DeserializerBuilder { get; } = new DeserializerBuilder();
 
-        public List<UpdateFileEntry> Files { get; set; } = new List<UpdateFileEntry>();
+        public List<UpdateFileEntryYaml> Files { get; set; } = new List<UpdateFileEntryYaml>();
     }
-
-    public class UpdateFileEntry
+    public class UpdateFileEntryYaml
     {
         public string AbsoluteFilePath { get; set; }
         public string CRC32 { get; set; }

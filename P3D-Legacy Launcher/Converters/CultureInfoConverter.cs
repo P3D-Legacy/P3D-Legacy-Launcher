@@ -6,7 +6,7 @@ using YamlDotNet.Core;
 using YamlDotNet.Core.Events;
 using YamlDotNet.Serialization;
 
-namespace P3D.Legacy.Launcher.Yaml
+namespace P3D.Legacy.Launcher.Converters
 {
     public class CultureInfoConverter : IYamlTypeConverter
     {

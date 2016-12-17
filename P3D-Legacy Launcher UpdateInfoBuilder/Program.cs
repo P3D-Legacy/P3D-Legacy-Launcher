@@ -27,7 +27,7 @@ namespace P3D.Legacy.Launcher.UpdateInfoBuilder
 
             var crc32 = new Crc32();
             var sha1 = new SHA1Managed();
-            var updateFileEntries = new List<UpdateFileEntry>();
+            var updateFileEntries = new List<UpdateFileEntryYaml>();
             foreach (var absoluteFilePath in allAbsoluteFilePaths)
             {
                 var filePath = Path.Combine(updateInfoPath, absoluteFilePath);
@@ -38,12 +38,12 @@ namespace P3D.Legacy.Launcher.UpdateInfoBuilder
                     var sha1Hash = string.Empty;
                     crc32Hash = crc32.ComputeHash(fs).Aggregate(crc32Hash, (current, b) => current + b.ToString("x2").ToLower());
                     sha1Hash = sha1.ComputeHash(fs).Aggregate(sha1Hash, (current, b) => current + b.ToString("x2").ToLower());
-                    updateFileEntries.Add(new UpdateFileEntry { AbsoluteFilePath = absoluteFilePath, CRC32 = crc32Hash, SHA1 = sha1Hash, Size = length });
+                    updateFileEntries.Add(new UpdateFileEntryYaml { AbsoluteFilePath = absoluteFilePath, CRC32 = crc32Hash, SHA1 = sha1Hash, Size = length });
                 }
             }
 
-            var serializer = UpdateInfo.SerializerBuilder.Build();
-            var content = serializer.Serialize(new UpdateInfo { Files = updateFileEntries });
+            var serializer = UpdateInfoYaml.SerializerBuilder.Build();
+            var content = serializer.Serialize(new UpdateInfoYaml { Files = updateFileEntries });
 
             File.WriteAllText(OutputFilePath, content);
         }

@@ -8,19 +8,19 @@ namespace P3D.Legacy.Launcher.Forms
 {
     public partial class ProfileForm : Form
     {
-        public static ProfileForm ProfileNew(Profile profile) => new ProfileForm(profile, true);
-        public static ProfileForm ProfileEdit(Profile profile) => new ProfileForm(profile);
+        public static ProfileForm ProfileNew(ProfileYaml profile) => new ProfileForm(profile, true);
+        public static ProfileForm ProfileEdit(ProfileYaml profile) => new ProfileForm(profile);
 
-        private Profile Profile => new Profile { Name = TextBox_ProfileName.Text, Version = new Version((string) ComboBox_Version.SelectedItem) };
+        private ProfileYaml Profile => new ProfileYaml { Name = TextBox_ProfileName.Text, Version = new Version((string) ComboBox_Version.SelectedItem) };
         private string ProfileOldName { get; }
 
 
-        private ProfileForm(Profile profile, bool copy = false)
+        private ProfileForm(ProfileYaml profile, bool copy = false)
         {
             InitializeComponent();
 
             ComboBox_Version.Items.Clear();
-            foreach (var availableVersion in Profiles.AvailableVersions)
+            foreach (var availableVersion in ProfilesYaml.AvailableVersions)
                 ComboBox_Version.Items.Add(availableVersion.ToString());
 
             if (copy)
