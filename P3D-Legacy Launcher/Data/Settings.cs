@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Net;
 
 using P3D.Legacy.Launcher.Yaml;
 
@@ -24,8 +27,18 @@ namespace P3D.Legacy.Launcher.Data
 
         public bool GameUpdates { get; set; }
         public CultureInfo Language { get; set; }
-        public Uri SelectedDL { get; set; }
 
+        private int _selectedDLIndex;
+        public int SelectedDLIndex { get { return _selectedDLIndex; } set { if (value > 0 || value < DLList.Count) _selectedDLIndex = value; } }
+        public static List<Uri> DLList { get; } = GetDLUris();
+        private static List<Uri> GetDLUris()
+        {
+            var downloaded = new WebClient().DownloadString("https://raw.githubusercontent.com/P3D-Legacy/P3D-Legacy-Data/master/DLUris.txt");
+            var strings = string.IsNullOrEmpty(downloaded) ? new string[0] : downloaded.Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+            return strings.All(string.IsNullOrEmpty) ? new List<Uri>() : strings.Select(str => new Uri(str)).ToList();
+        }
+
+        public Uri GetDL() => DLList.Any() ? DLList[SelectedDLIndex] : null;
         public bool IsValid() => Language != null /* && SelectedDL != null*/;
     }
 }

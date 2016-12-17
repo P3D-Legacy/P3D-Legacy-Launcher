@@ -173,7 +173,7 @@ namespace P3D.Legacy.Launcher.Forms
         }
         private void ComboBox_CurrentProfile_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Profiles.ProfileIndex = ComboBox_CurrentProfile.SelectedIndex;
+            Profiles.SelectedProfileIndex = ComboBox_CurrentProfile.SelectedIndex;
         }
 
         private void TabPage_Settings_VisibleChanged(object sender, EventArgs e)
@@ -188,7 +188,7 @@ namespace P3D.Legacy.Launcher.Forms
             {
                 GameUpdates = Check_Updates.Checked,
                 Language = Settings.AvailableCultureInfo[ComboBox_Language.SelectedIndex],
-                SelectedDL = UpdateInfo.DLUris.Length >= ComboBox_SelectedDL.SelectedIndex ? null : UpdateInfo.DLUris[ComboBox_SelectedDL.SelectedIndex],
+                SelectedDLIndex = ComboBox_SelectedDL.SelectedIndex
             };
 
             SaveSettings(Settings);
@@ -267,10 +267,16 @@ namespace P3D.Legacy.Launcher.Forms
                 if (!LocalGameReleaseUpToDate)
                     UpdateCurrentProfile(OnlineLastGameRelease);
                 else
-                    MessageBox.Show(string.Format(MBLang.ProfileUpToDate, CurrentProfile.Name), MBLang.ProfileUpToDateTitle, MessageBoxButtons.OK);
+                {
+                    if (!onStartup)
+                        MessageBox.Show(string.Format(MBLang.ProfileUpToDate, CurrentProfile.Name), MBLang.ProfileUpToDateTitle, MessageBoxButtons.OK);
+                }
             }
             else
-                MessageBox.Show(MBLang.NoInternet, MBLang.NoInternetTitle, MessageBoxButtons.OK);
+            {
+                if (!onStartup)
+                    MessageBox.Show(MBLang.NoInternet, MBLang.NoInternetTitle, MessageBoxButtons.OK);
+            }
         }
         private bool DownloadCurrentProfile()
         {
@@ -297,10 +303,9 @@ namespace P3D.Legacy.Launcher.Forms
             switch (MessageBox.Show(string.Format(MBLang.UpdateAvailable, CurrentProfile.Version, onlineRelease.Version), MBLang.UpdateAvailableTitle, MessageBoxButtons.YesNoCancel))
             {
                 case DialogResult.Yes:
-                    if (Settings.SelectedDL != null && !string.IsNullOrEmpty(Settings.SelectedDL.AbsolutePath))
+                    if (Settings.GetDL() != null && !string.IsNullOrEmpty(Settings.GetDL().AbsolutePath))
                     {
-                        Settings.SelectedDL = new Uri("https://dl.dropboxusercontent.com/u/58476180/P3D/");
-                        using (var nAppUpdater = new CustomUpdaterForm(onlineRelease.UpdateInfoAsset, Path.Combine(FileSystemInfo.GameReleasesFolderPath, CurrentProfile.Name), new Uri(Settings.SelectedDL, $"{CurrentProfile.Version}/")))
+                        using (var nAppUpdater = new CustomUpdaterForm(onlineRelease.UpdateInfoAsset, Path.Combine(FileSystemInfo.GameReleasesFolderPath, CurrentProfile.Name), new Uri(Settings.GetDL(), $"{CurrentProfile.Version}/")))
                             nAppUpdater.ShowDialog();
                     }
                     else
@@ -327,7 +332,7 @@ namespace P3D.Legacy.Launcher.Forms
             ComboBox_CurrentProfile.Items.Clear();
             foreach (var profile in Profiles.ProfileList)
                 ComboBox_CurrentProfile.Items.Add(profile.Name);
-            ComboBox_CurrentProfile.SelectedIndex = Profiles.ProfileIndex;
+            ComboBox_CurrentProfile.SelectedIndex = Profiles.SelectedProfileIndex;
         }
         private void ReloadSettings()
         {
@@ -343,13 +348,13 @@ namespace P3D.Legacy.Launcher.Forms
                 ComboBox_Language.Items.Add(cultureInfo.NativeName);
             ComboBox_Language.SelectedIndex = Array.IndexOf(Settings.AvailableCultureInfo, Settings.Language);
 
-            if (Settings.SelectedDL == null)
-                Settings.SelectedDL = UpdateInfo.DLUris.FirstOrDefault();
-
             ComboBox_SelectedDL.Items.Clear();
-            foreach (var dlUri in UpdateInfo.DLUris)
-                ComboBox_SelectedDL.Items.Add(dlUri);
-            ComboBox_SelectedDL.SelectedIndex = Array.IndexOf(UpdateInfo.DLUris, Settings.SelectedDL);
+            if (Settings.DLList.Any())
+            {
+                foreach (var dlUri in Settings.DLList)
+                    ComboBox_SelectedDL.Items.Add(dlUri);
+                ComboBox_SelectedDL.SelectedIndex = Settings.SelectedDLIndex;
+            }
         }
 
         private static void SaveSettings(Settings settings)

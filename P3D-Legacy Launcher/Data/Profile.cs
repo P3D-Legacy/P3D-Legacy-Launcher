@@ -15,13 +15,14 @@ namespace P3D.Legacy.Launcher.Data
 
         public static IEnumerable<Version> AvailableVersions => GitHubInfo.GetAllReleases.Select(release => new Version(release.TagName));
 
-        public static Profiles Default => new Profiles { ProfileIndex = 0, ProfileList = new List<Profile> { Profile.Default } };
+        public static Profiles Default => new Profiles { SelectedProfileIndex = 0, ProfileList = new List<Profile> { Profile.Default } };
 
 
-        public int ProfileIndex { get; set; }
+        private int _selectedProfileIndex;
+        public int SelectedProfileIndex { get { return _selectedProfileIndex; } set { if(value > 0 || value < ProfileList.Count) _selectedProfileIndex = value; } }
         public List<Profile> ProfileList { get; private set; }
 
-        public Profile GetProfile() => ProfileList[ProfileIndex];
+        public Profile GetProfile() => ProfileList.Any() ? ProfileList[SelectedProfileIndex] : null;
         public bool IsValid() => GetProfile() != null && GetProfile().Name != null && GetProfile().Version != null;
     }
 
