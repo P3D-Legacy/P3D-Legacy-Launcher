@@ -12,5 +12,5 @@ before_build:
 - nuget restore
 
 build:
-  project: P3D-Legacy Launcher.sln
+  project: 'P3D-Legacy Launcher.sln'
   verbosity: minimal
