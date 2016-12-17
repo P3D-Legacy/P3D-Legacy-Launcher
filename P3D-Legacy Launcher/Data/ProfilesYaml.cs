@@ -20,7 +20,7 @@ namespace P3D.Legacy.Launcher.Data
 
         private int _selectedProfileIndex;
         public int SelectedProfileIndex { get { return _selectedProfileIndex; } set { if(value > 0 || value < ProfileList.Count) _selectedProfileIndex = value; } }
-        public List<ProfileYaml> ProfileList { get; private set; }
+        public List<ProfileYaml> ProfileList { get; private set; } = new List<ProfileYaml>();
 
         public ProfileYaml GetProfile() => ProfileList.Any() ? ProfileList[SelectedProfileIndex] : null;
         public bool IsValid() => GetProfile() != null && GetProfile().Name != null && GetProfile().Version != null;
