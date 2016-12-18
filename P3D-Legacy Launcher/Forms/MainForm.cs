@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -17,7 +16,7 @@ using Microsoft.Win32;
 
 using P3D.Legacy.Launcher.Data;
 using P3D.Legacy.Launcher.Extensions;
-
+using TheArtOfDev.HtmlRenderer.Core.Entities;
 using TheArtOfDev.HtmlRenderer.WinForms;
 
 using YamlDotNet.Core;
@@ -75,9 +74,9 @@ namespace P3D.Legacy.Launcher.Forms
             {
                 Text = new WebClient { Encoding = Encoding.UTF8 }.DownloadString(NewsUri),
                 Dock = DockStyle.Fill,
-                //BackColor = Color.FromArgb(255, 231, 231, 231),
-                //BackgroundImage = GetImage("https://github.com/P3D-Legacy/p3d-legacy.github.io/raw/master/images/body-bg.png")
+                BaseStylesheet = ""
             };
+            htmlPanel.ImageLoad += HtmlPanel_ImageLoad;
             TabPage_News.Controls.Add(htmlPanel);
 
             Label_Version.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
@@ -85,6 +84,15 @@ namespace P3D.Legacy.Launcher.Forms
 
             ReloadProfileList();
             ReloadSettings();
+        }
+        private void HtmlPanel_ImageLoad(object sender, HtmlImageLoadEventArgs e)
+        {
+            if (e.Src.StartsWith(".."))
+            {
+                var uri = new Uri(NewsUri);
+                var path = new Uri($"{uri.Scheme}://{e.Src.Replace("..", uri.Host)}");
+                e.Callback(path.AbsoluteUri);
+            }
         }
 
         private void MainForm_Shown(object sender, EventArgs e)
