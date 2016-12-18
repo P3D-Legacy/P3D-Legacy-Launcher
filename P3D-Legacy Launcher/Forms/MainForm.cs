@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading;
@@ -16,13 +18,17 @@ using Microsoft.Win32;
 using P3D.Legacy.Launcher.Data;
 using P3D.Legacy.Launcher.Extensions;
 
+using TheArtOfDev.HtmlRenderer.WinForms;
+
 using YamlDotNet.Core;
 
 namespace P3D.Legacy.Launcher.Forms
 {
     public partial class MainForm : Form
     {
-        public static StringBuilder Logger { get; } = new StringBuilder();
+        private static StringBuilder Logger { get; } = new StringBuilder();
+
+        private const string NewsUri = "https://p3d-legacy.github.io/launcher/";
 
         #region GitHub
 
@@ -52,6 +58,7 @@ namespace P3D.Legacy.Launcher.Forms
         }
         private void FormPreInitialize()
         {
+            Logger?.Clear();
             foreach (Control control in Controls)
                 control.Dispose();
             Controls.Clear();
@@ -62,8 +69,16 @@ namespace P3D.Legacy.Launcher.Forms
         }
         private void FormInitialize()
         {
-            Logger.Clear();
             Log($"System Language: {CultureInfo.InstalledUICulture.EnglishName}");
+
+            var htmlPanel = new HtmlPanel
+            {
+                Text = new WebClient { Encoding = Encoding.UTF8 }.DownloadString(NewsUri),
+                Dock = DockStyle.Fill,
+                //BackColor = Color.FromArgb(255, 231, 231, 231),
+                //BackgroundImage = GetImage("https://github.com/P3D-Legacy/p3d-legacy.github.io/raw/master/images/body-bg.png")
+            };
+            TabPage_News.Controls.Add(htmlPanel);
 
             Label_Version.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             TabPage_Settings.VisibleChanged += TabPage_Settings_VisibleChanged;
@@ -214,7 +229,8 @@ namespace P3D.Legacy.Launcher.Forms
         private void Log(string message)
         {
             Logger.AppendLine(message);
-            TextBox_Logger.Text = Logger.ToString();
+            if(TextBox_Logger != null)
+                TextBox_Logger.Text = Logger.ToString();
         }
 
         private void CheckLauncherForUpdate()

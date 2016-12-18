@@ -276,33 +276,6 @@
   <data name="TabControl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="WebBrowser_News.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
-  </data>
-  <data name="WebBrowser_News.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 3</value>
-  </data>
-  <data name="WebBrowser_News.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>20, 20</value>
-  </data>
-  <data name="WebBrowser_News.Size" type="System.Drawing.Size, System.Drawing">
-    <value>830, 376</value>
-  </data>
-  <data name="WebBrowser_News.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;WebBrowser_News.Name" xml:space="preserve">
-    <value>WebBrowser_News</value>
-  </data>
-  <data name="&gt;&gt;WebBrowser_News.Type" xml:space="preserve">
-    <value>System.Windows.Forms.WebBrowser, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;WebBrowser_News.Parent" xml:space="preserve">
-    <value>TabPage_News</value>
-  </data>
-  <data name="&gt;&gt;WebBrowser_News.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="TabPage_News.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>

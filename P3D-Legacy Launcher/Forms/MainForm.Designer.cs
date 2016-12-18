@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace P3D.Legacy.Launcher.Forms
 {
@@ -39,7 +40,6 @@ namespace P3D.Legacy.Launcher.Forms
             this.Button_DeleteProfile = new System.Windows.Forms.Button();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.TabPage_News = new System.Windows.Forms.TabPage();
-            this.WebBrowser_News = new System.Windows.Forms.WebBrowser();
             this.TabPage_Logger = new System.Windows.Forms.TabPage();
             this.TextBox_Logger = new System.Windows.Forms.TextBox();
             this.TabPage_Settings = new System.Windows.Forms.TabPage();
@@ -58,7 +58,6 @@ namespace P3D.Legacy.Launcher.Forms
             this.TextBox_About = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.TabControl.SuspendLayout();
-            this.TabPage_News.SuspendLayout();
             this.TabPage_Logger.SuspendLayout();
             this.TabPage_Settings.SuspendLayout();
             this.GroupBox_Netwok.SuspendLayout();
@@ -120,16 +119,9 @@ namespace P3D.Legacy.Launcher.Forms
             // 
             // TabPage_News
             // 
-            this.TabPage_News.Controls.Add(this.WebBrowser_News);
             resources.ApplyResources(this.TabPage_News, "TabPage_News");
             this.TabPage_News.Name = "TabPage_News";
             this.TabPage_News.UseVisualStyleBackColor = true;
-            // 
-            // WebBrowser_News
-            // 
-            resources.ApplyResources(this.WebBrowser_News, "WebBrowser_News");
-            this.WebBrowser_News.Name = "WebBrowser_News";
-            this.WebBrowser_News.Url = new System.Uri("https://p3d-legacy.github.io/launcher/", System.UriKind.Absolute);
             // 
             // TabPage_Logger
             // 
@@ -260,7 +252,6 @@ namespace P3D.Legacy.Launcher.Forms
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Shown += new System.EventHandler(this.MainForm_Shown);
             this.TabControl.ResumeLayout(false);
-            this.TabPage_News.ResumeLayout(false);
             this.TabPage_Logger.ResumeLayout(false);
             this.TabPage_Logger.PerformLayout();
             this.TabPage_Settings.ResumeLayout(false);
@@ -285,7 +276,6 @@ namespace P3D.Legacy.Launcher.Forms
         private TextBox TextBox_Logger;
         private TabPage TabPage_Settings;
         private TabPage TabPage_About;
-        private WebBrowser WebBrowser_News;
         private Button Button_CheckForUpdates;
         private Button Putton_StartGame;
         private CheckBox Check_Updates;
