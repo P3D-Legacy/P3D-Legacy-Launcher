@@ -18,4 +18,4 @@ The minimum requirements are
     
 Please note that the size I provided can and may be wrong, because I have little idea on how measure package size.
 
-![Screenshot](https://www.dropbox.com/s/kehqp41w6beheme/%D0%A1%D0%BA%D1%80%D0%B8%D0%BD%D1%88%D0%BE%D1%82%202016-12-19%2002.10.38.png?dl=0)
+![Screenshot](https://dl.dropboxusercontent.com/u/58476180/P3D/LauncherScreenshot.png)
