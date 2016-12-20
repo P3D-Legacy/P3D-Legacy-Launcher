@@ -1,0 +1,7 @@
+name: P3D-Legacy Launcher
+markdown: kramdown
+rouge: true
+permalink: pretty
+
+gems:
+  - jekyll-github-metadata
