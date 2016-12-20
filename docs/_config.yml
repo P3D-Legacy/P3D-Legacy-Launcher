@@ -5,4 +5,3 @@ permalink: pretty
 
 gems:
   - jekyll-github-metadata
-theme: jekyll-theme-cayman
