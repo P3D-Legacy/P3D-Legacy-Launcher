@@ -201,4 +201,10 @@ Would you like to open the webpage now?</value>
   <data name="UpdatedTitle" xml:space="preserve">
     <value>Success!</value>
   </data>
+  <data name="ToolTipSaveCredentials" xml:space="preserve">
+    <value>Enable "Remember Me" first!</value>
+  </data>
+  <data name="ToolTipGameJoltToken" xml:space="preserve">
+    <value>This is your GameJolt Token, not your GameJolt Password! For more info, check the FAQ tab</value>
+  </data>
 </root>

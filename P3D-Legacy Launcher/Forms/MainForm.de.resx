@@ -135,14 +135,32 @@
   <data name="Button_SaveSettings.Text" xml:space="preserve">
     <value>Speichern</value>
   </data>
+  <data name="CheckBox_AutoLogIn.Text" xml:space="preserve">
+    <value>Automatically Log In</value>
+  </data>
+  <data name="CheckBox_SaveCredentials.Text" xml:space="preserve">
+    <value>Remember Credentials</value>
+  </data>
   <data name="Check_Updates.Text" xml:space="preserve">
     <value>Prüfe nach Updates beim starten</value>
+  </data>
+  <data name="GroupBox_Netwok.Text" xml:space="preserve">
+    <value>Network</value>
   </data>
   <data name="GroupBox_Startup.Text" xml:space="preserve">
     <value>Häufig verwendet</value>
   </data>
   <data name="Label_Language.Text" xml:space="preserve">
     <value>Sprache:</value>
+  </data>
+  <data name="Label_SelectedDL.Text" xml:space="preserve">
+    <value>Selected DL:</value>
+  </data>
+  <data name="Label_Token.Text" xml:space="preserve">
+    <value>Token:</value>
+  </data>
+  <data name="Label_Username.Text" xml:space="preserve">
+    <value>Username:</value>
   </data>
   <data name="LinkLabel_Pokemon3D.Text" xml:space="preserve">
     <value>Pokémon3D</value>
@@ -161,5 +179,8 @@
   </data>
   <data name="TabPage_Settings.Text" xml:space="preserve">
     <value>Einstellungen</value>
+  </data>
+  <data name="TextBox_Token.Hint" xml:space="preserve">
+    <value>This is your GameJolt Token, not your GameJolt Password! For more info, check the FAQ tab</value>
   </data>
 </root>

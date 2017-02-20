@@ -36,22 +36,24 @@
             this.Label_ProfileName = new System.Windows.Forms.Label();
             this.Button_SaveProfile = new System.Windows.Forms.Button();
             this.Button_Cancel = new System.Windows.Forms.Button();
+            this.GroupBox_Modifications = new System.Windows.Forms.GroupBox();
             this.GroupBox_ProfileInfo.SuspendLayout();
             this.SuspendLayout();
             // 
             // GroupBox_ProfileInfo
             // 
+            resources.ApplyResources(this.GroupBox_ProfileInfo, "GroupBox_ProfileInfo");
             this.GroupBox_ProfileInfo.Controls.Add(this.ComboBox_Version);
             this.GroupBox_ProfileInfo.Controls.Add(this.Label_Version);
             this.GroupBox_ProfileInfo.Controls.Add(this.TextBox_ProfileName);
             this.GroupBox_ProfileInfo.Controls.Add(this.Label_ProfileName);
-            resources.ApplyResources(this.GroupBox_ProfileInfo, "GroupBox_ProfileInfo");
             this.GroupBox_ProfileInfo.Name = "GroupBox_ProfileInfo";
             this.GroupBox_ProfileInfo.TabStop = false;
             // 
             // ComboBox_Version
             // 
             resources.ApplyResources(this.ComboBox_Version, "ComboBox_Version");
+            this.ComboBox_Version.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBox_Version.FormattingEnabled = true;
             this.ComboBox_Version.Name = "ComboBox_Version";
             // 
@@ -84,13 +86,21 @@
             this.Button_Cancel.UseVisualStyleBackColor = true;
             this.Button_Cancel.Click += new System.EventHandler(this.Button_Cancel_Click);
             // 
+            // GroupBox_Modifications
+            // 
+            resources.ApplyResources(this.GroupBox_Modifications, "GroupBox_Modifications");
+            this.GroupBox_Modifications.Name = "GroupBox_Modifications";
+            this.GroupBox_Modifications.TabStop = false;
+            // 
             // ProfileForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.GroupBox_Modifications);
             this.Controls.Add(this.Button_Cancel);
             this.Controls.Add(this.Button_SaveProfile);
             this.Controls.Add(this.GroupBox_ProfileInfo);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ProfileForm";
             this.GroupBox_ProfileInfo.ResumeLayout(false);
             this.GroupBox_ProfileInfo.PerformLayout();
@@ -107,5 +117,6 @@
         private System.Windows.Forms.Label Label_Version;
         private System.Windows.Forms.TextBox TextBox_ProfileName;
         private System.Windows.Forms.Label Label_ProfileName;
+        private System.Windows.Forms.GroupBox GroupBox_Modifications;
     }
 }

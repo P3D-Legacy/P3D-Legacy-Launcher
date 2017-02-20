@@ -10,21 +10,17 @@ using Ionic.Zip;
 using Octokit;
 
 using P3D.Legacy.Launcher.Extensions;
+using P3D.Legacy.Launcher.Services;
 
 namespace P3D.Legacy.Launcher.Forms
 {
-    public partial class DirectUpdaterForm : Form
+    internal partial class DirectUpdaterForm : Form
     {
         private WebClient Downloader { get; set; }
-        private bool Cancelled { get; set; }
 
         private ReleaseAsset ReleaseAsset { get; }
-        private string TempFilePath => FileSystemInfo.TempFilePath(ReleaseAsset.Name);
+        private string TempFilePath => FileSystem.TempFilePath(ReleaseAsset.Name);
         private string ExtractionFolder { get; }
-
-        private int _totalFiles;
-        private int _filesExtracted;
-
 
         public DirectUpdaterForm(ReleaseAsset releaseAsset, string extractionFolder)
         {
@@ -36,11 +32,10 @@ namespace P3D.Legacy.Launcher.Forms
 
         private async void DirectUpdaterForm_Shown(object sender, EventArgs e)
         {
-            if (!Directory.Exists(FileSystemInfo.TempFolderPath))
-                Directory.CreateDirectory(FileSystemInfo.TempFolderPath);
+            if (!Directory.Exists(FileSystem.TempFolderPath))
+                Directory.CreateDirectory(FileSystem.TempFolderPath);
 
             await Task.Run(DownloadFile);
-            Close();
         }
 
         private async Task DownloadFile()
@@ -57,7 +52,6 @@ namespace P3D.Legacy.Launcher.Forms
                 }
             }
             catch (WebException) { return; }
-            if (Cancelled) return;
 
             if (File.Exists(TempFilePath))
                 ExtractFile();
@@ -66,22 +60,27 @@ namespace P3D.Legacy.Launcher.Forms
         }
         private void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            this.SafeInvoke(delegate { ProgressBar.Maximum = ReleaseAsset.Size; ProgressBar.Value = (int) e.BytesReceived; });
+            this.SafeInvoke(delegate
+            {
+                PercentageProgressBar.Maximum = ReleaseAsset.Size;
+                PercentageProgressBar.Value = (int) e.BytesReceived;
+            });
         }
 
         private void ExtractFile()
         {
-            if (Cancelled) return;
-
-            this.SafeInvoke(() => Label_ProgressBar1.Text = Label_ProgressBar2.Text);
+            Label_ProgressBar1.SafeInvoke(() => Label_ProgressBar1.Text = Label_ProgressBar2.Text);
 
             if (!Directory.Exists(ExtractionFolder))
                 Directory.CreateDirectory(ExtractionFolder);
 
+            BackgroundWorker_Extractor.RunWorkerAsync();
+        }
+
+        private void BackgroundWorker_Extractor_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
             using (var zip = ZipFile.Read(TempFilePath))
             {
-                zip.ExtractProgress += zip_ExtractProgress;
-
                 var result = zip.Skip(1).Where(entry => entry.FileName.Contains(zip[0].FileName)).ToList();
                 result = result.Select(c =>
                 {
@@ -89,39 +88,39 @@ namespace P3D.Legacy.Launcher.Forms
                     return c;
                 }).ToList();
 
-                _totalFiles = result.Count;
-                _filesExtracted = 0;
-
                 // -- We skip the Main folder.
-                foreach (var zipEntry in result)
+                for (var i = 0; i < result.Count; i++)
                 {
-                    if (Cancelled) return;
-                    zipEntry.Extract(ExtractionFolder, ExtractExistingFileAction.OverwriteSilently);
+                    if (e.Cancel) return;
+                    result[i].Extract(ExtractionFolder, ExtractExistingFileAction.OverwriteSilently);
+                    BackgroundWorker_Extractor.ReportProgress((int) Math.Round((double) i / (double) result.Count * 100));
                 }
             }
-
-            File.Delete(TempFilePath);
         }
-
-        private void zip_ExtractProgress(object sender, ExtractProgressEventArgs e)
+        private void BackgroundWorker_Extractor_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
             this.SafeInvoke(delegate
             {
-                if (e.EventType != ZipProgressEventType.Extracting_BeforeExtractEntry)
-                    return;
-                _filesExtracted++;
-
-                ProgressBar.Maximum = _totalFiles;
-                ProgressBar.Value = _filesExtracted;
+                PercentageProgressBar.Maximum = 100;
+                PercentageProgressBar.Value = e.ProgressPercentage;
+            });
+        }
+        private void BackgroundWorker_Extractor_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            this.SafeInvoke(delegate
+            {
+                Close();
+                DialogResult = DialogResult.OK;
             });
         }
 
-        private void DirectDownloaderForm_FormClosing(object sender, FormClosingEventArgs e)
+        private async void DirectDownloaderForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Cancelled = true;
             Downloader?.CancelAsync();
+            BackgroundWorker_Extractor?.CancelAsync();
 
-            Directory.Delete(FileSystemInfo.TempFolderPath, true);
+            await Task.Delay(1000);
+            Directory.Delete(FileSystem.TempFolderPath, true);
         }
     }
 }

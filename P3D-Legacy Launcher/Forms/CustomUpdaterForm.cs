@@ -13,16 +13,17 @@ using Octokit;
 
 using P3D.Legacy.Launcher.Data;
 using P3D.Legacy.Launcher.Extensions;
+using P3D.Legacy.Launcher.Services;
 
 namespace P3D.Legacy.Launcher.Forms
 {
-    public partial class CustomUpdaterForm : Form
+    internal partial class CustomUpdaterForm : Form
     {
         private WebClient Downloader { get; set; }
         private bool Cancelled { get; set; }
 
         private ReleaseAsset UpdateInfoAsset { get; }
-        private string ReleaseInfoFilePath => FileSystemInfo.TempFilePath(UpdateInfoAsset.Name);
+        private string ReleaseInfoFilePath => FileSystem.TempFilePath(UpdateInfoAsset.Name);
         private string UpdatedFolderPath { get; }
         private Uri DLUri { get; }
 
@@ -37,8 +38,8 @@ namespace P3D.Legacy.Launcher.Forms
 
         private async void CustomUpdaterForm_Shown(object sender, EventArgs e)
         {
-            if (!Directory.Exists(FileSystemInfo.TempFolderPath))
-                Directory.CreateDirectory(FileSystemInfo.TempFolderPath);
+            if (!Directory.Exists(FileSystem.TempFolderPath))
+                Directory.CreateDirectory(FileSystem.TempFolderPath);
 
             await Task.Run(DownloadFile);
             Close();
@@ -51,7 +52,7 @@ namespace P3D.Legacy.Launcher.Forms
 
             try
             {
-                ProgressBar.SafeInvoke(() => ProgressBar.Maximum = UpdateInfoAsset.Size);
+                PercentageProgressBar.SafeInvoke(() => PercentageProgressBar.Maximum = UpdateInfoAsset.Size);
                 using (Downloader = new WebClient())
                 {
                     Downloader.DownloadProgressChanged += client_DownloadProgressChanged;
@@ -81,7 +82,7 @@ namespace P3D.Legacy.Launcher.Forms
         }
         private void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            ProgressBar.SafeInvoke(() => ProgressBar.Value = (int) e.BytesReceived);
+            PercentageProgressBar.SafeInvoke(() => PercentageProgressBar.Value = (int) e.BytesReceived);
         }
 
         private List<UpdateFileEntryYaml> StartUpdate()
@@ -91,18 +92,17 @@ namespace P3D.Legacy.Launcher.Forms
             Label_ProgressBar1.SafeInvoke(() => Label_ProgressBar1.Text = Label_ProgressBar2.Text);
 
             var releaseInfoContent = File.ReadAllText(ReleaseInfoFilePath);
-            var deserializer = UpdateInfoYaml.DeserializerBuilder.Build();
-            var updateInfo = deserializer.Deserialize<UpdateInfoYaml>(releaseInfoContent);
+            var updateInfo = UpdateInfoYaml.Deserialize(releaseInfoContent);
 
             var crc32 = new Crc32();
             var sha1 = new SHA1Managed();
             var notValidFileEntries = new List<UpdateFileEntryYaml>();
-            ProgressBar.SafeInvoke(delegate { ProgressBar.Maximum = updateInfo.Files.Count; ProgressBar.Step = 1; ProgressBar.Value = 0; });
+            PercentageProgressBar.SafeInvoke(delegate { PercentageProgressBar.Maximum = updateInfo.Files.Count; PercentageProgressBar.Step = 1; PercentageProgressBar.Value = 0; });
             Parallel.ForEach(updateInfo.Files, (updateFileEntry, state) =>
             {
                 if(Cancelled) state.Stop();
 
-                this.SafeInvoke(() => ProgressBar.PerformStep());
+                PercentageProgressBar.SafeInvoke(() => PercentageProgressBar.PerformStep());
 
                 var filePath = Path.Combine(UpdatedFolderPath, updateFileEntry.AbsoluteFilePath);
                 if (!File.Exists(filePath))
@@ -140,17 +140,17 @@ namespace P3D.Legacy.Launcher.Forms
         {
             if (Cancelled) return;
 
-            this.SafeInvoke(() => Label_ProgressBar1.Text = Label_ProgressBar3.Text);
+            Label_ProgressBar1.SafeInvoke(() => Label_ProgressBar1.Text = Label_ProgressBar3.Text);
 
             try
             {
-                this.SafeInvoke(delegate { ProgressBar.Maximum = updateFileEntries.Count; ProgressBar.Step = 1; ProgressBar.Value = 0; });
+                PercentageProgressBar.SafeInvoke(delegate { PercentageProgressBar.Maximum = updateFileEntries.Count; PercentageProgressBar.Step = 1; PercentageProgressBar.Value = 0; });
                 Parallel.ForEach(updateFileEntries, (updateFileEntry, state) =>
                 {
                     if (Cancelled) state.Stop();
 
                     var dlUri = new Uri(DLUri, updateFileEntry.AbsoluteFilePath);
-                    var tempFilePath = FileSystemInfo.TempFilePath(updateFileEntry.AbsoluteFilePath);
+                    var tempFilePath = FileSystem.TempFilePath(updateFileEntry.AbsoluteFilePath);
                     var tempFolderpath = Path.GetDirectoryName(tempFilePath);
                     if (!string.IsNullOrEmpty(tempFolderpath) && !Directory.Exists(tempFolderpath))
                         Directory.CreateDirectory(tempFolderpath);
@@ -158,7 +158,7 @@ namespace P3D.Legacy.Launcher.Forms
                     using (var downloader = new WebClient())
                     {
                         downloader.DownloadFile(dlUri, tempFilePath);
-                        this.SafeInvoke(() => ProgressBar.PerformStep());
+                        PercentageProgressBar.SafeInvoke(() => PercentageProgressBar.PerformStep());
                     }
                 });
             }
@@ -179,7 +179,7 @@ namespace P3D.Legacy.Launcher.Forms
                 {
                     if (Cancelled) state.Break();
 
-                    var tempFilePath = FileSystemInfo.TempFilePath(updateFileEntry.AbsoluteFilePath);
+                    var tempFilePath = FileSystem.TempFilePath(updateFileEntry.AbsoluteFilePath);
                     var filePath = Path.Combine(UpdatedFolderPath, updateFileEntry.AbsoluteFilePath);
 
                     if (File.Exists(filePath))
@@ -191,12 +191,12 @@ namespace P3D.Legacy.Launcher.Forms
             catch (UnauthorizedAccessException) { FileReplacementErrorMessage(); return; }
             catch (IOException) { FileReplacementErrorMessage(); return; }
         }
-        private void NAppUpdaterForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void CustomUpdaterForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Cancelled = true;
             Downloader?.CancelAsync();
 
-            Directory.Delete(FileSystemInfo.TempFolderPath, true);
+            Directory.Delete(FileSystem.TempFolderPath, true);
         }
 
 

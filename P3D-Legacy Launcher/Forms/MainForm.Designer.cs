@@ -38,11 +38,18 @@ namespace P3D.Legacy.Launcher.Forms
             this.Button_NewProfile = new System.Windows.Forms.Button();
             this.Button_EditProfile = new System.Windows.Forms.Button();
             this.Button_DeleteProfile = new System.Windows.Forms.Button();
-            this.TabControl = new System.Windows.Forms.TabControl();
-            this.TabPage_News = new System.Windows.Forms.TabPage();
-            this.TabPage_Logger = new System.Windows.Forms.TabPage();
-            this.TextBox_Logger = new System.Windows.Forms.TextBox();
+            this.TabPage_About = new System.Windows.Forms.TabPage();
+            this.TextBox_Credits = new System.Windows.Forms.TextBox();
+            this.TextBox_About = new System.Windows.Forms.TextBox();
+            this.Label_Version = new System.Windows.Forms.Label();
+            this.LinkLabel_Pokemon3D = new System.Windows.Forms.LinkLabel();
             this.TabPage_Settings = new System.Windows.Forms.TabPage();
+            this.GroupBox__GameJolt = new System.Windows.Forms.GroupBox();
+            this.CheckBox_SaveCredentials = new System.Windows.Forms.CheckBox();
+            this.CheckBox_AutoLogIn = new System.Windows.Forms.CheckBox();
+            this.TextBox_Username = new System.Windows.Forms.TextBox();
+            this.Label_Token = new System.Windows.Forms.Label();
+            this.Label_Username = new System.Windows.Forms.Label();
             this.GroupBox_Netwok = new System.Windows.Forms.GroupBox();
             this.ComboBox_SelectedDL = new System.Windows.Forms.ComboBox();
             this.Label_SelectedDL = new System.Windows.Forms.Label();
@@ -51,18 +58,24 @@ namespace P3D.Legacy.Launcher.Forms
             this.Label_Language = new System.Windows.Forms.Label();
             this.ComboBox_Language = new System.Windows.Forms.ComboBox();
             this.Check_Updates = new System.Windows.Forms.CheckBox();
-            this.TabPage_About = new System.Windows.Forms.TabPage();
-            this.TextBox_Credits = new System.Windows.Forms.TextBox();
-            this.Label_Version = new System.Windows.Forms.Label();
-            this.LinkLabel_Pokemon3D = new System.Windows.Forms.LinkLabel();
-            this.TextBox_About = new System.Windows.Forms.TextBox();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.TabControl.SuspendLayout();
-            this.TabPage_Logger.SuspendLayout();
+            this.TabPage_Logger = new System.Windows.Forms.TabPage();
+            this.TextBox_Logger = new System.Windows.Forms.TextBox();
+            this.TabPage_News = new System.Windows.Forms.TabPage();
+            this.TabControl = new System.Windows.Forms.TabControl();
+            this.TabPage_FAQ = new System.Windows.Forms.TabPage();
+            this.PictureBox_GameJolt = new System.Windows.Forms.PictureBox();
+            this.BackgroundWorker_GameJolt = new System.ComponentModel.BackgroundWorker();
+            this.PictureBox_GameJolt_Offline = new System.Windows.Forms.PictureBox();
+            this.TextBox_Token = new P3D.Legacy.Launcher.Controls.WatermarkTextBox();
+            this.TabPage_About.SuspendLayout();
             this.TabPage_Settings.SuspendLayout();
+            this.GroupBox__GameJolt.SuspendLayout();
             this.GroupBox_Netwok.SuspendLayout();
             this.GroupBox_Startup.SuspendLayout();
-            this.TabPage_About.SuspendLayout();
+            this.TabPage_Logger.SuspendLayout();
+            this.TabControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox_GameJolt)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox_GameJolt_Offline)).BeginInit();
             this.SuspendLayout();
             // 
             // Button_CheckForUpdates
@@ -81,6 +94,7 @@ namespace P3D.Legacy.Launcher.Forms
             // 
             // ComboBox_CurrentProfile
             // 
+            this.ComboBox_CurrentProfile.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBox_CurrentProfile.FormattingEnabled = true;
             resources.ApplyResources(this.ComboBox_CurrentProfile, "ComboBox_CurrentProfile");
             this.ComboBox_CurrentProfile.Name = "ComboBox_CurrentProfile";
@@ -107,37 +121,48 @@ namespace P3D.Legacy.Launcher.Forms
             this.Button_DeleteProfile.UseVisualStyleBackColor = true;
             this.Button_DeleteProfile.Click += new System.EventHandler(this.Button_DeleteProfile_Click);
             // 
-            // TabControl
+            // TabPage_About
             // 
-            resources.ApplyResources(this.TabControl, "TabControl");
-            this.TabControl.Controls.Add(this.TabPage_News);
-            this.TabControl.Controls.Add(this.TabPage_Logger);
-            this.TabControl.Controls.Add(this.TabPage_Settings);
-            this.TabControl.Controls.Add(this.TabPage_About);
-            this.TabControl.Name = "TabControl";
-            this.TabControl.SelectedIndex = 0;
+            this.TabPage_About.BackColor = System.Drawing.Color.White;
+            this.TabPage_About.Controls.Add(this.TextBox_Credits);
+            this.TabPage_About.Controls.Add(this.TextBox_About);
+            this.TabPage_About.Controls.Add(this.Label_Version);
+            this.TabPage_About.Controls.Add(this.LinkLabel_Pokemon3D);
+            resources.ApplyResources(this.TabPage_About, "TabPage_About");
+            this.TabPage_About.Name = "TabPage_About";
             // 
-            // TabPage_News
+            // TextBox_Credits
             // 
-            resources.ApplyResources(this.TabPage_News, "TabPage_News");
-            this.TabPage_News.Name = "TabPage_News";
-            this.TabPage_News.UseVisualStyleBackColor = true;
+            this.TextBox_Credits.BackColor = System.Drawing.Color.White;
+            this.TextBox_Credits.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.TextBox_Credits, "TextBox_Credits");
+            this.TextBox_Credits.Name = "TextBox_Credits";
+            this.TextBox_Credits.ReadOnly = true;
             // 
-            // TabPage_Logger
+            // TextBox_About
             // 
-            this.TabPage_Logger.Controls.Add(this.TextBox_Logger);
-            resources.ApplyResources(this.TabPage_Logger, "TabPage_Logger");
-            this.TabPage_Logger.Name = "TabPage_Logger";
-            this.TabPage_Logger.UseVisualStyleBackColor = true;
+            this.TextBox_About.BackColor = System.Drawing.Color.White;
+            this.TextBox_About.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            resources.ApplyResources(this.TextBox_About, "TextBox_About");
+            this.TextBox_About.Name = "TextBox_About";
+            this.TextBox_About.ReadOnly = true;
             // 
-            // TextBox_Logger
+            // Label_Version
             // 
-            resources.ApplyResources(this.TextBox_Logger, "TextBox_Logger");
-            this.TextBox_Logger.Name = "TextBox_Logger";
-            this.TextBox_Logger.ReadOnly = true;
+            resources.ApplyResources(this.Label_Version, "Label_Version");
+            this.Label_Version.Name = "Label_Version";
+            // 
+            // LinkLabel_Pokemon3D
+            // 
+            resources.ApplyResources(this.LinkLabel_Pokemon3D, "LinkLabel_Pokemon3D");
+            this.LinkLabel_Pokemon3D.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(112)))), ((int)(((byte)(0)))));
+            this.LinkLabel_Pokemon3D.Name = "LinkLabel_Pokemon3D";
+            this.LinkLabel_Pokemon3D.TabStop = true;
+            this.LinkLabel_Pokemon3D.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel_Pokemon3D_LinkClicked);
             // 
             // TabPage_Settings
             // 
+            this.TabPage_Settings.Controls.Add(this.GroupBox__GameJolt);
             this.TabPage_Settings.Controls.Add(this.GroupBox_Netwok);
             this.TabPage_Settings.Controls.Add(this.Button_SaveSettings);
             this.TabPage_Settings.Controls.Add(this.GroupBox_Startup);
@@ -145,6 +170,46 @@ namespace P3D.Legacy.Launcher.Forms
             resources.ApplyResources(this.TabPage_Settings, "TabPage_Settings");
             this.TabPage_Settings.Name = "TabPage_Settings";
             this.TabPage_Settings.UseVisualStyleBackColor = true;
+            // 
+            // GroupBox__GameJolt
+            // 
+            resources.ApplyResources(this.GroupBox__GameJolt, "GroupBox__GameJolt");
+            this.GroupBox__GameJolt.Controls.Add(this.TextBox_Token);
+            this.GroupBox__GameJolt.Controls.Add(this.CheckBox_SaveCredentials);
+            this.GroupBox__GameJolt.Controls.Add(this.CheckBox_AutoLogIn);
+            this.GroupBox__GameJolt.Controls.Add(this.TextBox_Username);
+            this.GroupBox__GameJolt.Controls.Add(this.Label_Token);
+            this.GroupBox__GameJolt.Controls.Add(this.Label_Username);
+            this.GroupBox__GameJolt.Name = "GroupBox__GameJolt";
+            this.GroupBox__GameJolt.TabStop = false;
+            // 
+            // CheckBox_SaveCredentials
+            // 
+            resources.ApplyResources(this.CheckBox_SaveCredentials, "CheckBox_SaveCredentials");
+            this.CheckBox_SaveCredentials.Name = "CheckBox_SaveCredentials";
+            this.CheckBox_SaveCredentials.UseVisualStyleBackColor = true;
+            this.CheckBox_SaveCredentials.CheckedChanged += new System.EventHandler(this.CheckBox_SaveCredentials_CheckedChanged);
+            // 
+            // CheckBox_AutoLogIn
+            // 
+            resources.ApplyResources(this.CheckBox_AutoLogIn, "CheckBox_AutoLogIn");
+            this.CheckBox_AutoLogIn.Name = "CheckBox_AutoLogIn";
+            this.CheckBox_AutoLogIn.UseVisualStyleBackColor = true;
+            // 
+            // TextBox_Username
+            // 
+            resources.ApplyResources(this.TextBox_Username, "TextBox_Username");
+            this.TextBox_Username.Name = "TextBox_Username";
+            // 
+            // Label_Token
+            // 
+            resources.ApplyResources(this.Label_Token, "Label_Token");
+            this.Label_Token.Name = "Label_Token";
+            // 
+            // Label_Username
+            // 
+            resources.ApplyResources(this.Label_Username, "Label_Username");
+            this.Label_Username.Name = "Label_Username";
             // 
             // GroupBox_Netwok
             // 
@@ -157,6 +222,7 @@ namespace P3D.Legacy.Launcher.Forms
             // ComboBox_SelectedDL
             // 
             resources.ApplyResources(this.ComboBox_SelectedDL, "ComboBox_SelectedDL");
+            this.ComboBox_SelectedDL.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBox_SelectedDL.FormattingEnabled = true;
             this.ComboBox_SelectedDL.Name = "ComboBox_SelectedDL";
             // 
@@ -189,6 +255,7 @@ namespace P3D.Legacy.Launcher.Forms
             // ComboBox_Language
             // 
             resources.ApplyResources(this.ComboBox_Language, "ComboBox_Language");
+            this.ComboBox_Language.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBox_Language.FormattingEnabled = true;
             this.ComboBox_Language.Name = "ComboBox_Language";
             // 
@@ -198,49 +265,73 @@ namespace P3D.Legacy.Launcher.Forms
             this.Check_Updates.Name = "Check_Updates";
             this.Check_Updates.UseVisualStyleBackColor = true;
             // 
-            // TabPage_About
+            // TabPage_Logger
             // 
-            this.TabPage_About.Controls.Add(this.TextBox_Credits);
-            this.TabPage_About.Controls.Add(this.Label_Version);
-            this.TabPage_About.Controls.Add(this.LinkLabel_Pokemon3D);
-            this.TabPage_About.Controls.Add(this.TextBox_About);
-            resources.ApplyResources(this.TabPage_About, "TabPage_About");
-            this.TabPage_About.Name = "TabPage_About";
-            this.TabPage_About.UseVisualStyleBackColor = true;
+            this.TabPage_Logger.Controls.Add(this.TextBox_Logger);
+            resources.ApplyResources(this.TabPage_Logger, "TabPage_Logger");
+            this.TabPage_Logger.Name = "TabPage_Logger";
+            this.TabPage_Logger.UseVisualStyleBackColor = true;
             // 
-            // TextBox_Credits
+            // TextBox_Logger
             // 
-            this.TextBox_Credits.BackColor = System.Drawing.Color.White;
-            this.TextBox_Credits.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            resources.ApplyResources(this.TextBox_Credits, "TextBox_Credits");
-            this.TextBox_Credits.Name = "TextBox_Credits";
-            this.TextBox_Credits.ReadOnly = true;
+            resources.ApplyResources(this.TextBox_Logger, "TextBox_Logger");
+            this.TextBox_Logger.Name = "TextBox_Logger";
+            this.TextBox_Logger.ReadOnly = true;
             // 
-            // Label_Version
+            // TabPage_News
             // 
-            resources.ApplyResources(this.Label_Version, "Label_Version");
-            this.Label_Version.Name = "Label_Version";
+            resources.ApplyResources(this.TabPage_News, "TabPage_News");
+            this.TabPage_News.Name = "TabPage_News";
+            this.TabPage_News.UseVisualStyleBackColor = true;
             // 
-            // LinkLabel_Pokemon3D
+            // TabControl
             // 
-            resources.ApplyResources(this.LinkLabel_Pokemon3D, "LinkLabel_Pokemon3D");
-            this.LinkLabel_Pokemon3D.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(112)))), ((int)(((byte)(0)))));
-            this.LinkLabel_Pokemon3D.Name = "LinkLabel_Pokemon3D";
-            this.LinkLabel_Pokemon3D.TabStop = true;
-            this.LinkLabel_Pokemon3D.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel_Pokemon3D_LinkClicked);
+            resources.ApplyResources(this.TabControl, "TabControl");
+            this.TabControl.Controls.Add(this.TabPage_News);
+            this.TabControl.Controls.Add(this.TabPage_Logger);
+            this.TabControl.Controls.Add(this.TabPage_FAQ);
+            this.TabControl.Controls.Add(this.TabPage_Settings);
+            this.TabControl.Controls.Add(this.TabPage_About);
+            this.TabControl.Name = "TabControl";
+            this.TabControl.SelectedIndex = 0;
             // 
-            // TextBox_About
+            // TabPage_FAQ
             // 
-            this.TextBox_About.BackColor = System.Drawing.Color.White;
-            this.TextBox_About.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            resources.ApplyResources(this.TextBox_About, "TextBox_About");
-            this.TextBox_About.Name = "TextBox_About";
-            this.TextBox_About.ReadOnly = true;
+            resources.ApplyResources(this.TabPage_FAQ, "TabPage_FAQ");
+            this.TabPage_FAQ.Name = "TabPage_FAQ";
+            this.TabPage_FAQ.UseVisualStyleBackColor = true;
+            // 
+            // PictureBox_GameJolt
+            // 
+            resources.ApplyResources(this.PictureBox_GameJolt, "PictureBox_GameJolt");
+            this.PictureBox_GameJolt.Name = "PictureBox_GameJolt";
+            this.PictureBox_GameJolt.TabStop = false;
+            this.PictureBox_GameJolt.Click += new System.EventHandler(this.PictureBox_GameJolt_Click);
+            // 
+            // BackgroundWorker_GameJolt
+            // 
+            this.BackgroundWorker_GameJolt.WorkerSupportsCancellation = true;
+            this.BackgroundWorker_GameJolt.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker_GameJolt_DoWork);
+            // 
+            // PictureBox_GameJolt_Offline
+            // 
+            resources.ApplyResources(this.PictureBox_GameJolt_Offline, "PictureBox_GameJolt_Offline");
+            this.PictureBox_GameJolt_Offline.Name = "PictureBox_GameJolt_Offline";
+            this.PictureBox_GameJolt_Offline.TabStop = false;
+            this.PictureBox_GameJolt_Offline.Click += new System.EventHandler(this.PictureBox_GameJolt_Offline_Click);
+            // 
+            // TextBox_Token
+            // 
+            this.TextBox_Token.Hint = "This is your GameJolt Token, not your GameJolt Password! For more info, check the" +
+    " FAQ tab";
+            resources.ApplyResources(this.TextBox_Token, "TextBox_Token");
+            this.TextBox_Token.Name = "TextBox_Token";
             // 
             // MainForm
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.PictureBox_GameJolt);
             this.Controls.Add(this.TabControl);
             this.Controls.Add(this.Button_DeleteProfile);
             this.Controls.Add(this.Button_EditProfile);
@@ -248,19 +339,23 @@ namespace P3D.Legacy.Launcher.Forms
             this.Controls.Add(this.ComboBox_CurrentProfile);
             this.Controls.Add(this.Button_CheckForUpdates);
             this.Controls.Add(this.Putton_StartGame);
+            this.Controls.Add(this.PictureBox_GameJolt_Offline);
             this.Name = "MainForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
-            this.Shown += new System.EventHandler(this.MainForm_Shown);
-            this.TabControl.ResumeLayout(false);
-            this.TabPage_Logger.ResumeLayout(false);
-            this.TabPage_Logger.PerformLayout();
+            this.TabPage_About.ResumeLayout(false);
+            this.TabPage_About.PerformLayout();
             this.TabPage_Settings.ResumeLayout(false);
+            this.GroupBox__GameJolt.ResumeLayout(false);
+            this.GroupBox__GameJolt.PerformLayout();
             this.GroupBox_Netwok.ResumeLayout(false);
             this.GroupBox_Netwok.PerformLayout();
             this.GroupBox_Startup.ResumeLayout(false);
             this.GroupBox_Startup.PerformLayout();
-            this.TabPage_About.ResumeLayout(false);
-            this.TabPage_About.PerformLayout();
+            this.TabPage_Logger.ResumeLayout(false);
+            this.TabPage_Logger.PerformLayout();
+            this.TabControl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox_GameJolt)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBox_GameJolt_Offline)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -270,27 +365,37 @@ namespace P3D.Legacy.Launcher.Forms
         private Button Button_NewProfile;
         private Button Button_EditProfile;
         private Button Button_DeleteProfile;
-        private TabControl TabControl;
-        private TabPage TabPage_News;
-        private TabPage TabPage_Logger;
-        private TextBox TextBox_Logger;
-        private TabPage TabPage_Settings;
-        private TabPage TabPage_About;
         private Button Button_CheckForUpdates;
         private Button Putton_StartGame;
-        private CheckBox Check_Updates;
-        private LinkLabel LinkLabel_Pokemon3D;
+        private TabPage TabPage_About;
+        private TextBox TextBox_Credits;
         private TextBox TextBox_About;
-        private GroupBox GroupBox_Startup;
-        private Label Label_Language;
-        private ComboBox ComboBox_Language;
-        private Button Button_SaveSettings;
         private Label Label_Version;
+        private LinkLabel LinkLabel_Pokemon3D;
+        private TabPage TabPage_Settings;
+        private GroupBox GroupBox__GameJolt;
+        private TextBox TextBox_Username;
+        private Label Label_Token;
+        private Label Label_Username;
         private GroupBox GroupBox_Netwok;
         private ComboBox ComboBox_SelectedDL;
         private Label Label_SelectedDL;
-        private TextBox TextBox_Credits;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private Button Button_SaveSettings;
+        private GroupBox GroupBox_Startup;
+        private Label Label_Language;
+        private ComboBox ComboBox_Language;
+        private CheckBox Check_Updates;
+        private TabPage TabPage_Logger;
+        private TextBox TextBox_Logger;
+        private TabPage TabPage_News;
+        private TabControl TabControl;
+        private CheckBox CheckBox_SaveCredentials;
+        private CheckBox CheckBox_AutoLogIn;
+        private Controls.WatermarkTextBox TextBox_Token;
+        private TabPage TabPage_FAQ;
+        private PictureBox PictureBox_GameJolt;
+        private System.ComponentModel.BackgroundWorker BackgroundWorker_GameJolt;
+        private PictureBox PictureBox_GameJolt_Offline;
     }
 }
 

@@ -6,7 +6,7 @@ using P3D.Legacy.Launcher.Extensions;
 
 namespace P3D.Legacy.Launcher.Data
 {
-    public class GitHubRelease
+    internal class GitHubRelease
     {
         private Release Release { get; }
         public ReleaseAsset ReleaseAsset => Release.GetRelease();

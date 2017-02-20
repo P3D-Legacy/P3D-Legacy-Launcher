@@ -6,9 +6,9 @@ using YamlDotNet.Core;
 using YamlDotNet.Core.Events;
 using YamlDotNet.Serialization;
 
-namespace P3D.Legacy.Launcher.Converters
+namespace P3D.Legacy.Launcher.YamlConverters
 {
-    public class CultureInfoConverter : IYamlTypeConverter
+    internal class CultureInfoConverter : IYamlTypeConverter
     {
         public bool Accepts(Type type) => type == typeof(CultureInfo);
 

@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace P3D.Legacy.Launcher.Extensions
 {
-    public static class ControlExtensions
+    internal static class ControlExtensions
     {
         public static void SafeInvoke(this Control uiElement, Action updater, bool forceSynchronous = false)
         {

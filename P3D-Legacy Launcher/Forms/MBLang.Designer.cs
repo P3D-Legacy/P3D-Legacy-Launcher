@@ -265,6 +265,24 @@ namespace P3D.Legacy.Launcher.Forms {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This is your GameJolt Token, not your GameJolt Password! For more info, check the FAQ tab.
+        /// </summary>
+        internal static string ToolTipGameJoltToken {
+            get {
+                return ResourceManager.GetString("ToolTipGameJoltToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable &quot;Remember Me&quot; first!.
+        /// </summary>
+        internal static string ToolTipSaveCredentials {
+            get {
+                return ResourceManager.GetString("ToolTipSaveCredentials", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Would you like to update the [{0}] version to [{1}] (Yes) or would you like to download it as an independent version (No)?.
         /// </summary>
         internal static string UpdateAvailable {

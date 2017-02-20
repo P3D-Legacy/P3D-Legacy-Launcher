@@ -1,9 +1,9 @@
 ﻿using System;
 using System.IO;
 
-namespace P3D.Legacy.Launcher
+namespace P3D.Legacy.Launcher.Services
 {
-    public static class FileSystemInfo
+    internal static class FileSystem
     {
         public static string MainFolderPath { get; } = AppDomain.CurrentDomain.BaseDirectory;
 
@@ -24,7 +24,7 @@ namespace P3D.Legacy.Launcher
         private const string ProfilesFilename = "Profiles.yml";
         public static string ProfilesFilePath { get; } = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ProfilesFilename);
 
-        private const string GameReleasesFoldername = "Releases";
-        public static string GameReleasesFolderPath { get; } = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, GameReleasesFoldername);
+        private const string GameProfilesFoldername = "Profiles";
+        public static string GameProfilesFolderPath { get; } = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, GameProfilesFoldername);
     }
 }

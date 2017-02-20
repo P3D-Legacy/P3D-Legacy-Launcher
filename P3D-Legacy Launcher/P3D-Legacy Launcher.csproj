@@ -25,6 +25,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -38,9 +39,10 @@
       .allowedextension
     </AllowedReferenceRelatedFileExtensions>
     <UseVSHostingProcess>false</UseVSHostingProcess>
+    <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Icon.ico</ApplicationIcon>
+    <ApplicationIcon>Images\Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <NoWin32Manifest>true</NoWin32Manifest>
@@ -50,48 +52,63 @@
       <HintPath>..\packages\DotNetZip.1.10.1\lib\net20\DotNetZip.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="HtmlRenderer, Version=1.5.0.5, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\HtmlRenderer.Core.1.5.0.5\lib\net45\HtmlRenderer.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="HtmlRenderer, Version=1.5.0.6, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlRenderer.Core.1.5.0.6\lib\net45\HtmlRenderer.dll</HintPath>
     </Reference>
     <Reference Include="HtmlRenderer.WinForms, Version=1.5.0.6, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlRenderer.Mono.1.5.0.6\lib\net45\HtmlRenderer.WinForms.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Octokit, Version=0.23.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Octokit.0.23.0\lib\net45\Octokit.dll</HintPath>
+    <Reference Include="JoltNet, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\nilllzz.JoltNet.1.0.1\lib\net45\JoltNet.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="Octokit, Version=0.24.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Octokit.0.24.0\lib\net45\Octokit.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
     <Reference Include="SystemInfoLibrary, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\SystemInfoLibrary.1.4.0\lib\net45\SystemInfoLibrary.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="YamlDotNet, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\YamlDotNet.4.0.0\lib\net35\YamlDotNet.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="YamlDotNet, Version=4.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YamlDotNet.4.1.0\lib\net35\YamlDotNet.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\TimeoutWebClient.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\WatermarkTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Data\ProfilesYaml.cs" />
     <Compile Include="Extensions\ControlExtensions.cs" />
     <Compile Include="Crc32.cs" />
     <Compile Include="Data\UpdateInfoYaml.cs" />
-    <Compile Include="FileSystemInfo.cs" />
-    <Compile Include="GitHubInfo.cs" />
+    <Compile Include="Services\FileSystem.cs" />
+    <Compile Include="Forms\GameJoltForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\GameJoltForm.Designer.cs">
+      <DependentUpon>GameJoltForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Services\GameJolt.cs" />
+    <Compile Include="Services\GitHub.cs" />
     <Compile Include="Forms\MBLang.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MBLang.resx</DependentUpon>
     </Compile>
-    <Compile Include="Converters\UriConverter.cs" />
-    <Compile Include="Converters\CultureInfoConverter.cs" />
-    <Compile Include="Converters\VersionConverter.cs" />
-    <Compile Include="Extensions\IEnumerableExtensions.cs" />
+    <Compile Include="YamlConverters\UriConverter.cs" />
+    <Compile Include="YamlConverters\CultureInfoConverter.cs" />
+    <Compile Include="YamlConverters\VersionConverter.cs" />
     <Compile Include="Forms\DirectUpdaterForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +138,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\ReleaseExtensions.cs" />
     <Compile Include="Data\SettingsYaml.cs" />
+    <Compile Include="WebsiteChecker.cs" />
     <EmbeddedResource Include="Forms\CustomUpdaterForm.de.resx">
       <DependentUpon>CustomUpdaterForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -153,6 +171,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DirectUpdaterForm.ru.resx">
       <DependentUpon>DirectUpdaterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\GameJoltForm.de.resx">
+      <DependentUpon>GameJoltForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\GameJoltForm.es.resx">
+      <DependentUpon>GameJoltForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\GameJoltForm.lt.resx">
+      <DependentUpon>GameJoltForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\GameJoltForm.nl.resx">
+      <DependentUpon>GameJoltForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\GameJoltForm.resx">
+      <DependentUpon>GameJoltForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\GameJoltForm.ru.resx">
+      <DependentUpon>GameJoltForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.de.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
@@ -192,12 +228,12 @@
     <EmbeddedResource Include="Forms\ProfileForm.nl.resx">
       <DependentUpon>ProfileForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ProfileForm.resx">
-      <DependentUpon>ProfileForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\MBLang.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>MBLang.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\ProfileForm.resx">
+      <DependentUpon>ProfileForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ProfileForm.ru.resx">
       <DependentUpon>ProfileForm.cs</DependentUpon>
@@ -205,7 +241,16 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Icon.ico" />
+    <Content Include="Images\gamejolt-bolt-light-2x.png" />
+    <Content Include="Images\gamejolt-bolt-light-error-2x.png" />
+    <Content Include="Images\gamejolt-logo-light-2x.png" />
+    <Content Include="Images\Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\P3D-Legacy-Shared\P3D-Legacy Shared.csproj">
+      <Project>{73ff082b-42b5-4e0c-a1a2-0b908fba1406}</Project>
+      <Name>P3D-Legacy Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

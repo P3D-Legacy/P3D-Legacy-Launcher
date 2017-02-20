@@ -6,7 +6,7 @@ using P3D.Legacy.Launcher.Data;
 
 namespace P3D.Legacy.Launcher.Forms
 {
-    public partial class ProfileForm : Form
+    internal partial class ProfileForm : Form
     {
         public static ProfileForm ProfileNew(ProfileYaml profile) => new ProfileForm(profile, true);
         public static ProfileForm ProfileEdit(ProfileYaml profile) => new ProfileForm(profile);
@@ -23,6 +23,7 @@ namespace P3D.Legacy.Launcher.Forms
             foreach (var availableVersion in ProfilesYaml.AvailableVersions)
                 ComboBox_Version.Items.Add(availableVersion.ToString());
 
+
             if (copy)
                 TextBox_ProfileName.Text = $"Copy of {profile.Name}";
             else
@@ -36,7 +37,7 @@ namespace P3D.Legacy.Launcher.Forms
 
         private void Button_SaveProfile_Click(object sender, EventArgs e)
         {
-            var profiles = MainForm.LoadProfiles();
+            var profiles = ProfilesYaml.Load();
 
             if (!string.IsNullOrEmpty(ProfileOldName))
             {
@@ -50,7 +51,7 @@ namespace P3D.Legacy.Launcher.Forms
                     profiles.ProfileList.Add(Profile);
             }
 
-            MainForm.SaveProfiles(profiles);
+            ProfilesYaml.Save(profiles);
             Close();
         }
 

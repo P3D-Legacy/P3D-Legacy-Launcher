@@ -121,12 +121,12 @@
     <value>Программа обновления</value>
   </data>
   <data name="Label_ProgressBar1.Text" xml:space="preserve">
-    <value>Update Info Progress:</value>
+    <value>Загрузка информации об обновлении:</value>
   </data>
   <data name="Label_ProgressBar2.Text" xml:space="preserve">
-    <value>Comparsion Progress:</value>
+    <value>Сравнение файлов:</value>
   </data>
   <data name="Label_ProgressBar3.Text" xml:space="preserve">
-    <value>Download Progress:</value>
+    <value>Скачивание файлов:</value>
   </data>
 </root>
