@@ -168,7 +168,7 @@ namespace P3D.Legacy.Launcher.Forms
             var pathexe = Path.Combine(path, FileSystem.ExeFilename);
             if (Directory.Exists(path) && File.Exists(pathexe))
             {
-                var startInfo = new ProcessStartInfo(pathexe, ArgHandler.GetLaunchArg(GameJolt.GameJoltYaml));
+                var startInfo = new ProcessStartInfo(pathexe, LaunchArgsHandler.CreateArgs(GameJolt.GameJoltYaml, false));
                 Process.Start(startInfo);
                 this.SafeInvoke(Close);
                 return;
