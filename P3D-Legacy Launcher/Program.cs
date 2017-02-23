@@ -9,6 +9,8 @@ namespace P3D.Legacy.Launcher
 {
     public static class Program
     {
+        // TODO
+        // Use https://github.com/MonoGame/MonoKickstart
         public static List<Action> ActionsBeforeExit { get; } = new List<Action>();
 
         [STAThread]

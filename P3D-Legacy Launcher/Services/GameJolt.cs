@@ -27,7 +27,7 @@ namespace P3D.Legacy.Launcher.Services
         public static bool WebsiteIsUp => WebsiteChecker.Check();
 
 
-        public GameJoltYaml GameJoltYaml => new GameJoltYaml() { GameId = GameId, GameKey = GameKey, Username = Username, Token = Token };
+        public GameJoltYaml GameJoltYaml => new GameJoltYaml() { GameId = OldGameId, GameKey = OldGameKey, Username = Username, Token = Token };
 
         private string Username { get; }
         private string Token { get; }
@@ -40,6 +40,7 @@ namespace P3D.Legacy.Launcher.Services
 
         public async Task<bool> IsConnected()
         {
+            // BUG: Is this a bug? After creating new GameJolt(), _lastSessionPing is a MinValue, it returns false info.
             if (_lastSessionPing == DateTime.MinValue)
                 return false;
 

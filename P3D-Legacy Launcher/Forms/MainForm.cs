@@ -286,15 +286,6 @@ namespace P3D.Legacy.Launcher.Forms
             }
         }
 
-        private async void PictureBox_GameJolt_Offline_Click(object sender, EventArgs e)
-        {
-            PictureBox_GameJolt_Offline.BorderStyle = BorderStyle.Fixed3D;
-            await Task.Delay(100);
-            PictureBox_GameJolt_Offline.BorderStyle = BorderStyle.None;
-
-            if (!await GameJolt.IsConnected())
-                await OpenGameJoltSession();
-        }
         private async void PictureBox_GameJolt_Click(object sender, EventArgs e)
         {
             PictureBox_GameJolt.BorderStyle = BorderStyle.Fixed3D;
@@ -303,6 +294,15 @@ namespace P3D.Legacy.Launcher.Forms
 
             if (await GameJolt.IsConnected())
                 await CloseGameJoltSession();
+        }
+        private async void PictureBox_GameJolt_Offline_Click(object sender, EventArgs e)
+        {
+            PictureBox_GameJolt_Offline.BorderStyle = BorderStyle.Fixed3D;
+            await Task.Delay(100);
+            PictureBox_GameJolt_Offline.BorderStyle = BorderStyle.None;
+
+            if (!await GameJolt.IsConnected())
+                await OpenGameJoltSession();
         }
 
         private async void BackgroundWorker_GameJolt_DoWork(object sender, DoWorkEventArgs e)
