@@ -64,10 +64,10 @@
       <HintPath>$(SolutionDir)\packages\Octokit.0.24.0\lib\net45\Octokit.dll</HintPath>
     </Reference>
     <Reference Include="PCLExt.FileStorage, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PCLExt.FileStorage.1.0.8\lib\net45\PCLExt.FileStorage.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\PCLExt.FileStorage.1.0.8\lib\net45\PCLExt.FileStorage.dll</HintPath>
     </Reference>
     <Reference Include="PCLExt.FileStorage.Abstractions, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\PCLExt.FileStorage.1.0.8\lib\net45\PCLExt.FileStorage.Abstractions.dll</HintPath>
+      <HintPath>$(SolutionDir)\packages\PCLExt.FileStorage.1.0.8\lib\net45\PCLExt.FileStorage.Abstractions.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
