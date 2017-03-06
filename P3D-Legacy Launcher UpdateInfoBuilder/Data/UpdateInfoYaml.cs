@@ -24,7 +24,8 @@ namespace P3D.Legacy.Launcher.UpdateInfoBuilder.Data
         }
 
 
-        private List<UpdateFileEntryYaml> Files { get; }
+        [YamlMember(Alias = "Files")]
+        private List<UpdateFileEntryYaml> Files { get; set; }
 
         public UpdateInfoYaml(List<UpdateFileEntryYaml> updateFileEntries) { Files = updateFileEntries; }
 
@@ -33,9 +34,13 @@ namespace P3D.Legacy.Launcher.UpdateInfoBuilder.Data
     }
     internal class UpdateFileEntryYaml
     {
+        [YamlMember(Alias = "AbsoluteFilePath")]
         public string AbsoluteFilePath { get; set; }
+        [YamlMember(Alias = "CRC32")]
         public string CRC32 { get; set; }
+        [YamlMember(Alias = "SHA1")]
         public string SHA1 { get; set; }
+        [YamlMember(Alias = "Size")]
         public long Size { get; set; }
     }
 }

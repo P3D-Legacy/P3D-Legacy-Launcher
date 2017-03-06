@@ -89,7 +89,7 @@ namespace P3D.Legacy.Launcher.Forms
             CheckLauncherForUpdateAsync();
 
             if (Settings.GameUpdates)
-                CheckForUpdatesAsync(true);
+                CheckProfileForUpdateAsync(true);
 
             if (CheckBox_AutoLogIn.Checked)
                 OpenGameJoltSessionAsync();
@@ -211,7 +211,7 @@ namespace P3D.Legacy.Launcher.Forms
         private async void Button_CheckForUpdates_Click(object sender, EventArgs e)
         {
             GitHub.Update();
-            await CheckForUpdatesAsync();
+            await CheckProfileForUpdateAsync();
         }
 
         private async void Button_NewProfile_Click(object sender, EventArgs e)
@@ -435,29 +435,34 @@ namespace P3D.Legacy.Launcher.Forms
                 MessageBox.Show(LocalizationUI.GetString("NoInternet"), LocalizationUI.GetString("NoInternetTitle"), MessageBoxButtons.OK);
             }
         }
-        private async Task CheckForUpdatesAsync(bool onStartup = false)
+        private async Task CheckProfileForUpdateAsync(bool onStartup = false) // -- onStartup - function is called on Launcher startup.
         {
             Log($"Checking Profile '{CurrentProfile.Name}' for updates...");
 
             if (!onStartup && await CurrentProfile.Folder.CheckExistsAsync(StorageInfo.ExeFilename) != ExistenceCheckResult.FileExists)
             {
-                Log($"Profile '{CurrentProfile.Name}' is not downloaded!");
+                Log($"Profile '{CurrentProfile.Name}' was not downloaded!");
                 await DownloadCurrentProfileAsync();
             }
 
             if (await CurrentProfile.Folder.CheckExistsAsync(StorageInfo.ExeFilename) != ExistenceCheckResult.FileExists)
             {
-                Log($"Profile '{CurrentProfile.Name}' is not downloaded!");
+                Log($"Something went wrong while dwonloading the Profile '{CurrentProfile.Name}'! Aborting update!");
                 return;
             }
 
             var gameReleases = await GitHub.GetAllGitHubReleasesAsync();
-            if (gameReleases.Any())
+            if (gameReleases.Any() && (!onStartup || CurrentProfile.IsDefault))
             {
                 var latestRelease = gameReleases.First();
-                if ((!onStartup || CurrentProfile.IsDefault) && (!(CurrentProfile.Version >= latestRelease.Version) || false)) // !(CurrentProfile.Version >= CurrentProfile.VersionExe)
+                if (CurrentProfile.Version >= latestRelease.Version)
                 {
                     Log($"Found a new Profile '{CurrentProfile.Name}' version [{latestRelease.Version}]!");
+                    UpdateCurrentProfile(latestRelease);
+                }
+                else if (CurrentProfile.VersionExe != new Version("0.0.0.0") && CurrentProfile.Version >= CurrentProfile.VersionExe)
+                {
+                    Log($"The version of the .exe file [{CurrentProfile.VersionExe}] of Profile '{CurrentProfile.Name}' does not correspond to the Profile version [{CurrentProfile.Version}]! An update is needed.");
                     UpdateCurrentProfile(latestRelease);
                 }
                 else
@@ -500,7 +505,7 @@ namespace P3D.Legacy.Launcher.Forms
         }
         private void UpdateCurrentProfile(GitHubRelease onlineRelease)
         {
-            switch (MessageBox.Show(string.Format(LocalizationUI.GetString("UpdateAvailable"), CurrentProfile.Version, onlineRelease.Version), LocalizationUI.GetString("UpdateAvailableTitle"), MessageBoxButtons.YesNoCancel))
+            switch (MessageBox.Show(string.Format(LocalizationUI.GetString("UpdateAvailable"), CurrentProfile.VersionExe, onlineRelease.Version), LocalizationUI.GetString("UpdateAvailableTitle"), MessageBoxButtons.YesNo))
             {
                 case DialogResult.Yes:
                     MessageBox.Show(LocalizationUI.GetString("UpdateDisabled"), LocalizationUI.GetString("UpdateDisabledTitle"), MessageBoxButtons.OK);
@@ -511,12 +516,14 @@ namespace P3D.Legacy.Launcher.Forms
                     //    MessageBox.Show(MBLang.DLNotSelected, MBLang.DLNotSelectedTitle, MessageBoxButtons.OK);
                     break;
 
-                case DialogResult.No:
+                //case DialogResult.No:
+                case DialogResult.Cancel:
                     using (var directUpdater = new ReleaseDownloaderForm(onlineRelease.ReleaseAsset, CurrentProfile.Folder))
                         directUpdater.ShowDialog();
                     break;
 
-                case DialogResult.Cancel:
+                //case DialogResult.Cancel:
+                case DialogResult.No:
                     return;
             }
         }

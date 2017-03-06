@@ -24,7 +24,8 @@ namespace P3D.Legacy.Launcher.Data
         }
 
 
-        private List<UpdateFileEntryYaml> Files { get; }
+        [YamlMember(Alias = "Files")]
+        private List<UpdateFileEntryYaml> Files { get; set; }
 
         public UpdateInfoYaml(List<UpdateFileEntryYaml> updateFileEntries) { Files = updateFileEntries; }
 

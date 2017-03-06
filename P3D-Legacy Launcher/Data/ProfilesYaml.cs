@@ -43,7 +43,7 @@ namespace P3D.Legacy.Launcher.Data
     }
     internal class ProfileYaml
     {
-        public static ProfileYaml Default => new ProfileYaml("Latest", Profiles.AvailableVersions.FirstOrDefault() ?? new Version("0.0"));
+        public static ProfileYaml Default => new ProfileYaml("Latest", Profiles.AvailableVersions.FirstOrDefault() ?? Profile.NoVersion);
 
 
         [YamlMember(Alias = "Name")]

@@ -168,6 +168,9 @@ namespace P3D.Legacy.Launcher.Data
 
     internal sealed class Profile
     {
+        public static System.Version NoVersion { get; } = new System.Version("0.0");
+        private static System.Version GameJoltVersion { get; } = new System.Version("0.55");
+
         public static bool operator ==(Profile a, Profile b) => ReferenceEquals(a, null) ? ReferenceEquals(b, null) : a.Equals((object) b);
         public static bool operator !=(Profile a, Profile b) => !(a == b);
 
@@ -184,13 +187,9 @@ namespace P3D.Legacy.Launcher.Data
             get
             {
                 if (AsyncExtensions.RunSync(async () => await Folder.CheckExistsAsync(StorageInfo.ExeFilename) == ExistenceCheckResult.FileExists))
-                {
                     return new System.Version(FileVersionInfo.GetVersionInfo(AsyncExtensions.RunSync(async () => await Folder.GetFileAsync(StorageInfo.ExeFilename)).Path).ProductVersion);
-                }
                 else
-                {
-                    return new System.Version("0");
-                }
+                    return NoVersion;
             }
         }
 
@@ -201,12 +200,20 @@ namespace P3D.Legacy.Launcher.Data
             get
             {
                 var latestVersion = Profiles.AvailableVersions.FirstOrDefault();
-                return Name == "Latest" && latestVersion != null ? latestVersion == Version : Version == new System.Version("0.0");
+                return Name == "Latest" && latestVersion != null ? latestVersion == Version : Version == NoVersion;
             }
         }
-        public bool IsSupportingGameJolt => Version >= new System.Version("0.55");
+        public bool IsSupportingGameJolt => Version >= GameJoltVersion;
 
-        public Profile(string name, System.Version version) { Name = name; Version = version; }
+        public Profile(string name, System.Version version)
+        {
+            Name = name;
+            Version = version;
+
+            System.Version[] versions;
+            if (Equals(Version, NoVersion) && (versions = Profiles.AvailableVersions.ToArray()).Length > 0)
+                Version = versions.First();
+        }
 
         public ProfileYaml ToYaml() => ToYaml(this);
         public async Task Delete() => await Delete(this);
