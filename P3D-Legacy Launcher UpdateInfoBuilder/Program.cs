@@ -42,7 +42,7 @@ namespace P3D.Legacy.Launcher.UpdateInfoBuilder
                 }
             }
 
-            var content = UpdateInfoYaml.Serialize(new UpdateInfoYaml { Files = updateFileEntries });
+            var content = UpdateInfoYaml.Serialize(new UpdateInfoYaml(updateFileEntries));
             File.WriteAllText(OutputFilePath, content);
         }
     }

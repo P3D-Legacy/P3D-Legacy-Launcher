@@ -9,20 +9,23 @@ using Ionic.Zip;
 
 using Octokit;
 
+using P3D.Legacy.Launcher.Controls;
 using P3D.Legacy.Launcher.Extensions;
 using P3D.Legacy.Launcher.Services;
 
+using PCLExt.FileStorage;
+
 namespace P3D.Legacy.Launcher.Forms
 {
-    internal partial class DirectUpdaterForm : Form
+    internal partial class ReleaseDownloaderForm : LocalizableForm
     {
         private WebClient Downloader { get; set; }
 
         private ReleaseAsset ReleaseAsset { get; }
-        private string TempFilePath => FileSystem.TempFilePath(ReleaseAsset.Name);
-        private string ExtractionFolder { get; }
+        private IFile TempFile => StorageInfo.GetTempFile(ReleaseAsset.Name).Result;
+        private IFolder ExtractionFolder { get; }
 
-        public DirectUpdaterForm(ReleaseAsset releaseAsset, string extractionFolder)
+        public ReleaseDownloaderForm(ReleaseAsset releaseAsset, IFolder extractionFolder)
         {
             ReleaseAsset = releaseAsset;
             ExtractionFolder = extractionFolder;
@@ -30,56 +33,51 @@ namespace P3D.Legacy.Launcher.Forms
             InitializeComponent();
         }
 
-        private async void DirectUpdaterForm_Shown(object sender, EventArgs e)
-        {
-            if (!Directory.Exists(FileSystem.TempFolderPath))
-                Directory.CreateDirectory(FileSystem.TempFolderPath);
+        private async void DirectUpdaterForm_Shown(object sender, EventArgs e) => await Task.Run(DownloadFileAsync);
 
-            await Task.Run(DownloadFile);
-        }
-
-        private async Task DownloadFile()
+        private async Task DownloadFileAsync()
         {
-            if (File.Exists(TempFilePath))
-                File.Delete(TempFilePath);
+            await TempFile.DeleteAsync();
 
             try
             {
                 using (Downloader = new WebClient())
                 {
                     Downloader.DownloadProgressChanged += client_DownloadProgressChanged;
-                    await Downloader.DownloadFileTaskAsync(ReleaseAsset.BrowserDownloadUrl, TempFilePath);
+                    await Downloader.DownloadFileTaskAsync(ReleaseAsset.BrowserDownloadUrl, TempFile.Path);
                 }
             }
             catch (WebException) { return; }
 
-            if (File.Exists(TempFilePath))
-                ExtractFile();
-            else
-                ;
+            //TODO: Check
+            ExtractFile();
         }
         private void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             this.SafeInvoke(delegate
             {
-                PercentageProgressBar.Maximum = ReleaseAsset.Size;
-                PercentageProgressBar.Value = (int) e.BytesReceived;
+                double bytesIn = e.BytesReceived;
+                double totalBytes = e.TotalBytesToReceive;
+                double percentage = bytesIn / totalBytes * 100;
+                PercentageProgressBar.Value = (int) percentage;
             });
         }
 
         private void ExtractFile()
         {
-            Label_ProgressBar1.SafeInvoke(() => Label_ProgressBar1.Text = Label_ProgressBar2.Text);
-
-            if (!Directory.Exists(ExtractionFolder))
-                Directory.CreateDirectory(ExtractionFolder);
+            Label_ProgressBar1.SafeInvoke(() =>
+            {
+                PercentageProgressBar.Value = 0;
+                Label_ProgressBar1.Text = Label_ProgressBar2.Text;
+            });
 
             BackgroundWorker_Extractor.RunWorkerAsync();
         }
 
-        private void BackgroundWorker_Extractor_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        private async void BackgroundWorker_Extractor_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
-            using (var zip = ZipFile.Read(TempFilePath))
+            using(var fs = await TempFile.OpenAsync(PCLExt.FileStorage.FileAccess.Read))
+            using (var zip = ZipFile.Read(fs))
             {
                 var result = zip.Skip(1).Where(entry => entry.FileName.Contains(zip[0].FileName)).ToList();
                 result = result.Select(c =>
@@ -92,19 +90,16 @@ namespace P3D.Legacy.Launcher.Forms
                 for (var i = 0; i < result.Count; i++)
                 {
                     if (e.Cancel) return;
-                    result[i].Extract(ExtractionFolder, ExtractExistingFileAction.OverwriteSilently);
-                    BackgroundWorker_Extractor.ReportProgress((int) Math.Round((double) i / (double) result.Count * 100));
+                    result[i].Extract(ExtractionFolder.Path, ExtractExistingFileAction.OverwriteSilently);
+
+                    double bytesIn = i;
+                    double totalBytes = result.Count;
+                    double percentage = bytesIn / totalBytes * 100;
+                    BackgroundWorker_Extractor.ReportProgress((int) percentage);
                 }
             }
         }
-        private void BackgroundWorker_Extractor_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
-        {
-            this.SafeInvoke(delegate
-            {
-                PercentageProgressBar.Maximum = 100;
-                PercentageProgressBar.Value = e.ProgressPercentage;
-            });
-        }
+        private void BackgroundWorker_Extractor_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e) => this.SafeInvoke(() => PercentageProgressBar.Value = e.ProgressPercentage);
         private void BackgroundWorker_Extractor_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
         {
             this.SafeInvoke(delegate
@@ -120,7 +115,8 @@ namespace P3D.Legacy.Launcher.Forms
             BackgroundWorker_Extractor?.CancelAsync();
 
             await Task.Delay(1000);
-            Directory.Delete(FileSystem.TempFolderPath, true);
+            try { await StorageInfo.TempFolder.DeleteAsync(); }
+            catch (IOException) { /* Program.ActionsBeforeExit.Add(() => AsyncExtensions.RunSync(async () => await StorageInfo.TempFolder.DeleteAsync())); */ }
         }
     }
 }

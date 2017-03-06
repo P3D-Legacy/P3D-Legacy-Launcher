@@ -22,10 +22,11 @@ namespace P3D.Legacy.Launcher
             {
                 LastCheck = DateTime.UtcNow;
                 try { return WebsiteIsUp = new TcpClient().ConnectAsync(Host, 80).Wait(timeout); }
-                catch (SocketException) { return WebsiteIsUp = false; }
+                catch (Exception e) when(IsSocketException(e)) { return WebsiteIsUp = false; }
             }
             else
                 return WebsiteIsUp;
         }
+        private bool IsSocketException(Exception e) => e is SocketException || e.InnerException is SocketException;
     }
 }

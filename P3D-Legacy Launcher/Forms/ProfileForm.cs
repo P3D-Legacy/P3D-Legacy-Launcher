@@ -1,63 +1,56 @@
 ﻿using System;
 using System.Linq;
-using System.Windows.Forms;
 
+using P3D.Legacy.Launcher.Controls;
 using P3D.Legacy.Launcher.Data;
 
 namespace P3D.Legacy.Launcher.Forms
 {
-    internal partial class ProfileForm : Form
+    internal partial class ProfileForm : LocalizableForm
     {
-        public static ProfileForm ProfileNew(ProfileYaml profile) => new ProfileForm(profile, true);
-        public static ProfileForm ProfileEdit(ProfileYaml profile) => new ProfileForm(profile);
+        public static ProfileForm ProfileNew(Profiles profiles) => new ProfileForm(profiles, true);
+        public static ProfileForm ProfileEdit(Profiles profiles) => new ProfileForm(profiles);
 
-        private ProfileYaml Profile => new ProfileYaml { Name = TextBox_ProfileName.Text, Version = new Version((string) ComboBox_Version.SelectedItem) };
-        private string ProfileOldName { get; }
+        private Profiles Profiles { get; }
+        private Profile Profile => new Profile(TextBox_ProfileName.Text, new Version((string) ComboBox_Version.SelectedItem));
+        private Profile ProfileOld { get; }
 
-
-        private ProfileForm(ProfileYaml profile, bool copy = false)
+        private ProfileForm(Profiles profiles, bool copy = false)
         {
+            Profiles = profiles;
+
             InitializeComponent();
 
             ComboBox_Version.Items.Clear();
-            foreach (var availableVersion in ProfilesYaml.AvailableVersions)
+            foreach (var availableVersion in Profiles.AvailableVersions)
                 ComboBox_Version.Items.Add(availableVersion.ToString());
 
 
             if (copy)
-                TextBox_ProfileName.Text = $"Copy of {profile.Name}";
+                TextBox_ProfileName.Text = $"Copy of {Profiles.CurrentProfile.Name}";
             else
             {
-                TextBox_ProfileName.Text = profile.Name;
-                ProfileOldName = profile.Name;
+                TextBox_ProfileName.Text = Profiles.CurrentProfile.Name;
+                ProfileOld = Profiles.CurrentProfile;
             }
-            ComboBox_Version.SelectedIndex = ComboBox_Version.Items.IndexOf(profile.Version.ToString());
+            ComboBox_Version.SelectedIndex = ComboBox_Version.Items.IndexOf(Profiles.CurrentProfile.Version.ToString());
         }
 
-
-        private void Button_SaveProfile_Click(object sender, EventArgs e)
+        private async void Button_SaveProfile_Click(object sender, EventArgs e)
         {
-            var profiles = ProfilesYaml.Load();
-
-            if (!string.IsNullOrEmpty(ProfileOldName))
+            if (ProfileOld != null)
             {
-                for (var i = 0; i < profiles.ProfileList.Count; i++)
-                    if (profiles.ProfileList[i].Name == ProfileOldName)
-                        profiles.ProfileList[i] = Profile;
+                await Profiles.ReplaceAsync(ProfileOld, Profile);
             }
             else
             {
-                if(profiles.ProfileList.All(profile => profile.Name != Profile.Name))
-                    profiles.ProfileList.Add(Profile);
+                if (Profiles.All(profile => profile.Name != Profile.Name))
+                    await Profiles.Create(Profile);
             }
 
-            ProfilesYaml.Save(profiles);
+            await Profiles.SaveAsync();
             Close();
         }
-
-        private void Button_Cancel_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+        private void Button_Cancel_Click(object sender, EventArgs e) => Close();
     }
 }

@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
@@ -21,13 +20,16 @@ using P3D.Legacy.Launcher.Data;
 using P3D.Legacy.Launcher.Extensions;
 using P3D.Legacy.Launcher.Services;
 using P3D.Legacy.Shared;
+using P3D.Legacy.Shared.Extensions;
+
+using PCLExt.FileStorage;
 
 using TheArtOfDev.HtmlRenderer.Core.Entities;
 using TheArtOfDev.HtmlRenderer.WinForms;
 
 namespace P3D.Legacy.Launcher.Forms
 {
-    internal partial class MainForm : Form
+    internal partial class MainForm : LocalizableForm
     {
         private static StringBuilder Logger { get; } = new StringBuilder();
 
@@ -39,10 +41,10 @@ namespace P3D.Legacy.Launcher.Forms
 
         private GameJolt GameJolt { get; set; }
 
-        private SettingsYaml Settings { get; set; } = SettingsYaml.Load();
+        private Settings Settings { get; } = AsyncExtensions.RunSync(async () => await Settings.LoadAsync());
 
-        private ProfilesYaml Profiles { get; set; } = ProfilesYaml.Load();
-        private ProfileYaml CurrentProfile => Profiles.GetProfile();
+        private Profiles Profiles { get; } = AsyncExtensions.RunSync(async () => await Profiles.LoadAsync());
+        private Profile CurrentProfile => Profiles.CurrentProfile;
 
 
         public MainForm()
@@ -58,35 +60,41 @@ namespace P3D.Legacy.Launcher.Forms
                 control.Dispose();
             Controls.Clear();
 
-            Thread.CurrentThread.CurrentCulture = Settings.Language;
-            Thread.CurrentThread.CurrentUICulture = Settings.Language;
-            CultureInfo.DefaultThreadCurrentCulture = Settings.Language;
+            Thread.CurrentThread.CurrentCulture = Settings.LocalizationInfo.CultureInfo;
+            Thread.CurrentThread.CurrentUICulture = Settings.LocalizationInfo.CultureInfo;
+            CultureInfo.DefaultThreadCurrentCulture = Settings.LocalizationInfo.CultureInfo;
+            LocalizationUI.Load(Settings.LocalizationInfo);
         }
         private async void FormInitialize()
         {
             Log($"System Language: {CultureInfo.InstalledUICulture.EnglishName}");
 
-            PictureBox_GameJolt.Visible = GameJolt != null && await GameJolt?.IsConnected();
+            PictureBox_GameJolt.Visible = GameJolt != null && await GameJolt?.IsConnectedAsync();
             Label_Version.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
             TabPage_Settings.VisibleChanged += TabPage_Settings_VisibleChanged;
 
             CheckBox_SaveCredentials.Checked = !CheckBox_SaveCredentials.Checked;
             CheckBox_SaveCredentials.Checked = !CheckBox_SaveCredentials.Checked;
 
-            ReloadProfileList();
+            await ReloadProfileListAsync();
             ReloadSettings();
 
-            BrowserLoad();
+            // TODO: better string.format use
+            TextBox_Credits.Text = LocalizationUI.GetString(TextBox_Credits.StringID_Text, "Aragas", string.Join(", ", LocalizationUI.Localizations.Select(lf => lf.Author)
+                .Distinct()
+                .Where(author => !string.IsNullOrEmpty(author))));
 
-            CheckLauncherForUpdate();
+            BrowserLoadAsync();
+
+            CheckLauncherForUpdateAsync();
 
             if (Settings.GameUpdates)
-                CheckForUpdates(true);
+                CheckForUpdatesAsync(true);
 
             if (CheckBox_AutoLogIn.Checked)
-                OpenGameJoltSession();
+                OpenGameJoltSessionAsync();
         }
-        private async Task BrowserLoad()
+        private async Task BrowserLoadAsync()
         {
             try
             {
@@ -115,20 +123,23 @@ namespace P3D.Legacy.Launcher.Forms
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            ProfilesYaml.Save(Profiles);
+            AsyncExtensions.RunSync(async () => await Profiles.SaveAsync());
 
-            Program.ActionsBeforeExit.Add(() => Task.Run(() => GameJolt.SessionClose()).Wait(2000));
+            Program.ActionsBeforeExit.Add(() => Task.Run(() => GameJolt.SessionCloseAsync()).Wait(2000));
         }
 
         private async void Button_Start_Click(object sender, EventArgs e)
         {
-            if (OSInfo.FrameworkVersion >= new Version(4, 0))
+            const string OpenALLink = "https://www.openal.org/downloads/";
+            const string DotNetLink = "https://www.microsoft.com/ru-RU/download/details.aspx?id=42643";
+
+            if (OSInfo.FrameworkVersion >= new Version(4, 0, 30319, 34000)) // 4.5.2
             {
                 if (!IsOpenALInstalled())
                 {
-                    if (MessageBox.Show(MBLang.OpenALError, MBLang.OpenALErrorTitle, MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    if (MessageBox.Show(LocalizationUI.GetString("SomethingNotFoundError", "OpenAL 1.1", OpenALLink), LocalizationUI.GetString("SomethingNotFoundErrorTitle"), MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-                        Process.Start(MBLang.OpenALErrorLink);
+                        Process.Start(OpenALLink);
                         this.SafeInvoke(Close);
                         return;
                     }
@@ -136,24 +147,24 @@ namespace P3D.Legacy.Launcher.Forms
             }
             else
             {
-                if (MessageBox.Show(MBLang.DotNetError, MBLang.DotNetErrorTitle, MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (MessageBox.Show(LocalizationUI.GetString("SomethingNotFoundError", "Microsoft .NET Framework 4.5.2", DotNetLink), LocalizationUI.GetString("SomethingNotFoundErrorTitle"), MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    Process.Start(MBLang.DotNetErrorLink);
+                    Process.Start(DotNetLink);
                     this.SafeInvoke(Close);
                     return;
                 }
             }
 
 
-            if (CurrentProfile.IsSupportingGameJolt && !await GameJolt.IsSessionActive())
+            if (CurrentProfile.IsSupportingGameJolt && !(await GameJolt.IsSessionActiveAsync()).Success)
             {
-                using (var gameJoltMessageBox = new GameJoltForm())
+                using (var gameJoltMessageBox = new GameJoltForm(Settings))
                 {
                     switch (gameJoltMessageBox.ShowDialog())
                     {
                         case DialogResult.Yes:
                             ReloadSettings();
-                            if (!await OpenGameJoltSession())
+                            if (!await OpenGameJoltSessionAsync())
                                 return;
                             break;
 
@@ -162,25 +173,24 @@ namespace P3D.Legacy.Launcher.Forms
                     }
                 }
             }
-            
 
-            var path = Path.Combine(FileSystem.GameProfilesFolderPath, CurrentProfile.Name);
-            var pathexe = Path.Combine(path, FileSystem.ExeFilename);
-            if (Directory.Exists(path) && File.Exists(pathexe))
+
+            if (await CurrentProfile.Folder.CheckExistsAsync(StorageInfo.ExeFilename) == ExistenceCheckResult.FileExists)
             {
-                var startInfo = new ProcessStartInfo(pathexe, LaunchArgsHandler.CreateArgs(GameJolt.GameJoltYaml, false));
+                var exeFile = await CurrentProfile.Folder.GetFileAsync(StorageInfo.ExeFilename);
+                var startInfo = new ProcessStartInfo(exeFile.Path, LaunchArgsHandler.CreateArgs(GameJolt.GameJoltYaml, false));
                 Process.Start(startInfo);
                 this.SafeInvoke(Close);
                 return;
             }
             else
             {
-                Putton_StartGame.Enabled = false;
+                Button_StartGame.Enabled = false;
 
-                if (await DownloadCurrentProfile())
+                if (await DownloadCurrentProfileAsync())
                     Button_Start_Click(sender, e);
                 else
-                    Putton_StartGame.Enabled = true;
+                    Button_StartGame.Enabled = true;
             }
         }
         private bool IsOpenALInstalled()
@@ -201,58 +211,47 @@ namespace P3D.Legacy.Launcher.Forms
         private async void Button_CheckForUpdates_Click(object sender, EventArgs e)
         {
             GitHub.Update();
-            await CheckForUpdates();
+            await CheckForUpdatesAsync();
         }
 
-        private void Button_NewProfile_Click(object sender, EventArgs e)
+        private async void Button_NewProfile_Click(object sender, EventArgs e)
         {
-            using (var profileForm = ProfileForm.ProfileNew(CurrentProfile))
+            using (var profileForm = ProfileForm.ProfileNew(Profiles))
                 profileForm.ShowDialog();
-            ReloadProfileList(SelectedProfile.Last);
+            await ReloadProfileListAsync(Profiles.SelectedProfile.Last);
         }
-        private void Button_EditProfile_Click(object sender, EventArgs e)
+        private async void Button_EditProfile_Click(object sender, EventArgs e)
         {
-            using (var profileForm = ProfileForm.ProfileEdit(CurrentProfile))
+            using (var profileForm = ProfileForm.ProfileEdit(Profiles))
                 profileForm.ShowDialog();
-            ReloadProfileList(SelectedProfile.Current);
+            await ReloadProfileListAsync(Profiles.SelectedProfile.Current);
         }
-        private void Button_DeleteProfile_Click(object sender, EventArgs e)
+        private async void Button_DeleteProfile_Click(object sender, EventArgs e)
         {
-            var profiles = ProfilesYaml.Load();
-            if (profiles.ProfileList.Count > ComboBox_CurrentProfile.SelectedIndex && !profiles.ProfileList[ComboBox_CurrentProfile.SelectedIndex].IsDefault)
-            {
-                profiles.ProfileList.RemoveAt(ComboBox_CurrentProfile.SelectedIndex);
-                ProfilesYaml.Save(profiles);
-                ReloadProfileList(SelectedProfile.Last);
-            }
+            await Profiles.DeleteAsync(ComboBox_CurrentProfile.SelectedIndex);
+            await ReloadProfileListAsync(Profiles.SelectedProfile.Last);
         }
-        private void ComboBox_CurrentProfile_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Profiles.SelectedProfileIndex = ComboBox_CurrentProfile.SelectedIndex;
-        }
+        private void ComboBox_CurrentProfile_SelectedIndexChanged(object sender, EventArgs e) => Profiles.SelectedProfileIndex = ComboBox_CurrentProfile.SelectedIndex;
 
         private void TabPage_Settings_VisibleChanged(object sender, EventArgs e)
         {
             if ((sender as TabPage).Visible)
                 ReloadSettings();
         }
-        private void Button_SaveSettings_Click(object sender, EventArgs e)
+        private async void Button_SaveSettings_Click(object sender, EventArgs e)
         {
-            var language = Settings.Language;
-            Settings = new SettingsYaml
-            {
-                GameUpdates = Check_Updates.Checked,
-                Language = SettingsYaml.AvailableCultureInfo[ComboBox_Language.SelectedIndex],
-                GameJoltUsername = TextBox_Username.Text,
-                GameJoltToken = TextBox_Token.Text,
-                AutoLogIn = CheckBox_AutoLogIn.Checked,
-                SaveCredentials = CheckBox_SaveCredentials.Checked,
-                SelectedDLIndex = ComboBox_SelectedDL.SelectedIndex
-            };
+            var oldLocalizationInfo = Settings.LocalizationInfo;
+            Settings.GameUpdates = Check_Updates.Checked;
+            Settings.LocalizationInfo = LocalizationUI.Localizations[ComboBox_Language.SelectedIndex];
+            Settings.GameJoltUsername = TextBox_Username.Text;
+            Settings.GameJoltToken = TextBox_Token.Text;
+            Settings.AutoLogIn = CheckBox_AutoLogIn.Checked;
+            Settings.SaveCredentials = CheckBox_SaveCredentials.Checked;
+            Settings.SelectedDLIndex = ComboBox_SelectedDL.SelectedIndex;
 
-            SettingsYaml.Save(Settings);
+            await Settings.SaveAsync();
 
-            if (!Equals(language, Settings.Language))
+            if (!Equals(oldLocalizationInfo, Settings.LocalizationInfo))
             {
                 var tabIndex = TabControl.SelectedIndex;
 
@@ -282,7 +281,7 @@ namespace P3D.Legacy.Launcher.Forms
                 CheckBox_AutoLogIn.ForeColor = Color.DimGray;
                 CheckBox_AutoLogIn.AutoCheck = false;
 
-                ToolTip_SaveCredentials.SetToolTip(CheckBox_AutoLogIn, MBLang.ToolTipSaveCredentials);
+                ToolTip_SaveCredentials.SetToolTip(CheckBox_AutoLogIn, LocalizationUI.GetString("ToolTipSaveCredentials"));
             }
         }
 
@@ -292,8 +291,8 @@ namespace P3D.Legacy.Launcher.Forms
             await Task.Delay(100);
             PictureBox_GameJolt.BorderStyle = BorderStyle.None;
 
-            if (await GameJolt.IsConnected())
-                await CloseGameJoltSession();
+            if (await GameJolt.IsConnectedAsync())
+                await CloseGameJoltSessionAsync();
         }
         private async void PictureBox_GameJolt_Offline_Click(object sender, EventArgs e)
         {
@@ -301,8 +300,8 @@ namespace P3D.Legacy.Launcher.Forms
             await Task.Delay(100);
             PictureBox_GameJolt_Offline.BorderStyle = BorderStyle.None;
 
-            if (!await GameJolt.IsConnected())
-                await OpenGameJoltSession();
+            if (!await GameJolt.IsConnectedAsync())
+                await OpenGameJoltSessionAsync();
         }
 
         private async void BackgroundWorker_GameJolt_DoWork(object sender, DoWorkEventArgs e)
@@ -311,7 +310,7 @@ namespace P3D.Legacy.Launcher.Forms
             {
                 var stopwatch = Stopwatch.StartNew();
 
-                if (!await GameJolt.IsSessionActive())
+                if (!(await GameJolt.IsSessionActiveAsync()).Success)
                     break;
 
                 stopwatch.Stop();
@@ -331,7 +330,7 @@ namespace P3D.Legacy.Launcher.Forms
                 TextBox_Logger.Text = Logger.ToString();
         }
 
-        private async Task<bool> OpenGameJoltSession()
+        private async Task<bool> OpenGameJoltSessionAsync()
         {
             if (string.IsNullOrEmpty(Settings.GameJoltUsername))
             {
@@ -339,11 +338,13 @@ namespace P3D.Legacy.Launcher.Forms
                 return false;
             }
 
-            if (!await GameJolt.IsConnected())
+            if (!await GameJolt.IsConnectedAsync())
             {
                 Log("Opening GameJolt Session...");
-                await GameJolt.SessionOpen();
-                if (await GameJolt.IsConnected())
+                var resp = await GameJolt.SessionOpenAsync();
+                if(!resp.Success)
+                    Log($"GameJolt Error: {resp.ErrorMessage}");
+                if (await GameJolt.IsConnectedAsync())
                 {
                     Log("GameJolt Session was opened!");
                     BackgroundWorker_GameJolt.CancelAsync();
@@ -354,24 +355,26 @@ namespace P3D.Legacy.Launcher.Forms
                     Log("GameJolt Session could not be opened!");
             }
 
-            if (!await GameJolt.IsMigrated())
+            if (!await GameJolt.IsMigratedAsync())
                 Log($"GameJolt User {Settings.GameJoltUsername} has not migrated!");
 
-            return await GameJolt.IsConnected() == true;
+            return await GameJolt.IsConnectedAsync();
         }
-        private async Task<bool> CloseGameJoltSession()
+        private async Task<bool> CloseGameJoltSessionAsync()
         {
             if (string.IsNullOrEmpty(Settings.GameJoltUsername))
             {
-                Log($"Can't open Session! credentials not set!");
+                Log($"Can't open Session! Credentials not set!");
                 return false;
             }
 
-            if (await GameJolt.IsConnected())
+            if (await GameJolt.IsConnectedAsync())
             {
                 Log("Closing GameJolt Session...");
-                await GameJolt.SessionClose();
-                if (!await GameJolt.IsConnected())
+                var resp = await GameJolt.SessionCloseAsync();
+                if (!resp.Success)
+                    Log($"GameJolt Error: {resp.ErrorMessage}");
+                if (!await GameJolt.IsConnectedAsync())
                 {
                     Log("GameJolt Session was closed!");
                     PictureBox_GameJolt.Visible = false;
@@ -380,34 +383,42 @@ namespace P3D.Legacy.Launcher.Forms
                     Log("GameJolt Session was not opened! Can't close the Session!");
             }
 
-            return await GameJolt.IsConnected() == false;
+            return !await GameJolt.IsConnectedAsync();
         }
 
-        private async Task CheckLauncherForUpdate()
+        private async Task CheckLauncherForUpdateAsync()
         {
             var launcherVersion = Assembly.GetExecutingAssembly().GetName().Version;
             Log($"Launcher version: [{launcherVersion}].");
             Log("Checking Launcher for updates...");
-            var launcherReleases = await GitHub.GetAllLauncherGitHubReleases();
+            var launcherReleases = await GitHub.GetAllLauncherGitHubReleasesAsync();
             if (launcherReleases.Any())
             {
                 var latestRelease = launcherReleases.First();
                 if (launcherVersion < latestRelease.Version)
                 {
                     Log($"Found a new Launcher version [{latestRelease.Version}]!");
-                    switch (MessageBox.Show(MBLang.LauncherUpdateAvailable, MBLang.LauncherUpdateAvailableTitle, MessageBoxButtons.YesNo))
+                    switch (MessageBox.Show(LocalizationUI.GetString("LauncherUpdateAvailable"), LocalizationUI.GetString("LauncherUpdateAvailableTitle"), MessageBoxButtons.YesNo))
                     {
                         case DialogResult.Yes:
-                            using (var directUpdater = new DirectUpdaterForm(latestRelease.ReleaseAsset, FileSystem.UpdateFolderPath))
+                            using (var directUpdater = new ReleaseDownloaderForm(latestRelease.ReleaseAsset, StorageInfo.UpdateFolder))
                                 directUpdater.ShowDialog();
 
-                            Program.ActionsBeforeExit.Add(() =>
-                                new Process { StartInfo =
+                            Program.ActionsBeforeExit.Add(async () =>
+                            {
+                                if (await StorageInfo.MainFolder.CheckExistsAsync(StorageInfo.UpdaterExeFilename) == ExistenceCheckResult.FileExists)
+                                {
+                                    new Process
                                     {
-                                        UseShellExecute = false,
-                                        FileName = Path.Combine(FileSystem.MainFolderPath, FileSystem.UpdaterExeFilename),
-                                        CreateNoWindow = true
-                                    } }.Start());
+                                        StartInfo =
+                                        {
+                                            UseShellExecute = false,
+                                            FileName = (await StorageInfo.MainFolder.GetFileAsync(StorageInfo.UpdaterExeFilename)).Path,
+                                            CreateNoWindow = true
+                                        }
+                                    }.Start();
+                                }
+                            });
                             Close();
                             break;
 
@@ -421,32 +432,30 @@ namespace P3D.Legacy.Launcher.Forms
             else
             {
                 Log("Error while checking Launcher for updates. Is Internet available?");
-                MessageBox.Show(MBLang.NoInternet, MBLang.NoInternetTitle, MessageBoxButtons.OK);
+                MessageBox.Show(LocalizationUI.GetString("NoInternet"), LocalizationUI.GetString("NoInternetTitle"), MessageBoxButtons.OK);
             }
         }
-        private async Task CheckForUpdates(bool onStartup = false)
+        private async Task CheckForUpdatesAsync(bool onStartup = false)
         {
             Log($"Checking Profile '{CurrentProfile.Name}' for updates...");
 
-            var path = Path.Combine(FileSystem.GameProfilesFolderPath, CurrentProfile.Name);
-            var pathexe = Path.Combine(path, FileSystem.ExeFilename);
-            if (!onStartup && (!Directory.Exists(path) || !File.Exists(pathexe)))
+            if (!onStartup && await CurrentProfile.Folder.CheckExistsAsync(StorageInfo.ExeFilename) != ExistenceCheckResult.FileExists)
             {
                 Log($"Profile '{CurrentProfile.Name}' is not downloaded!");
-                await DownloadCurrentProfile();
+                await DownloadCurrentProfileAsync();
             }
 
-            if (!Directory.Exists(path) || !File.Exists(pathexe))
+            if (await CurrentProfile.Folder.CheckExistsAsync(StorageInfo.ExeFilename) != ExistenceCheckResult.FileExists)
             {
                 Log($"Profile '{CurrentProfile.Name}' is not downloaded!");
                 return;
             }
 
-            var gameReleases = await GitHub.GetAllGitHubReleases();
+            var gameReleases = await GitHub.GetAllGitHubReleasesAsync();
             if (gameReleases.Any())
             {
                 var latestRelease = gameReleases.First();
-                if ((!onStartup || CurrentProfile.IsDefault) && !(CurrentProfile.Version >= latestRelease.Version))
+                if ((!onStartup || CurrentProfile.IsDefault) && (!(CurrentProfile.Version >= latestRelease.Version) || false)) // !(CurrentProfile.Version >= CurrentProfile.VersionExe)
                 {
                     Log($"Found a new Profile '{CurrentProfile.Name}' version [{latestRelease.Version}]!");
                     UpdateCurrentProfile(latestRelease);
@@ -456,7 +465,7 @@ namespace P3D.Legacy.Launcher.Forms
                     if (!onStartup)
                     {
                         Log($"Profile '{CurrentProfile.Name}' is up to date.");
-                        MessageBox.Show(string.Format(MBLang.ProfileUpToDate, CurrentProfile.Name), MBLang.ProfileUpToDateTitle, MessageBoxButtons.OK);
+                        MessageBox.Show(string.Format(LocalizationUI.GetString("ProfileUpToDate"), CurrentProfile.Name), LocalizationUI.GetString("ProfileUpToDateTitle"), MessageBoxButtons.OK);
                     }
                 }
             }
@@ -465,21 +474,21 @@ namespace P3D.Legacy.Launcher.Forms
                 if (!onStartup)
                 {
                     Log($"Error while checking Profile '{CurrentProfile.Name}'. Is Internet available?");
-                    MessageBox.Show(MBLang.NoInternet, MBLang.NoInternetTitle, MessageBoxButtons.OK);
+                    MessageBox.Show(LocalizationUI.GetString("NoInternet"), LocalizationUI.GetString("NoInternetTitle"), MessageBoxButtons.OK);
                 }
             }
         }
-        private async Task<bool> DownloadCurrentProfile()
+        private async Task<bool> DownloadCurrentProfileAsync()
         {
-            var gameReleases = await GitHub.GetAllGitHubReleases();
+            var gameReleases = await GitHub.GetAllGitHubReleasesAsync();
             if (gameReleases.Any())
             {
                 var onlineRelease = gameReleases.First(release => release.Version == CurrentProfile.Version);
 
-                switch (MessageBox.Show(string.Format(MBLang.NotDownloaded, CurrentProfile.Name), MBLang.NotDownloadedTitle, MessageBoxButtons.YesNo))
+                switch (MessageBox.Show(string.Format(LocalizationUI.GetString("NotDownloaded"), CurrentProfile.Name), LocalizationUI.GetString("NotDownloadedTitle"), MessageBoxButtons.YesNo))
                 {
                     case DialogResult.Yes:
-                        using (var directUpdater = new DirectUpdaterForm(onlineRelease.ReleaseAsset, Path.Combine(FileSystem.GameProfilesFolderPath, CurrentProfile.Name)))
+                        using (var directUpdater = new ReleaseDownloaderForm(onlineRelease.ReleaseAsset, CurrentProfile.Folder))
                         {
                             var state = directUpdater.ShowDialog();
                             return state != DialogResult.Abort && state != DialogResult.Cancel;
@@ -491,18 +500,19 @@ namespace P3D.Legacy.Launcher.Forms
         }
         private void UpdateCurrentProfile(GitHubRelease onlineRelease)
         {
-            switch (MessageBox.Show(string.Format(MBLang.UpdateAvailable, CurrentProfile.Version, onlineRelease.Version), MBLang.UpdateAvailableTitle, MessageBoxButtons.YesNoCancel))
+            switch (MessageBox.Show(string.Format(LocalizationUI.GetString("UpdateAvailable"), CurrentProfile.Version, onlineRelease.Version), LocalizationUI.GetString("UpdateAvailableTitle"), MessageBoxButtons.YesNoCancel))
             {
                 case DialogResult.Yes:
-                    if (Settings.SelectedDL != null && !string.IsNullOrEmpty(Settings.SelectedDL.AbsolutePath))
-                        using (var customUpdater = new CustomUpdaterForm(onlineRelease.UpdateInfoAsset, Path.Combine(FileSystem.GameProfilesFolderPath, CurrentProfile.Name), new Uri(Settings.SelectedDL, $"{onlineRelease.Version}/")))
-                            customUpdater.ShowDialog();
-                    else
-                        MessageBox.Show(MBLang.DLNotSelected, MBLang.DLNotSelectedTitle, MessageBoxButtons.OK);
+                    MessageBox.Show(LocalizationUI.GetString("UpdateDisabled"), LocalizationUI.GetString("UpdateDisabledTitle"), MessageBoxButtons.OK);
+                    //if (Settings.SelectedDL != null && !string.IsNullOrEmpty(Settings.SelectedDL.AbsolutePath))
+                    //    using (var customUpdater = new CustomUpdaterForm(onlineRelease.UpdateInfoAsset, Path.Combine(FileSystem.GameProfilesFolderPath, CurrentProfile.Name), new Uri(Settings.SelectedDL, $"{onlineRelease.Version}/")))
+                    //        customUpdater.ShowDialog();
+                    //else
+                    //    MessageBox.Show(MBLang.DLNotSelected, MBLang.DLNotSelectedTitle, MessageBoxButtons.OK);
                     break;
 
                 case DialogResult.No:
-                    using (var directUpdater = new DirectUpdaterForm(onlineRelease.ReleaseAsset, Path.Combine(FileSystem.GameProfilesFolderPath, CurrentProfile.Name)))
+                    using (var directUpdater = new ReleaseDownloaderForm(onlineRelease.ReleaseAsset, CurrentProfile.Folder))
                         directUpdater.ShowDialog();
                     break;
 
@@ -511,35 +521,21 @@ namespace P3D.Legacy.Launcher.Forms
             }
         }
 
-        private void ReloadProfileList(SelectedProfile selectedProfile = SelectedProfile.Current)
+        private async Task ReloadProfileListAsync(Profiles.SelectedProfile selectedProfile = Profiles.SelectedProfile.Current)
         {
-            var previousSelectedProfileIndex = Profiles.SelectedProfileIndex;
-            Profiles = ProfilesYaml.Load();
-
-            switch (selectedProfile)
-            {
-                case SelectedProfile.Current:
-                    Profiles.SelectedProfileIndex = previousSelectedProfileIndex;
-                    break;
-                case SelectedProfile.First:
-                    Profiles.SelectedProfileIndex = Profiles.ProfileList.Any() ? 0 : Profiles.SelectedProfileIndex;
-                    break;
-                case SelectedProfile.Last:
-                    Profiles.SelectedProfileIndex = Profiles.ProfileList.Any() ? Profiles.ProfileList.Count - 1 : Profiles.SelectedProfileIndex;
-                    break;
-            }
+            await Profiles.ReloadAsync(selectedProfile);
 
             if (Controls.Count == 0)
                 return;
 
             ComboBox_CurrentProfile.Items.Clear();
-            foreach (var profile in Profiles.ProfileList)
+            foreach (var profile in Profiles)
                 ComboBox_CurrentProfile.Items.Add(profile.Name);
             ComboBox_CurrentProfile.SelectedIndex = Profiles.SelectedProfileIndex;
         }
-        private void ReloadSettings()
+        private async void ReloadSettings()
         {
-            Settings = SettingsYaml.Load();
+            await Settings.ReloadAsync();
 
             if (Controls.Count == 0)
                 return;
@@ -547,9 +543,18 @@ namespace P3D.Legacy.Launcher.Forms
             Check_Updates.Checked = Settings.GameUpdates;
 
             ComboBox_Language.Items.Clear();
-            foreach (var cultureInfo in SettingsYaml.AvailableCultureInfo)
-                ComboBox_Language.Items.Add(cultureInfo.NativeName);
-            ComboBox_Language.SelectedIndex = Array.IndexOf(SettingsYaml.AvailableCultureInfo, Settings.Language);
+            var localizations = LocalizationUI.Localizations;
+            foreach (var localizationInfo in localizations)
+            {
+                var cultureInfo = localizationInfo.CultureInfo;
+                var nativeNameTitleCase = cultureInfo.TextInfo.ToTitleCase(cultureInfo.NativeName);
+
+                var locaizationName = !string.IsNullOrEmpty(localizationInfo.SubLanguage)
+                    ? $"{nativeNameTitleCase} [{localizationInfo.SubLanguage}]"
+                    : nativeNameTitleCase;
+                ComboBox_Language.Items.Add(locaizationName);
+            }
+            ComboBox_Language.SelectedIndex = localizations.IndexOf(localizationInfo => Equals(localizationInfo.CultureInfo, Settings.LocalizationInfo.CultureInfo) && Equals(localizationInfo.SubLanguage, Settings.LocalizationInfo.SubLanguage));
 
             GameJolt = new GameJolt(Settings.GameJoltUsername, Settings.GameJoltToken);
             TextBox_Username.Text = Settings.GameJoltUsername;
@@ -558,15 +563,13 @@ namespace P3D.Legacy.Launcher.Forms
             CheckBox_SaveCredentials.Checked = Settings.SaveCredentials;
 
             ComboBox_SelectedDL.Items.Clear();
-            if (SettingsYaml.DLList.Any())
+            if (Settings.DLList.Any())
             {
-                foreach (var dlUri in SettingsYaml.DLList)
+                foreach (var dlUri in Settings.DLList)
                     ComboBox_SelectedDL.Items.Add(dlUri);
                 ComboBox_SelectedDL.SelectedIndex = Settings.SelectedDLIndex;
             }
         }
-
-        private enum SelectedProfile { Current, First, Last }
     }
 }
     

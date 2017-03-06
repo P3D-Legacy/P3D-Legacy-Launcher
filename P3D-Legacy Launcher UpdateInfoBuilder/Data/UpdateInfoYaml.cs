@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
 namespace P3D.Legacy.Launcher.UpdateInfoBuilder.Data
 {
-    internal class UpdateInfoYaml
+    internal class UpdateInfoYaml : IEnumerable<UpdateFileEntryYaml>
     {
         private static SerializerBuilder SerializerBuilder { get; } = new SerializerBuilder();
         private static DeserializerBuilder DeserializerBuilder { get; } = new DeserializerBuilder();
@@ -23,7 +24,12 @@ namespace P3D.Legacy.Launcher.UpdateInfoBuilder.Data
         }
 
 
-        public List<UpdateFileEntryYaml> Files { get; set; } = new List<UpdateFileEntryYaml>();
+        private List<UpdateFileEntryYaml> Files { get; }
+
+        public UpdateInfoYaml(List<UpdateFileEntryYaml> updateFileEntries) { Files = updateFileEntries; }
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        public IEnumerator<UpdateFileEntryYaml> GetEnumerator() => Files.GetEnumerator();
     }
     internal class UpdateFileEntryYaml
     {

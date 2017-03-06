@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProfileForm));
-            this.GroupBox_ProfileInfo = new System.Windows.Forms.GroupBox();
+            this.GroupBox_ProfileInfo = new P3D.Legacy.Launcher.Controls.LocalizableGroupBox();
             this.ComboBox_Version = new System.Windows.Forms.ComboBox();
-            this.Label_Version = new System.Windows.Forms.Label();
+            this.Label_Version = new P3D.Legacy.Launcher.Controls.LocalizableLabel();
             this.TextBox_ProfileName = new System.Windows.Forms.TextBox();
-            this.Label_ProfileName = new System.Windows.Forms.Label();
-            this.Button_SaveProfile = new System.Windows.Forms.Button();
-            this.Button_Cancel = new System.Windows.Forms.Button();
-            this.GroupBox_Modifications = new System.Windows.Forms.GroupBox();
+            this.Label_ProfileName = new P3D.Legacy.Launcher.Controls.LocalizableLabel();
+            this.Button_SaveProfile = new P3D.Legacy.Launcher.Controls.LocalizableButton();
+            this.Button_Cancel = new P3D.Legacy.Launcher.Controls.LocalizableButton();
+            this.GroupBox_Modifications = new P3D.Legacy.Launcher.Controls.LocalizableGroupBox();
             this.GroupBox_ProfileInfo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,6 +48,7 @@
             this.GroupBox_ProfileInfo.Controls.Add(this.TextBox_ProfileName);
             this.GroupBox_ProfileInfo.Controls.Add(this.Label_ProfileName);
             this.GroupBox_ProfileInfo.Name = "GroupBox_ProfileInfo";
+            this.GroupBox_ProfileInfo.StringID_Text = "pf_groupbox_profileinfo";
             this.GroupBox_ProfileInfo.TabStop = false;
             // 
             // ComboBox_Version
@@ -61,6 +62,7 @@
             // 
             resources.ApplyResources(this.Label_Version, "Label_Version");
             this.Label_Version.Name = "Label_Version";
+            this.Label_Version.StringID_Text = "pf_label_version";
             // 
             // TextBox_ProfileName
             // 
@@ -71,11 +73,13 @@
             // 
             resources.ApplyResources(this.Label_ProfileName, "Label_ProfileName");
             this.Label_ProfileName.Name = "Label_ProfileName";
+            this.Label_ProfileName.StringID_Text = "pf_label_profilename";
             // 
             // Button_SaveProfile
             // 
             resources.ApplyResources(this.Button_SaveProfile, "Button_SaveProfile");
             this.Button_SaveProfile.Name = "Button_SaveProfile";
+            this.Button_SaveProfile.StringID_Text = "pf_button_save";
             this.Button_SaveProfile.UseVisualStyleBackColor = true;
             this.Button_SaveProfile.Click += new System.EventHandler(this.Button_SaveProfile_Click);
             // 
@@ -83,6 +87,7 @@
             // 
             resources.ApplyResources(this.Button_Cancel, "Button_Cancel");
             this.Button_Cancel.Name = "Button_Cancel";
+            this.Button_Cancel.StringID_Text = "pf_button_cancel";
             this.Button_Cancel.UseVisualStyleBackColor = true;
             this.Button_Cancel.Click += new System.EventHandler(this.Button_Cancel_Click);
             // 
@@ -90,6 +95,7 @@
             // 
             resources.ApplyResources(this.GroupBox_Modifications, "GroupBox_Modifications");
             this.GroupBox_Modifications.Name = "GroupBox_Modifications";
+            this.GroupBox_Modifications.StringID_Text = "pf_groupbox_modifications";
             this.GroupBox_Modifications.TabStop = false;
             // 
             // ProfileForm
@@ -102,6 +108,7 @@
             this.Controls.Add(this.GroupBox_ProfileInfo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ProfileForm";
+            this.StringID_Title = "pf_title";
             this.GroupBox_ProfileInfo.ResumeLayout(false);
             this.GroupBox_ProfileInfo.PerformLayout();
             this.ResumeLayout(false);
@@ -110,13 +117,13 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox GroupBox_ProfileInfo;
-        private System.Windows.Forms.Button Button_SaveProfile;
-        private System.Windows.Forms.Button Button_Cancel;
+        private P3D.Legacy.Launcher.Controls.LocalizableGroupBox GroupBox_ProfileInfo;
+        private P3D.Legacy.Launcher.Controls.LocalizableButton Button_SaveProfile;
+        private P3D.Legacy.Launcher.Controls.LocalizableButton Button_Cancel;
         private System.Windows.Forms.ComboBox ComboBox_Version;
-        private System.Windows.Forms.Label Label_Version;
+        private P3D.Legacy.Launcher.Controls.LocalizableLabel Label_Version;
         private System.Windows.Forms.TextBox TextBox_ProfileName;
-        private System.Windows.Forms.Label Label_ProfileName;
-        private System.Windows.Forms.GroupBox GroupBox_Modifications;
+        private P3D.Legacy.Launcher.Controls.LocalizableLabel Label_ProfileName;
+        private P3D.Legacy.Launcher.Controls.LocalizableGroupBox GroupBox_Modifications;
     }
 }

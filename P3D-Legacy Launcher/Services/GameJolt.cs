@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,11 +15,11 @@ namespace P3D.Legacy.Launcher.Services
     {
         private const string Host = "gamejolt.com";
 
-        private const string GameId = "";
-        private const string GameKey = "";
+        private static string GameId = "";
+        private static string GameKey = "";
 
-        private const string OldGameId = "";
-        private const string OldGameKey = "";
+        private static string OldGameId = "";
+        private static string OldGameKey = "";
 
         private static GameJoltApiClient Client { get; } = new GameJoltApiClient(Encoding.UTF8.GetString(Convert.FromBase64String(GameId)), Encoding.UTF8.GetString(Convert.FromBase64String(GameKey)));
         private static GameJoltApiClient OldClient { get; } = new GameJoltApiClient(Encoding.UTF8.GetString(Convert.FromBase64String(OldGameId)), Encoding.UTF8.GetString(Convert.FromBase64String(OldGameKey)));
@@ -35,24 +36,29 @@ namespace P3D.Legacy.Launcher.Services
         private DateTime _lastSessionPing = DateTime.MinValue;
 
 
+        public GameJolt() { }
         public GameJolt(string username, string token) { Username = username; Token = token; }
 
 
-        public async Task<bool> IsConnected()
+        public async Task<bool> IsConnectedAsync()
         {
             // BUG: Is this a bug? After creating new GameJolt(), _lastSessionPing is a MinValue, it returns false info.
             if (_lastSessionPing == DateTime.MinValue)
                 return false;
 
             if (DateTime.UtcNow - _lastSessionPing > TimeSpan.FromSeconds(30))
-                await IsSessionActive();
+                await IsSessionActiveAsync();
 
             return true;
         }
 
-        public async Task<bool> IsSessionActive()
+        public async Task<GameJoltResponse> IsSessionActiveAsync()
         {
-            if (!WebsiteIsUp) return false;
+            if (!WebsiteIsUp)
+            {
+                var ctor = typeof(GameJoltResponse).GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic, null, new[] { typeof(string) }, null);
+                return (GameJoltResponse) ctor.Invoke(new object[] {"Website is down!"});
+            }
 
             var pingRequest = RequestProvider.Sessions.Ping(SessionStatus.Active, Username, Token);
             await Client.ExecuteRequestAsync(pingRequest);
@@ -62,11 +68,15 @@ namespace P3D.Legacy.Launcher.Services
             else
                 _lastSessionPing = DateTime.MinValue;
 
-            return pingRequest.Response.Success;
+            return pingRequest.Response;
         }
-        public async Task<bool> SessionOpen()
+        public async Task<GameJoltResponse> SessionOpenAsync()
         {
-            if (!WebsiteIsUp) return false;
+            if (!WebsiteIsUp)
+            {
+                var ctor = typeof(GameJoltResponse).GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic, null, new[] { typeof(string) }, null);
+                return (GameJoltResponse) ctor.Invoke(new object[] {"Website is down!"});
+            }
 
             var openRequest = RequestProvider.Sessions.Open(Username, Token);
             await Client.ExecuteRequestAsync(openRequest);
@@ -76,11 +86,15 @@ namespace P3D.Legacy.Launcher.Services
             else
                 _lastSessionPing = DateTime.MinValue;
 
-            return openRequest.Response.Success;
+            return openRequest.Response;
         }
-        public async Task<bool> SessionClose()
+        public async Task<GameJoltResponse> SessionCloseAsync()
         {
-            if (!WebsiteIsUp) return false;
+            if (!WebsiteIsUp)
+            {
+                var ctor = typeof(GameJoltResponse).GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic, null, new[] { typeof(string) }, null);
+                return (GameJoltResponse) ctor.Invoke(new object[] {"Website is down!"});
+            }
 
             var closeRequest = RequestProvider.Sessions.Close(Username, Token);
             await Client.ExecuteRequestAsync(closeRequest).ConfigureAwait(false);
@@ -88,12 +102,12 @@ namespace P3D.Legacy.Launcher.Services
             if (closeRequest.Response.Success)
                 _lastSessionPing = DateTime.MinValue;
 
-            return closeRequest.Response.Success;
+            return closeRequest.Response;
         }
 
-        public async Task<bool> IsMigrated()
+        public async Task<bool> IsMigratedAsync()
         {
-            if (!await IsConnected() || !WebsiteIsUp) return false;
+            if (!await IsConnectedAsync() || !WebsiteIsUp) return false;
 
             var userRequest = RequestProvider.Users.Fetch(Username);
             await Client.ExecuteRequestAsync(userRequest);
@@ -103,7 +117,7 @@ namespace P3D.Legacy.Launcher.Services
             await OldClient.ExecuteRequestAsync(request).ConfigureAwait(false);
             return request.Response.Success;
         }
-        public async Task Migrate()
+        public async Task MigrateAsync()
         {
             var userRequest = RequestProvider.Users.Fetch(Username);
             await Client.ExecuteRequestAsync(userRequest);

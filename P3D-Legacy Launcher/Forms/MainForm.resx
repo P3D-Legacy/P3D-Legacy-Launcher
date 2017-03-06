@@ -139,13 +139,13 @@
     <value>6</value>
   </data>
   <data name="Button_CheckForUpdates.Text" xml:space="preserve">
-    <value>Check for Updates</value>
+    <value>mf_button_checkforupdates</value>
   </data>
   <data name="&gt;&gt;Button_CheckForUpdates.Name" xml:space="preserve">
     <value>Button_CheckForUpdates</value>
   </data>
   <data name="&gt;&gt;Button_CheckForUpdates.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>P3D.Legacy.Launcher.Controls.LocalizableButton, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;Button_CheckForUpdates.Parent" xml:space="preserve">
     <value>$this</value>
@@ -153,37 +153,37 @@
   <data name="&gt;&gt;Button_CheckForUpdates.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="Putton_StartGame.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
+  <data name="Button_StartGame.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Right</value>
   </data>
-  <data name="Putton_StartGame.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="Button_StartGame.Font" type="System.Drawing.Font, System.Drawing">
     <value>Segoe UI, 8.25pt</value>
   </data>
-  <data name="Putton_StartGame.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="Button_StartGame.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Putton_StartGame.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="Button_StartGame.Location" type="System.Drawing.Point, System.Drawing">
     <value>682, 414</value>
   </data>
-  <data name="Putton_StartGame.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="Button_StartGame.Size" type="System.Drawing.Size, System.Drawing">
     <value>150, 25</value>
   </data>
-  <data name="Putton_StartGame.TabIndex" type="System.Int32, mscorlib">
+  <data name="Button_StartGame.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="Putton_StartGame.Text" xml:space="preserve">
-    <value>Play</value>
+  <data name="Button_StartGame.Text" xml:space="preserve">
+    <value>mf_button_play</value>
   </data>
-  <data name="&gt;&gt;Putton_StartGame.Name" xml:space="preserve">
-    <value>Putton_StartGame</value>
+  <data name="&gt;&gt;Button_StartGame.Name" xml:space="preserve">
+    <value>Button_StartGame</value>
   </data>
-  <data name="&gt;&gt;Putton_StartGame.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;Button_StartGame.Type" xml:space="preserve">
+    <value>P3D.Legacy.Launcher.Controls.LocalizableButton, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;Putton_StartGame.Parent" xml:space="preserve">
+  <data name="&gt;&gt;Button_StartGame.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;Putton_StartGame.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;Button_StartGame.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="ComboBox_CurrentProfile.Location" type="System.Drawing.Point, System.Drawing">
@@ -220,13 +220,13 @@
     <value>2</value>
   </data>
   <data name="Button_NewProfile.Text" xml:space="preserve">
-    <value>New Profile</value>
+    <value>mf_button_newprofile</value>
   </data>
   <data name="&gt;&gt;Button_NewProfile.Name" xml:space="preserve">
     <value>Button_NewProfile</value>
   </data>
   <data name="&gt;&gt;Button_NewProfile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>P3D.Legacy.Launcher.Controls.LocalizableButton, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;Button_NewProfile.Parent" xml:space="preserve">
     <value>$this</value>
@@ -247,13 +247,13 @@
     <value>3</value>
   </data>
   <data name="Button_EditProfile.Text" xml:space="preserve">
-    <value>Edit Profile</value>
+    <value>mf_button_editprofile</value>
   </data>
   <data name="&gt;&gt;Button_EditProfile.Name" xml:space="preserve">
     <value>Button_EditProfile</value>
   </data>
   <data name="&gt;&gt;Button_EditProfile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>P3D.Legacy.Launcher.Controls.LocalizableButton, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;Button_EditProfile.Parent" xml:space="preserve">
     <value>$this</value>
@@ -274,19 +274,94 @@
     <value>4</value>
   </data>
   <data name="Button_DeleteProfile.Text" xml:space="preserve">
-    <value>Delete Profile</value>
+    <value>mf_button_delete</value>
   </data>
   <data name="&gt;&gt;Button_DeleteProfile.Name" xml:space="preserve">
     <value>Button_DeleteProfile</value>
   </data>
   <data name="&gt;&gt;Button_DeleteProfile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>P3D.Legacy.Launcher.Controls.LocalizableButton, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;Button_DeleteProfile.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;Button_DeleteProfile.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="&gt;&gt;TextBox_Credits.Name" xml:space="preserve">
+    <value>TextBox_Credits</value>
+  </data>
+  <data name="&gt;&gt;TextBox_Credits.Type" xml:space="preserve">
+    <value>P3D.Legacy.Launcher.Controls.LocalizableTextBox, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;TextBox_Credits.Parent" xml:space="preserve">
+    <value>TabPage_About</value>
+  </data>
+  <data name="&gt;&gt;TextBox_Credits.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;TextBox_About.Name" xml:space="preserve">
+    <value>TextBox_About</value>
+  </data>
+  <data name="&gt;&gt;TextBox_About.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TextBox_About.Parent" xml:space="preserve">
+    <value>TabPage_About</value>
+  </data>
+  <data name="&gt;&gt;TextBox_About.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;Label_Version.Name" xml:space="preserve">
+    <value>Label_Version</value>
+  </data>
+  <data name="&gt;&gt;Label_Version.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Label_Version.Parent" xml:space="preserve">
+    <value>TabPage_About</value>
+  </data>
+  <data name="&gt;&gt;Label_Version.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;LinkLabel_Pokemon3D.Name" xml:space="preserve">
+    <value>LinkLabel_Pokemon3D</value>
+  </data>
+  <data name="&gt;&gt;LinkLabel_Pokemon3D.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;LinkLabel_Pokemon3D.Parent" xml:space="preserve">
+    <value>TabPage_About</value>
+  </data>
+  <data name="&gt;&gt;LinkLabel_Pokemon3D.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="TabPage_About.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabPage_About.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="TabPage_About.Size" type="System.Drawing.Size, System.Drawing">
+    <value>836, 382</value>
+  </data>
+  <data name="TabPage_About.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="TabPage_About.Text" xml:space="preserve">
+    <value>mf_tabpage_about</value>
+  </data>
+  <data name="&gt;&gt;TabPage_About.Name" xml:space="preserve">
+    <value>TabPage_About</value>
+  </data>
+  <data name="&gt;&gt;TabPage_About.Type" xml:space="preserve">
+    <value>P3D.Legacy.Launcher.Controls.LocalizableTabPage, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;TabPage_About.Parent" xml:space="preserve">
+    <value>TabControl</value>
+  </data>
+  <data name="&gt;&gt;TabPage_About.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="TextBox_Credits.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Bottom</value>
@@ -304,15 +379,13 @@
     <value>3</value>
   </data>
   <data name="TextBox_Credits.Text" xml:space="preserve">
-    <value>Launcher by Aragas
-Translation:
-SViper, Capt_Segis, Biggda76, Blurgaro, Persuer, Aragas</value>
+    <value>mf_textbox_credits</value>
   </data>
   <data name="&gt;&gt;TextBox_Credits.Name" xml:space="preserve">
     <value>TextBox_Credits</value>
   </data>
   <data name="&gt;&gt;TextBox_Credits.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>P3D.Legacy.Launcher.Controls.LocalizableTextBox, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;TextBox_Credits.Parent" xml:space="preserve">
     <value>TabPage_About</value>
@@ -419,35 +492,179 @@ Pokémon 3D and The P3D Team neither owns nor claims to own any portion of the P
   <data name="&gt;&gt;LinkLabel_Pokemon3D.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="TabPage_About.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
+  <data name="&gt;&gt;GroupBox__GameJolt.Name" xml:space="preserve">
+    <value>GroupBox__GameJolt</value>
   </data>
-  <data name="TabPage_About.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
+  <data name="&gt;&gt;GroupBox__GameJolt.Type" xml:space="preserve">
+    <value>P3D.Legacy.Launcher.Controls.LocalizableGroupBox, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="TabPage_About.Size" type="System.Drawing.Size, System.Drawing">
-    <value>836, 382</value>
+  <data name="&gt;&gt;GroupBox__GameJolt.Parent" xml:space="preserve">
+    <value>TabPage_Settings</value>
   </data>
-  <data name="TabPage_About.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;GroupBox__GameJolt.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;GroupBox_Netwok.Name" xml:space="preserve">
+    <value>GroupBox_Netwok</value>
+  </data>
+  <data name="&gt;&gt;GroupBox_Netwok.Type" xml:space="preserve">
+    <value>P3D.Legacy.Launcher.Controls.LocalizableGroupBox, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;GroupBox_Netwok.Parent" xml:space="preserve">
+    <value>TabPage_Settings</value>
+  </data>
+  <data name="&gt;&gt;GroupBox_Netwok.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;Button_SaveSettings.Name" xml:space="preserve">
+    <value>Button_SaveSettings</value>
+  </data>
+  <data name="&gt;&gt;Button_SaveSettings.Type" xml:space="preserve">
+    <value>P3D.Legacy.Launcher.Controls.LocalizableButton, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;Button_SaveSettings.Parent" xml:space="preserve">
+    <value>TabPage_Settings</value>
+  </data>
+  <data name="&gt;&gt;Button_SaveSettings.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;GroupBox_Startup.Name" xml:space="preserve">
+    <value>GroupBox_Startup</value>
+  </data>
+  <data name="&gt;&gt;GroupBox_Startup.Type" xml:space="preserve">
+    <value>P3D.Legacy.Launcher.Controls.LocalizableGroupBox, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;GroupBox_Startup.Parent" xml:space="preserve">
+    <value>TabPage_Settings</value>
+  </data>
+  <data name="&gt;&gt;GroupBox_Startup.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="TabPage_About.Text" xml:space="preserve">
-    <value>About</value>
+  <data name="TabPage_Settings.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
   </data>
-  <data name="&gt;&gt;TabPage_About.Name" xml:space="preserve">
-    <value>TabPage_About</value>
+  <data name="TabPage_Settings.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
   </data>
-  <data name="&gt;&gt;TabPage_About.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="TabPage_Settings.Size" type="System.Drawing.Size, System.Drawing">
+    <value>836, 382</value>
   </data>
-  <data name="&gt;&gt;TabPage_About.Parent" xml:space="preserve">
+  <data name="TabPage_Settings.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="TabPage_Settings.Text" xml:space="preserve">
+    <value>mf_tabpage_settings</value>
+  </data>
+  <data name="&gt;&gt;TabPage_Settings.Name" xml:space="preserve">
+    <value>TabPage_Settings</value>
+  </data>
+  <data name="&gt;&gt;TabPage_Settings.Type" xml:space="preserve">
+    <value>P3D.Legacy.Launcher.Controls.LocalizableTabPage, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;TabPage_Settings.Parent" xml:space="preserve">
     <value>TabControl</value>
   </data>
-  <data name="&gt;&gt;TabPage_About.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;TabPage_Settings.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="GroupBox__GameJolt.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;TextBox_Token.Name" xml:space="preserve">
+    <value>TextBox_Token</value>
+  </data>
+  <data name="&gt;&gt;TextBox_Token.Type" xml:space="preserve">
+    <value>P3D.Legacy.Launcher.Controls.LocalizableWatermarkTextBox, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;TextBox_Token.Parent" xml:space="preserve">
+    <value>GroupBox__GameJolt</value>
+  </data>
+  <data name="&gt;&gt;TextBox_Token.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;CheckBox_SaveCredentials.Name" xml:space="preserve">
+    <value>CheckBox_SaveCredentials</value>
+  </data>
+  <data name="&gt;&gt;CheckBox_SaveCredentials.Type" xml:space="preserve">
+    <value>P3D.Legacy.Launcher.Controls.LocalizableCheckBox, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;CheckBox_SaveCredentials.Parent" xml:space="preserve">
+    <value>GroupBox__GameJolt</value>
+  </data>
+  <data name="&gt;&gt;CheckBox_SaveCredentials.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;CheckBox_AutoLogIn.Name" xml:space="preserve">
+    <value>CheckBox_AutoLogIn</value>
+  </data>
+  <data name="&gt;&gt;CheckBox_AutoLogIn.Type" xml:space="preserve">
+    <value>P3D.Legacy.Launcher.Controls.LocalizableCheckBox, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;CheckBox_AutoLogIn.Parent" xml:space="preserve">
+    <value>GroupBox__GameJolt</value>
+  </data>
+  <data name="&gt;&gt;CheckBox_AutoLogIn.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;TextBox_Username.Name" xml:space="preserve">
+    <value>TextBox_Username</value>
+  </data>
+  <data name="&gt;&gt;TextBox_Username.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;TextBox_Username.Parent" xml:space="preserve">
+    <value>GroupBox__GameJolt</value>
+  </data>
+  <data name="&gt;&gt;TextBox_Username.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;Label_Token.Name" xml:space="preserve">
+    <value>Label_Token</value>
+  </data>
+  <data name="&gt;&gt;Label_Token.Type" xml:space="preserve">
+    <value>P3D.Legacy.Launcher.Controls.LocalizableLabel, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;Label_Token.Parent" xml:space="preserve">
+    <value>GroupBox__GameJolt</value>
+  </data>
+  <data name="&gt;&gt;Label_Token.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;Label_Username.Name" xml:space="preserve">
+    <value>Label_Username</value>
+  </data>
+  <data name="&gt;&gt;Label_Username.Type" xml:space="preserve">
+    <value>P3D.Legacy.Launcher.Controls.LocalizableLabel, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;Label_Username.Parent" xml:space="preserve">
+    <value>GroupBox__GameJolt</value>
+  </data>
+  <data name="&gt;&gt;Label_Username.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="GroupBox__GameJolt.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 92</value>
+  </data>
+  <data name="GroupBox__GameJolt.Size" type="System.Drawing.Size, System.Drawing">
+    <value>822, 120</value>
+  </data>
+  <data name="GroupBox__GameJolt.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="GroupBox__GameJolt.Text" xml:space="preserve">
+    <value>mf_groupbox_gamejolt</value>
+  </data>
+  <data name="&gt;&gt;GroupBox__GameJolt.Name" xml:space="preserve">
+    <value>GroupBox__GameJolt</value>
+  </data>
+  <data name="&gt;&gt;GroupBox__GameJolt.Type" xml:space="preserve">
+    <value>P3D.Legacy.Launcher.Controls.LocalizableGroupBox, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;GroupBox__GameJolt.Parent" xml:space="preserve">
+    <value>TabPage_Settings</value>
+  </data>
+  <data name="&gt;&gt;GroupBox__GameJolt.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="TextBox_Token.Location" type="System.Drawing.Point, System.Drawing">
     <value>216, 45</value>
@@ -465,16 +682,13 @@ Pokémon 3D and The P3D Team neither owns nor claims to own any portion of the P
     <value>TextBox_Token</value>
   </data>
   <data name="&gt;&gt;TextBox_Token.Type" xml:space="preserve">
-    <value>P3D.Legacy.Launcher.Controls.WatermarkTextBox, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>P3D.Legacy.Launcher.Controls.LocalizableWatermarkTextBox, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;TextBox_Token.Parent" xml:space="preserve">
     <value>GroupBox__GameJolt</value>
   </data>
   <data name="&gt;&gt;TextBox_Token.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="CheckBox_SaveCredentials.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="CheckBox_SaveCredentials.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -483,28 +697,25 @@ Pokémon 3D and The P3D Team neither owns nor claims to own any portion of the P
     <value>9, 74</value>
   </data>
   <data name="CheckBox_SaveCredentials.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 17</value>
+    <value>201, 17</value>
   </data>
   <data name="CheckBox_SaveCredentials.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="CheckBox_SaveCredentials.Text" xml:space="preserve">
-    <value>Remember me</value>
+    <value>mf_checkbox_savecredentials</value>
   </data>
   <data name="&gt;&gt;CheckBox_SaveCredentials.Name" xml:space="preserve">
     <value>CheckBox_SaveCredentials</value>
   </data>
   <data name="&gt;&gt;CheckBox_SaveCredentials.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>P3D.Legacy.Launcher.Controls.LocalizableCheckBox, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;CheckBox_SaveCredentials.Parent" xml:space="preserve">
     <value>GroupBox__GameJolt</value>
   </data>
   <data name="&gt;&gt;CheckBox_SaveCredentials.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="CheckBox_AutoLogIn.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="CheckBox_AutoLogIn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -513,19 +724,19 @@ Pokémon 3D and The P3D Team neither owns nor claims to own any portion of the P
     <value>9, 97</value>
   </data>
   <data name="CheckBox_AutoLogIn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 17</value>
+    <value>201, 17</value>
   </data>
   <data name="CheckBox_AutoLogIn.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="CheckBox_AutoLogIn.Text" xml:space="preserve">
-    <value>Keep me logged in</value>
+    <value>mf_checkbox_autologin</value>
   </data>
   <data name="&gt;&gt;CheckBox_AutoLogIn.Name" xml:space="preserve">
     <value>CheckBox_AutoLogIn</value>
   </data>
   <data name="&gt;&gt;CheckBox_AutoLogIn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>P3D.Legacy.Launcher.Controls.LocalizableCheckBox, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;CheckBox_AutoLogIn.Parent" xml:space="preserve">
     <value>GroupBox__GameJolt</value>
@@ -554,9 +765,6 @@ Pokémon 3D and The P3D Team neither owns nor claims to own any portion of the P
   <data name="&gt;&gt;TextBox_Username.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="Label_Token.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="Label_Token.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -564,28 +772,25 @@ Pokémon 3D and The P3D Team neither owns nor claims to own any portion of the P
     <value>6, 48</value>
   </data>
   <data name="Label_Token.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 13</value>
+    <value>204, 13</value>
   </data>
   <data name="Label_Token.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="Label_Token.Text" xml:space="preserve">
-    <value>Token:</value>
+    <value>mf_label_token</value>
   </data>
   <data name="&gt;&gt;Label_Token.Name" xml:space="preserve">
     <value>Label_Token</value>
   </data>
   <data name="&gt;&gt;Label_Token.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>P3D.Legacy.Launcher.Controls.LocalizableLabel, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;Label_Token.Parent" xml:space="preserve">
     <value>GroupBox__GameJolt</value>
   </data>
   <data name="&gt;&gt;Label_Token.ZOrder" xml:space="preserve">
     <value>4</value>
-  </data>
-  <data name="Label_Username.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
   </data>
   <data name="Label_Username.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -594,19 +799,19 @@ Pokémon 3D and The P3D Team neither owns nor claims to own any portion of the P
     <value>6, 22</value>
   </data>
   <data name="Label_Username.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 13</value>
+    <value>204, 13</value>
   </data>
   <data name="Label_Username.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="Label_Username.Text" xml:space="preserve">
-    <value>Username:</value>
+    <value>mf_label_username</value>
   </data>
   <data name="&gt;&gt;Label_Username.Name" xml:space="preserve">
     <value>Label_Username</value>
   </data>
   <data name="&gt;&gt;Label_Username.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>P3D.Legacy.Launcher.Controls.LocalizableLabel, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;Label_Username.Parent" xml:space="preserve">
     <value>GroupBox__GameJolt</value>
@@ -614,32 +819,62 @@ Pokémon 3D and The P3D Team neither owns nor claims to own any portion of the P
   <data name="&gt;&gt;Label_Username.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="GroupBox__GameJolt.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 92</value>
-  </data>
-  <data name="GroupBox__GameJolt.Size" type="System.Drawing.Size, System.Drawing">
-    <value>822, 120</value>
-  </data>
-  <data name="GroupBox__GameJolt.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="GroupBox__GameJolt.Text" xml:space="preserve">
-    <value>GameJolt</value>
-  </data>
-  <data name="&gt;&gt;GroupBox__GameJolt.Name" xml:space="preserve">
-    <value>GroupBox__GameJolt</value>
-  </data>
-  <data name="&gt;&gt;GroupBox__GameJolt.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;GroupBox__GameJolt.Parent" xml:space="preserve">
-    <value>TabPage_Settings</value>
-  </data>
-  <data name="&gt;&gt;GroupBox__GameJolt.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="GroupBox_Netwok.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
+  </data>
+  <data name="&gt;&gt;ComboBox_SelectedDL.Name" xml:space="preserve">
+    <value>ComboBox_SelectedDL</value>
+  </data>
+  <data name="&gt;&gt;ComboBox_SelectedDL.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ComboBox_SelectedDL.Parent" xml:space="preserve">
+    <value>GroupBox_Netwok</value>
+  </data>
+  <data name="&gt;&gt;ComboBox_SelectedDL.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;Label_SelectedDL.Name" xml:space="preserve">
+    <value>Label_SelectedDL</value>
+  </data>
+  <data name="&gt;&gt;Label_SelectedDL.Type" xml:space="preserve">
+    <value>P3D.Legacy.Launcher.Controls.LocalizableLabel, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;Label_SelectedDL.Parent" xml:space="preserve">
+    <value>GroupBox_Netwok</value>
+  </data>
+  <data name="&gt;&gt;Label_SelectedDL.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="GroupBox_Netwok.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="GroupBox_Netwok.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 218</value>
+  </data>
+  <data name="GroupBox_Netwok.Size" type="System.Drawing.Size, System.Drawing">
+    <value>822, 58</value>
+  </data>
+  <data name="GroupBox_Netwok.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="GroupBox_Netwok.Text" xml:space="preserve">
+    <value>mf_groupbox_network</value>
+  </data>
+  <data name="GroupBox_Netwok.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;GroupBox_Netwok.Name" xml:space="preserve">
+    <value>GroupBox_Netwok</value>
+  </data>
+  <data name="&gt;&gt;GroupBox_Netwok.Type" xml:space="preserve">
+    <value>P3D.Legacy.Launcher.Controls.LocalizableGroupBox, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;GroupBox_Netwok.Parent" xml:space="preserve">
+    <value>TabPage_Settings</value>
+  </data>
+  <data name="&gt;&gt;GroupBox_Netwok.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="ComboBox_SelectedDL.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Left, Right</value>
@@ -665,9 +900,6 @@ Pokémon 3D and The P3D Team neither owns nor claims to own any portion of the P
   <data name="&gt;&gt;ComboBox_SelectedDL.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="Label_SelectedDL.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="Label_SelectedDL.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -675,48 +907,24 @@ Pokémon 3D and The P3D Team neither owns nor claims to own any portion of the P
     <value>6, 22</value>
   </data>
   <data name="Label_SelectedDL.Size" type="System.Drawing.Size, System.Drawing">
-    <value>69, 13</value>
+    <value>204, 13</value>
   </data>
   <data name="Label_SelectedDL.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="Label_SelectedDL.Text" xml:space="preserve">
-    <value>Selected DL:</value>
+    <value>mf_label_selecteddl</value>
   </data>
   <data name="&gt;&gt;Label_SelectedDL.Name" xml:space="preserve">
     <value>Label_SelectedDL</value>
   </data>
   <data name="&gt;&gt;Label_SelectedDL.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>P3D.Legacy.Launcher.Controls.LocalizableLabel, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;Label_SelectedDL.Parent" xml:space="preserve">
     <value>GroupBox_Netwok</value>
   </data>
   <data name="&gt;&gt;Label_SelectedDL.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="GroupBox_Netwok.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 218</value>
-  </data>
-  <data name="GroupBox_Netwok.Size" type="System.Drawing.Size, System.Drawing">
-    <value>822, 58</value>
-  </data>
-  <data name="GroupBox_Netwok.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="GroupBox_Netwok.Text" xml:space="preserve">
-    <value>Network</value>
-  </data>
-  <data name="&gt;&gt;GroupBox_Netwok.Name" xml:space="preserve">
-    <value>GroupBox_Netwok</value>
-  </data>
-  <data name="&gt;&gt;GroupBox_Netwok.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;GroupBox_Netwok.Parent" xml:space="preserve">
-    <value>TabPage_Settings</value>
-  </data>
-  <data name="&gt;&gt;GroupBox_Netwok.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="Button_SaveSettings.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
@@ -735,13 +943,13 @@ Pokémon 3D and The P3D Team neither owns nor claims to own any portion of the P
     <value>3</value>
   </data>
   <data name="Button_SaveSettings.Text" xml:space="preserve">
-    <value>Save</value>
+    <value>mf_button_save</value>
   </data>
   <data name="&gt;&gt;Button_SaveSettings.Name" xml:space="preserve">
     <value>Button_SaveSettings</value>
   </data>
   <data name="&gt;&gt;Button_SaveSettings.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>P3D.Legacy.Launcher.Controls.LocalizableButton, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;Button_SaveSettings.Parent" xml:space="preserve">
     <value>TabPage_Settings</value>
@@ -752,8 +960,65 @@ Pokémon 3D and The P3D Team neither owns nor claims to own any portion of the P
   <data name="GroupBox_Startup.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="Label_Language.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="&gt;&gt;Label_Language.Name" xml:space="preserve">
+    <value>Label_Language</value>
+  </data>
+  <data name="&gt;&gt;Label_Language.Type" xml:space="preserve">
+    <value>P3D.Legacy.Launcher.Controls.LocalizableLabel, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;Label_Language.Parent" xml:space="preserve">
+    <value>GroupBox_Startup</value>
+  </data>
+  <data name="&gt;&gt;Label_Language.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ComboBox_Language.Name" xml:space="preserve">
+    <value>ComboBox_Language</value>
+  </data>
+  <data name="&gt;&gt;ComboBox_Language.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ComboBox_Language.Parent" xml:space="preserve">
+    <value>GroupBox_Startup</value>
+  </data>
+  <data name="&gt;&gt;ComboBox_Language.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;Check_Updates.Name" xml:space="preserve">
+    <value>Check_Updates</value>
+  </data>
+  <data name="&gt;&gt;Check_Updates.Type" xml:space="preserve">
+    <value>P3D.Legacy.Launcher.Controls.LocalizableCheckBox, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;Check_Updates.Parent" xml:space="preserve">
+    <value>GroupBox_Startup</value>
+  </data>
+  <data name="&gt;&gt;Check_Updates.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="GroupBox_Startup.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 6</value>
+  </data>
+  <data name="GroupBox_Startup.Size" type="System.Drawing.Size, System.Drawing">
+    <value>822, 80</value>
+  </data>
+  <data name="GroupBox_Startup.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="GroupBox_Startup.Text" xml:space="preserve">
+    <value>mf_groupbox_common</value>
+  </data>
+  <data name="&gt;&gt;GroupBox_Startup.Name" xml:space="preserve">
+    <value>GroupBox_Startup</value>
+  </data>
+  <data name="&gt;&gt;GroupBox_Startup.Type" xml:space="preserve">
+    <value>P3D.Legacy.Launcher.Controls.LocalizableGroupBox, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;GroupBox_Startup.Parent" xml:space="preserve">
+    <value>TabPage_Settings</value>
+  </data>
+  <data name="&gt;&gt;GroupBox_Startup.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="Label_Language.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -762,19 +1027,19 @@ Pokémon 3D and The P3D Team neither owns nor claims to own any portion of the P
     <value>6, 45</value>
   </data>
   <data name="Label_Language.Size" type="System.Drawing.Size, System.Drawing">
-    <value>58, 13</value>
+    <value>204, 13</value>
   </data>
   <data name="Label_Language.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
   <data name="Label_Language.Text" xml:space="preserve">
-    <value>Language:</value>
+    <value>mf_label_language</value>
   </data>
   <data name="&gt;&gt;Label_Language.Name" xml:space="preserve">
     <value>Label_Language</value>
   </data>
   <data name="&gt;&gt;Label_Language.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>P3D.Legacy.Launcher.Controls.LocalizableLabel, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;Label_Language.Parent" xml:space="preserve">
     <value>GroupBox_Startup</value>
@@ -806,9 +1071,6 @@ Pokémon 3D and The P3D Team neither owns nor claims to own any portion of the P
   <data name="&gt;&gt;ComboBox_Language.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="Check_Updates.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
   <data name="Check_Updates.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -816,19 +1078,19 @@ Pokémon 3D and The P3D Team neither owns nor claims to own any portion of the P
     <value>9, 19</value>
   </data>
   <data name="Check_Updates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 17</value>
+    <value>807, 17</value>
   </data>
   <data name="Check_Updates.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="Check_Updates.Text" xml:space="preserve">
-    <value>Check for game updates on startup</value>
+    <value>mf_checkbox_checkforupdatesonstartup</value>
   </data>
   <data name="&gt;&gt;Check_Updates.Name" xml:space="preserve">
     <value>Check_Updates</value>
   </data>
   <data name="&gt;&gt;Check_Updates.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>P3D.Legacy.Launcher.Controls.LocalizableCheckBox, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;Check_Updates.Parent" xml:space="preserve">
     <value>GroupBox_Startup</value>
@@ -836,56 +1098,44 @@ Pokémon 3D and The P3D Team neither owns nor claims to own any portion of the P
   <data name="&gt;&gt;Check_Updates.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="GroupBox_Startup.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 6</value>
+  <data name="&gt;&gt;TextBox_Logger.Name" xml:space="preserve">
+    <value>TextBox_Logger</value>
   </data>
-  <data name="GroupBox_Startup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>822, 80</value>
+  <data name="&gt;&gt;TextBox_Logger.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="GroupBox_Startup.TabIndex" type="System.Int32, mscorlib">
+  <data name="&gt;&gt;TextBox_Logger.Parent" xml:space="preserve">
+    <value>TabPage_Logger</value>
+  </data>
+  <data name="&gt;&gt;TextBox_Logger.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="GroupBox_Startup.Text" xml:space="preserve">
-    <value>Common</value>
-  </data>
-  <data name="&gt;&gt;GroupBox_Startup.Name" xml:space="preserve">
-    <value>GroupBox_Startup</value>
-  </data>
-  <data name="&gt;&gt;GroupBox_Startup.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;GroupBox_Startup.Parent" xml:space="preserve">
-    <value>TabPage_Settings</value>
-  </data>
-  <data name="&gt;&gt;GroupBox_Startup.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="TabPage_Settings.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="TabPage_Logger.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
-  <data name="TabPage_Settings.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="TabPage_Logger.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>3, 3, 3, 3</value>
   </data>
-  <data name="TabPage_Settings.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="TabPage_Logger.Size" type="System.Drawing.Size, System.Drawing">
     <value>836, 382</value>
   </data>
-  <data name="TabPage_Settings.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="TabPage_Logger.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
   </data>
-  <data name="TabPage_Settings.Text" xml:space="preserve">
-    <value>Settings</value>
+  <data name="TabPage_Logger.Text" xml:space="preserve">
+    <value>mf_tabpage_logger</value>
   </data>
-  <data name="&gt;&gt;TabPage_Settings.Name" xml:space="preserve">
-    <value>TabPage_Settings</value>
+  <data name="&gt;&gt;TabPage_Logger.Name" xml:space="preserve">
+    <value>TabPage_Logger</value>
   </data>
-  <data name="&gt;&gt;TabPage_Settings.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;TabPage_Logger.Type" xml:space="preserve">
+    <value>P3D.Legacy.Launcher.Controls.LocalizableTabPage, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;TabPage_Settings.Parent" xml:space="preserve">
+  <data name="&gt;&gt;TabPage_Logger.Parent" xml:space="preserve">
     <value>TabControl</value>
   </data>
-  <data name="&gt;&gt;TabPage_Settings.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;TabPage_Logger.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="TextBox_Logger.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -914,33 +1164,6 @@ Pokémon 3D and The P3D Team neither owns nor claims to own any portion of the P
   <data name="&gt;&gt;TextBox_Logger.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="TabPage_Logger.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="TabPage_Logger.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="TabPage_Logger.Size" type="System.Drawing.Size, System.Drawing">
-    <value>836, 382</value>
-  </data>
-  <data name="TabPage_Logger.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="TabPage_Logger.Text" xml:space="preserve">
-    <value>Logger</value>
-  </data>
-  <data name="&gt;&gt;TabPage_Logger.Name" xml:space="preserve">
-    <value>TabPage_Logger</value>
-  </data>
-  <data name="&gt;&gt;TabPage_Logger.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;TabPage_Logger.Parent" xml:space="preserve">
-    <value>TabControl</value>
-  </data>
-  <data name="&gt;&gt;TabPage_Logger.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="TabPage_News.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
   </data>
@@ -954,13 +1177,13 @@ Pokémon 3D and The P3D Team neither owns nor claims to own any portion of the P
     <value>0</value>
   </data>
   <data name="TabPage_News.Text" xml:space="preserve">
-    <value>News</value>
+    <value>mf_tabpage_news</value>
   </data>
   <data name="&gt;&gt;TabPage_News.Name" xml:space="preserve">
     <value>TabPage_News</value>
   </data>
   <data name="&gt;&gt;TabPage_News.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>P3D.Legacy.Launcher.Controls.LocalizableTabPage, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;TabPage_News.Parent" xml:space="preserve">
     <value>TabControl</value>
@@ -971,26 +1194,11 @@ Pokémon 3D and The P3D Team neither owns nor claims to own any portion of the P
   <data name="TabControl.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
   </data>
-  <data name="TabPage_FAQ.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="TabPage_FAQ.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="TabPage_FAQ.Size" type="System.Drawing.Size, System.Drawing">
-    <value>836, 382</value>
-  </data>
-  <data name="TabPage_FAQ.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="TabPage_FAQ.Text" xml:space="preserve">
-    <value>FAQ</value>
-  </data>
   <data name="&gt;&gt;TabPage_FAQ.Name" xml:space="preserve">
     <value>TabPage_FAQ</value>
   </data>
   <data name="&gt;&gt;TabPage_FAQ.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>P3D.Legacy.Launcher.Controls.LocalizableTabPage, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;TabPage_FAQ.Parent" xml:space="preserve">
     <value>TabControl</value>
@@ -1019,8 +1227,38 @@ Pokémon 3D and The P3D Team neither owns nor claims to own any portion of the P
   <data name="&gt;&gt;TabControl.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="TabPage_FAQ.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="TabPage_FAQ.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="TabPage_FAQ.Size" type="System.Drawing.Size, System.Drawing">
+    <value>836, 382</value>
+  </data>
+  <data name="TabPage_FAQ.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="TabPage_FAQ.Text" xml:space="preserve">
+    <value>mf_tabpage_faq</value>
+  </data>
+  <data name="&gt;&gt;TabPage_FAQ.Name" xml:space="preserve">
+    <value>TabPage_FAQ</value>
+  </data>
+  <data name="&gt;&gt;TabPage_FAQ.Type" xml:space="preserve">
+    <value>P3D.Legacy.Launcher.Controls.LocalizableTabPage, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;TabPage_FAQ.Parent" xml:space="preserve">
+    <value>TabControl</value>
+  </data>
+  <data name="&gt;&gt;TabPage_FAQ.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="PictureBox_GameJolt.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Right</value>
+  </data>
+  <data name="PictureBox_GameJolt.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="PictureBox_GameJolt.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -1067,6 +1305,9 @@ Pokémon 3D and The P3D Team neither owns nor claims to own any portion of the P
   <data name="PictureBox_GameJolt_Offline.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Right</value>
   </data>
+  <data name="PictureBox_GameJolt_Offline.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="PictureBox_GameJolt_Offline.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACYAAAAmCAYAAACoPemuAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -1091,6 +1332,9 @@ Pokémon 3D and The P3D Team neither owns nor claims to own any portion of the P
   </data>
   <data name="PictureBox_GameJolt_Offline.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
+  </data>
+  <data name="PictureBox_GameJolt_Offline.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;PictureBox_GameJolt_Offline.Name" xml:space="preserve">
     <value>PictureBox_GameJolt_Offline</value>
@@ -1651,9 +1895,6 @@ Pokémon 3D and The P3D Team neither owns nor claims to own any portion of the P
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
 </value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.MaximumSize" type="System.Drawing.Size, System.Drawing">
     <value>860, 520</value>
   </data>
@@ -1664,7 +1905,7 @@ Pokémon 3D and The P3D Team neither owns nor claims to own any portion of the P
     <value>No</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Pokémon 3D Launcher</value>
+    <value>mf_title</value>
   </data>
   <data name="&gt;&gt;BackgroundWorker_GameJolt.Name" xml:space="preserve">
     <value>BackgroundWorker_GameJolt</value>
@@ -1676,6 +1917,6 @@ Pokémon 3D and The P3D Team neither owns nor claims to own any portion of the P
     <value>MainForm</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>P3D.Legacy.Launcher.Controls.LocalizableForm, P3D-Legacy Launcher, Version=1.3.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

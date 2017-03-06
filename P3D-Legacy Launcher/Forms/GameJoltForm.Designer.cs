@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameJoltForm));
-            this.Button_LogIn = new System.Windows.Forms.Button();
-            this.Button_SignIn = new System.Windows.Forms.Button();
-            this.Button_PlayOffline = new System.Windows.Forms.Button();
+            this.Button_LogIn = new P3D.Legacy.Launcher.Controls.LocalizableButton();
+            this.Button_SignIn = new P3D.Legacy.Launcher.Controls.LocalizableButton();
+            this.Button_PlayOffline = new P3D.Legacy.Launcher.Controls.LocalizableButton();
             this.PictureBox_GameJoltLogo = new System.Windows.Forms.PictureBox();
-            this.Label_QuestionToken = new System.Windows.Forms.Label();
-            this.WatermarkTextBox_Username = new P3D.Legacy.Launcher.Controls.WatermarkTextBox();
-            this.WatermarkTextBox_Token = new P3D.Legacy.Launcher.Controls.WatermarkTextBox();
-            this.CheckBox_SaveCredentials = new System.Windows.Forms.CheckBox();
-            this.CheckBox_AutoLogIn = new System.Windows.Forms.CheckBox();
+            this.Label_QuestionToken = new P3D.Legacy.Launcher.Controls.LocalizableLabel();
+            this.WatermarkTextBox_Username = new P3D.Legacy.Launcher.Controls.LocalizableWatermarkTextBox();
+            this.WatermarkTextBox_Token = new P3D.Legacy.Launcher.Controls.LocalizableWatermarkTextBox();
+            this.CheckBox_SaveCredentials = new P3D.Legacy.Launcher.Controls.LocalizableCheckBox();
+            this.CheckBox_AutoLogIn = new P3D.Legacy.Launcher.Controls.LocalizableCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox_GameJoltLogo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,6 +45,7 @@
             // 
             resources.ApplyResources(this.Button_LogIn, "Button_LogIn");
             this.Button_LogIn.Name = "Button_LogIn";
+            this.Button_LogIn.StringID_Text = "gj_button_login";
             this.Button_LogIn.UseVisualStyleBackColor = true;
             this.Button_LogIn.Click += new System.EventHandler(this.Button_LogIn_Click);
             // 
@@ -52,6 +53,7 @@
             // 
             resources.ApplyResources(this.Button_SignIn, "Button_SignIn");
             this.Button_SignIn.Name = "Button_SignIn";
+            this.Button_SignIn.StringID_Text = "gj_button_signin";
             this.Button_SignIn.UseVisualStyleBackColor = true;
             this.Button_SignIn.Click += new System.EventHandler(this.Button_SignIn_Click);
             // 
@@ -59,6 +61,7 @@
             // 
             resources.ApplyResources(this.Button_PlayOffline, "Button_PlayOffline");
             this.Button_PlayOffline.Name = "Button_PlayOffline";
+            this.Button_PlayOffline.StringID_Text = "gj_button_playoffline";
             this.Button_PlayOffline.UseVisualStyleBackColor = true;
             this.Button_PlayOffline.Click += new System.EventHandler(this.Button_PlayOffline_Click);
             // 
@@ -72,26 +75,30 @@
             // 
             resources.ApplyResources(this.Label_QuestionToken, "Label_QuestionToken");
             this.Label_QuestionToken.Name = "Label_QuestionToken";
+            this.Label_QuestionToken.StringID_Text = "gj_label_questionchar";
             this.Label_QuestionToken.Click += new System.EventHandler(this.Label_QuestionToken_Click);
             this.Label_QuestionToken.MouseEnter += new System.EventHandler(this.Label_QuestionToken_MouseEnter);
             this.Label_QuestionToken.MouseLeave += new System.EventHandler(this.Label_QuestionToken_MouseLeave);
             // 
             // WatermarkTextBox_Username
             // 
-            this.WatermarkTextBox_Username.Hint = "Username";
+            this.WatermarkTextBox_Username.Hint = "gj_wtextbox_username";
             resources.ApplyResources(this.WatermarkTextBox_Username, "WatermarkTextBox_Username");
             this.WatermarkTextBox_Username.Name = "WatermarkTextBox_Username";
+            this.WatermarkTextBox_Username.StringID_Hint = "gj_wtextbox_username";
             // 
             // WatermarkTextBox_Token
             // 
-            this.WatermarkTextBox_Token.Hint = "Token";
+            this.WatermarkTextBox_Token.Hint = "gj_wtextbox_token";
             resources.ApplyResources(this.WatermarkTextBox_Token, "WatermarkTextBox_Token");
             this.WatermarkTextBox_Token.Name = "WatermarkTextBox_Token";
+            this.WatermarkTextBox_Token.StringID_Hint = "gj_wtextbox_token";
             // 
             // CheckBox_SaveCredentials
             // 
             resources.ApplyResources(this.CheckBox_SaveCredentials, "CheckBox_SaveCredentials");
             this.CheckBox_SaveCredentials.Name = "CheckBox_SaveCredentials";
+            this.CheckBox_SaveCredentials.StringID_Text = "gj_checkbox_savecredentials";
             this.CheckBox_SaveCredentials.UseVisualStyleBackColor = true;
             this.CheckBox_SaveCredentials.CheckedChanged += new System.EventHandler(this.CheckBox_SaveCredentials_CheckedChanged);
             // 
@@ -99,6 +106,7 @@
             // 
             resources.ApplyResources(this.CheckBox_AutoLogIn, "CheckBox_AutoLogIn");
             this.CheckBox_AutoLogIn.Name = "CheckBox_AutoLogIn";
+            this.CheckBox_AutoLogIn.StringID_Text = "gj_checkbox_autologin";
             this.CheckBox_AutoLogIn.UseVisualStyleBackColor = true;
             // 
             // GameJoltForm
@@ -116,6 +124,7 @@
             this.Controls.Add(this.Button_LogIn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "GameJoltForm";
+            this.StringID_Title = "gj_title";
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox_GameJoltLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -123,14 +132,14 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button Button_LogIn;
-        private System.Windows.Forms.Button Button_SignIn;
-        private System.Windows.Forms.Button Button_PlayOffline;
+        private P3D.Legacy.Launcher.Controls.LocalizableButton Button_LogIn;
+        private P3D.Legacy.Launcher.Controls.LocalizableButton Button_SignIn;
+        private P3D.Legacy.Launcher.Controls.LocalizableButton Button_PlayOffline;
         private System.Windows.Forms.PictureBox PictureBox_GameJoltLogo;
-        private Controls.WatermarkTextBox WatermarkTextBox_Token;
-        private Controls.WatermarkTextBox WatermarkTextBox_Username;
-        private System.Windows.Forms.Label Label_QuestionToken;
-        private System.Windows.Forms.CheckBox CheckBox_SaveCredentials;
-        private System.Windows.Forms.CheckBox CheckBox_AutoLogIn;
+        private P3D.Legacy.Launcher.Controls.LocalizableLabel Label_QuestionToken;
+        private P3D.Legacy.Launcher.Controls.LocalizableCheckBox CheckBox_SaveCredentials;
+        private P3D.Legacy.Launcher.Controls.LocalizableCheckBox CheckBox_AutoLogIn;
+        private Controls.LocalizableWatermarkTextBox WatermarkTextBox_Token;
+        private Controls.LocalizableWatermarkTextBox WatermarkTextBox_Username;
     }
 }

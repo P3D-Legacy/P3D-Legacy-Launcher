@@ -25,9 +25,10 @@ namespace P3D.Legacy.Launcher.Services
         public static bool WebsiteIsUp => WebsiteChecker.Check();
 
         private static List<Release> _getAllReleases;
-        private static async Task<List<Release>> GetAllReleases()
+        private static async Task<List<Release>> GetAllReleasesAsync()
         {
-            if (_getAllReleases != null) return _getAllReleases;
+            if (_getAllReleases != null)
+                return _getAllReleases;
             else
             {
                 if(!WebsiteIsUp) return new List<Release>();
@@ -36,16 +37,17 @@ namespace P3D.Legacy.Launcher.Services
                 catch (Exception) { return new List<Release>(); }
             }
         }
-        public static async Task<List<GitHubRelease>> GetAllGitHubReleases()
+        public static async Task<List<GitHubRelease>> GetAllGitHubReleasesAsync()
         {
-            var releases = await GetAllReleases();
+            var releases = await GetAllReleasesAsync();
             return new List<GitHubRelease>(releases.Any() ? releases.Select(release => new GitHubRelease(release)) : new List<GitHubRelease>());
         }
 
         private static List<Release> _getAllLauncherReleases;
         private static async Task<List<Release>> GetAllLauncherReleases()
         {
-            if (_getAllLauncherReleases != null) return _getAllLauncherReleases;
+            if (_getAllLauncherReleases != null)
+                return _getAllLauncherReleases;
             else
             {
                 if (!WebsiteIsUp) return new List<Release>();
@@ -54,14 +56,14 @@ namespace P3D.Legacy.Launcher.Services
                 catch (Exception) { return new List<Release>(); }
             }
         }
-        public static async Task<List<GitHubRelease>> GetAllLauncherGitHubReleases()
+        public static async Task<List<GitHubRelease>> GetAllLauncherGitHubReleasesAsync()
         {
             var releases = await GetAllLauncherReleases();
             return new List<GitHubRelease>(releases.Any() ? releases.Select(release => new GitHubRelease(release)) : new List<GitHubRelease>());
         }
 
         private static List<Release> _getBetaWhitelistUsers;
-        private static async Task<List<Release>> GetBetaWhitelistUsers()
+        private static async Task<List<Release>> GetBetaWhitelistUsersAsync()
         {
             if (_getBetaWhitelistUsers != null) return _getBetaWhitelistUsers;
             else

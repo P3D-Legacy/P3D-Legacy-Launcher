@@ -6,11 +6,12 @@ namespace P3D.Legacy.Launcher.Controls
     internal class WatermarkTextBox : TextBox
     {
         private string _hint;
-        public string Hint
+        public virtual string Hint
         {
             get { return _hint; }
             set { _hint = value; Invalidate(); }
         }
+
         protected override void WndProc(ref Message m)
         {
             base.WndProc(ref m);

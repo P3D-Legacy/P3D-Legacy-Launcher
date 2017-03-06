@@ -11,6 +11,7 @@ namespace P3D.Legacy.Launcher
     {
         // TODO
         // Use https://github.com/MonoGame/MonoKickstart
+        //     https://github.com/FNA-XNA/FNA/wiki/3:-Distributing-FNA-Games
         public static List<Action> ActionsBeforeExit { get; } = new List<Action>();
 
         [STAThread]

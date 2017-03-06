@@ -3,49 +3,57 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
+using P3D.Legacy.Launcher.Controls;
 using P3D.Legacy.Launcher.Data;
+using P3D.Legacy.Launcher.Services;
 
 namespace P3D.Legacy.Launcher.Forms
 {
-    internal partial class GameJoltForm : Form
+    internal partial class GameJoltForm : LocalizableForm
     {
+        private Settings Settings { get; }
+
         private ToolTip ToolTip_WatermarkTextBox_Token { get; } = new ToolTip();
 
-        public GameJoltForm()
+        public GameJoltForm(Settings settings)
         {
+            Settings = settings;
+
             InitializeComponent();
 
-            var settings = SettingsYaml.Load();
-            WatermarkTextBox_Username.Text = settings.GameJoltUsername;
-            WatermarkTextBox_Token.Text = settings.GameJoltToken;
-            CheckBox_SaveCredentials.Checked = settings.SaveCredentials;
-            CheckBox_AutoLogIn.Checked = settings.AutoLogIn;
+            CheckBox_SaveCredentials.Checked = Settings.SaveCredentials;
+            CheckBox_AutoLogIn.Checked = Settings.AutoLogIn;
+            if (CheckBox_SaveCredentials.Checked)
+            {
+                WatermarkTextBox_Username.Text = Settings.GameJoltUsername;
+                WatermarkTextBox_Token.Text = Settings.GameJoltToken;
+            }
         }
 
-        private void Button_LogIn_Click(object sender, EventArgs e)
+        private async void Button_LogIn_Click(object sender, EventArgs e)
         {
-            var settings = SettingsYaml.Load();
-            settings.GameJoltUsername = WatermarkTextBox_Username.Text;
-            settings.GameJoltToken = WatermarkTextBox_Token.Text;
-            settings.SaveCredentials = CheckBox_SaveCredentials.Checked;
-            settings.AutoLogIn = CheckBox_AutoLogIn.Checked;
-            SettingsYaml.Save(settings);
+            Settings.SaveCredentials = CheckBox_SaveCredentials.Checked;
+            Settings.AutoLogIn = CheckBox_AutoLogIn.Checked;
+            if (Settings.SaveCredentials)
+            {
+                Settings.GameJoltUsername = WatermarkTextBox_Username.Text;
+                Settings.GameJoltToken = WatermarkTextBox_Token.Text;
+            }
+            await Settings.SaveAsync();
 
             Close();
             DialogResult = DialogResult.Yes;
         }
-
         private void Button_SignIn_Click(object sender, EventArgs e) => Process.Start(new ProcessStartInfo("http://gamejolt.com/join"));
-
         private void Button_PlayOffline_Click(object sender, EventArgs e)
         {
             Close();
             DialogResult = DialogResult.Ignore;
         }
 
-        private void Label_QuestionToken_MouseEnter(object sender, EventArgs e) => ToolTip_WatermarkTextBox_Token.Show(MBLang.ToolTipGameJoltToken, Label_QuestionToken);
+        private void Label_QuestionToken_MouseEnter(object sender, EventArgs e) => ToolTip_WatermarkTextBox_Token.Show(LocalizationUI.GetString("mf_label_token_hint"), Label_QuestionToken);
         private void Label_QuestionToken_MouseLeave(object sender, EventArgs e) => ToolTip_WatermarkTextBox_Token.Hide(Label_QuestionToken);
-        private void Label_QuestionToken_Click(object sender, EventArgs e) => ToolTip_WatermarkTextBox_Token.Show(MBLang.ToolTipGameJoltToken, Label_QuestionToken);
+        private void Label_QuestionToken_Click(object sender, EventArgs e) => ToolTip_WatermarkTextBox_Token.Show(LocalizationUI.GetString("mf_label_token_hint"), Label_QuestionToken);
 
         private ToolTip ToolTip_SaveCredentials { get; } = new ToolTip();
         private void CheckBox_SaveCredentials_CheckedChanged(object sender, EventArgs e)
@@ -63,7 +71,7 @@ namespace P3D.Legacy.Launcher.Forms
                 CheckBox_AutoLogIn.ForeColor = Color.DimGray;
                 CheckBox_AutoLogIn.AutoCheck = false;
 
-                ToolTip_SaveCredentials.SetToolTip(CheckBox_AutoLogIn, MBLang.ToolTipSaveCredentials);
+                ToolTip_SaveCredentials.SetToolTip(CheckBox_AutoLogIn, LocalizationUI.GetString("ToolTipSaveCredentials"));
             }
         }
     }

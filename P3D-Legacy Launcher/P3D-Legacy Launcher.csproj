@@ -63,6 +63,12 @@
     <Reference Include="Octokit, Version=0.24.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>$(SolutionDir)\packages\Octokit.0.24.0\lib\net45\Octokit.dll</HintPath>
     </Reference>
+    <Reference Include="PCLExt.FileStorage, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>$(SolutionDir)\packages\PCLExt.FileStorage.1.0.7\lib\net45\PCLExt.FileStorage.dll</HintPath>
+    </Reference>
+    <Reference Include="PCLExt.FileStorage.Abstractions, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>$(SolutionDir)\packages\PCLExt.FileStorage.1.0.7\lib\net45\PCLExt.FileStorage.Abstractions.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -77,17 +83,50 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\LocalizableTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\LocalizableTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\LocalizableButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\LocalizableLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\LocalizableCheckBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\LocalizableGroupBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\TimeoutWebClient.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\LocalizableForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\LocalizableWatermarkTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Controls\WatermarkTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Data\Profiles.cs" />
     <Compile Include="Data\ProfilesYaml.cs" />
+    <Compile Include="Data\Settings.cs" />
     <Compile Include="Extensions\ControlExtensions.cs" />
     <Compile Include="Crc32.cs" />
     <Compile Include="Data\UpdateInfoYaml.cs" />
-    <Compile Include="Services\FileSystem.cs" />
+    <Compile Include="Forms\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Services\LocalizationUI.cs" />
+    <Compile Include="Services\StorageInfo.cs" />
     <Compile Include="Forms\GameJoltForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,32 +135,20 @@
     </Compile>
     <Compile Include="Services\GameJolt.cs" />
     <Compile Include="Services\GitHub.cs" />
-    <Compile Include="Forms\MBLang.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MBLang.resx</DependentUpon>
-    </Compile>
     <Compile Include="YamlConverters\UriConverter.cs" />
-    <Compile Include="YamlConverters\CultureInfoConverter.cs" />
     <Compile Include="YamlConverters\VersionConverter.cs" />
-    <Compile Include="Forms\DirectUpdaterForm.cs">
+    <Compile Include="Forms\ReleaseDownloaderForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\DirectUpdaterForm.Designer.cs">
-      <DependentUpon>DirectUpdaterForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
+    <Compile Include="Forms\ReleaseDownloaderForm.Designer.cs">
+      <DependentUpon>ReleaseDownloaderForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Data\GitHubRelease.cs" />
-    <Compile Include="Forms\CustomUpdaterForm.cs">
+    <Compile Include="Forms\PerFileUpdaterForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\CustomUpdaterForm.Designer.cs">
-      <DependentUpon>CustomUpdaterForm.cs</DependentUpon>
+    <Compile Include="Forms\PerFileUpdaterForm.Designer.cs">
+      <DependentUpon>PerFileUpdaterForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ProfileForm.cs">
       <SubType>Form</SubType>
@@ -134,103 +161,19 @@
     <Compile Include="Extensions\ReleaseExtensions.cs" />
     <Compile Include="Data\SettingsYaml.cs" />
     <Compile Include="WebsiteChecker.cs" />
-    <EmbeddedResource Include="Forms\CustomUpdaterForm.de.resx">
-      <DependentUpon>CustomUpdaterForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CustomUpdaterForm.es.resx">
-      <DependentUpon>CustomUpdaterForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CustomUpdaterForm.lt.resx">
-      <DependentUpon>CustomUpdaterForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CustomUpdaterForm.nl.resx">
-      <DependentUpon>CustomUpdaterForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CustomUpdaterForm.ru.resx">
-      <DependentUpon>CustomUpdaterForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DirectUpdaterForm.de.resx">
-      <DependentUpon>DirectUpdaterForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DirectUpdaterForm.es.resx">
-      <DependentUpon>DirectUpdaterForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DirectUpdaterForm.lt.resx">
-      <DependentUpon>DirectUpdaterForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DirectUpdaterForm.nl.resx">
-      <DependentUpon>DirectUpdaterForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DirectUpdaterForm.resx">
-      <DependentUpon>DirectUpdaterForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\DirectUpdaterForm.ru.resx">
-      <DependentUpon>DirectUpdaterForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\GameJoltForm.de.resx">
-      <DependentUpon>GameJoltForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\GameJoltForm.es.resx">
-      <DependentUpon>GameJoltForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\GameJoltForm.lt.resx">
-      <DependentUpon>GameJoltForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\GameJoltForm.nl.resx">
-      <DependentUpon>GameJoltForm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\ReleaseDownloaderForm.resx">
+      <DependentUpon>ReleaseDownloaderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\GameJoltForm.resx">
       <DependentUpon>GameJoltForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\GameJoltForm.ru.resx">
-      <DependentUpon>GameJoltForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MainForm.de.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MainForm.es.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MainForm.lt.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MainForm.nl.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MainForm.ru.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MBLang.de.resx" />
-    <EmbeddedResource Include="Forms\MBLang.es.resx" />
-    <EmbeddedResource Include="Forms\MBLang.lt.resx" />
-    <EmbeddedResource Include="Forms\MBLang.nl.resx" />
-    <EmbeddedResource Include="Forms\MBLang.ru.resx" />
-    <EmbeddedResource Include="Forms\CustomUpdaterForm.resx">
-      <DependentUpon>CustomUpdaterForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ProfileForm.de.resx">
-      <DependentUpon>ProfileForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ProfileForm.es.resx">
-      <DependentUpon>ProfileForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ProfileForm.lt.resx">
-      <DependentUpon>ProfileForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ProfileForm.nl.resx">
-      <DependentUpon>ProfileForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MBLang.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>MBLang.Designer.cs</LastGenOutput>
+    <EmbeddedResource Include="Forms\PerFileUpdaterForm.resx">
+      <DependentUpon>PerFileUpdaterForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ProfileForm.resx">
-      <DependentUpon>ProfileForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ProfileForm.ru.resx">
       <DependentUpon>ProfileForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />

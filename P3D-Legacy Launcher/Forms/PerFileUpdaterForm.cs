@@ -11,26 +11,29 @@ using DamienG.Security.Cryptography;
 
 using Octokit;
 
+using P3D.Legacy.Launcher.Controls;
 using P3D.Legacy.Launcher.Data;
 using P3D.Legacy.Launcher.Extensions;
 using P3D.Legacy.Launcher.Services;
 
+using PCLExt.FileStorage;
+
 namespace P3D.Legacy.Launcher.Forms
 {
-    internal partial class CustomUpdaterForm : Form
+    internal partial class PerFileUpdaterForm : LocalizableForm
     {
         private WebClient Downloader { get; set; }
         private bool Cancelled { get; set; }
 
         private ReleaseAsset UpdateInfoAsset { get; }
-        private string ReleaseInfoFilePath => FileSystem.TempFilePath(UpdateInfoAsset.Name);
-        private string UpdatedFolderPath { get; }
+        private IFile ReleaseInfoFile => StorageInfo.GetTempFile(UpdateInfoAsset.Name).Result;
+        private IFolder UpdatedFolder { get; }
         private Uri DLUri { get; }
 
-        public CustomUpdaterForm(ReleaseAsset updateInfoAsset, string updatedFolderPath, Uri dlUri)
+        public PerFileUpdaterForm(ReleaseAsset updateInfoAsset, IFolder updatedFolder, Uri dlUri)
         {
             UpdateInfoAsset = updateInfoAsset;
-            UpdatedFolderPath = updatedFolderPath;
+            UpdatedFolder = updatedFolder;
             DLUri = dlUri;
 
             InitializeComponent();
@@ -38,17 +41,13 @@ namespace P3D.Legacy.Launcher.Forms
 
         private async void CustomUpdaterForm_Shown(object sender, EventArgs e)
         {
-            if (!Directory.Exists(FileSystem.TempFolderPath))
-                Directory.CreateDirectory(FileSystem.TempFolderPath);
-
-            await Task.Run(DownloadFile);
+            await Task.Run(DownloadFileAsync);
             Close();
         }
 
-        private async Task DownloadFile()
+        private async Task DownloadFileAsync()
         {
-            if (File.Exists(ReleaseInfoFilePath))
-                File.Delete(ReleaseInfoFilePath);
+            await ReleaseInfoFile.DeleteAsync();
 
             try
             {
@@ -56,16 +55,17 @@ namespace P3D.Legacy.Launcher.Forms
                 using (Downloader = new WebClient())
                 {
                     Downloader.DownloadProgressChanged += client_DownloadProgressChanged;
-                    await Downloader.DownloadFileTaskAsync(UpdateInfoAsset.BrowserDownloadUrl, ReleaseInfoFilePath);
+                    await Downloader.DownloadFileTaskAsync(UpdateInfoAsset.BrowserDownloadUrl, ReleaseInfoFile.Path);
                 }
             }
             catch (WebException) { DownloadErrorMessage(); return; }
             if (Cancelled) return;
 
 
-            if (File.Exists(ReleaseInfoFilePath))
-            {
-                var list = StartUpdate();
+            // TODO: Check
+            //if (File.Exists(ReleaseInfoFilePath))
+            //{
+                var list = await StartUpdateAsync();
                 if (Cancelled) return;
 
                 if (list.Any())
@@ -76,41 +76,40 @@ namespace P3D.Legacy.Launcher.Forms
                 }
                 else
                     NoUpdateNeededMessage();
-            }
-            else
-                DownloadErrorMessage();
+            //}
+            //else
+            //    DownloadErrorMessage();
         }
         private void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             PercentageProgressBar.SafeInvoke(() => PercentageProgressBar.Value = (int) e.BytesReceived);
         }
 
-        private List<UpdateFileEntryYaml> StartUpdate()
+        private async Task<List<UpdateFileEntryYaml>> StartUpdateAsync()
         {
             if (Cancelled) return new List<UpdateFileEntryYaml>();
 
             Label_ProgressBar1.SafeInvoke(() => Label_ProgressBar1.Text = Label_ProgressBar2.Text);
 
-            var releaseInfoContent = File.ReadAllText(ReleaseInfoFilePath);
+            var releaseInfoContent = await ReleaseInfoFile.ReadAllTextAsync();
             var updateInfo = UpdateInfoYaml.Deserialize(releaseInfoContent);
 
             var crc32 = new Crc32();
             var sha1 = new SHA1Managed();
             var notValidFileEntries = new List<UpdateFileEntryYaml>();
-            PercentageProgressBar.SafeInvoke(delegate { PercentageProgressBar.Maximum = updateInfo.Files.Count; PercentageProgressBar.Step = 1; PercentageProgressBar.Value = 0; });
-            Parallel.ForEach(updateInfo.Files, (updateFileEntry, state) =>
+            PercentageProgressBar.SafeInvoke(delegate { PercentageProgressBar.Maximum = updateInfo.Count(); PercentageProgressBar.Step = 1; PercentageProgressBar.Value = 0; });
+            Parallel.ForEach(updateInfo, async (updateFileEntry, state) =>
             {
                 if(Cancelled) state.Stop();
 
                 PercentageProgressBar.SafeInvoke(() => PercentageProgressBar.PerformStep());
 
-                var filePath = Path.Combine(UpdatedFolderPath, updateFileEntry.AbsoluteFilePath);
-                if (!File.Exists(filePath))
+                if (await UpdatedFolder.CheckExistsAsync(updateFileEntry.AbsoluteFilePath) != ExistenceCheckResult.FileExists)
                 {
                     notValidFileEntries.Add(updateFileEntry);
                     return;
                 }
-                using (var fs = File.Open(filePath, System.IO.FileMode.Open, FileAccess.Read))
+                using (var fs = await (await UpdatedFolder.GetFileAsync(updateFileEntry.AbsoluteFilePath)).OpenAsync(PCLExt.FileStorage.FileAccess.Read))
                 {
                     var crc32Hash = string.Empty;
                     var sha1Hash = string.Empty;
@@ -145,19 +144,15 @@ namespace P3D.Legacy.Launcher.Forms
             try
             {
                 PercentageProgressBar.SafeInvoke(delegate { PercentageProgressBar.Maximum = updateFileEntries.Count; PercentageProgressBar.Step = 1; PercentageProgressBar.Value = 0; });
-                Parallel.ForEach(updateFileEntries, (updateFileEntry, state) =>
+                Parallel.ForEach(updateFileEntries, async (updateFileEntry, state) =>
                 {
                     if (Cancelled) state.Stop();
 
                     var dlUri = new Uri(DLUri, updateFileEntry.AbsoluteFilePath);
-                    var tempFilePath = FileSystem.TempFilePath(updateFileEntry.AbsoluteFilePath);
-                    var tempFolderpath = Path.GetDirectoryName(tempFilePath);
-                    if (!string.IsNullOrEmpty(tempFolderpath) && !Directory.Exists(tempFolderpath))
-                        Directory.CreateDirectory(tempFolderpath);
-
+                    var tempFile = await StorageInfo.GetTempFile(updateFileEntry.AbsoluteFilePath);
                     using (var downloader = new WebClient())
                     {
-                        downloader.DownloadFile(dlUri, tempFilePath);
+                        downloader.DownloadFile(dlUri, tempFile.Path);
                         PercentageProgressBar.SafeInvoke(() => PercentageProgressBar.PerformStep());
                     }
                 });
@@ -175,52 +170,49 @@ namespace P3D.Legacy.Launcher.Forms
 
             try
             {
-                Parallel.ForEach(updateFileEntries, (updateFileEntry, state) =>
+                Parallel.ForEach(updateFileEntries, async (updateFileEntry, state) =>
                 {
                     if (Cancelled) state.Break();
 
-                    var tempFilePath = FileSystem.TempFilePath(updateFileEntry.AbsoluteFilePath);
-                    var filePath = Path.Combine(UpdatedFolderPath, updateFileEntry.AbsoluteFilePath);
-
-                    if (File.Exists(filePath))
-                        File.Delete(filePath);
-                    File.Move(tempFilePath, filePath);
-                    File.Delete(tempFilePath);
+                    var tempFilePath = await StorageInfo.GetTempFile(updateFileEntry.AbsoluteFilePath);
+                    await tempFilePath.MoveAsync(PortablePath.Combine(UpdatedFolder.Path, updateFileEntry.AbsoluteFilePath));
+                    await tempFilePath.DeleteAsync();
                 });
             }
             catch (UnauthorizedAccessException) { FileReplacementErrorMessage(); return; }
             catch (IOException) { FileReplacementErrorMessage(); return; }
         }
-        private void CustomUpdaterForm_FormClosing(object sender, FormClosingEventArgs e)
+        private async void CustomUpdaterForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Cancelled = true;
             Downloader?.CancelAsync();
 
-            Directory.Delete(FileSystem.TempFolderPath, true);
+            await Task.Delay(1000);
+            await StorageInfo.TempFolder.DeleteAsync();
         }
 
 
         private void DownloadErrorMessage()
         {
-            MessageBox.Show(MBLang.DownloadError, MBLang.DownloadErrorTitle, MessageBoxButtons.OK);
+            MessageBox.Show(LocalizationUI.GetString("DownloadError"), LocalizationUI.GetString("DownloadErrorTitle"), MessageBoxButtons.OK);
             if (Cancelled) return;
             this.SafeInvoke(Close);
         }
         private void FileReplacementErrorMessage()
         {
-            MessageBox.Show(MBLang.FileReplacementError, MBLang.FileReplacementErrorTitle, MessageBoxButtons.OK);
+            MessageBox.Show(LocalizationUI.GetString("FileReplacementError"), LocalizationUI.GetString("FileReplacementErrorTitle"), MessageBoxButtons.OK);
             if (Cancelled) return;
             this.SafeInvoke(Close);
         }
         private void NoUpdateNeededMessage()
         {
-            MessageBox.Show(MBLang.NoUpdateNeeded, MBLang.NoUpdateNeededTitle, MessageBoxButtons.OK);
+            MessageBox.Show(LocalizationUI.GetString("NoUpdateNeeded"), LocalizationUI.GetString("NoUpdateNeededTitle"), MessageBoxButtons.OK);
             if (Cancelled) return;
             this.SafeInvoke(Close);
         }
         private void UpdatedMessage()
         {
-            MessageBox.Show(MBLang.Updated, MBLang.UpdatedTitle, MessageBoxButtons.OK);
+            MessageBox.Show(LocalizationUI.GetString("Updated"), LocalizationUI.GetString("UpdatedTitle"), MessageBoxButtons.OK);
             if (Cancelled) return;
             this.SafeInvoke(Close);
         }
