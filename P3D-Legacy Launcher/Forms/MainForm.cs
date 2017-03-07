@@ -175,10 +175,10 @@ namespace P3D.Legacy.Launcher.Forms
             }
 
 
-            if (await CurrentProfile.Folder.CheckExistsAsync(StorageInfo.ExeFilename) == ExistenceCheckResult.FileExists)
+            if (CurrentProfile.ExecutionFile != null)
             {
-                var exeFile = await CurrentProfile.Folder.GetFileAsync(StorageInfo.ExeFilename);
-                var startInfo = new ProcessStartInfo(exeFile.Path, LaunchArgsHandler.CreateArgs(GameJolt.GameJoltYaml, false));
+                var gameJoltArgs = CurrentProfile.IsSupportingGameJolt ? LaunchArgsHandler.CreateArgs(GameJolt.GameJoltYaml, false) : "";
+                var startInfo = new ProcessStartInfo(CurrentProfile.ExecutionFile.Path, $"{gameJoltArgs} {CurrentProfile.LaunchArgs}") { UseShellExecute = false };
                 Process.Start(startInfo);
                 this.SafeInvoke(Close);
                 return;
@@ -439,19 +439,19 @@ namespace P3D.Legacy.Launcher.Forms
         {
             Log($"Checking Profile '{CurrentProfile.Name}' for updates...");
 
-            if (!onStartup && await CurrentProfile.Folder.CheckExistsAsync(StorageInfo.ExeFilename) != ExistenceCheckResult.FileExists)
+            if (!onStartup && CurrentProfile.ExecutionFile == null)
             {
                 Log($"Profile '{CurrentProfile.Name}' was not downloaded!");
                 await DownloadCurrentProfileAsync();
             }
 
-            if (await CurrentProfile.Folder.CheckExistsAsync(StorageInfo.ExeFilename) != ExistenceCheckResult.FileExists)
+            if (CurrentProfile.ExecutionFile == null)
             {
-                Log($"Something went wrong while dwonloading the Profile '{CurrentProfile.Name}'! Aborting update!");
+                Log($"Something went wrong while downloading the Profile '{CurrentProfile.Name}'! Aborting update!");
                 return;
             }
 
-            var gameReleases = await GitHub.GetAllGitHubReleasesAsync();
+            var gameReleases = await CurrentProfile.GetAvailableReleasesAsync();
             if (gameReleases.Any() && (!onStartup || CurrentProfile.IsDefault))
             {
                 var latestRelease = gameReleases.First();
@@ -485,7 +485,7 @@ namespace P3D.Legacy.Launcher.Forms
         }
         private async Task<bool> DownloadCurrentProfileAsync()
         {
-            var gameReleases = await GitHub.GetAllGitHubReleasesAsync();
+            var gameReleases = await CurrentProfile.GetAvailableReleasesAsync();
             if (gameReleases.Any())
             {
                 var onlineRelease = gameReleases.First(release => release.Version == CurrentProfile.Version);
@@ -530,15 +530,27 @@ namespace P3D.Legacy.Launcher.Forms
 
         private async Task ReloadProfileListAsync(Profiles.SelectedProfile selectedProfile = Profiles.SelectedProfile.Current)
         {
+            var selectedIndex = Profiles.SelectedProfileIndex;
+
             await Profiles.ReloadAsync(selectedProfile);
 
             if (Controls.Count == 0)
                 return;
 
-            ComboBox_CurrentProfile.Items.Clear();
-            foreach (var profile in Profiles)
-                ComboBox_CurrentProfile.Items.Add(profile.Name);
-            ComboBox_CurrentProfile.SelectedIndex = Profiles.SelectedProfileIndex;
+            ComboBox_CurrentProfile.DataSource = Profiles.ToArray();
+            switch (selectedProfile)
+            {
+                case Profiles.SelectedProfile.Current:
+                    ComboBox_CurrentProfile.SelectedIndex = selectedIndex;
+                    break;
+                case Profiles.SelectedProfile.First:
+                    ComboBox_CurrentProfile.SelectedIndex = Profiles.Any() ? 0 : -1;
+                    break;
+                case Profiles.SelectedProfile.Last:
+                    ComboBox_CurrentProfile.SelectedIndex = Profiles.Any() ? Profiles.Count() - 1 : -1;
+                    break;
+            }
+            
         }
         private async void ReloadSettings()
         {

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 
 using JoltNet;
@@ -13,7 +12,7 @@ namespace P3D.Legacy.Launcher.Services
 {
     internal class GameJolt
     {
-        private const string Host = "gamejolt.com";
+        private static readonly EncodedString Host = "gamejolt.com";
 
         private static string GameId = "";
         private static string GameKey = "";
@@ -21,8 +20,8 @@ namespace P3D.Legacy.Launcher.Services
         private static string OldGameId = "";
         private static string OldGameKey = "";
 
-        private static GameJoltApiClient Client { get; } = new GameJoltApiClient(Encoding.UTF8.GetString(Convert.FromBase64String(GameId)), Encoding.UTF8.GetString(Convert.FromBase64String(GameKey)));
-        private static GameJoltApiClient OldClient { get; } = new GameJoltApiClient(Encoding.UTF8.GetString(Convert.FromBase64String(OldGameId)), Encoding.UTF8.GetString(Convert.FromBase64String(OldGameKey)));
+        private static GameJoltApiClient Client { get; } = new GameJoltApiClient(EncodedString.FromEncodedData(GameId), EncodedString.FromEncodedData(GameKey));
+        private static GameJoltApiClient OldClient { get; } = new GameJoltApiClient(EncodedString.FromEncodedData(OldGameId), EncodedString.FromEncodedData(OldGameKey));
 
         private static WebsiteChecker WebsiteChecker { get; } = new WebsiteChecker(Host);
         public static bool WebsiteIsUp => WebsiteChecker.Check();

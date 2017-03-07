@@ -20,8 +20,6 @@ namespace P3D.Legacy.Launcher.Services
         public static IFolder TempFolder => MainFolder.CreateFolderAsync(TempFoldername, CreationCollisionOption.OpenIfExists).Result;
         public static async Task<IFile> GetTempFile(string fileName) => await TempFolder.CreateFileAsync(fileName, CreationCollisionOption.OpenIfExists);
 
-        public const string ExeFilename = "Pokemon3D.exe";
-
         public const string UpdaterExeFilename = "P3D-Legacy Launcher Updater.exe";
 
         private const string SettingsFilename = "Settings.yml";

@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 using P3D.Legacy.Launcher.Services;
@@ -22,17 +21,10 @@ namespace P3D.Legacy.Launcher.Data
         public static ProfilesYaml ToYaml(Profiles profile) => new ProfilesYaml(profile.SelectedProfileIndex, profile.ProfileList.Select(Profile.ToYaml).ToList());
         public static Profiles FromYaml(ProfilesYaml profile) => new Profiles(profile.SelectedProfileIndex, profile.ProfileList.Select(Profile.FromYaml).ToList());
 
-        private static readonly SemaphoreSlim _saveSemaphoreSlim = new SemaphoreSlim(1);
         public static async Task SaveAsync(ProfilesYaml yaml)
         {
             var serializer = ProfilesYaml.SerializerBuilder.Build();
             await StorageInfo.ProfilesFile.WriteAllTextAsync(serializer.Serialize(yaml));
-            return;
-
-            // -- There seems to be some race condition, workaround or legit fix? 
-            await _saveSemaphoreSlim.WaitAsync();
-            try { await StorageInfo.ProfilesFile.WriteAllTextAsync(serializer.Serialize(yaml)); }
-            finally { _saveSemaphoreSlim.Release(); }
         }
         public static async Task<Profiles> LoadAsync()
         {
@@ -55,17 +47,7 @@ namespace P3D.Legacy.Launcher.Data
 
         }
 
-        public static IEnumerable<System.Version> AvailableVersions { get; } = AsyncExtensions.RunSync(async () => await GetAvailableVersionsAsync()).OrderByDescending<System.Version, System.Version>(version => version);
-        private static async Task<IEnumerable<System.Version>> GetAvailableVersionsAsync()
-        {
-            if (!GitHub.WebsiteIsUp)
-                return new List<System.Version>();
 
-            try { return new List<System.Version>((await GitHub.GetAllGitHubReleasesAsync()).Select(release => release.Version)); }
-            catch (Exception) { return new List<System.Version>(); }
-        }
-        
-        
         private List<Profile> ProfileList { get; set; }
         public int SelectedProfileIndex { get; set; }
         public Profile CurrentProfile
@@ -80,12 +62,12 @@ namespace P3D.Legacy.Launcher.Data
 
         private Profiles(int selectedProfileIndex, List<Profile> profileList) { SelectedProfileIndex = selectedProfileIndex; ProfileList = profileList; }
 
-        public async Task Create(string name, System.Version version)
+        public async Task CreateAsync(ProfileType profileType, string name, System.Version version, string launchArgs = "")
         {
-            ProfileList.Add(new Profile(name, version));
+            ProfileList.Add(new Profile(profileType, name, version, launchArgs));
             await SaveAsync();
         }
-        public async Task Create(Profile profile)
+        public async Task CreateAsync(Profile profile)
         {
             ProfileList.Add(profile);
             await SaveAsync();
@@ -115,16 +97,19 @@ namespace P3D.Legacy.Launcher.Data
                 if (ProfileList[i] == profileOld)
                     ProfileList[i] = profileNew;
 
-            var oldFolder = profileOld.Folder;
-            var newFolder = profileNew.Folder;
-            if ((await oldFolder.GetFilesAsync()).Any() || (await oldFolder.GetFoldersAsync()).Any()) // If Folder is not empty
+            if (profileOld.Name != profileNew.Name)
             {
-                var folderReplace = await GetEmptyFolderRecursiveAsync(newFolder);
+                var oldFolder = profileOld.Folder;
+                var newFolder = profileNew.Folder;
+                if ((await oldFolder.GetFilesAsync()).Any() || (await oldFolder.GetFoldersAsync()).Any())
+                {
+                    var folderReplace = await GetEmptyFolderRecursiveAsync(newFolder);
 
-                if ((await newFolder.GetFilesAsync()).Any() || (await newFolder.GetFoldersAsync()).Any()) // If Folder is not empty
-                    await newFolder.MoveAsync(folderReplace);
+                    if ((await newFolder.GetFilesAsync()).Any() || (await newFolder.GetFoldersAsync()).Any())
+                        await newFolder.MoveAsync(folderReplace);
 
-                await oldFolder.MoveAsync(newFolder);
+                    await oldFolder.MoveAsync(newFolder);
+                }
             }
         }
         private async Task<IFolder> GetEmptyFolderRecursiveAsync(IFolder folder)
@@ -169,57 +154,75 @@ namespace P3D.Legacy.Launcher.Data
     internal sealed class Profile
     {
         public static System.Version NoVersion { get; } = new System.Version("0.0");
-        private static System.Version GameJoltVersion { get; } = new System.Version("0.55");
 
         public static bool operator ==(Profile a, Profile b) => ReferenceEquals(a, null) ? ReferenceEquals(b, null) : a.Equals((object) b);
         public static bool operator !=(Profile a, Profile b) => !(a == b);
 
+        public static async Task<IEnumerable<System.Version>> GetAvailableVersionsAsync(ProfileType profileType)
+        {
+            if (!GitHub.WebsiteIsUp)
+                return new List<System.Version>();
+
+            try
+            {
+                var t = await GitHub.GetAllGitHubReleasesAsync(profileType);
+                return new List<System.Version>((await GitHub.GetAllGitHubReleasesAsync(profileType)).Select(release => release.Version)).OrderByDescending<System.Version, System.Version>(version => version); ;
+            }
+            catch (Exception) { return new List<System.Version>(); }
+        }
+
         public static async Task Delete(Profile profile) => await profile.Folder.DeleteAsync();
 
-        public static ProfileYaml ToYaml(Profile profile) => new ProfileYaml(profile.Name, profile.Version);
-        public static Profile FromYaml(ProfileYaml profile) => new Profile(profile.Name, profile.Version);
+        public static ProfileYaml ToYaml(Profile profile) => new ProfileYaml(profile.ProfileType, profile.Name, profile.Version, profile.LaunchArgs);
+        public static Profile FromYaml(ProfileYaml yaml) => new Profile(yaml.ProfileType, yaml.Name, yaml.Version, yaml.LaunchArgs);
 
 
+        public ProfileType ProfileType { get; }
         public string Name { get; }
         public System.Version Version { get; }
-        public System.Version VersionExe
+        public System.Version VersionExe => ExecutionFile != null ? new System.Version(FileVersionInfo.GetVersionInfo(ExecutionFile.Path).ProductVersion) : NoVersion;
+        public string LaunchArgs { get; }
+
+        public IFile ExecutionFile
         {
             get
             {
-                if (AsyncExtensions.RunSync(async () => await Folder.CheckExistsAsync(StorageInfo.ExeFilename) == ExistenceCheckResult.FileExists))
-                    return new System.Version(FileVersionInfo.GetVersionInfo(AsyncExtensions.RunSync(async () => await Folder.GetFileAsync(StorageInfo.ExeFilename)).Path).ProductVersion);
-                else
-                    return NoVersion;
+                if(AsyncExtensions.RunSync(async () => await Folder.CheckExistsAsync(ProfileType.Exe) == ExistenceCheckResult.FileExists))
+                    return AsyncExtensions.RunSync(async () => await Folder.GetFileAsync(ProfileType.Exe));
+                return null;
             }
         }
-
-        public IFolder Folder => StorageInfo.GameProfilesFolder.CreateFolderAsync(Name, CreationCollisionOption.OpenIfExists).Result;
+        public IFolder Folder => AsyncExtensions.RunSync(async () => await StorageInfo.GameProfilesFolder.CreateFolderAsync(Name, CreationCollisionOption.OpenIfExists));
 
         public bool IsDefault
         {
             get
-            {
-                var latestVersion = Profiles.AvailableVersions.FirstOrDefault();
+            { 
+                var latestVersion = AsyncExtensions.RunSync(async () => await GetAvailableVersionsAsync()).FirstOrDefault();
                 return Name == "Latest" && latestVersion != null ? latestVersion == Version : Version == NoVersion;
             }
         }
-        public bool IsSupportingGameJolt => Version >= GameJoltVersion;
+        public bool IsSupportingGameJolt => ProfileType.IsSupportingGameJolt(Version);
 
-        public Profile(string name, System.Version version)
+        public Profile(ProfileType profileType, string name, System.Version version, string launchArgs = "")
         {
+            ProfileType = profileType;
             Name = name;
             Version = version;
+            LaunchArgs = string.IsNullOrEmpty(launchArgs) ? profileType.DefaultLaunchArgs : launchArgs;
 
             System.Version[] versions;
-            if (Equals(Version, NoVersion) && (versions = Profiles.AvailableVersions.ToArray()).Length > 0)
+            if (Equals(Version, NoVersion) && (versions = AsyncExtensions.RunSync(async () => await GetAvailableVersionsAsync()).ToArray()).Length > 0)
                 Version = versions.First();
         }
+
+        public async Task<List<GitHubRelease>> GetAvailableReleasesAsync() => await GitHub.GetAllGitHubReleasesAsync(ProfileType);
+        public async Task<IEnumerable<System.Version>> GetAvailableVersionsAsync() => await GetAvailableVersionsAsync(ProfileType);
 
         public ProfileYaml ToYaml() => ToYaml(this);
         public async Task Delete() => await Delete(this);
 
-
-        private bool Equals(Profile other) => string.Equals(Name, other.Name);
+        private bool Equals(Profile other) => String.Equals(Name, other.Name);
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) return false;
@@ -228,5 +231,7 @@ namespace P3D.Legacy.Launcher.Data
             return Equals((Profile)obj);
         }
         public override int GetHashCode() => Name?.GetHashCode() ?? 0;
+
+        public override string ToString() => Name;
     }
 }

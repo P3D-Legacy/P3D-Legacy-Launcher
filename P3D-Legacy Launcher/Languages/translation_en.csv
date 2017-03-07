@@ -43,8 +43,13 @@ gj_button_signin,,Sign Up
 ;Profile Form;,,
 pf_title,Window Title,Profile Editor
 pf_groupbox_profileinfo,,Profile Info
+pf_label_profiletype,,Profile Type:
 pf_label_profilename,,Profile Name:
 pf_label_version,,Version:
+pf_label_launchargs,Args = arguements. Please try to make it compact,Launch Args:
+pf_label_noedit,,"You can't edit the 'Latest' Profile!
+Create a new profile!"
+pf_button_openprofiledir,,Open Directory
 pf_groupbox_modifications,,Modifications
 pf_button_cancel,,Cancel
 pf_button_save,,Save
@@ -81,7 +86,7 @@ NoUpdateNeededTitle,,Done!
 ProfileUpToDate,,Profile '{0}' is up to date!
 ProfileUpToDateTitle,,Update Check
 ToolTipSaveCredentials,,"Enable ""Remember Me"" first!"
-UpdateAvailable,,Would you like to update the [{0}] version to [{1}]?
+UpdateAvailable,,Would you like to download the [{0}] version to [{1}]?
 UpdateAvailableTitle,,Update is Available!
 Updated,,The Profile was successfully updated!
 UpdateDisabled,,"Update is disabled! Please download the new version, don't use updating."

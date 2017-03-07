@@ -30,6 +30,12 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProfileForm));
             this.GroupBox_ProfileInfo = new P3D.Legacy.Launcher.Controls.LocalizableGroupBox();
+            this.Button_OpenProfileDir = new P3D.Legacy.Launcher.Controls.LocalizableButton();
+            this.Label_LaunchArgs = new P3D.Legacy.Launcher.Controls.LocalizableLabel();
+            this.TextBox_LaunchArgs = new System.Windows.Forms.TextBox();
+            this.Label_NoEdit = new P3D.Legacy.Launcher.Controls.LocalizableLabel();
+            this.ComboBox_Type = new System.Windows.Forms.ComboBox();
+            this.Label_ProfileType = new P3D.Legacy.Launcher.Controls.LocalizableLabel();
             this.ComboBox_Version = new System.Windows.Forms.ComboBox();
             this.Label_Version = new P3D.Legacy.Launcher.Controls.LocalizableLabel();
             this.TextBox_ProfileName = new System.Windows.Forms.TextBox();
@@ -43,6 +49,12 @@
             // GroupBox_ProfileInfo
             // 
             resources.ApplyResources(this.GroupBox_ProfileInfo, "GroupBox_ProfileInfo");
+            this.GroupBox_ProfileInfo.Controls.Add(this.Button_OpenProfileDir);
+            this.GroupBox_ProfileInfo.Controls.Add(this.Label_LaunchArgs);
+            this.GroupBox_ProfileInfo.Controls.Add(this.TextBox_LaunchArgs);
+            this.GroupBox_ProfileInfo.Controls.Add(this.Label_NoEdit);
+            this.GroupBox_ProfileInfo.Controls.Add(this.ComboBox_Type);
+            this.GroupBox_ProfileInfo.Controls.Add(this.Label_ProfileType);
             this.GroupBox_ProfileInfo.Controls.Add(this.ComboBox_Version);
             this.GroupBox_ProfileInfo.Controls.Add(this.Label_Version);
             this.GroupBox_ProfileInfo.Controls.Add(this.TextBox_ProfileName);
@@ -50,6 +62,46 @@
             this.GroupBox_ProfileInfo.Name = "GroupBox_ProfileInfo";
             this.GroupBox_ProfileInfo.StringID_Text = "pf_groupbox_profileinfo";
             this.GroupBox_ProfileInfo.TabStop = false;
+            // 
+            // Button_OpenProfileDir
+            // 
+            resources.ApplyResources(this.Button_OpenProfileDir, "Button_OpenProfileDir");
+            this.Button_OpenProfileDir.Name = "Button_OpenProfileDir";
+            this.Button_OpenProfileDir.StringID_Text = "pf_button_openprofiledir";
+            this.Button_OpenProfileDir.UseVisualStyleBackColor = true;
+            this.Button_OpenProfileDir.Click += new System.EventHandler(this.Button_OpenProfileDir_Click);
+            // 
+            // Label_LaunchArgs
+            // 
+            resources.ApplyResources(this.Label_LaunchArgs, "Label_LaunchArgs");
+            this.Label_LaunchArgs.Name = "Label_LaunchArgs";
+            this.Label_LaunchArgs.StringID_Text = "pf_label_launchargs";
+            // 
+            // TextBox_LaunchArgs
+            // 
+            resources.ApplyResources(this.TextBox_LaunchArgs, "TextBox_LaunchArgs");
+            this.TextBox_LaunchArgs.Name = "TextBox_LaunchArgs";
+            // 
+            // Label_NoEdit
+            // 
+            this.Label_NoEdit.ForeColor = System.Drawing.Color.Red;
+            resources.ApplyResources(this.Label_NoEdit, "Label_NoEdit");
+            this.Label_NoEdit.Name = "Label_NoEdit";
+            this.Label_NoEdit.StringID_Text = "pf_label_noedit";
+            // 
+            // ComboBox_Type
+            // 
+            resources.ApplyResources(this.ComboBox_Type, "ComboBox_Type");
+            this.ComboBox_Type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboBox_Type.FormattingEnabled = true;
+            this.ComboBox_Type.Name = "ComboBox_Type";
+            this.ComboBox_Type.SelectedIndexChanged += new System.EventHandler(this.ComboBox_Type_SelectedIndexChanged);
+            // 
+            // Label_ProfileType
+            // 
+            resources.ApplyResources(this.Label_ProfileType, "Label_ProfileType");
+            this.Label_ProfileType.Name = "Label_ProfileType";
+            this.Label_ProfileType.StringID_Text = "pf_label_profiletype";
             // 
             // ComboBox_Version
             // 
@@ -125,5 +177,11 @@
         private System.Windows.Forms.TextBox TextBox_ProfileName;
         private P3D.Legacy.Launcher.Controls.LocalizableLabel Label_ProfileName;
         private P3D.Legacy.Launcher.Controls.LocalizableGroupBox GroupBox_Modifications;
+        private Controls.LocalizableButton Button_OpenProfileDir;
+        private System.Windows.Forms.ComboBox ComboBox_Type;
+        private Controls.LocalizableLabel Label_ProfileType;
+        private Controls.LocalizableLabel Label_NoEdit;
+        private Controls.LocalizableLabel Label_LaunchArgs;
+        private System.Windows.Forms.TextBox TextBox_LaunchArgs;
     }
 }

@@ -115,6 +115,7 @@
     </Compile>
     <Compile Include="Data\Profiles.cs" />
     <Compile Include="Data\ProfilesYaml.cs" />
+    <Compile Include="Data\ProfileType.cs" />
     <Compile Include="Data\Settings.cs" />
     <Compile Include="Extensions\ControlExtensions.cs" />
     <Compile Include="Crc32.cs" />
@@ -135,6 +136,7 @@
     </Compile>
     <Compile Include="Services\GameJolt.cs" />
     <Compile Include="Services\GitHub.cs" />
+    <Compile Include="YamlConverters\ProfileTypeConverter.cs" />
     <Compile Include="YamlConverters\UriConverter.cs" />
     <Compile Include="YamlConverters\VersionConverter.cs" />
     <Compile Include="Forms\ReleaseDownloaderForm.cs">
@@ -176,6 +178,12 @@
     <EmbeddedResource Include="Forms\ProfileForm.resx">
       <DependentUpon>ProfileForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Languages\translation_nl.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Languages\translation_de.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Languages\translation_en.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
