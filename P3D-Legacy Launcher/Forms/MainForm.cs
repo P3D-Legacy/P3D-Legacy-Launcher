@@ -80,7 +80,7 @@ namespace P3D.Legacy.Launcher.Forms
             ReloadSettings();
 
             // TODO: better string.format use
-            TextBox_Credits.Text = LocalizationUI.GetString(TextBox_Credits.StringID_Text, "Aragas", string.Join(", ", LocalizationUI.Localizations.Select(lf => lf.Author)
+            Label_Credits.Text = string.Format(Label_Credits.Text, "Aragas", string.Join(", ", LocalizationUI.Localizations.Select(lf => lf.Author)
                 .Distinct()
                 .Where(author => !string.IsNullOrEmpty(author))));
 

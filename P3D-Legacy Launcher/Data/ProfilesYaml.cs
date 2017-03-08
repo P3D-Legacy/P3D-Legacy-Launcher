@@ -4,6 +4,7 @@ using System.Linq;
 
 using P3D.Legacy.Launcher.YamlConverters;
 using P3D.Legacy.Shared.Extensions;
+
 using YamlDotNet.Serialization;
 
 namespace P3D.Legacy.Launcher.Data
@@ -41,6 +42,7 @@ namespace P3D.Legacy.Launcher.Data
             return ProfileList[SelectedProfileIndex].Name != null && ProfileList[SelectedProfileIndex].Version != null;
         }
     }
+
     internal class ProfileYaml
     {
         public static ProfileYaml Default => new ProfileYaml(ProfileType.Game, "Latest", AsyncExtensions.RunSync(async () => await Profile.GetAvailableVersionsAsync(ProfileType.Game)).FirstOrDefault() ?? Profile.NoVersion, string.Empty);

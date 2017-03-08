@@ -40,16 +40,14 @@ namespace P3D.Legacy.Launcher.Services
         private static Dictionary<ProfileType, List<Release>> _getAllReleases = new Dictionary<ProfileType, List<Release>>();
         private static async Task<List<Release>> GetAllReleasesAsync(ProfileType profileType)
         {
-            if (_getAllReleases.ContainsKey(profileType))
-                return _getAllReleases[profileType];
+            if (_getAllReleases.ContainsKey(profileType)) return _getAllReleases[profileType];
             else
             {
-                if(!WebsiteIsUp)
-                    return new List<Release>();
+                if(!WebsiteIsUp) return new List<Release>();
 
                 try
                 {
-                    var options = new ApiOptions() {StartPage = 1, PageCount = 1, PageSize = 30};
+                    var options = new ApiOptions() { StartPage = 1, PageCount = 1, PageSize = 30 };
                     if (profileType == ProfileType.Game)
                         _getAllReleases.Add(profileType, FilterReleases(await Client.Repository.Release.GetAll(OrgName, GameRepoName, options)));
                     else if (profileType == ProfileType.Server1)
@@ -78,8 +76,7 @@ namespace P3D.Legacy.Launcher.Services
         private static List<Release> _getAllLauncherReleases;
         private static async Task<List<Release>> GetAllLauncherReleases()
         {
-            if (_getAllLauncherReleases != null)
-                return _getAllLauncherReleases;
+            if (_getAllLauncherReleases != null) return _getAllLauncherReleases;
             else
             {
                 if (!WebsiteIsUp) return new List<Release>();

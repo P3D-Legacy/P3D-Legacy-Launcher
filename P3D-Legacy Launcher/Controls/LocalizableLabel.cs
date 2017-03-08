@@ -7,10 +7,10 @@ namespace P3D.Legacy.Launcher.Controls
     internal class LocalizableLabel : Label
     {
         private string _stringID;
-        public virtual string StringID_Text
+        public override string Text
         {
-            get { return _stringID; }
-            set { _stringID = value; Text = LocalizationUI.GetString(_stringID); }
+            get { return LocalizationUI.GetString(_stringID); }
+            set { _stringID = value; }
         }
     }
 }

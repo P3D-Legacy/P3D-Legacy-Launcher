@@ -44,7 +44,6 @@ namespace P3D.Legacy.Launcher.Data
                 await SaveAsync(ProfilesYaml.Default);
                 return FromYaml(deserializer.Deserialize<ProfilesYaml>(await StorageInfo.ProfilesFile.ReadAllTextAsync()));
             }
-
         }
 
 
@@ -158,16 +157,12 @@ namespace P3D.Legacy.Launcher.Data
         public static bool operator ==(Profile a, Profile b) => ReferenceEquals(a, null) ? ReferenceEquals(b, null) : a.Equals((object) b);
         public static bool operator !=(Profile a, Profile b) => !(a == b);
 
-        public static async Task<IEnumerable<System.Version>> GetAvailableVersionsAsync(ProfileType profileType)
+        public static async Task<List<System.Version>> GetAvailableVersionsAsync(ProfileType profileType)
         {
             if (!GitHub.WebsiteIsUp)
                 return new List<System.Version>();
 
-            try
-            {
-                var t = await GitHub.GetAllGitHubReleasesAsync(profileType);
-                return new List<System.Version>((await GitHub.GetAllGitHubReleasesAsync(profileType)).Select(release => release.Version)).OrderByDescending<System.Version, System.Version>(version => version); ;
-            }
+            try { return (await GitHub.GetAllGitHubReleasesAsync(profileType)).Select(release => release.Version).OrderByDescending(version => version).ToList(); }
             catch (Exception) { return new List<System.Version>(); }
         }
 
@@ -206,10 +201,10 @@ namespace P3D.Legacy.Launcher.Data
 
         public Profile(ProfileType profileType, string name, System.Version version, string launchArgs = "")
         {
-            ProfileType = profileType;
+            ProfileType = profileType ?? ProfileType.Game;
             Name = name;
             Version = version;
-            LaunchArgs = string.IsNullOrEmpty(launchArgs) ? profileType.DefaultLaunchArgs : launchArgs;
+            LaunchArgs = string.IsNullOrEmpty(launchArgs) ? ProfileType.DefaultLaunchArgs : launchArgs;
 
             System.Version[] versions;
             if (Equals(Version, NoVersion) && (versions = AsyncExtensions.RunSync(async () => await GetAvailableVersionsAsync()).ToArray()).Length > 0)
@@ -217,7 +212,7 @@ namespace P3D.Legacy.Launcher.Data
         }
 
         public async Task<List<GitHubRelease>> GetAvailableReleasesAsync() => await GitHub.GetAllGitHubReleasesAsync(ProfileType);
-        public async Task<IEnumerable<System.Version>> GetAvailableVersionsAsync() => await GetAvailableVersionsAsync(ProfileType);
+        public async Task<List<System.Version>> GetAvailableVersionsAsync() => await GetAvailableVersionsAsync(ProfileType);
 
         public ProfileYaml ToYaml() => ToYaml(this);
         public async Task Delete() => await Delete(this);

@@ -61,14 +61,11 @@ namespace P3D.Legacy.Launcher.Data
 
 
         public bool GameUpdates { get; set; }
-
         public LocalizationInfo LocalizationInfo { get; set; }
-
         public EncodedString GameJoltUsername { get; set; }
         public EncodedString GameJoltToken { get; set; }
         public bool AutoLogIn { get; set; }
         public bool SaveCredentials { get; set; }
-
         public int SelectedDLIndex { get; set; }
         public Uri SelectedDL => DLList.Any() ? DLList[SelectedDLIndex] : new Uri("https://dl.dropboxusercontent.com/u/58476180/P3D/");
 
@@ -94,6 +91,7 @@ namespace P3D.Legacy.Launcher.Data
             GameJoltToken = settings.GameJoltToken;
             AutoLogIn = settings.AutoLogIn;
             SaveCredentials = settings.SaveCredentials;
+            SelectedDLIndex = settings.SelectedDLIndex;
         }
     }
 }

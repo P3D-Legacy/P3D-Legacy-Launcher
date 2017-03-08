@@ -32,6 +32,7 @@ namespace P3D.Legacy.Launcher.Data
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         public IEnumerator<UpdateFileEntryYaml> GetEnumerator() => Files.GetEnumerator();
     }
+
     internal class UpdateFileEntryYaml
     {
         [YamlMember(Alias = "AbsoluteFilePath")]

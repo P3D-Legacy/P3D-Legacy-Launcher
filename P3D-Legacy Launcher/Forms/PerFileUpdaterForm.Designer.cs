@@ -37,37 +37,56 @@
             // 
             // Label_ProgressBar1
             // 
-            resources.ApplyResources(this.Label_ProgressBar1, "Label_ProgressBar1");
+            this.Label_ProgressBar1.AutoSize = true;
+            this.Label_ProgressBar1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.Label_ProgressBar1.Location = new System.Drawing.Point(12, 9);
             this.Label_ProgressBar1.Name = "Label_ProgressBar1";
-            this.Label_ProgressBar1.StringID_Text = "pfu_label_updateinfoprogress";
+            this.Label_ProgressBar1.Size = new System.Drawing.Size(146, 13);
+            this.Label_ProgressBar1.TabIndex = 4;
+            this.Label_ProgressBar1.Text = "pfu_label_updateinfoprogress";
             // 
             // Label_ProgressBar2
             // 
-            resources.ApplyResources(this.Label_ProgressBar2, "Label_ProgressBar2");
+            this.Label_ProgressBar2.AutoSize = true;
+            this.Label_ProgressBar2.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.Label_ProgressBar2.Location = new System.Drawing.Point(13, 9);
             this.Label_ProgressBar2.Name = "Label_ProgressBar2";
-            this.Label_ProgressBar2.StringID_Text = "pfu_label_comparisonprogress";
+            this.Label_ProgressBar2.Size = new System.Drawing.Size(150, 13);
+            this.Label_ProgressBar2.TabIndex = 5;
+            this.Label_ProgressBar2.Text = "pfu_label_comparisonprogress";
+            this.Label_ProgressBar2.Visible = false;
             // 
             // Label_ProgressBar3
             // 
-            resources.ApplyResources(this.Label_ProgressBar3, "Label_ProgressBar3");
+            this.Label_ProgressBar3.AutoSize = true;
+            this.Label_ProgressBar3.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.Label_ProgressBar3.Location = new System.Drawing.Point(13, 9);
             this.Label_ProgressBar3.Name = "Label_ProgressBar3";
-            this.Label_ProgressBar3.StringID_Text = "pfu_label_downloadprogress";
+            this.Label_ProgressBar3.Size = new System.Drawing.Size(142, 13);
+            this.Label_ProgressBar3.TabIndex = 6;
+            this.Label_ProgressBar3.Text = "pfu_label_downloadprogress";
+            this.Label_ProgressBar3.Visible = false;
             // 
             // PercentageProgressBar
             // 
-            resources.ApplyResources(this.PercentageProgressBar, "PercentageProgressBar");
+            this.PercentageProgressBar.Location = new System.Drawing.Point(12, 25);
             this.PercentageProgressBar.Name = "PercentageProgressBar";
+            this.PercentageProgressBar.Size = new System.Drawing.Size(260, 23);
+            this.PercentageProgressBar.TabIndex = 0;
             // 
             // PerFileUpdaterForm
             // 
-            resources.ApplyResources(this, "$this");
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(284, 66);
             this.Controls.Add(this.PercentageProgressBar);
             this.Controls.Add(this.Label_ProgressBar1);
             this.Controls.Add(this.Label_ProgressBar2);
             this.Controls.Add(this.Label_ProgressBar3);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.MaximizeBox = false;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(300, 100);
+            this.MinimumSize = new System.Drawing.Size(300, 100);
             this.Name = "PerFileUpdaterForm";
             this.StringID_Title = "pfu_title";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CustomUpdaterForm_FormClosing);
