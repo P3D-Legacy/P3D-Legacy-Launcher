@@ -4,18 +4,18 @@ using System.Drawing;
 using System.Windows.Forms;
 
 using P3D.Legacy.Launcher.Controls;
-using P3D.Legacy.Launcher.Data;
 using P3D.Legacy.Launcher.Services;
+using P3D.Legacy.Launcher.Storage.Files;
 
 namespace P3D.Legacy.Launcher.Forms
 {
     internal partial class GameJoltForm : LocalizableForm
     {
-        private Settings Settings { get; }
+        private SettingsFile Settings { get; }
 
         private ToolTip ToolTip_WatermarkTextBox_Token { get; } = new ToolTip();
 
-        public GameJoltForm(Settings settings)
+        public GameJoltForm(SettingsFile settings)
         {
             Settings = settings;
 

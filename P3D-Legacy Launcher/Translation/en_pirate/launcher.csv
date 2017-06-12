@@ -1,0 +1,108 @@
+STRING ID,PIRATE
+LANGUAGE_NAME,Pirate
+LANGUAGE_MAINTAINER,Cpt. Omega Beard
+BEGIN,
+;Main Form;,
+mf_title,3D Pocketmon Launcher
+mf_button_play,Sail fer ye voyage
+mf_button_checkforupdates,Search fer new Ships
+mf_button_newprofile,Hire new sailor
+mf_button_editprofile,Change ye sailor
+mf_button_delete,Murder ye sailor
+mf_groupbox_common,General adjustment
+mf_checkbox_checkforupdatesonstartup,Search fer new Ships upon start
+mf_label_language,Ye speak:
+mf_groupbox_gamejolt,GameJolt
+mf_label_username,Moniker
+mf_label_token,Token:
+mf_label_token_hint,"Tis be ye GameJolt Token, not ye GameJolt Passcode! Fer more info, look at ""Inquiries for picaroons"""
+mf_checkbox_savecredentials,Collect me monikers
+mf_checkbox_autologin,Mantain me ship floatin'
+mf_groupbox_network,The Seven Seas
+mf_label_selecteddl,Sea curren':
+mf_button_save,Mark ye chart
+mf_textbox_credits,"Launcher by {0}
+Speak:
+{1}"
+mf_tabpage_news,Ye Shore Billboard
+mf_tabpage_logger,Voyage postal scribble
+mf_tabpage_faq,Inquiries fer picaroons
+mf_tabpage_settings,Adjust ye voyage
+mf_tabpage_about,Bout our crow'
+mf_groupbox_game,Travel
+mf_checkbox_checkserveronstart,Inspect Ye Seven Seas on sail
+;GameJolt Form;,
+gj_title,"Ahoy, matey! Ye ship no be attached to GameJolt!"
+gj_wtextbox_username,Moniker
+gj_wtextbox_token,Token
+gj_checkbox_autologin,Mantain me ship floatin'
+gj_checkbox_savecredentials,Collect me monikers
+gj_label_questionchar,?
+gj_button_login,Float yer ship with yer mateys
+gj_button_playoffline,Voyage by yerself
+gj_button_signin,Become a pirate!
+;Profile Form;,
+pf_title,Sailor changer
+pf_groupbox_profileinfo,Sailor story
+pf_label_profiletype,Sailor's quality:
+pf_label_profilename,Sailor moniker:
+pf_label_version,Ship:
+pf_label_gamemode,Venture:
+pf_button_availablegamemods,Ventures mapped
+pf_label_launchargs,Shore buildings:
+pf_label_noedit,"Yo not be changin' 'tis ship part!
+Yo hire new sailor for it!"
+pf_button_openprofiledir,Go down the gallery
+pf_groupbox_modifications,Ship apparel
+pf_datagridview_enabled,Ready to sail
+pf_datagridview_author,Pirate
+pf_datagridview_name,Moniker
+pf_datagridview_category,Danger
+pf_datagridview_version,Venture level
+pf_datagridview_downloads,Pirates seeking
+pf_datagridview_rating,Danger counter
+pf_datagridview_gameversion,Ship version
+pf_button_availablemodifications,Apparel to use
+pf_button_cancel,Avast!
+pf_button_save,Mark ye chart
+pf_profile_latest,Newest Ship
+;ReleaseDownloader Form;,
+rd_title,Construction
+rd_label_downloadprogress,Bein' constructed:
+rd_label_extractionprogress,Bein' finalized:
+;PerFileUpdater Form;,
+pfu_title,New Ship
+pfu_label_updateinfoprogress,Pickin' new ship:
+pfu_label_comparisonprogress,Movin' apparel:
+pfu_label_downloadprogress,Preparin' ye ship:
+;MessageBox;,
+DLNotSelected,Yo ship no be constructin' with no doubloons!
+DLNotSelectedTitle,Arr! Need treasure!
+SomethingNotFoundError,"3D Pocketmon need {0}.
+Go to {1} befor' yo sail.
+Visit the tavern now?"
+SomethingNotFoundErrorTitle,Arr! Need material!
+DownloadError,Materials be scurvy. Another give a go'!
+DownloadErrorTitle,Arr! Squiffy wood!
+FileReplacementError,Tis not how yo move apparel!
+FileReplacementErrorTitle,Arr! Me booty!
+LauncherUpdateAvailable,"Jolly new cannons at shore!
+Be gettin' now?"
+LauncherUpdateAvailableTitle,Ahoy!
+NoInternet,GitHub not be reached. Ye ship be sailin'?
+NoInternetTitle,Arr! 'Tis no ship!
+NotDownloaded,"Sailor '{0}' not aboard!
+Shout all to embark now?"
+NotDownloadedTitle,Arr! Scurvy sailors!
+NoUpdateNeeded,Tis sailor be good enough!
+NoUpdateNeededTitle,Aye!
+ProfileUpToDate,Sailor '{0}' be good now.
+ProfileUpToDateTitle,Ship Search
+ToolTipSaveCredentials,Yo must get ye monikers collected!
+UpdateAvailable,Move from ol' ship [{0}] to [{1}]?
+UpdateAvailableTitle,Ho!
+Updated,Sailor be good now.
+UpdateDisabled,Constructors no be found! Do yer ship by yerself.
+UpdateDisabledTitle,Arr! Squiffy men!
+UpdatedTitle,Handy dandy ho!
+END,

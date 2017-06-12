@@ -1,0 +1,108 @@
+STRING ID,RUSSIAN / РУССКИЙ
+LANGUAGE_NAME,
+LANGUAGE_MAINTAINER,Aragas
+BEGIN,
+;Main Form;,
+mf_title,Pokémon 3D Launcher
+mf_button_play,Запустить
+mf_button_checkforupdates,Проверить обновления
+mf_button_newprofile,Новый профиль
+mf_button_editprofile,Изменить профиль
+mf_button_delete,Удалить профиль
+mf_groupbox_common,Общее
+mf_checkbox_checkforupdatesonstartup,Автоматически проверять обновления при запуске
+mf_label_language,Язык:
+mf_groupbox_gamejolt,Сеть
+mf_label_username,Имя пользователя:
+mf_label_token,Токен:
+mf_label_token_hint,"Это Ваш GameJolt Токен, а не пароль! Посмотрите FAQ для подробностей"
+mf_checkbox_savecredentials,Сохранить данные для входа
+mf_checkbox_autologin,Автоматически входить в аккаунт
+mf_groupbox_network,Сеть
+mf_label_selecteddl,Ссылка для скачивания:
+mf_button_save,Сохранить
+mf_textbox_credits,"Launcher создал {0}
+Перевод:
+{1}"
+mf_tabpage_news,Новости
+mf_tabpage_logger,Логгер
+mf_tabpage_faq,FAQ
+mf_tabpage_settings,Настройки
+mf_tabpage_about,О программе
+mf_groupbox_game,Игра
+mf_checkbox_checkserveronstart,Проверять наличие официального сервера на старте
+;GameJolt Form;,
+gj_title,Вы не вошли в GameJolt!
+gj_wtextbox_username,Имя пользователя
+gj_wtextbox_token,Токен
+gj_checkbox_autologin,Автоматически входить в аккаунт
+gj_checkbox_savecredentials,Сохранить данные для входа
+gj_label_questionchar,?
+gj_button_login,Войти
+gj_button_playoffline,Играть оффлайн
+gj_button_signin,Зарегистрироваться
+;Profile Form;,
+pf_title,Редактор профиля
+pf_groupbox_profileinfo,Информация о профиле
+pf_label_profiletype,Тип профиля:
+pf_label_profilename,Имя профиля:
+pf_label_version,Версия:
+pf_label_gamemode,GameMode:
+pf_button_availablegamemods,Available GameMods
+pf_label_launchargs,Аргументы запуска:
+pf_label_noedit,"Вы не можете изменить профиль 'Latest'!
+Создайте новый профиль!"
+pf_button_openprofiledir,Открыть папку
+pf_groupbox_modifications,Модификации
+pf_label_launchargs,Enabled
+pf_label_noedit,Author
+pf_button_openprofiledir,Name
+pf_groupbox_modifications,Category
+pf_datagridview_enabled,Version
+pf_datagridview_author,Downloads
+pf_datagridview_name,Rating
+pf_datagridview_category,Game Version
+pf_datagridview_version,Available Modifications
+pf_button_cancel,Отмена
+pf_button_save,Сохранить
+pf_profile_latest,Новейшая версия
+;ReleaseDownloader Form;,
+rd_title,Загрузчик
+rd_label_downloadprogress,Прогресс скачивания:
+rd_label_extractionprogress,Прогресс извлечения:
+;PerFileUpdater Form;,
+pfu_title,Загрузчик
+pfu_label_updateinfoprogress,Загрузка информации об обновлении:
+pfu_label_comparisonprogress,Сравнение файлов:
+pfu_label_downloadprogress,Скачивание файлов:
+;MessageBox;,
+DLNotSelected,Не могу обновить! Выберите сначала ссылку для скачивания!
+DLNotSelectedTitle,Ошибка!
+SomethingNotFoundError,"Pokémon 3D требует {0}
+Вы можете скачать это по данной ссылке {1}
+Открыть эту ссылку в Браузере?"
+SomethingNotFoundErrorTitle,Ошибка!
+DownloadError,Возникла ошибка при скачивании файла! Повторите попытку!
+DownloadErrorTitle,Ошибка!
+FileReplacementError,Возникла ошибка во время обновления старых файлов!
+FileReplacementErrorTitle,Ошибка!
+LauncherUpdateAvailable,"Доступна новая версия лаунчера!
+Хотите обновиться?"
+LauncherUpdateAvailableTitle,Доступно обновление!
+NoInternet,Не мог подключиться к GitHub! Вы подключены к интернеу?
+NoInternetTitle,Ошибка!
+NotDownloaded,"Профиль '{0}' не был скачан!
+Вы хотите его скачать?"
+NotDownloadedTitle,Ошибка!
+NoUpdateNeeded,Профиль уже был обновлен!
+NoUpdateNeededTitle,Готово!
+ProfileUpToDate,Профиль '{0}' уже использует последнюю версию!
+ProfileUpToDateTitle,Проверка обновления
+ToolTipSaveCredentials,Сперва разрешите сохранение данных для входа!
+UpdateAvailable,Вы хотите обновить версию [{0}] до версии [{1}]?
+UpdateAvailableTitle,Доступно обновление!
+Updated,Профиль был обновлен!
+UpdateDisabled,Готово!
+UpdateDisabledTitle,Ошибка!
+UpdatedTitle,Успешо!
+END,

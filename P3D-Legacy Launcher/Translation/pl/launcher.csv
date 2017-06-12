@@ -1,0 +1,108 @@
+STRING ID,POLISH/Język Polski
+LANGUAGE_NAME,
+LANGUAGE_MAINTAINER,biggda76
+BEGIN,
+;Main Form;,
+mf_title,Pokémon 3D Launcher
+mf_button_play,Graj
+mf_button_checkforupdates,Wyszukaj aktualizacje
+mf_button_newprofile,Nowy Profil
+mf_button_editprofile,Edytuj Profil
+mf_button_delete,Usuń Profil
+mf_groupbox_common,Główne
+mf_checkbox_checkforupdatesonstartup,Wyszukaj aktualizację przy uruchomieniu
+mf_label_language,Język:
+mf_groupbox_gamejolt,GameJolt
+mf_label_username,Użytkownik
+mf_label_token,Token
+mf_label_token_hint,"To jest Twój Token z konta GameJolt, nie Twoje hasło! Po więcej informacji odwiedź zakładkę Najczęściej Zadawane Pytania"
+mf_checkbox_savecredentials,Zapamiętaj
+mf_checkbox_autologin,Nie wylogowuj mnie
+mf_groupbox_network,Sieć
+mf_label_selecteddl,Wybierz DL:
+mf_button_save,Zapisz
+mf_textbox_credits,"Launcher stworzony przez: {0}
+Tłumaczenie:
+{1}"
+mf_tabpage_news,Aktualności
+mf_tabpage_logger,Logger
+mf_tabpage_faq,Najczęściej Zadawane Pytania
+mf_tabpage_settings,Ustawienia
+mf_tabpage_about,Informacje
+mf_groupbox_game,Gra
+mf_checkbox_checkserveronstart,Sprawdź status Oficjalnego Serwera przy starcie
+;GameJolt Form;,
+gj_title,Nie jesteś połączony z serwisem GameJolt
+gj_wtextbox_username,Użytkownik
+gj_wtextbox_token,Token
+gj_checkbox_autologin,Nie wylogowuj mnie
+gj_checkbox_savecredentials,Zapamiętaj
+gj_label_questionchar,?
+gj_button_login,Zaloguj się
+gj_button_playoffline,Graj Offline
+gj_button_signin,Zarejestruj się
+;Profile Form;,
+pf_title,Edytor Profilu
+pf_groupbox_profileinfo,Informacje o Profilu
+pf_label_profiletype,Typ Profilu:
+pf_label_profilename,Nazwa Profilu:
+pf_label_version,Wersja:
+pf_label_gamemode,Tryb gry:
+pf_button_availablegamemods,Dostępne tryby gry
+pf_label_launchargs,Arg. Uruchomienia
+pf_label_noedit,"Nie możesz edytować Profilu ""Latest""!
+Stwórz nowy profil!"
+pf_button_openprofiledir,Otwórz ścieżkę
+pf_groupbox_modifications,Modyfikacje
+pf_button_openprofiledir,Włączone
+pf_groupbox_modifications,Autor
+pf_datagridview_enabled,Nazwa
+pf_datagridview_author,Kategoria
+pf_datagridview_name,Wersja
+pf_datagridview_category,Pobrane
+pf_datagridview_version,Ocena
+pf_datagridview_downloads,Wersja gry
+pf_datagridview_rating,Dostępne modyfikacje
+pf_button_cancel,Anuluj
+pf_button_save,Zapisz
+pf_profile_latest,Najnowsza wersja
+;ReleaseDownloader Form;,
+rd_title,Downloader
+rd_label_downloadprogress,Postęp pobierania:
+rd_label_extractionprogress,Postęp wyodrębniania:
+;PerFileUpdater Form;,
+pfu_title,Updater
+pfu_label_updateinfoprogress,"Informacje o pobieraniu, Postęp pobierania:"
+pfu_label_comparisonprogress,Porównanie postępu:
+pfu_label_downloadprogress,Postęp pobierania:
+;MessageBox;,
+DLNotSelected,Nie można zaktualizować! Wybierz DL w zakładce ustawień
+DLNotSelectedTitle,Błąd!
+SomethingNotFoundError,"Pokémon 3D wymaga {0}
+Odwiedź {1} aby pobrać.
+Czy chcesz przejść do strony teraz?"
+SomethingNotFoundErrorTitle,Błąd!
+DownloadError,Wystąpił błąd z pobieraniem pliku. Spróbuj ponownie później!
+DownloadErrorTitle,Błąd!
+FileReplacementError,"Podczas zastępowania starych plików nowymi, wystąpił błąd."
+FileReplacementErrorTitle,Błąd!
+LauncherUpdateAvailable,"Nowa wersja Launchera jest dostępna.
+Czy chcesz dokonać aktualizacji?"
+LauncherUpdateAvailableTitle,Aktualizacja jest dostępna
+NoInternet,"Błąd połączenia z serwisem GitHub, sprawdź połączenie z internetem."
+NoInternetTitle,Sprawdź błąd aktualizacji!
+NotDownloaded,"Profil '{0}' nie był pobrany.
+Czy chcesz go pobrać teraz?"
+NotDownloadedTitle,Nie pobrane!
+NoUpdateNeeded,Wybrany Profil nie wymaga aktualizacji!
+NoUpdateNeededTitle,Gotowe!
+ProfileUpToDate,Profil '{0}' jest aktualny!
+ProfileUpToDateTitle,Sprawdź aktualizację
+ToolTipSaveCredentials,"Najpierw włącz opcje ""Zapamiętaj"""
+UpdateAvailable,Czy chcesz zaktualizować wersję [{0}] do wersji [{1}]?
+UpdateAvailableTitle,Aktualizacja jest dostępna
+Updated,Profil został pomyślnie zaktualizowany
+UpdateDisabled,Aktualizacja jest zablokowana. Pobierz nową wersję zamiast aktualizacji.
+UpdateDisabledTitle,Błąd!
+UpdatedTitle,Sukces!
+END,

@@ -30,6 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProfileForm));
             this.GroupBox_ProfileInfo = new P3D.Legacy.Launcher.Controls.LocalizableGroupBox();
+            this.Button_AvailableGameModes = new P3D.Legacy.Launcher.Controls.LocalizableButton();
+            this.ComboBox_GameMode = new System.Windows.Forms.ComboBox();
+            this.Label_GameMode = new P3D.Legacy.Launcher.Controls.LocalizableLabel();
             this.Button_OpenProfileDir = new P3D.Legacy.Launcher.Controls.LocalizableButton();
             this.Label_LaunchArgs = new P3D.Legacy.Launcher.Controls.LocalizableLabel();
             this.TextBox_LaunchArgs = new System.Windows.Forms.TextBox();
@@ -43,13 +46,20 @@
             this.Button_SaveProfile = new P3D.Legacy.Launcher.Controls.LocalizableButton();
             this.Button_Cancel = new P3D.Legacy.Launcher.Controls.LocalizableButton();
             this.GroupBox_Modifications = new P3D.Legacy.Launcher.Controls.LocalizableGroupBox();
+            this.Button_Modifications = new P3D.Legacy.Launcher.Controls.LocalizableButton();
+            this.DataGridView_Modifications = new System.Windows.Forms.DataGridView();
             this.GroupBox_ProfileInfo.SuspendLayout();
+            this.GroupBox_Modifications.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridView_Modifications)).BeginInit();
             this.SuspendLayout();
             // 
             // GroupBox_ProfileInfo
             // 
             this.GroupBox_ProfileInfo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.GroupBox_ProfileInfo.Controls.Add(this.Button_AvailableGameModes);
+            this.GroupBox_ProfileInfo.Controls.Add(this.ComboBox_GameMode);
+            this.GroupBox_ProfileInfo.Controls.Add(this.Label_GameMode);
             this.GroupBox_ProfileInfo.Controls.Add(this.Button_OpenProfileDir);
             this.GroupBox_ProfileInfo.Controls.Add(this.Label_LaunchArgs);
             this.GroupBox_ProfileInfo.Controls.Add(this.TextBox_LaunchArgs);
@@ -62,16 +72,55 @@
             this.GroupBox_ProfileInfo.Controls.Add(this.Label_ProfileName);
             this.GroupBox_ProfileInfo.Location = new System.Drawing.Point(12, 6);
             this.GroupBox_ProfileInfo.Name = "GroupBox_ProfileInfo";
-            this.GroupBox_ProfileInfo.Size = new System.Drawing.Size(430, 175);
+            this.GroupBox_ProfileInfo.Size = new System.Drawing.Size(560, 185);
             this.GroupBox_ProfileInfo.TabIndex = 0;
             this.GroupBox_ProfileInfo.TabStop = false;
             this.GroupBox_ProfileInfo.Text = "pf_groupbox_profileinfo";
+            // 
+            // Button_AvailableGameModes
+            // 
+            this.Button_AvailableGameModes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Button_AvailableGameModes.Enabled = false;
+            this.Button_AvailableGameModes.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.Button_AvailableGameModes.Location = new System.Drawing.Point(350, 97);
+            this.Button_AvailableGameModes.Name = "Button_AvailableGameModes";
+            this.Button_AvailableGameModes.Size = new System.Drawing.Size(204, 23);
+            this.Button_AvailableGameModes.TabIndex = 9;
+            this.Button_AvailableGameModes.Text = "pf_button_availablegamemods";
+            this.Button_AvailableGameModes.UseVisualStyleBackColor = true;
+            this.Button_AvailableGameModes.Visible = false;
+            this.Button_AvailableGameModes.Click += new System.EventHandler(this.Button_AvailableGameModes_Click);
+            // 
+            // ComboBox_GameMode
+            // 
+            this.ComboBox_GameMode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ComboBox_GameMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboBox_GameMode.Enabled = false;
+            this.ComboBox_GameMode.FormattingEnabled = true;
+            this.ComboBox_GameMode.Location = new System.Drawing.Point(144, 99);
+            this.ComboBox_GameMode.Name = "ComboBox_GameMode";
+            this.ComboBox_GameMode.Size = new System.Drawing.Size(200, 21);
+            this.ComboBox_GameMode.TabIndex = 8;
+            this.ComboBox_GameMode.Visible = false;
+            // 
+            // Label_GameMode
+            // 
+            this.Label_GameMode.Enabled = false;
+            this.Label_GameMode.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.Label_GameMode.Location = new System.Drawing.Point(6, 102);
+            this.Label_GameMode.Name = "Label_GameMode";
+            this.Label_GameMode.Size = new System.Drawing.Size(132, 13);
+            this.Label_GameMode.TabIndex = 7;
+            this.Label_GameMode.Text = "pf_label_gamemode";
+            this.Label_GameMode.Visible = false;
             // 
             // Button_OpenProfileDir
             // 
             this.Button_OpenProfileDir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.Button_OpenProfileDir.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.Button_OpenProfileDir.Location = new System.Drawing.Point(274, 125);
+            this.Button_OpenProfileDir.Location = new System.Drawing.Point(404, 152);
             this.Button_OpenProfileDir.Name = "Button_OpenProfileDir";
             this.Button_OpenProfileDir.Size = new System.Drawing.Size(150, 23);
             this.Button_OpenProfileDir.TabIndex = 3;
@@ -82,7 +131,7 @@
             // Label_LaunchArgs
             // 
             this.Label_LaunchArgs.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.Label_LaunchArgs.Location = new System.Drawing.Point(6, 102);
+            this.Label_LaunchArgs.Location = new System.Drawing.Point(6, 129);
             this.Label_LaunchArgs.Name = "Label_LaunchArgs";
             this.Label_LaunchArgs.Size = new System.Drawing.Size(132, 13);
             this.Label_LaunchArgs.TabIndex = 6;
@@ -92,18 +141,18 @@
             // 
             this.TextBox_LaunchArgs.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.TextBox_LaunchArgs.Location = new System.Drawing.Point(144, 99);
+            this.TextBox_LaunchArgs.Location = new System.Drawing.Point(144, 126);
             this.TextBox_LaunchArgs.Name = "TextBox_LaunchArgs";
-            this.TextBox_LaunchArgs.Size = new System.Drawing.Size(280, 20);
+            this.TextBox_LaunchArgs.Size = new System.Drawing.Size(410, 20);
             this.TextBox_LaunchArgs.TabIndex = 5;
             // 
             // Label_NoEdit
             // 
             this.Label_NoEdit.ForeColor = System.Drawing.Color.Red;
             this.Label_NoEdit.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.Label_NoEdit.Location = new System.Drawing.Point(9, 122);
+            this.Label_NoEdit.Location = new System.Drawing.Point(6, 149);
             this.Label_NoEdit.Name = "Label_NoEdit";
-            this.Label_NoEdit.Size = new System.Drawing.Size(259, 40);
+            this.Label_NoEdit.Size = new System.Drawing.Size(259, 36);
             this.Label_NoEdit.TabIndex = 4;
             this.Label_NoEdit.Text = "pf_label_noedit";
             this.Label_NoEdit.Visible = false;
@@ -116,7 +165,7 @@
             this.ComboBox_Type.FormattingEnabled = true;
             this.ComboBox_Type.Location = new System.Drawing.Point(144, 19);
             this.ComboBox_Type.Name = "ComboBox_Type";
-            this.ComboBox_Type.Size = new System.Drawing.Size(280, 21);
+            this.ComboBox_Type.Size = new System.Drawing.Size(410, 21);
             this.ComboBox_Type.TabIndex = 0;
             this.ComboBox_Type.SelectedIndexChanged += new System.EventHandler(this.ComboBox_Type_SelectedIndexChanged);
             // 
@@ -137,7 +186,7 @@
             this.ComboBox_Version.FormattingEnabled = true;
             this.ComboBox_Version.Location = new System.Drawing.Point(144, 72);
             this.ComboBox_Version.Name = "ComboBox_Version";
-            this.ComboBox_Version.Size = new System.Drawing.Size(280, 21);
+            this.ComboBox_Version.Size = new System.Drawing.Size(410, 21);
             this.ComboBox_Version.TabIndex = 2;
             // 
             // Label_Version
@@ -155,7 +204,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.TextBox_ProfileName.Location = new System.Drawing.Point(144, 46);
             this.TextBox_ProfileName.Name = "TextBox_ProfileName";
-            this.TextBox_ProfileName.Size = new System.Drawing.Size(280, 20);
+            this.TextBox_ProfileName.Size = new System.Drawing.Size(410, 20);
             this.TextBox_ProfileName.TabIndex = 1;
             // 
             // Label_ProfileName
@@ -171,7 +220,7 @@
             // 
             this.Button_SaveProfile.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Button_SaveProfile.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.Button_SaveProfile.Location = new System.Drawing.Point(322, 335);
+            this.Button_SaveProfile.Location = new System.Drawing.Point(452, 484);
             this.Button_SaveProfile.Name = "Button_SaveProfile";
             this.Button_SaveProfile.Size = new System.Drawing.Size(120, 23);
             this.Button_SaveProfile.TabIndex = 5;
@@ -183,7 +232,7 @@
             // 
             this.Button_Cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.Button_Cancel.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.Button_Cancel.Location = new System.Drawing.Point(12, 335);
+            this.Button_Cancel.Location = new System.Drawing.Point(12, 484);
             this.Button_Cancel.Name = "Button_Cancel";
             this.Button_Cancel.Size = new System.Drawing.Size(120, 23);
             this.Button_Cancel.TabIndex = 6;
@@ -196,32 +245,65 @@
             this.GroupBox_Modifications.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.GroupBox_Modifications.Controls.Add(this.Button_Modifications);
+            this.GroupBox_Modifications.Controls.Add(this.DataGridView_Modifications);
             this.GroupBox_Modifications.Enabled = false;
-            this.GroupBox_Modifications.Location = new System.Drawing.Point(12, 187);
+            this.GroupBox_Modifications.Location = new System.Drawing.Point(12, 197);
             this.GroupBox_Modifications.Name = "GroupBox_Modifications";
-            this.GroupBox_Modifications.Size = new System.Drawing.Size(430, 142);
+            this.GroupBox_Modifications.Size = new System.Drawing.Size(560, 281);
             this.GroupBox_Modifications.TabIndex = 14;
             this.GroupBox_Modifications.TabStop = false;
             this.GroupBox_Modifications.Text = "pf_groupbox_modifications";
             this.GroupBox_Modifications.Visible = false;
             // 
+            // Button_Modifications
+            // 
+            this.Button_Modifications.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Button_Modifications.Location = new System.Drawing.Point(354, 252);
+            this.Button_Modifications.Name = "Button_Modifications";
+            this.Button_Modifications.Size = new System.Drawing.Size(200, 23);
+            this.Button_Modifications.TabIndex = 1;
+            this.Button_Modifications.Text = "pf_button_availablemodifications";
+            this.Button_Modifications.UseVisualStyleBackColor = true;
+            // 
+            // DataGridView_Modifications
+            // 
+            this.DataGridView_Modifications.AllowUserToAddRows = false;
+            this.DataGridView_Modifications.AllowUserToDeleteRows = false;
+            this.DataGridView_Modifications.AllowUserToOrderColumns = true;
+            this.DataGridView_Modifications.AllowUserToResizeRows = false;
+            this.DataGridView_Modifications.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DataGridView_Modifications.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.DataGridView_Modifications.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataGridView_Modifications.Location = new System.Drawing.Point(3, 16);
+            this.DataGridView_Modifications.MultiSelect = false;
+            this.DataGridView_Modifications.Name = "DataGridView_Modifications";
+            this.DataGridView_Modifications.RowHeadersVisible = false;
+            this.DataGridView_Modifications.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DataGridView_Modifications.Size = new System.Drawing.Size(554, 230);
+            this.DataGridView_Modifications.StandardTab = true;
+            this.DataGridView_Modifications.TabIndex = 0;
+            // 
             // ProfileForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(454, 366);
+            this.ClientSize = new System.Drawing.Size(584, 515);
             this.Controls.Add(this.GroupBox_Modifications);
             this.Controls.Add(this.Button_Cancel);
             this.Controls.Add(this.Button_SaveProfile);
             this.Controls.Add(this.GroupBox_ProfileInfo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(470, 400);
-            this.MinimumSize = new System.Drawing.Size(470, 400);
+            this.MinimumSize = new System.Drawing.Size(600, 400);
             this.Name = "ProfileForm";
             this.StringID_Title = "pf_title";
             this.GroupBox_ProfileInfo.ResumeLayout(false);
             this.GroupBox_ProfileInfo.PerformLayout();
+            this.GroupBox_Modifications.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.DataGridView_Modifications)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -242,5 +324,10 @@
         private Controls.LocalizableLabel Label_NoEdit;
         private Controls.LocalizableLabel Label_LaunchArgs;
         private System.Windows.Forms.TextBox TextBox_LaunchArgs;
+        private System.Windows.Forms.DataGridView DataGridView_Modifications;
+        private Controls.LocalizableButton Button_Modifications;
+        private Controls.LocalizableButton Button_AvailableGameModes;
+        private System.Windows.Forms.ComboBox ComboBox_GameMode;
+        private Controls.LocalizableLabel Label_GameMode;
     }
 }

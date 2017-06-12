@@ -11,6 +11,8 @@ using P3D.Legacy.Launcher.Extensions;
 using P3D.Legacy.Shared.Data;
 using P3D.Legacy.Shared.Extensions;
 
+using static P3D.Legacy.Shared.Data.EncodedString;
+
 namespace P3D.Legacy.Launcher.Services
 {
     internal static class GitHub
@@ -32,18 +34,18 @@ namespace P3D.Legacy.Launcher.Services
 
         private static GitHubClient Client => AsyncExtensions.RunSync(async () => await AnonymousHitRateLimit()) ? TokenClient : AnonymousClient;
         private static GitHubClient AnonymousClient { get; } = new GitHubClient(new Connection(new ProductHeaderValue(ClientHeader)));
-        private static GitHubClient TokenClient { get; } = new GitHubClient(new Connection(new ProductHeaderValue(ClientHeader), new InMemoryCredentialStore(new Credentials(new EncodedString(EncodedString.FromEncodedData(ClientToken))))));
+        private static GitHubClient TokenClient { get; } = new GitHubClient(new Connection(new ProductHeaderValue(ClientHeader), new InMemoryCredentialStore(new Credentials(new EncodedString(FromEncodedData(ClientToken))))));
 
         private static WebsiteChecker WebsiteChecker { get; } = new WebsiteChecker(Host);
         public static bool WebsiteIsUp => WebsiteChecker.Check();
 
-        private static Dictionary<ProfileType, List<Release>> _getAllReleases = new Dictionary<ProfileType, List<Release>>();
-        private static async Task<List<Release>> GetAllReleasesAsync(ProfileType profileType)
+        private static Dictionary<ProfileType, List<GitHubRelease>> _getAllReleases = new Dictionary<ProfileType, List<GitHubRelease>>();
+        public static async Task<List<GitHubRelease>> GetAllReleasesAsync(ProfileType profileType)
         {
             if (_getAllReleases.ContainsKey(profileType)) return _getAllReleases[profileType];
             else
             {
-                if(!WebsiteIsUp) return new List<Release>();
+                if(!WebsiteIsUp) return new List<GitHubRelease>();
 
                 try
                 {
@@ -56,60 +58,29 @@ namespace P3D.Legacy.Launcher.Services
                         _getAllReleases.Add(profileType, FilterReleases(await Client.Repository.Release.GetAll(OrgServer2Name, Server2RepoName, options)));
                     return _getAllReleases[profileType];
                 }
-                catch (Exception) { return new List<Release>(); }
+                catch (Exception) { return new List<GitHubRelease>(); }
             }
         }
-        private static List<Release> FilterReleases(IEnumerable<Release> releases)
-        {
-            return releases.Where(release =>
-            {
-                Version version;
-                return release.HasRelease() && Version.TryParse(release.TagName, out version);
-            }).OrderByDescending(release => new Version(release.TagName)).ToList();
-        }
-        public static async Task<List<GitHubRelease>> GetAllGitHubReleasesAsync(ProfileType profileType)
-        {
-            var releases = await GetAllReleasesAsync(profileType);
-            return new List<GitHubRelease>(releases.Any() ? releases.Select(release => new GitHubRelease(release)) : new List<GitHubRelease>());
-        }
+        private static List<GitHubRelease> FilterReleases(IEnumerable<Release> releases) => releases.Where(release => release.IsValid()).Select(release => new GitHubRelease(release)).OrderByDescending(githubRelease => githubRelease.Version).ToList();
 
-        private static List<Release> _getAllLauncherReleases;
-        private static async Task<List<Release>> GetAllLauncherReleases()
+        private static List<GitHubRelease> _getAllLauncherReleases;
+        public static async Task<List<GitHubRelease>> GetAllLauncherReleasesAsync()
         {
             if (_getAllLauncherReleases != null) return _getAllLauncherReleases;
             else
             {
-                if (!WebsiteIsUp) return new List<Release>();
+                if (!WebsiteIsUp) return new List<GitHubRelease>();
 
-                try { return _getAllLauncherReleases = new List<Release>(await Client.Repository.Release.GetAll(OrgName, LauncherRepoName)); }
-                catch (Exception) { return new List<Release>(); }
+                try { return _getAllLauncherReleases = (await Client.Repository.Release.GetAll(OrgName, LauncherRepoName)).Select(release => new GitHubRelease(release)).ToList(); }
+                catch (Exception) { return new List<GitHubRelease>(); }
             }
         }
-        public static async Task<List<GitHubRelease>> GetAllLauncherGitHubReleasesAsync()
-        {
-            var releases = await GetAllLauncherReleases();
-            return new List<GitHubRelease>(releases.Any() ? releases.Select(release => new GitHubRelease(release)) : new List<GitHubRelease>());
-        }
-
-        private static List<Release> _getBetaWhitelistUsers;
-        private static async Task<List<Release>> GetBetaWhitelistUsersAsync()
-        {
-            if (_getBetaWhitelistUsers != null) return _getBetaWhitelistUsers;
-            else
-            {
-                if (!WebsiteIsUp) return new List<Release>();
-
-                try { return _getBetaWhitelistUsers = new List<Release>(await Client.Repository.Release.GetAll(OrgName, LauncherRepoName)); }
-                catch (Exception) { return new List<Release>(); }
-            }
-        }
-
 
         private static async Task<bool> AnonymousHitRateLimit() => (await AnonymousClient.Miscellaneous.GetRateLimits()).Resources.Core.Remaining <= 0;
 
         public static void Update()
         {
-            _getAllReleases = new Dictionary<ProfileType, List<Release>>();
+            _getAllReleases = new Dictionary<ProfileType, List<GitHubRelease>>();
             _getAllLauncherReleases = null;
         }
     }

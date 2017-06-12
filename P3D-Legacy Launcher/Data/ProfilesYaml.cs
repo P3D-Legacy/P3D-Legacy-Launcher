@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using P3D.Legacy.Launcher.Storage.Files;
 using P3D.Legacy.Launcher.YamlConverters;
 using P3D.Legacy.Shared.Extensions;
 
@@ -9,18 +10,18 @@ using YamlDotNet.Serialization;
 
 namespace P3D.Legacy.Launcher.Data
 {
-    internal class ProfilesYaml
+    internal class ProfilesYaml : IYamlSettings
     {
-        public static ProfilesYaml Default => new ProfilesYaml(0, new List<ProfileYaml> { ProfileYaml.Default });
+        public static ProfilesYaml Default => new ProfilesYaml();
 
         public static SerializerBuilder SerializerBuilder { get; } = new SerializerBuilder().EmitDefaults().WithTypeConverter(new VersionConverter()).WithTypeConverter(new ProfileTypeConverter());
         public static DeserializerBuilder DeserializerBuilder { get; } = new DeserializerBuilder().IgnoreUnmatchedProperties().WithTypeConverter(new VersionConverter()).WithTypeConverter(new ProfileTypeConverter());
 
 
         [YamlMember(Alias = "SelectedProfileIndex")]
-        public int SelectedProfileIndex { get; private set; }
+        public int SelectedProfileIndex { get; private set; } = 0;
         [YamlMember(Alias = "ProfileList")]
-        public List<ProfileYaml> ProfileList { get; private set; }
+        public List<ProfileYaml> ProfileList { get; private set; } = new List<ProfileYaml> { ProfileYaml.Default };
 
         public ProfilesYaml() { }
         public ProfilesYaml(int selectedProfileIndex, List<ProfileYaml> profileList) { SelectedProfileIndex = selectedProfileIndex; ProfileList = profileList; }

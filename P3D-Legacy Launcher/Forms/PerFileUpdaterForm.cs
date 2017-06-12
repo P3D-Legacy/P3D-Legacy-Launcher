@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,7 +16,8 @@ using P3D.Legacy.Launcher.Controls;
 using P3D.Legacy.Launcher.Data;
 using P3D.Legacy.Launcher.Extensions;
 using P3D.Legacy.Launcher.Services;
-
+using P3D.Legacy.Launcher.Storage.Files;
+using P3D.Legacy.Launcher.Storage.Folders;
 using PCLExt.FileStorage;
 
 namespace P3D.Legacy.Launcher.Forms
@@ -25,91 +27,152 @@ namespace P3D.Legacy.Launcher.Forms
         private WebClient Downloader { get; set; }
         private bool Cancelled { get; set; }
 
-        private ReleaseAsset UpdateInfoAsset { get; }
-        private IFile ReleaseInfoFile => StorageInfo.GetTempFile(UpdateInfoAsset.Name).Result;
+        private ReleaseAsset OldUpdateInfoAsset { get; }
+        private ReleaseAsset NewUpdateInfoAsset { get; }
+
+        private TempFile OldUpdateInfoFile => new TempFile(OldUpdateInfoAsset.Name);
+        private TempFile NewUpdateInfoFile => new TempFile(NewUpdateInfoAsset.Name);
+
         private IFolder UpdatedFolder { get; }
+
         private Uri DLUri { get; }
 
-        public PerFileUpdaterForm(ReleaseAsset updateInfoAsset, IFolder updatedFolder, Uri dlUri)
+        public PerFileUpdaterForm(ReleaseAsset oldUpdateInfoAsset, ReleaseAsset newUpdateInfoAsset, IFolder updatedFolder, Uri dlUri)
         {
-            UpdateInfoAsset = updateInfoAsset;
+            OldUpdateInfoAsset = oldUpdateInfoAsset;
+            NewUpdateInfoAsset = newUpdateInfoAsset;
             UpdatedFolder = updatedFolder;
             DLUri = dlUri;
 
             InitializeComponent();
         }
 
-        private async void CustomUpdaterForm_Shown(object sender, EventArgs e)
+        private void CustomUpdaterForm_Shown(object sender, EventArgs e)
         {
-            await Task.Run(DownloadFileAsync);
+            DownloadUpdateInfoFiles();
+
+            if (Cancelled) return;
+
+            CheckOldFiles();
+
+            if (Cancelled) return;
+
+            var list = StartUpdate();
+
+            if (Cancelled) return;
+
+            if (list.Any())
+            {
+                UpdateFiles(list);
+                if (Cancelled) return;
+                UpdatedMessage();
+            }
+            else
+                NoUpdateNeededMessage();
+
+
             Close();
         }
 
-        private async Task DownloadFileAsync()
+        private async void DownloadUpdateInfoFiles()
         {
-            await ReleaseInfoFile.DeleteAsync();
+            OldUpdateInfoFile.Delete();
+            NewUpdateInfoFile.Delete();
 
             try
             {
-                PercentageProgressBar.SafeInvoke(() => PercentageProgressBar.Maximum = UpdateInfoAsset.Size);
                 using (Downloader = new WebClient())
                 {
-                    Downloader.DownloadProgressChanged += client_DownloadProgressChanged;
-                    await Downloader.DownloadFileTaskAsync(UpdateInfoAsset.BrowserDownloadUrl, ReleaseInfoFile.Path);
+                    Downloader.DownloadProgressChanged += (sender, args) => PercentageProgressBar.SafeInvoke(() => PercentageProgressBar.Value = (int) args.BytesReceived);
+
+                    PercentageProgressBar.SafeInvoke(() => PercentageProgressBar.Maximum = OldUpdateInfoAsset.Size);
+                    await Downloader.DownloadFileTaskAsync(new Uri(OldUpdateInfoAsset.BrowserDownloadUrl), OldUpdateInfoFile.Path);
+
+                    PercentageProgressBar.SafeInvoke(() => PercentageProgressBar.Maximum = NewUpdateInfoAsset.Size);
+                    await Downloader.DownloadFileTaskAsync(new Uri(NewUpdateInfoAsset.BrowserDownloadUrl), NewUpdateInfoFile.Path);
                 }
             }
             catch (WebException) { DownloadErrorMessage(); return; }
-            if (Cancelled) return;
-
-
-            // TODO: Check
-            //if (File.Exists(ReleaseInfoFilePath))
-            //{
-                var list = await StartUpdateAsync();
-                if (Cancelled) return;
-
-                if (list.Any())
-                {
-                    UpdateFiles(list);
-                    if (Cancelled) return;
-                    UpdatedMessage();
-                }
-                else
-                    NoUpdateNeededMessage();
-            //}
-            //else
-            //    DownloadErrorMessage();
         }
-        private void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+
+        private void CheckOldFiles()
         {
-            PercentageProgressBar.SafeInvoke(() => PercentageProgressBar.Value = (int) e.BytesReceived);
+            var oldUpdateInfo = UpdateInfoYaml.Deserialize(OldUpdateInfoFile.ReadAllText());
+            var newUpdateInfo = UpdateInfoYaml.Deserialize(NewUpdateInfoFile.ReadAllText());
+
+
+            var toBeDeleted = new List<IFile>();
+            var crc32 = new Crc32();
+            var sha1 = new SHA1Managed();
+            PercentageProgressBar.SafeInvoke(delegate { PercentageProgressBar.Maximum = oldUpdateInfo.Count(); PercentageProgressBar.Step = 1; PercentageProgressBar.Value = 0; });
+            Parallel.ForEach(oldUpdateInfo, (oldUpdateFileEntry, state) =>
+            {
+                var newUpdateFileEntry  = newUpdateInfo.FirstOrDefault(newUpdateInfoFile => newUpdateInfoFile.AbsoluteFilePath == oldUpdateFileEntry.AbsoluteFilePath);
+
+                if (Cancelled) state.Stop();
+
+                PercentageProgressBar.SafeInvoke(() => PercentageProgressBar.PerformStep());
+
+                if (UpdatedFolder.CheckExists(oldUpdateFileEntry.AbsoluteFilePath) != ExistenceCheckResult.FileExists)
+                    state.Break();
+
+                var folder = UpdatedFolder;
+                var folders = oldUpdateFileEntry.AbsoluteFilePath.Split('\\');
+                foreach (var folderName in folders.Reverse().Skip(1).Reverse())
+                    folder = folder.GetFolder(folderName);
+
+                var file = UpdatedFolder.GetFile(folders.Reverse().Take(1).ToArray()[0]);
+                using (var fs = file.Open(PCLExt.FileStorage.FileAccess.Read))
+                {
+                    var crc32Hash = string.Empty;
+                    var sha1Hash = string.Empty;
+                    crc32Hash = crc32.ComputeHash(fs).Aggregate(crc32Hash, (current, b) => current + b.ToString("x2").ToLower());
+                    if (crc32Hash == oldUpdateFileEntry.CRC32 && crc32Hash == newUpdateFileEntry.CRC32)
+                    {
+                        sha1Hash = sha1.ComputeHash(fs).Aggregate(sha1Hash, (current, b) => current + b.ToString("x2").ToLower());
+                        if (sha1Hash == oldUpdateFileEntry.SHA1 && sha1Hash == newUpdateFileEntry.SHA1)
+                            return; // -- Everything matches, do nothing.
+                        else
+                        {
+                            toBeDeleted.Add(file);
+                            return; // -- Should be deleted;
+                        }
+                    }
+                    else
+                    {
+                        toBeDeleted.Add(file);
+                        return; // -- Should be deleted;
+                    }
+                }
+            });
+            foreach (var file in toBeDeleted)
+                file.Delete();
         }
 
-        private async Task<List<UpdateFileEntryYaml>> StartUpdateAsync()
+        private List<UpdateFileEntryYaml> StartUpdate()
         {
             if (Cancelled) return new List<UpdateFileEntryYaml>();
 
             Label_ProgressBar1.SafeInvoke(() => Label_ProgressBar1.Text = Label_ProgressBar2.Text);
 
-            var releaseInfoContent = await ReleaseInfoFile.ReadAllTextAsync();
-            var updateInfo = UpdateInfoYaml.Deserialize(releaseInfoContent);
+            var newUpdateInfo = UpdateInfoYaml.Deserialize(NewUpdateInfoFile.ReadAllText());
 
             var crc32 = new Crc32();
             var sha1 = new SHA1Managed();
             var notValidFileEntries = new List<UpdateFileEntryYaml>();
-            PercentageProgressBar.SafeInvoke(delegate { PercentageProgressBar.Maximum = updateInfo.Count(); PercentageProgressBar.Step = 1; PercentageProgressBar.Value = 0; });
-            Parallel.ForEach(updateInfo, async (updateFileEntry, state) =>
+            PercentageProgressBar.SafeInvoke(delegate { PercentageProgressBar.Maximum = newUpdateInfo.Count(); PercentageProgressBar.Step = 1; PercentageProgressBar.Value = 0; });
+            Parallel.ForEach(newUpdateInfo, (updateFileEntry, state) =>
             {
                 if(Cancelled) state.Stop();
 
                 PercentageProgressBar.SafeInvoke(() => PercentageProgressBar.PerformStep());
 
-                if (await UpdatedFolder.CheckExistsAsync(updateFileEntry.AbsoluteFilePath) != ExistenceCheckResult.FileExists)
+                if (UpdatedFolder.CheckExists(updateFileEntry.AbsoluteFilePath) != ExistenceCheckResult.FileExists)
                 {
                     notValidFileEntries.Add(updateFileEntry);
                     return;
                 }
-                using (var fs = await (await UpdatedFolder.GetFileAsync(updateFileEntry.AbsoluteFilePath)).OpenAsync(PCLExt.FileStorage.FileAccess.Read))
+                using (var fs = UpdatedFolder.GetFile(updateFileEntry.AbsoluteFilePath).Open(PCLExt.FileStorage.FileAccess.Read))
                 {
                     var crc32Hash = string.Empty;
                     var sha1Hash = string.Empty;
@@ -144,12 +207,12 @@ namespace P3D.Legacy.Launcher.Forms
             try
             {
                 PercentageProgressBar.SafeInvoke(delegate { PercentageProgressBar.Maximum = updateFileEntries.Count; PercentageProgressBar.Step = 1; PercentageProgressBar.Value = 0; });
-                Parallel.ForEach(updateFileEntries, async (updateFileEntry, state) =>
+                Parallel.ForEach(updateFileEntries, (updateFileEntry, state) =>
                 {
                     if (Cancelled) state.Stop();
 
                     var dlUri = new Uri(DLUri, updateFileEntry.AbsoluteFilePath);
-                    var tempFile = await StorageInfo.GetTempFile(updateFileEntry.AbsoluteFilePath);
+                    var tempFile = new TempFile(updateFileEntry.AbsoluteFilePath);
                     using (var downloader = new WebClient())
                     {
                         downloader.DownloadFile(dlUri, tempFile.Path);
@@ -170,25 +233,25 @@ namespace P3D.Legacy.Launcher.Forms
 
             try
             {
-                Parallel.ForEach(updateFileEntries, async (updateFileEntry, state) =>
+                Parallel.ForEach(updateFileEntries, (updateFileEntry, state) =>
                 {
                     if (Cancelled) state.Break();
 
-                    var tempFilePath = await StorageInfo.GetTempFile(updateFileEntry.AbsoluteFilePath);
-                    await tempFilePath.MoveAsync(PortablePath.Combine(UpdatedFolder.Path, updateFileEntry.AbsoluteFilePath));
-                    await tempFilePath.DeleteAsync();
+                    var tempFilePath = new TempFile(updateFileEntry.AbsoluteFilePath);
+                    tempFilePath.Move(PortablePath.Combine(UpdatedFolder.Path, updateFileEntry.AbsoluteFilePath));
+                    tempFilePath.Delete();
                 });
             }
             catch (UnauthorizedAccessException) { FileReplacementErrorMessage(); return; }
             catch (IOException) { FileReplacementErrorMessage(); return; }
         }
-        private async void CustomUpdaterForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void CustomUpdaterForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Cancelled = true;
             Downloader?.CancelAsync();
 
-            await Task.Delay(1000);
-            await StorageInfo.TempFolder.DeleteAsync();
+            Thread.Sleep(1000);
+            new TempFolder().Delete();
         }
 
 

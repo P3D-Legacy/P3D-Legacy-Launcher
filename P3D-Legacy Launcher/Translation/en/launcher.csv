@@ -1,0 +1,108 @@
+STRING ID,ENGLISH
+LANGUAGE_NAME,
+LANGUAGE_MAINTAINER,Aragas
+BEGIN,
+;Main Form;,
+mf_title,Pokémon 3D Launcher
+mf_button_play,Launch
+mf_button_checkforupdates,Check for Updates
+mf_button_newprofile,New Profile
+mf_button_editprofile,Edit Profile
+mf_button_delete,Delete Profile
+mf_groupbox_common,Common
+mf_checkbox_checkforupdatesonstartup,Check for game updates on startup
+mf_label_language,Language:
+mf_groupbox_gamejolt,GameJolt
+mf_label_username,Username:
+mf_label_token,Token:
+mf_label_token_hint,"This is your GameJolt Token, not your GameJolt Password! For more info, check the FAQ tab"
+mf_checkbox_savecredentials,Remember me
+mf_checkbox_autologin,Keep me logged in
+mf_groupbox_network,Network
+mf_label_selecteddl,Selected DL:
+mf_button_save,Save
+mf_textbox_credits,"Launcher by {0}
+Translation:
+{1}"
+mf_tabpage_news,News
+mf_tabpage_logger,Logger
+mf_tabpage_faq,FAQ
+mf_tabpage_settings,Settings
+mf_tabpage_about,About
+mf_groupbox_game,Game
+mf_checkbox_checkserveronstart,Check for Official Server presence on start
+;GameJolt Form;,
+gj_title,You are not logged into GameJolt! 
+gj_wtextbox_username,Username
+gj_wtextbox_token,Token
+gj_checkbox_autologin,Keep me logged in
+gj_checkbox_savecredentials,Remember me
+gj_label_questionchar,?
+gj_button_login,Log In
+gj_button_playoffline,Play Offline
+gj_button_signin,Sign Up
+;Profile Form;,
+pf_title,Profile Editor
+pf_groupbox_profileinfo,Profile Info
+pf_label_profiletype,Profile Type:
+pf_label_profilename,Profile Name:
+pf_label_version,Version:
+pf_label_gamemode,GameMode:
+pf_button_availablegamemods,Available GameModes
+pf_label_launchargs,Launch Args:
+pf_label_noedit,"You can't edit the 'Latest' Profile!
+Create a new profile!"
+pf_button_openprofiledir,Open Directory
+pf_groupbox_modifications,Modifications
+pf_datagridview_enabled,Enabled
+pf_datagridview_author,Author
+pf_datagridview_name,Name
+pf_datagridview_category,Category
+pf_datagridview_version,Version
+pf_datagridview_downloads,Downloads
+pf_datagridview_rating,Rating
+pf_datagridview_gameversion,Game Version
+pf_button_availablemodifications,Available Modifications
+pf_button_cancel,Cancel
+pf_button_save,Save
+pf_profile_latest,Newest Version
+;ReleaseDownloader Form;,
+rd_title,Downloader
+rd_label_downloadprogress,Download Progress:
+rd_label_extractionprogress,Extraction Progress:
+;PerFileUpdater Form;,
+pfu_title,Updater
+pfu_label_updateinfoprogress,Update Info Download Progress:
+pfu_label_comparisonprogress,Comparison Progress:
+pfu_label_downloadprogress,Download Progress:
+;MessageBox;,
+DLNotSelected,Can't update! Select a DL first in Settings tab!
+DLNotSelectedTitle,Error!
+SomethingNotFoundError,"Pokémon 3D requires {0}
+Please visit {1} to download.
+Would you like to open the webpage now?"
+SomethingNotFoundErrorTitle,Error!
+DownloadError,Failed to download a file. Please try again!
+DownloadErrorTitle,Error!
+FileReplacementError,There was an error while replacing the old files with the new ones!
+FileReplacementErrorTitle,Error!
+LauncherUpdateAvailable,"A new Launcher version is available!
+Would you like to update?"
+LauncherUpdateAvailableTitle,Update is Available!
+NoInternet,Could not connect to GitHub! Is Internet connection available?
+NoInternetTitle,Update Check Error!
+NotDownloaded,"Profile '{0}' was not downloaded!
+Would you like to download it?"
+NotDownloadedTitle,Not Downloaded!
+NoUpdateNeeded,The Profile doesn't need an update!
+NoUpdateNeededTitle,Done!
+ProfileUpToDate,Profile '{0}' is up to date!
+ProfileUpToDateTitle,Update Check
+ToolTipSaveCredentials,"Enable ""Remember Me"" first!"
+UpdateAvailable,Would you like to download the [{0}] version to [{1}]?
+UpdateAvailableTitle,Update is Available!
+Updated,The Profile was successfully updated!
+UpdateDisabled,"Update is disabled! Please download the new version, don't use updating."
+UpdateDisabledTitle,Error!
+UpdatedTitle,Success!
+END,

@@ -117,7 +117,6 @@
             this.WatermarkTextBox_Token.Name = "WatermarkTextBox_Token";
             this.WatermarkTextBox_Token.PasswordChar = '*';
             this.WatermarkTextBox_Token.Size = new System.Drawing.Size(360, 20);
-            this.WatermarkTextBox_Token.Hint = "gj_wtextbox_token";
             this.WatermarkTextBox_Token.TabIndex = 1;
             // 
             // CheckBox_SaveCredentials

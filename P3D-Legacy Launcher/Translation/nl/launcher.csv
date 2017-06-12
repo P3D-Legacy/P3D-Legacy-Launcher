@@ -1,0 +1,109 @@
+STRING ID,DUTCH/NEDERLANDS
+LANGUAGE_NAME,
+LANGUAGE_MAINTAINER,PersuerNL
+BEGIN,
+;Main Form;,
+mf_title,Pokémon 3D Launcher
+mf_button_play,Spelen
+mf_button_checkforupdates,Check voor updates
+mf_button_newprofile,Nieuw Profiel
+mf_button_editprofile,Profiel Bewerken
+mf_button_delete,Profiel Verwijderen
+mf_groupbox_common,Algemeen
+mf_checkbox_checkforupdatesonstartup,Checken voor updates bij opstarten
+mf_label_language,Taal:
+mf_groupbox_gamejolt,GameJolt
+mf_label_username,Gebruikersnaam
+mf_label_token,Token:
+mf_label_token_hint,"Dit is je GameJolt Token, niet je GameJolt wachtwoord! Voor meer informatie, bekijk de FAQ."
+mf_checkbox_savecredentials,Onthouden
+mf_checkbox_autologin,Hou mij ingelogd
+mf_groupbox_network,Netwerk
+mf_label_selecteddl,Geselecteerde download
+mf_button_save,Opslaan
+mf_textbox_credits,"Launcher door: {0}
+Vertaling:
+{1}"
+mf_tabpage_news,Nieuws
+mf_tabpage_logger,Logger
+mf_tabpage_faq,FAQ
+mf_tabpage_settings,Instellingen
+mf_tabpage_about,Over
+mf_groupbox_game,Spel
+mf_checkbox_checkserveronstart,Check bij het opstarten of je de Officiele Server online is.
+;GameJolt Form;,
+gj_title,Je bent niet ingelogd bij GameJolt!
+gj_wtextbox_username,Gebruikersnaam
+gj_wtextbox_token,Token
+gj_checkbox_autologin,Hou mij ingelogd
+gj_checkbox_savecredentials,Onthouden
+gj_label_questionchar,?
+gj_button_login,Inloggen
+gj_button_playoffline,Speel offline
+gj_button_signin,Inschrijven
+;Profile Form;,
+pf_title,Profiel Bewerken
+pf_groupbox_profileinfo,Profiel Informatie
+pf_label_profiletype,Profieltype
+pf_label_profilename,Profielnaam
+pf_label_version,Versie:
+pf_label_gamemode,GameMode:
+pf_button_availablegamemods,Beschikbare GameModes
+pf_label_launchargs,Startopties:
+pf_label_noedit,"Je kan ""nieuwste"" profiel niet bewerken! Maak een nieuw profiel!"
+pf_button_openprofiledir,Open map
+pf_groupbox_modifications,Modificaties
+pf_label_launchargs,Enabled
+pf_label_noedit,Auteur
+pf_button_openprofiledir,Naam
+pf_groupbox_modifications,"Categorie
+"
+pf_datagridview_enabled,Versie
+pf_datagridview_author,Downloads
+pf_datagridview_name,"Recensie
+"
+pf_datagridview_category,Game Versie
+pf_datagridview_version,Beschikbare modificaties
+pf_button_cancel,Annuleren
+pf_button_save,Opslaan
+pf_profile_latest,Nieuwste Versie
+;ReleaseDownloader Form;,
+rd_title,Downloader
+rd_label_downloadprogress,Downloadvoortgang:
+rd_label_extractionprogress,Extractievoortgang:
+;PerFileUpdater Form;,
+pfu_title,Updater
+pfu_label_updateinfoprogress,Update informatie downloadvoortgang:
+pfu_label_comparisonprogress,Vergelijkingsvoortang:
+pfu_label_downloadprogress,Downloadvoortgang:
+;MessageBox;,
+DLNotSelected,Kan niet updaten!
+DLNotSelectedTitle,Error!
+SomethingNotFoundError,"Pokémon 3D heeft {0} nodig.
+Ga alstublieft naar {1} om het te downloaden.
+Wilt u deze webpagina openen?"
+SomethingNotFoundErrorTitle,Error!
+DownloadError,Bestand downloaden mislukt. Probeer het opnieuw!
+DownloadErrorTitle,Error!
+FileReplacementError,Er ging iets mis tijdens het vervangen van de bestanden!
+FileReplacementErrorTitle,Error!
+LauncherUpdateAvailable,"Er is een nieuwe versie van de launcher beschikbaar!
+Wil je updaten?"
+LauncherUpdateAvailableTitle,Update beschikbaar!
+NoInternet,"Kon niet verbinden met GitHub, is er een netwerkverbinding beschikbaar?"
+NoInternetTitle,Update Check Error!
+NotDownloaded,"Profiel '{0}' is niet gedownload!
+Wil je het downloaden?"
+NotDownloadedTitle,Niet gedownload!
+NoUpdateNeeded,Dit profiel hoeft niet geupdate te worden!
+NoUpdateNeededTitle,Klaar!
+ProfileUpToDate,Profiel '{0}' is up to date!
+ProfileUpToDateTitle,Update Check
+ToolTipSaveCredentials,"Zorg ervoor dat ""Onthouden"" aangevinkt staat!"
+UpdateAvailable,Wil je versie [{0}] updaten naar versie [{1}]?
+UpdateAvailableTitle,Update is beschikbaar!
+Updated,Dit profiel is succesvol geupdate!
+UpdateDisabled,"Update is uitgeschakeld! Download alsjeblieft de nieuwe versie, in plaats van update te gebruiken."
+UpdateDisabledTitle,Error!
+UpdatedTitle,Succes!
+END,

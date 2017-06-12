@@ -1,0 +1,108 @@
+STRING ID,GERMAN/DEUTSCH
+LANGUAGE_NAME,
+LANGUAGE_MAINTAINER,Blurgaro
+BEGIN,
+;Main Form;,
+mf_title,Pokémon 3D Launcher
+mf_button_play,Start
+mf_button_checkforupdates,Suche nach Updates
+mf_button_newprofile,Neues Profil erstellen
+mf_button_editprofile,Profil bearbeiten
+mf_button_delete,Profil löschen
+mf_groupbox_common,Häufig verwendet
+mf_checkbox_checkforupdatesonstartup,Prüfe nach Updates beim starten
+mf_label_language,Sprache:
+mf_groupbox_gamejolt,Gamejolt
+mf_label_username,Benutzername:
+mf_label_token,Token:
+mf_label_token_hint,"Dies ist dein Gamejolt-Token, nicht dein Gamejolt-Passwort! Für mehr Informationen, prüfe die FAQs"
+mf_checkbox_savecredentials,Passwort speichern
+mf_checkbox_autologin,eingeloggt bleiben
+mf_groupbox_network,Netzwerk
+mf_label_selecteddl,Ausgewählter DL:
+mf_button_save,Speichern
+mf_textbox_credits,"Launcher von {0}
+Übersetzung:
+{1}"
+mf_tabpage_news,Neuigkeiten
+mf_tabpage_logger,Aktivitätenprotokoll
+mf_tabpage_faq,FAQ
+mf_tabpage_settings,Einstellungen
+mf_tabpage_about,Informationen
+mf_groupbox_game,Spiel
+mf_checkbox_checkserveronstart,Prüfe auf Anwesenheit des offiziellen Servers beim Start
+;GameJolt Form;,
+gj_title,Du bist nicht in Gamejolt eingeloggt!
+gj_wtextbox_username,Benutzername
+gj_wtextbox_token,Token
+gj_checkbox_autologin,eingeloggt bleiben
+gj_checkbox_savecredentials,Passwort speichern
+gj_label_questionchar,?
+gj_button_login,Einloggen
+gj_button_playoffline,Offline spielen
+gj_button_signin,Anmelden
+;Profile Form;,
+pf_title,Profil Editor
+pf_groupbox_profileinfo,Profilinformation
+pf_label_profiletype,Profiltyp:
+pf_label_profilename,Profilname:
+pf_label_version,Version:
+pf_label_gamemode,Spielmodus:
+pf_button_availablegamemods,Verfügbare Spielmodi:
+pf_label_launchargs,Starte Argumente:
+pf_label_noedit,"Du kannst das ""aktuellste"" Profil nicht öffnen!
+Bitte erstelle ein neues Profil!"
+pf_button_openprofiledir,Verzeichnis öffnen
+pf_groupbox_modifications,Mods
+pf_datagridview_enabled,Aktiviert
+pf_datagridview_author,Autor
+pf_datagridview_name,Name
+pf_datagridview_category,Kategorie
+pf_datagridview_version,Version
+pf_datagridview_downloads,Downloads
+pf_datagridview_rating,Bewertung
+pf_datagridview_gameversion,Spielversion
+pf_button_availablemodifications,Verfügbare Mods
+pf_button_cancel,Abbrechen
+pf_button_save,Speichern
+pf_profile_latest,Neueste Version
+;ReleaseDownloader Form;,
+rd_title,Download
+rd_label_downloadprogress,Downloadfortschritt:
+rd_label_extractionprogress,Extraktionsfortschritt
+;PerFileUpdater Form;,
+pfu_title,Updater
+pfu_label_updateinfoprogress,Update-Infofortschritt:
+pfu_label_comparisonprogress,Fortschrittsvergleich:
+pfu_label_downloadprogress,Downloadfortschritt:
+;MessageBox;,
+DLNotSelected,Update nicht möglich! Wählen Sie zuerst einen DL in den Einstellungen!
+DLNotSelectedTitle,Fehler!
+SomethingNotFoundError,"Pokemon 3D benötigt {0}
+Bitte besuche {1} zum herunterladen.
+Möchtest du die Website jetzt öffnen?"
+SomethingNotFoundErrorTitle,Fehler!
+DownloadError,Der Download ist fehlgeschlagen. Bitte erneut versuchen!
+DownloadErrorTitle,Fehler!
+FileReplacementError,Es unterlief ein Fehler beim Ersetzen der alten Dateien!
+FileReplacementErrorTitle,Fehler!
+LauncherUpdateAvailable,"Ein neuer Launcher ist verfügbar!
+Möchtest du die neue Version herunterladen?"
+LauncherUpdateAvailableTitle,Update ist verfügbar!
+NoInternet,Konnte nicht zu GitHub verbinden! ist eine Internetverbindung verfügbar?
+NoInternetTitle,Fehler beim Prüfen von Updates!
+NotDownloaded,"Profil '{0}' wurde nicht heruntergeladen!
+Möchtest du es jetzt herunterladen?"
+NotDownloadedTitle,Nicht heruntergeladen!
+NoUpdateNeeded,Dieses Profil benötigt kein Update!
+NoUpdateNeededTitle,Abgeschlossen!
+ProfileUpToDate,Profil '{0}' ist auf dem aktuellsten Stand!
+ProfileUpToDateTitle,Überprüfe Update
+ToolTipSaveCredentials,"Aktiviere zuerst ""Passwort speichern""!"
+UpdateAvailable,Möchtest du die Version [{0}] zu Version [{1}] updaten?
+UpdateAvailableTitle,Update ist verfügbar!
+Updated,Das Profil wurde erfolgreich geupdated!
+UpdateDisabled,Update ist gesperrt! Bitte lade dir die neueste Version herunter. Ein Update ist nicht möglich.
+UpdateDisabledTitle,Fehler!
+UpdatedTitle,Erfolgreich!
+END,

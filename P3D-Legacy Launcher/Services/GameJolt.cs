@@ -8,6 +8,8 @@ using JoltNet;
 
 using P3D.Legacy.Shared.Data;
 
+using static P3D.Legacy.Shared.Data.EncodedString;
+
 namespace P3D.Legacy.Launcher.Services
 {
     internal class GameJolt
@@ -20,8 +22,8 @@ namespace P3D.Legacy.Launcher.Services
         private static string OldGameId = "";
         private static string OldGameKey = "";
 
-        private static GameJoltApiClient Client { get; } = new GameJoltApiClient(EncodedString.FromEncodedData(GameId), EncodedString.FromEncodedData(GameKey));
-        private static GameJoltApiClient OldClient { get; } = new GameJoltApiClient(EncodedString.FromEncodedData(OldGameId), EncodedString.FromEncodedData(OldGameKey));
+        private static GameJoltApiClient Client { get; } = new GameJoltApiClient(FromEncodedData(GameId), FromEncodedData(GameKey));
+        private static GameJoltApiClient OldClient { get; } = new GameJoltApiClient(FromEncodedData(OldGameId), FromEncodedData(OldGameKey));
 
         private static WebsiteChecker WebsiteChecker { get; } = new WebsiteChecker(Host);
         public static bool WebsiteIsUp => WebsiteChecker.Check();
@@ -32,7 +34,7 @@ namespace P3D.Legacy.Launcher.Services
         private string Username { get; }
         private string Token { get; }
 
-        private DateTime _lastSessionPing = DateTime.MinValue;
+        private DateTime? _lastSessionPing;
 
 
         public GameJolt() { }
@@ -41,8 +43,10 @@ namespace P3D.Legacy.Launcher.Services
 
         public async Task<bool> IsConnectedAsync()
         {
-            // BUG: Is this a bug? After creating new GameJolt(), _lastSessionPing is a MinValue, it returns false info.
-            if (_lastSessionPing == DateTime.MinValue)
+            //if (_lastSessionPing == null)
+            //    await SessionOpenAsync();
+
+            if (_lastSessionPing == null)
                 return false;
 
             if (DateTime.UtcNow - _lastSessionPing > TimeSpan.FromSeconds(30))
@@ -65,7 +69,7 @@ namespace P3D.Legacy.Launcher.Services
             if (pingRequest.Response.Success)
                 _lastSessionPing = DateTime.UtcNow;
             else
-                _lastSessionPing = DateTime.MinValue;
+                _lastSessionPing = null;
 
             return pingRequest.Response;
         }
@@ -83,7 +87,13 @@ namespace P3D.Legacy.Launcher.Services
             if (openRequest.Response.Success)
                 _lastSessionPing = DateTime.UtcNow;
             else
-                _lastSessionPing = DateTime.MinValue;
+                _lastSessionPing = null;
+
+            if (openRequest.Response.Success)
+            {
+                var request = RequestProvider.Storage.GetKeys(Username, Token);
+                await OldClient.ExecuteRequestAsync(request);
+            }
 
             return openRequest.Response;
         }
@@ -99,7 +109,7 @@ namespace P3D.Legacy.Launcher.Services
             await Client.ExecuteRequestAsync(closeRequest).ConfigureAwait(false);
 
             if (closeRequest.Response.Success)
-                _lastSessionPing = DateTime.MinValue;
+                _lastSessionPing = null;
 
             return closeRequest.Response;
         }

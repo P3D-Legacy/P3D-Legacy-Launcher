@@ -1,0 +1,108 @@
+STRING ID,LITHUANIAN/LIETUVIŠKAI
+LANGUAGE_NAME,
+LANGUAGE_MAINTAINER,SViper
+BEGIN,
+;Main Form;,
+mf_title,Pokemonai 3D Paleidėjas
+mf_button_play,Žaisti
+mf_button_checkforupdates,"Tikrinti, ar yra atnaujinimų"
+mf_button_newprofile,Naujas Profilis
+mf_button_editprofile,Redaguoti Profilį
+mf_button_delete,Ištrinti Profilį
+mf_groupbox_common,Bendras
+mf_checkbox_checkforupdatesonstartup,"Tikrinti, ar yra žaidimo atnaujimų paleidimo metu"
+mf_label_language,Kalba:
+mf_groupbox_gamejolt,GameJolt
+mf_label_username,Vartotojo vardas:
+mf_label_token,Token'as:
+mf_label_token_hint,"Tai yra jūsų GameJolt Token'as, o ne jūsų GameJolt Slaptažodis! Daugiau informacijos rasite DUK skiltyje."
+mf_checkbox_savecredentials,Prisiminti mane
+mf_checkbox_autologin,Palikti mane prijungtą
+mf_groupbox_network,Tinklai
+mf_label_selecteddl,Pasirinkti parsiuntimo nuorodą:
+mf_button_save,Išsaugoti
+mf_textbox_credits,"Paleidėjo kūrėjas {0}
+Vertėjai:
+{1}"
+mf_tabpage_news,Naujienos
+mf_tabpage_logger,Loger'is
+mf_tabpage_faq,DUK
+mf_tabpage_settings,Nustatymai
+mf_tabpage_about,Apie
+mf_groupbox_game,Žaidimas
+mf_checkbox_checkserveronstart,Patikrinti ar Pagrindinis Serveris aktyvus paleidimo metu
+;GameJolt Form;,
+gj_title,Jūs nesate prisijungęs prie GameJolt!
+gj_wtextbox_username,Vartotojo vardas
+gj_wtextbox_token,Token'as
+gj_checkbox_autologin,Palikti mane prijungtą
+gj_checkbox_savecredentials,Prisiminti mane
+gj_label_questionchar,?
+gj_button_login,Prisijungti
+gj_button_playoffline,Žaisti neprisijungus
+gj_button_signin,Prisiregistruoti
+;Profile Form;,
+pf_title,Profilio Redaktorius
+pf_groupbox_profileinfo,Profilio Informacija
+pf_label_profiletype,Profilio Tipas:
+pf_label_profilename,Profilio Vardas:
+pf_label_version,Versija:
+pf_label_gamemode,Žaidimo Modifikacijos
+pf_button_availablegamemods,Galimos Žaidimo Modifikacijos
+pf_label_launchargs,Paleisti Argumentus:
+pf_label_noedit,"Jūs negalite redaguoti Profilio 'Latest'!
+Susikurkite naują profilį!"
+pf_button_openprofiledir,Atidaryti Žaidimo Aplanką
+pf_groupbox_modifications,Modifikacijos
+pf_datagridview_enabled,Įjungtas
+pf_datagridview_author,Autorius
+pf_datagridview_name,Vardas
+pf_datagridview_category,Kategorija
+pf_datagridview_version,Versija
+pf_datagridview_downloads,Siuntiniai
+pf_datagridview_rating,Reitingas
+pf_datagridview_gameversion,Žaidimo Versija
+pf_button_availablemodifications,Galimos Modifikacijos
+pf_button_cancel,Atšaukti
+pf_button_save,Išsaugoti
+pf_profile_latest,Naujausia Versija
+;ReleaseDownloader Form;,
+rd_title,Parsiųntėjas
+rd_label_downloadprogress,Parsiųntimo Progresas:
+rd_label_extractionprogress,Ekstrakcijos Progresas:
+;PerFileUpdater Form;,
+pfu_title,Atnaujintojas
+pfu_label_updateinfoprogress,Atnaujintos Informacijos Parsiųntimo Progresas
+pfu_label_comparisonprogress,Palyginimo Progresas:
+pfu_label_downloadprogress,Parsiųntimo Progresas:
+;MessageBox;,
+DLNotSelected,Negalima atnaujinti! Pirmiausia pasirinkite parsisiuntimo nuorodą nustatymuose!
+DLNotSelectedTitle,Klaida!
+SomethingNotFoundError,"Pokemonai 3D reikalauja {0}
+Prašau apsilankyti {1}, kad tai parsisiųsti.
+Ar norėtumėte atidaryti tinklalapį dabar?"
+SomethingNotFoundErrorTitle,Klaida!
+DownloadError,Nepavyko parsiųsti failo. Prašome badyti dar kartą!
+DownloadErrorTitle,Klaida!
+FileReplacementError,Įvyko klaida keičiant senus failus į naujus!
+FileReplacementErrorTitle,Klaida!
+LauncherUpdateAvailable,"Jau pasiekiama nauja Paleidėjo versija!
+Ar norėtumėte atsinaujinti Paleidėją!"
+LauncherUpdateAvailableTitle,Yra naujas atnaujinimas!
+NoInternet,Nepavyko prisijungti prie GitHub! Ar jūs prisijungęs prie interneto?
+NoInternetTitle,Klaida naujinimo tikrinime!
+NotDownloaded,"Profilis '{0}' nebuvo parsiųstas!
+Ar norėtumėte parsisiųsti jį?"
+NotDownloadedTitle,Neparsiųstas!
+NoUpdateNeeded,Profilio nereikia atnaujinti!
+NoUpdateNeededTitle,Atlikta!
+ProfileUpToDate,Profilis '{0}' yra atnaujintas!
+ProfileUpToDateTitle,Atnaujinimo Patikrinimas
+ToolTipSaveCredentials,"Pirmiausia įjunkite ""Prisiminti mane"" funkciją!"
+UpdateAvailable,Ar norėtumėte atnaujinti [{0}] versiją į [{1}]?
+UpdateAvailableTitle,Yra naujas atnaujinimas!
+Updated,Profilis buvo sėkmingai atnaujintas!
+UpdateDisabled,Atnaujinimas išjungtas! Prašome parsisiųsti naują versiją naujai.
+UpdateDisabledTitle,Klaida!
+UpdatedTitle,Sėkmingai!
+END,

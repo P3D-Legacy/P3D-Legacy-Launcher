@@ -1,0 +1,107 @@
+STRING ID,SPANISH / ESPAÑOL
+LANGUAGE_NAME,Latinoamérica
+LANGUAGE_MAINTAINER,Capt_Segis
+BEGIN,
+;Main Form;,
+mf_title,Pokémon 3D Launcher
+mf_button_play,Jugar
+mf_button_checkforupdates,Buscar actualizaciones
+mf_button_newprofile,Nuevo perfil
+mf_button_editprofile,Editar perfil
+mf_button_delete,Borrar perfil
+mf_groupbox_common,General
+mf_checkbox_checkforupdatesonstartup,Buscar actualizaciones al iniciar
+mf_label_language,Idioma
+mf_groupbox_gamejolt,GameJolt
+mf_label_username,Usuario:
+mf_label_token,Token:
+mf_label_token_hint,"Este es su Token de GameJolt, no su contraseña. Véase Preguntas Frecuentes."
+mf_checkbox_savecredentials,Recordar
+mf_checkbox_autologin,Mantener sesión iniciada
+mf_groupbox_network,Conexión
+mf_label_selecteddl,Enlace de descarga
+mf_button_save,Guardar
+mf_textbox_credits,"Launcher hecho por {0}
+Traducción:
+{1}"
+mf_tabpage_news,Noticias
+mf_tabpage_logger,Registro
+mf_tabpage_faq,Preguntas Frecuentes
+mf_tabpage_settings,Configuración
+mf_tabpage_about,Acerca de
+mf_groupbox_game,Juego
+mf_checkbox_checkserveronstart,Buscar el server oficial al iniciar
+;GameJolt Form;,
+gj_title,No has iniciado sesion en GameJolt.
+gj_wtextbox_username,Usuario
+gj_wtextbox_token,Token
+gj_checkbox_autologin,Mantener sesión iniciada
+gj_checkbox_savecredentials,Recordar
+gj_label_questionchar,?
+gj_button_login,Iniciar sesión
+gj_button_playoffline,Modo desconectado
+gj_button_signin,Crear cuenta
+;Profile Form;,
+pf_title,Editor de perfiles
+pf_groupbox_profileinfo,Información del perfil
+pf_label_profiletype,Tipo de perfil:
+pf_label_profilename,Nombre del perfil
+pf_label_version,Versión:
+pf_label_gamemode,GameMode:
+pf_button_availablegamemods,GameModes disponibles
+pf_label_launchargs,Parámetros:
+pf_label_noedit,No es posible editar el perfil 'Latest'. Debe crear un nuevo perfil.
+pf_button_openprofiledir,Abrir ubicación
+pf_groupbox_modifications,Mods:
+pf_datagridview_enabled,Habilitado
+pf_datagridview_author,Autor
+pf_datagridview_name,Nombre
+pf_datagridview_category,Categoría
+pf_datagridview_version,Versión
+pf_datagridview_downloads,Descargas
+pf_datagridview_rating,Calificación
+pf_datagridview_gameversion,Versión del juego
+pf_button_availablemodifications,Mods disponibles
+pf_button_cancel,Cancelar
+pf_button_save,Guardar
+pf_profile_latest,Versión más reciente
+;ReleaseDownloader Form;,
+rd_title,Descarga
+rd_label_downloadprogress,Descargando:
+rd_label_extractionprogress,Extrayendo:
+;PerFileUpdater Form;,
+pfu_title,Actualización
+pfu_label_updateinfoprogress,Descargando información:
+pfu_label_comparisonprogress,Comparando archivos:
+pfu_label_downloadprogress,Descargando actualización:
+;MessageBox;,
+DLNotSelected,"No es posible actualizar. Por favor, seleccione un enlace de descarga en la pestaña de Configuración."
+DLNotSelectedTitle,Error
+SomethingNotFoundError,"Pokémon 3D requiere tener {0} instalado.
+Por favor, visite {1} para descargarlo.
+¿Le gustaría abrir la pagina web ahora?"
+SomethingNotFoundErrorTitle,Error
+DownloadError,"Error al descargar un archivo. Por favor, intente de nuevo."
+DownloadErrorTitle,Error
+FileReplacementError,Hubo un error al reemplazar archivos.
+FileReplacementErrorTitle,Error
+LauncherUpdateAvailable,"Una nueva versión del Launcher se encuentra disponible.
+¿Le gustaría actualizar el Launcher?"
+LauncherUpdateAvailableTitle,Hay una actualización disponible
+NoInternet,"No se pudo conectar a GitHub. Por favor, verifique su conexión a internet."
+NoInternetTitle,Error de Verificación
+NotDownloaded,"El perfil '{0}' no ha sido descargado.
+¿Desea hacerlo ahora?"
+NotDownloadedTitle,Descarga no realizada
+NoUpdateNeeded,El perfil se encuentra actualizado.
+NoUpdateNeededTitle,Completado
+ProfileUpToDate,El perfil '{0}' se encuentra actualizado.
+ProfileUpToDateTitle,Verificación
+ToolTipSaveCredentials,"Por favor, habilitar ""Recordar"" en la configuración."
+UpdateAvailable,¿Le gustaría parchar la versión [{0}] a la versión [{1}]?
+UpdateAvailableTitle,Hay una actualización disponible.
+Updated,El perfil ha sido actualizado con éxito.
+UpdateDisabled,"La opción de actualizar ha sido inhabilitada. Por favor, descargue la nueva version de forma independiente."
+UpdateDisabledTitle,Error
+UpdatedTitle,Completado
+END,

@@ -45,6 +45,8 @@ namespace P3D.Legacy.Launcher.Forms
             this.Label_Version = new System.Windows.Forms.Label();
             this.LinkLabel_Pokemon3D = new System.Windows.Forms.LinkLabel();
             this.TabPage_Settings = new P3D.Legacy.Launcher.Controls.LocalizableTabPage();
+            this.GroupBox_Game = new P3D.Legacy.Launcher.Controls.LocalizableGroupBox();
+            this.CheckBox_CheckServerOnStart = new P3D.Legacy.Launcher.Controls.LocalizableCheckBox();
             this.GroupBox__GameJolt = new P3D.Legacy.Launcher.Controls.LocalizableGroupBox();
             this.TextBox_Token = new P3D.Legacy.Launcher.Controls.LocalizableWatermarkTextBox();
             this.CheckBox_SaveCredentials = new P3D.Legacy.Launcher.Controls.LocalizableCheckBox();
@@ -65,16 +67,22 @@ namespace P3D.Legacy.Launcher.Forms
             this.TabPage_News = new P3D.Legacy.Launcher.Controls.LocalizableTabPage();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.TabPage_FAQ = new P3D.Legacy.Launcher.Controls.LocalizableTabPage();
+            this.TabPage_Skins = new System.Windows.Forms.TabPage();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.Label_NoGameJolt = new P3D.Legacy.Launcher.Controls.LocalizableLabel();
             this.PictureBox_GameJolt = new System.Windows.Forms.PictureBox();
             this.BackgroundWorker_GameJolt = new System.ComponentModel.BackgroundWorker();
             this.PictureBox_GameJolt_Offline = new System.Windows.Forms.PictureBox();
             this.TabPage_About.SuspendLayout();
             this.TabPage_Settings.SuspendLayout();
+            this.GroupBox_Game.SuspendLayout();
             this.GroupBox__GameJolt.SuspendLayout();
             this.GroupBox_Netwok.SuspendLayout();
             this.GroupBox_Startup.SuspendLayout();
             this.TabPage_Logger.SuspendLayout();
             this.TabControl.SuspendLayout();
+            this.TabPage_Skins.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox_GameJolt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox_GameJolt_Offline)).BeginInit();
             this.SuspendLayout();
@@ -207,6 +215,7 @@ namespace P3D.Legacy.Launcher.Forms
             // 
             // TabPage_Settings
             // 
+            this.TabPage_Settings.Controls.Add(this.GroupBox_Game);
             this.TabPage_Settings.Controls.Add(this.GroupBox__GameJolt);
             this.TabPage_Settings.Controls.Add(this.GroupBox_Netwok);
             this.TabPage_Settings.Controls.Add(this.Button_SaveSettings);
@@ -218,6 +227,28 @@ namespace P3D.Legacy.Launcher.Forms
             this.TabPage_Settings.Size = new System.Drawing.Size(836, 382);
             this.TabPage_Settings.TabIndex = 2;
             this.TabPage_Settings.Text = "mf_tabpage_settings";
+            // 
+            // GroupBox_Game
+            // 
+            this.GroupBox_Game.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.GroupBox_Game.Controls.Add(this.CheckBox_CheckServerOnStart);
+            this.GroupBox_Game.Location = new System.Drawing.Point(8, 218);
+            this.GroupBox_Game.Name = "GroupBox_Game";
+            this.GroupBox_Game.Size = new System.Drawing.Size(822, 58);
+            this.GroupBox_Game.TabIndex = 4;
+            this.GroupBox_Game.TabStop = false;
+            this.GroupBox_Game.Text = "mf_groupbox_game";
+            // 
+            // CheckBox_CheckServerOnStart
+            // 
+            this.CheckBox_CheckServerOnStart.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.CheckBox_CheckServerOnStart.Location = new System.Drawing.Point(6, 19);
+            this.CheckBox_CheckServerOnStart.Name = "CheckBox_CheckServerOnStart";
+            this.CheckBox_CheckServerOnStart.Size = new System.Drawing.Size(807, 17);
+            this.CheckBox_CheckServerOnStart.TabIndex = 1;
+            this.CheckBox_CheckServerOnStart.Text = "mf_checkbox_checkserveronstart";
+            this.CheckBox_CheckServerOnStart.UseVisualStyleBackColor = true;
             // 
             // GroupBox__GameJolt
             // 
@@ -298,7 +329,7 @@ namespace P3D.Legacy.Launcher.Forms
             this.GroupBox_Netwok.Controls.Add(this.ComboBox_SelectedDL);
             this.GroupBox_Netwok.Controls.Add(this.Label_SelectedDL);
             this.GroupBox_Netwok.Enabled = false;
-            this.GroupBox_Netwok.Location = new System.Drawing.Point(8, 218);
+            this.GroupBox_Netwok.Location = new System.Drawing.Point(8, 282);
             this.GroupBox_Netwok.Name = "GroupBox_Netwok";
             this.GroupBox_Netwok.Size = new System.Drawing.Size(822, 58);
             this.GroupBox_Netwok.TabIndex = 2;
@@ -433,10 +464,38 @@ namespace P3D.Legacy.Launcher.Forms
             this.TabPage_FAQ.TabIndex = 4;
             this.TabPage_FAQ.Text = "mf_tabpage_faq";
             // 
+            // TabPage_Skins
+            // 
+            this.TabPage_Skins.Controls.Add(this.pictureBox1);
+            this.TabPage_Skins.Controls.Add(this.Label_NoGameJolt);
+            this.TabPage_Skins.Location = new System.Drawing.Point(4, 22);
+            this.TabPage_Skins.Name = "TabPage_Skins";
+            this.TabPage_Skins.Padding = new System.Windows.Forms.Padding(3);
+            this.TabPage_Skins.Size = new System.Drawing.Size(836, 382);
+            this.TabPage_Skins.TabIndex = 5;
+            this.TabPage_Skins.Text = "mf_tabpage_skins";
+            this.TabPage_Skins.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(120, 96);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 50);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            // 
+            // Label_NoGameJolt
+            // 
+            this.Label_NoGameJolt.AutoSize = true;
+            this.Label_NoGameJolt.Location = new System.Drawing.Point(8, 3);
+            this.Label_NoGameJolt.Name = "Label_NoGameJolt";
+            this.Label_NoGameJolt.Size = new System.Drawing.Size(103, 13);
+            this.Label_NoGameJolt.TabIndex = 0;
+            this.Label_NoGameJolt.Text = "mf_label_nogamejolt";
+            // 
             // PictureBox_GameJolt
             // 
             this.PictureBox_GameJolt.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.PictureBox_GameJolt.Enabled = false;
             this.PictureBox_GameJolt.Image = ((System.Drawing.Image)(resources.GetObject("PictureBox_GameJolt.Image")));
             this.PictureBox_GameJolt.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.PictureBox_GameJolt.Location = new System.Drawing.Point(638, 423);
@@ -455,7 +514,6 @@ namespace P3D.Legacy.Launcher.Forms
             // PictureBox_GameJolt_Offline
             // 
             this.PictureBox_GameJolt_Offline.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.PictureBox_GameJolt_Offline.Enabled = false;
             this.PictureBox_GameJolt_Offline.Image = ((System.Drawing.Image)(resources.GetObject("PictureBox_GameJolt_Offline.Image")));
             this.PictureBox_GameJolt_Offline.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.PictureBox_GameJolt_Offline.Location = new System.Drawing.Point(638, 423);
@@ -486,10 +544,12 @@ namespace P3D.Legacy.Launcher.Forms
             this.MinimumSize = new System.Drawing.Size(860, 520);
             this.Name = "MainForm";
             this.StringID_Title = "mf_title";
+            this.Text = "mf_title";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.TabPage_About.ResumeLayout(false);
             this.TabPage_About.PerformLayout();
             this.TabPage_Settings.ResumeLayout(false);
+            this.GroupBox_Game.ResumeLayout(false);
             this.GroupBox__GameJolt.ResumeLayout(false);
             this.GroupBox__GameJolt.PerformLayout();
             this.GroupBox_Netwok.ResumeLayout(false);
@@ -497,6 +557,9 @@ namespace P3D.Legacy.Launcher.Forms
             this.TabPage_Logger.ResumeLayout(false);
             this.TabPage_Logger.PerformLayout();
             this.TabControl.ResumeLayout(false);
+            this.TabPage_Skins.ResumeLayout(false);
+            this.TabPage_Skins.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox_GameJolt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox_GameJolt_Offline)).EndInit();
             this.ResumeLayout(false);
@@ -539,6 +602,11 @@ namespace P3D.Legacy.Launcher.Forms
         private PictureBox PictureBox_GameJolt_Offline;
         private LocalizableLabel Label_About;
         private LocalizableLabel Label_Credits;
+        private LocalizableGroupBox GroupBox_Game;
+        private LocalizableCheckBox CheckBox_CheckServerOnStart;
+        private TabPage TabPage_Skins;
+        private LocalizableLabel Label_NoGameJolt;
+        private PictureBox pictureBox1;
     }
 }
 

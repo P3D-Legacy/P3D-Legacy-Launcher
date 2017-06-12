@@ -1,0 +1,108 @@
+STRING ID,PORTUGUESE / PORTUGUÊS
+LANGUAGE_NAME,
+LANGUAGE_MAINTAINER,OmegaGhost
+BEGIN,
+;Main Form;,
+mf_title,Launcher Pokémon 3D
+mf_button_play,Jogar
+mf_button_checkforupdates,Buscar Atualizações
+mf_button_newprofile,Novo Perfil
+mf_button_editprofile,Editar Perfil
+mf_button_delete,Apagar Perfil
+mf_groupbox_common,Geral
+mf_checkbox_checkforupdatesonstartup,Buscar Atualizações ao iniciar
+mf_label_language,Linguagem:
+mf_groupbox_gamejolt,GameJolt
+mf_label_username,Usuário:
+mf_label_token,Token:
+mf_label_token_hint,"Esse é o seu Token GameJolt, não sua Senha GameJolt! Para mais informações, cheque a aba de Perguntas Frequentes."
+mf_checkbox_savecredentials,Lembrar credenciais
+mf_checkbox_autologin,Manter-me logado
+mf_groupbox_network,Rede
+mf_label_selecteddl,Link de download:
+mf_button_save,Salvar
+mf_textbox_credits,"Launcher feito por {0}
+Traduções:
+{1}"
+mf_tabpage_news,Notícias
+mf_tabpage_logger,Registro de Sistema
+mf_tabpage_faq,Perguntas Frequentes
+mf_tabpage_settings,Configurações
+mf_tabpage_about,Sobre
+mf_groupbox_game,Jogo
+mf_checkbox_checkserveronstart,Checar presença do Servidor Oficial ao inicializar
+;GameJolt Form;,
+gj_title,Você não está logado no GameJolt!
+gj_wtextbox_username,Usuário
+gj_wtextbox_token,Token
+gj_checkbox_autologin,Manter-me logado
+gj_checkbox_savecredentials,Lembrar credenciais
+gj_label_questionchar,?
+gj_button_login,Fazer Login
+gj_button_playoffline,Jogar Offline
+gj_button_signin,Registrar
+;Profile Form;,
+pf_title,Editor de Perfis
+pf_groupbox_profileinfo,Informação do Perfil
+pf_label_profiletype,Tipo de Perfil:
+pf_label_profilename,Nome do Perfil
+pf_label_version,Versão:
+pf_label_gamemode,Modo de Jogo:
+pf_button_availablegamemods,Modos Disponíveis
+pf_label_launchargs,Opç. de Inicialização:
+pf_label_noedit,"Você não pode editar o Perfil 'Latest'!
+Crie um novo perfil!"
+pf_button_openprofiledir,Abrir Pasta
+pf_groupbox_modifications,Mods
+pf_button_openprofiledir,Ativado
+pf_groupbox_modifications,Autor
+pf_datagridview_enabled,Nome
+pf_datagridview_author,Categoria
+pf_datagridview_name,Versão
+pf_datagridview_category,Downloads
+pf_datagridview_version,Avaliação
+pf_datagridview_downloads,Versão do Jogo
+pf_datagridview_rating,Mods Disponíveis
+pf_button_cancel,Cancelar
+pf_button_save,Salvar
+pf_profile_latest,Última Versão
+;ReleaseDownloader Form;,
+rd_title,Baixar
+rd_label_downloadprogress,Baixando:
+rd_label_extractionprogress,Extraindo:
+;PerFileUpdater Form;,
+pfu_title,Atualização
+pfu_label_updateinfoprogress,Recebendo informação:
+pfu_label_comparisonprogress,Comparando dados:
+pfu_label_downloadprogress,Baixando atualização:
+;MessageBox;,
+DLNotSelected,Falha na Atualização! Selecione um link de download na aba Configurações!
+DLNotSelectedTitle,Erro!
+SomethingNotFoundError,"Pokémon 3D requer {0}.
+Por favor, visite {1} para baixar.
+Gostaria de abrir o link agora?"
+SomethingNotFoundErrorTitle,Erro!
+DownloadError,"Algum arquivo não pôde ser baixado! Por favor, tente novamente!"
+DownloadErrorTitle,Erro!
+FileReplacementError,Um erro ocorreu ao substituir os arquivos antigos pelos novos!
+FileReplacementErrorTitle,Erro!
+LauncherUpdateAvailable,"Uma nova versão do Launcher está disponível!
+Gostaria de atualizar agora?"
+LauncherUpdateAvailableTitle,Atualização disponível!
+NoInternet,Falha ao conectar ao GitHub! Cheque sua conexão de Internet.
+NoInternetTitle,Erro na verificação da Atualização!
+NotDownloaded,"Perfil '{0}' não foi baixado!
+Gostaria de baixá-lo?"
+NotDownloadedTitle,Não foi baixado!
+NoUpdateNeeded,O Perfil não precisa de Atualizações!
+NoUpdateNeededTitle,Pronto!
+ProfileUpToDate,O Perfil '{0}' está atualizado!
+ProfileUpToDateTitle,Buscar Atualizações
+ToolTipSaveCredentials,"Habilite ""Lembrar credenciais"" primeiro!"
+UpdateAvailable,Gostaria de atualizar a versão [{0}] para [{1}]?
+UpdateAvailableTitle,Atualização disponível!
+Updated,O Perfil foi atualizado com sucesso!
+UpdateDisabled,"A opção de atualização está desativada! Por favor, baixe a nova versão de forma independente."
+UpdateDisabledTitle,Erro!
+UpdatedTitle,Sucesso!
+END,

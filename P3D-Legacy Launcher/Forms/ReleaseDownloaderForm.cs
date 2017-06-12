@@ -2,16 +2,16 @@
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using Ionic.Zip;
+using ICSharpCode.SharpZipLib.Zip;
 
 using Octokit;
 
 using P3D.Legacy.Launcher.Controls;
 using P3D.Legacy.Launcher.Extensions;
-using P3D.Legacy.Launcher.Services;
+using P3D.Legacy.Launcher.Storage.Files;
+using P3D.Legacy.Launcher.Storage.Folders;
 
 using PCLExt.FileStorage;
 
@@ -22,7 +22,7 @@ namespace P3D.Legacy.Launcher.Forms
         private WebClient Downloader { get; set; }
 
         private ReleaseAsset ReleaseAsset { get; }
-        private IFile TempFile => StorageInfo.GetTempFile(ReleaseAsset.Name).Result;
+        private IFile TempFile => new TempFile(ReleaseAsset.Name);
         private IFolder ExtractionFolder { get; }
 
         public ReleaseDownloaderForm(ReleaseAsset releaseAsset, IFolder extractionFolder)
@@ -33,64 +33,65 @@ namespace P3D.Legacy.Launcher.Forms
             InitializeComponent();
         }
 
-        private async void DirectUpdaterForm_Shown(object sender, EventArgs e) => await Task.Run(DownloadFileAsync);
-
-        private async Task DownloadFileAsync()
+        private void DirectUpdaterForm_Shown(object sender, EventArgs args)
         {
-            await TempFile.DeleteAsync();
+            TempFile.Delete();
 
             try
             {
                 using (Downloader = new WebClient())
                 {
-                    Downloader.DownloadProgressChanged += client_DownloadProgressChanged;
-                    await Downloader.DownloadFileTaskAsync(ReleaseAsset.BrowserDownloadUrl, TempFile.Path);
+                    Downloader.DownloadFileCompleted += (s, e) =>
+                    {
+                        Label_ProgressBar1.SafeInvoke(() =>
+                        {
+                            PercentageProgressBar.Value = 0;
+                            Label_ProgressBar1.Text = Label_ProgressBar2.Text;
+                        });
+
+                        BackgroundWorker_Extractor.RunWorkerAsync();
+                    };
+                    Downloader.DownloadProgressChanged += (s, e) =>
+                    {
+                        this.SafeInvoke(delegate
+                        {
+                            double bytesIn = e.BytesReceived;
+                            double totalBytes = e.TotalBytesToReceive;
+                            double percentage = bytesIn / totalBytes * 100;
+                            PercentageProgressBar.Value = (int) percentage;
+                        });
+                    };
+                    Downloader.DownloadFileAsync(new Uri(ReleaseAsset.BrowserDownloadUrl), TempFile.Path);
                 }
             }
-            catch (WebException) { return; }
-
-            //TODO: Check
-            ExtractFile();
-        }
-        private void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
-        {
-            this.SafeInvoke(delegate
-            {
-                double bytesIn = e.BytesReceived;
-                double totalBytes = e.TotalBytesToReceive;
-                double percentage = bytesIn / totalBytes * 100;
-                PercentageProgressBar.Value = (int) percentage;
-            });
+            catch (WebException) { }
         }
 
-        private void ExtractFile()
+        private void BackgroundWorker_Extractor_DoWork(object sender, System.ComponentModel.DoWorkEventArgs args)
         {
-            Label_ProgressBar1.SafeInvoke(() =>
+            using(var fs = TempFile.Open(PCLExt.FileStorage.FileAccess.Read))
+            using (var zip = new ZipFile(fs))
             {
-                PercentageProgressBar.Value = 0;
-                Label_ProgressBar1.Text = Label_ProgressBar2.Text;
-            });
-
-            BackgroundWorker_Extractor.RunWorkerAsync();
-        }
-
-        private async void BackgroundWorker_Extractor_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {
-            using(var fs = await TempFile.OpenAsync(PCLExt.FileStorage.FileAccess.Read))
-            using (var zip = ZipFile.Read(fs))
-            {
-                var result = zip.Skip(1).Where(entry => entry.FileName.Contains(zip[0].FileName)).ToList();
-                result = result.Select(c =>
-                {
-                    c.FileName = c.FileName.Replace(zip[0].FileName, "");
-                    return c;
-                }).ToList();
+                var result = zip.Cast<ZipEntry>().Skip(1).Where(entry => entry.Name.Contains(zip[0].Name)).ToList(); // -- Zip should contain main folder.
 
                 // -- We skip the Main folder.
                 for (var i = 0; i < result.Count; i++)
                 {
-                    if (e.Cancel) return;
-                    result[i].Extract(ExtractionFolder.Path, ExtractExistingFileAction.OverwriteSilently);
+                    if (args.Cancel) return;
+
+                    var zipEntry = result[i];
+                    var path = zipEntry.Name.Replace(zip[0].Name, "");
+
+                    if (zipEntry.IsDirectory)
+                    {
+                        ExtractionFolder.GetFolderFromPath(path);
+                    }
+                    if (zipEntry.IsFile)
+                    {
+                        using (var inputStream = zip.GetInputStream(zipEntry))
+                        using (var fileStream = ExtractionFolder.GetFileFromPath(path).Open(PCLExt.FileStorage.FileAccess.ReadAndWrite))
+                            inputStream.CopyTo(fileStream);
+                    }
 
                     double bytesIn = i;
                     double totalBytes = result.Count;
@@ -99,8 +100,8 @@ namespace P3D.Legacy.Launcher.Forms
                 }
             }
         }
-        private void BackgroundWorker_Extractor_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e) => this.SafeInvoke(() => PercentageProgressBar.Value = e.ProgressPercentage);
-        private void BackgroundWorker_Extractor_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        private void BackgroundWorker_Extractor_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs args) => this.SafeInvoke(() => PercentageProgressBar.Value = args.ProgressPercentage);
+        private void BackgroundWorker_Extractor_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs args)
         {
             this.SafeInvoke(delegate
             {
@@ -109,14 +110,13 @@ namespace P3D.Legacy.Launcher.Forms
             });
         }
 
-        private async void DirectDownloaderForm_FormClosing(object sender, FormClosingEventArgs e)
+        private void DirectDownloaderForm_FormClosing(object sender, FormClosingEventArgs args)
         {
             Downloader?.CancelAsync();
             BackgroundWorker_Extractor?.CancelAsync();
 
-            await Task.Delay(1000);
-            try { await StorageInfo.TempFolder.DeleteAsync(); }
-            catch (IOException) { /* Program.ActionsBeforeExit.Add(() => AsyncExtensions.RunSync(async () => await StorageInfo.TempFolder.DeleteAsync())); */ }
+            try { new TempFolder().Delete(); }
+            catch (FileNotFoundException) { Program.ActionsBeforeExit.Add(() => new TempFolder().Delete()); }
         }
     }
 }
