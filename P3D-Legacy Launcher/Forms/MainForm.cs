@@ -458,12 +458,12 @@ namespace P3D.Legacy.Launcher.Forms
             if (gameReleases.Any() && (!onStartup || CurrentProfile.IsDefault))
             {
                 var latestRelease = gameReleases.First();
-                if (CurrentProfile.Version < latestRelease.Version)
+                if (CurrentProfile.Version < latestRelease.Version || CurrentProfile.VersionExe < latestRelease.Version)
                 {
                     Log($"Found a new Profile '{CurrentProfile.Name}' version [{latestRelease.Version}]!");
                     UpdateCurrentProfile(latestRelease);
                 }
-                else if (CurrentProfile.VersionExe != new Version("0.0") && CurrentProfile.VersionExe != new Version("1.0.0.0") && CurrentProfile.Version >= CurrentProfile.VersionExe)
+                else if (CurrentProfile.VersionExe != new Version("0.0") && CurrentProfile.VersionExe != new Version("1.0.0.0") && CurrentProfile.VersionExe < CurrentProfile.Version)
                 {
                     Log($"The version of the execution file [{CurrentProfile.VersionExe}] of Profile '{CurrentProfile.Name}' does not correspond to the Profile version [{CurrentProfile.Version}]! An update is needed.");
                     UpdateCurrentProfile(latestRelease);
@@ -508,27 +508,37 @@ namespace P3D.Legacy.Launcher.Forms
         }
         private void UpdateCurrentProfile(GitHubRelease onlineRelease)
         {
-            switch (MessageBox.Show(string.Format(LocalizationUI.GetString("UpdateAvailable"), CurrentProfile.Version, onlineRelease.Version), LocalizationUI.GetString("UpdateAvailableTitle"), MessageBoxButtons.YesNoCancel))
+            switch (MessageBox.Show(string.Format(LocalizationUI.GetString("UpdateAvailable"), CurrentProfile.Version, onlineRelease.Version), LocalizationUI.GetString("UpdateAvailableTitle"), MessageBoxButtons.YesNo))
             {
                 case DialogResult.Yes:
-                    //MessageBox.Show(LocalizationUI.GetString("UpdateDisabled"), LocalizationUI.GetString("UpdateDisabledTitle"), MessageBoxButtons.OK);
-                    if (Settings.SelectedDL != null && !string.IsNullOrEmpty(Settings.SelectedDL.AbsolutePath))
-                        //using (var customUpdater = new PerFileUpdaterForm(onlineRelease.UpdateInfoAsset, CurrentProfile.Folder, new Uri(Settings.SelectedDL, $"{onlineRelease.Version}/")))
-                        //    customUpdater.ShowDialog();
-                        ;
-                    else
-                        MessageBox.Show(LocalizationUI.GetString("DLNotSelected"), LocalizationUI.GetString("DLNotSelectedTitle"), MessageBoxButtons.OK);
-                    break;
-
-                case DialogResult.No:
-                //case DialogResult.Cancel:
                     using (var directUpdater = new ReleaseDownloaderForm(onlineRelease.ReleaseAsset, CurrentProfile.Folder))
                         directUpdater.ShowDialog();
                     break;
 
-                case DialogResult.Cancel:
-                //case DialogResult.No:
+                case DialogResult.No:
                     return;
+
+                    /*
+                    case DialogResult.Yes:
+                        //MessageBox.Show(LocalizationUI.GetString("UpdateDisabled"), LocalizationUI.GetString("UpdateDisabledTitle"), MessageBoxButtons.OK);
+                        if (Settings.SelectedDL != null && !string.IsNullOrEmpty(Settings.SelectedDL.AbsolutePath))
+                            //using (var customUpdater = new PerFileUpdaterForm(onlineRelease.UpdateInfoAsset, CurrentProfile.Folder, new Uri(Settings.SelectedDL, $"{onlineRelease.Version}/")))
+                            //    customUpdater.ShowDialog();
+                            ;
+                        else
+                            MessageBox.Show(LocalizationUI.GetString("DLNotSelected"), LocalizationUI.GetString("DLNotSelectedTitle"), MessageBoxButtons.OK);
+                        break;
+
+                    case DialogResult.No:
+                    //case DialogResult.Cancel:
+                        using (var directUpdater = new ReleaseDownloaderForm(onlineRelease.ReleaseAsset, CurrentProfile.Folder))
+                            directUpdater.ShowDialog();
+                        break;
+
+                    case DialogResult.Cancel:
+                    //case DialogResult.No:
+                        return;
+                        */
             }
         }
 

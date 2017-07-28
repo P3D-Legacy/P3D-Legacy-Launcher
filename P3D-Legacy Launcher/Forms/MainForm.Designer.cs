@@ -544,7 +544,6 @@ namespace P3D.Legacy.Launcher.Forms
             this.MinimumSize = new System.Drawing.Size(860, 520);
             this.Name = "MainForm";
             this.StringID_Title = "mf_title";
-            this.Text = "mf_title";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.TabPage_About.ResumeLayout(false);
             this.TabPage_About.PerformLayout();

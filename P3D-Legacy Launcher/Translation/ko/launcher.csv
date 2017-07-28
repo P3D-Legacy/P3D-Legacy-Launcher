@@ -1,0 +1,109 @@
+﻿STRING ID,KOREAN
+LANGUAGE_NAME,KOREAN
+LANGUAGE_MAINTAINER,ACMEBLD
+BEGIN,
+;Main Form;,
+mf_title,포켓몬 3D 런처
+mf_button_play,시작
+mf_button_checkforupdates,업데이트 확인
+mf_button_newprofile,새 프로필
+mf_button_editprofile,프로필 수정
+mf_button_delete,프로필 삭제
+mf_groupbox_common,공공
+mf_checkbox_checkforupdatesonstartup,시작 시 업데이트 확인
+mf_label_language,언어 :
+mf_groupbox_gamejolt,GameJolt
+mf_label_username,유저네임 :
+mf_label_token,토큰 :
+mf_label_token_hint,GameJolt 토큰을 말함. GameJolt 비밀번호가 아님! 자세히 알아보려면 FAQ 란 참조.
+mf_checkbox_savecredentials,정보 저장
+mf_checkbox_autologin,로그인 상태 유지
+mf_groupbox_network,네트워크
+mf_label_selecteddl,선택된 DL :
+mf_button_save,저장
+mf_textbox_credits,"런처 by {0}
+번역:
+{1}"
+mf_tabpage_news,새 소식
+mf_tabpage_logger,로그일람
+mf_tabpage_faq,FAQ
+mf_tabpage_settings,설정
+mf_tabpage_about,About
+mf_groupbox_game,게임
+mf_checkbox_checkserveronstart,시작시 공식 서버 상태 확인
+;GameJolt Form;,
+gj_title,GameJolt에 로그인 하지 않으셨습니다!
+gj_wtextbox_username,유저네임
+gj_wtextbox_token,토큰
+gj_checkbox_autologin,로그인 상태 유지
+gj_checkbox_savecredentials,정보 저장
+gj_label_questionchar,?
+gj_button_login,로그인
+gj_button_playoffline,오프라인 플레이
+gj_button_signin,계정 생성
+;Profile Form;,
+pf_title,프로필 수정하기
+pf_groupbox_profileinfo,프로필 정보
+pf_label_profiletype,프로필 종류 :
+pf_label_profilename,프로필 이름 :
+pf_label_version,버전 :
+pf_label_gamemode,게임모드 :
+pf_button_availablegamemods,사용가능 게임모드 :
+pf_label_launchargs,Launch Args :
+pf_label_noedit,"최신' 프로필은 수정할 수 없습니다!
+새로운 프로필을 생성하세요!"
+pf_button_openprofiledir,디렉토리 열기
+pf_groupbox_modifications,수정
+pf_datagridview_enabled,활성화
+pf_datagridview_author,개발자
+pf_datagridview_name,이름
+pf_datagridview_category,카테고리
+pf_datagridview_version,버전
+pf_datagridview_downloads,다운로드
+pf_datagridview_rating,순위
+pf_datagridview_gameversion,게임 버전
+pf_button_availablemodifications,사용가능한 수정
+pf_button_cancel,취소
+pf_button_save,저장
+pf_profile_latest,최신 버전
+;ReleaseDownloader Form;,
+rd_title,다운로더
+rd_label_downloadprogress,다운로드 과정 :
+rd_label_extractionprogress,추출 과정 :
+;PerFileUpdater Form;,
+pfu_title,업데이터
+pfu_label_updateinfoprogress,업데이트 정보 다운로드 과정 :
+pfu_label_comparisonprogress,비교 과정 :
+pfu_label_downloadprogress,다운로드 과정 :
+;MessageBox;,
+DLNotSelected,업데이트 불가! 먼저 설정 탭에서 DL을 선택하세요!
+DLNotSelectedTitle,에러!
+SomethingNotFoundError,"포켓몬 3D 는 {0}
+가 필요합니다.
+{1}에 방문하여 다운로드 하세요.
+해당 사이트를 방문하시겠습니까?"
+SomethingNotFoundErrorTitle,에러!
+DownloadError,파일 다운로드 실패. 재시도 필요!
+DownloadErrorTitle,에러!
+FileReplacementError,이전 파일들을 새로운 파일로 교체 중 에러 발생!
+FileReplacementErrorTitle,에러!
+LauncherUpdateAvailable,"신버전 런처가 사용 가능합니다!
+업데이트 하시겠습니까?"
+LauncherUpdateAvailableTitle,업데이트 가능!
+NoInternet,GitHub에 연결할 수 없습니다. 인터넷 연결상태를 확인하세요.
+NoInternetTitle,업데이트 체크 에러!
+NotDownloaded,"프로필 '{0}' 가 아직 다운로드 되지 않았습니다!
+다운로드 하시겠습니까?"
+NotDownloadedTitle,다운로드 미완료!
+NoUpdateNeeded,프로필 업데이트 불필요!
+NoUpdateNeededTitle,완료!
+ProfileUpToDate,프로필 '{0}' 가 최신 상태입니다!
+ProfileUpToDateTitle,업데이트 체크
+ToolTipSaveCredentials,"""정보 저장""을 먼저 활성화 하세요!"
+UpdateAvailable,[{1}]의 [{0}] 버전을 다운로드 하시겠습니까?
+UpdateAvailableTitle,업데이트 가능!
+Updated,프로필이 성공적으로 업데이트 되었습니다!
+UpdateDisabled,업데이트 비활성화됨! (사용불가) 새로운 버전을 다운로드 하세요.
+UpdateDisabledTitle,에러!
+UpdatedTitle,성공!
+END,
