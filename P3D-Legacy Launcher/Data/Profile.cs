@@ -44,14 +44,7 @@ namespace P3D.Legacy.Launcher.Data
         public ProfileFolder Folder => new ProfileFolder(Name, ProfileType);
         public List<ModificationInfo> ModificationInfos => Folder.ModFolder.GetModificationFolders().Select(mod => mod.ModificationFile.ModificationInfo).ToList();
 
-        public bool IsDefault
-        {
-            get
-            {
-                var latestVersion = AsyncExtensions.RunSync(async () => await GetAvailableVersionsAsync()).FirstOrDefault();
-                return Name == "Latest" && latestVersion != null ? latestVersion == Version : Version == NoVersion;
-            }
-        }
+        public bool IsDefault => Name == "Latest";
         public bool IsSupportingGameJolt => ProfileType.IsSupportingGameJolt(Version);
 
         public Profile(ProfileType profileType, string name, Version version, string launchArgs = "")

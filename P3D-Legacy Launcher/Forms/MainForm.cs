@@ -458,6 +458,18 @@ namespace P3D.Legacy.Launcher.Forms
             if (gameReleases.Any() && (!onStartup || CurrentProfile.IsDefault))
             {
                 var latestRelease = gameReleases.First();
+
+                if (CurrentProfile.IsDefault)
+                {
+                    if(CurrentProfile.Version < latestRelease.Version)
+                    {
+                        Log($"Found a new Profile '{CurrentProfile.Name}' version [{latestRelease.Version}]!");
+                        UpdateCurrentProfile(latestRelease);
+                        return;
+                    }
+                }
+
+
                 if (CurrentProfile.Version < latestRelease.Version || CurrentProfile.VersionExe < latestRelease.Version)
                 {
                     Log($"Found a new Profile '{CurrentProfile.Name}' version [{latestRelease.Version}]!");
