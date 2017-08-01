@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 using P3D.Legacy.Launcher.Data;
 using P3D.Legacy.Launcher.Storage.Folders;
+using P3D.Legacy.Shared.Extensions;
 using P3D.Legacy.Shared.Storage.Folders;
 
 using PCLExt.FileStorage;
@@ -21,15 +22,17 @@ namespace P3D.Legacy.Launcher.Storage.Files
 
         internal enum SelectedProfile { Current, First, Last }
 
+        private Profile Latest => new Profile(ProfileType.Game, "Latest", AsyncExtensions.RunSync(async () => await Profile.GetAvailableVersionsAsync(ProfileType.Game)).FirstOrDefault() ?? Profile.NoVersion, string.Empty);
         private List<Profile> ProfileList { get; set; }
+
         public int SelectedProfileIndex { get; set; }
         public Profile CurrentProfile
         {
             get
             {
-                if (ProfileList.Count <= SelectedProfileIndex)
+                if (ProfileList.Count <= SelectedProfileIndex) // Because of Latest
                     SelectedProfileIndex = ProfileList.Count - 1;
-                return ProfileList.Any() ? ProfileList[SelectedProfileIndex] : null;
+                return ProfileList.Any() ? ProfileList[SelectedProfileIndex] : null; // Because of Latest
             }
         }
 
@@ -179,11 +182,18 @@ namespace P3D.Legacy.Launcher.Storage.Files
             }
         }
 
-        protected override ProfilesYaml ToYaml() => new ProfilesYaml(SelectedProfileIndex, ProfileList.Select(Profile.ToYaml).ToList());
+        protected override ProfilesYaml ToYaml()
+        {
+            ProfileList.Remove(Latest);
+            return new ProfilesYaml(SelectedProfileIndex, ProfileList.Select(Profile.ToYaml).ToList());
+        }
+
         protected override void FromYaml(ProfilesYaml profile)
         {
             SelectedProfileIndex = profile.SelectedProfileIndex;
-            ProfileList = profile.ProfileList.Select(Profile.FromYaml).ToList();
+            ProfileList = new List<Profile> {Latest};
+            profile.ProfileList.RemoveAll(p => p.Name == "Latest"); // Removing old way of keeping latest profile
+            ProfileList.AddRange(profile.ProfileList.Select(Profile.FromYaml).ToList());
         }
 
 

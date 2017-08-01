@@ -4,7 +4,6 @@ using System.Linq;
 
 using P3D.Legacy.Launcher.Storage.Files;
 using P3D.Legacy.Launcher.YamlConverters;
-using P3D.Legacy.Shared.Extensions;
 
 using YamlDotNet.Serialization;
 
@@ -21,34 +20,42 @@ namespace P3D.Legacy.Launcher.Data
         [YamlMember(Alias = "SelectedProfileIndex")]
         public int SelectedProfileIndex { get; private set; } = 0;
         [YamlMember(Alias = "ProfileList")]
-        public List<ProfileYaml> ProfileList { get; private set; } = new List<ProfileYaml> { ProfileYaml.Default };
+        public List<ProfileYaml> ProfileList { get; private set; } = new List<ProfileYaml>();
 
         public ProfilesYaml() { }
-        public ProfilesYaml(int selectedProfileIndex, List<ProfileYaml> profileList) { SelectedProfileIndex = selectedProfileIndex; ProfileList = profileList; }
+        public ProfilesYaml(int selectedProfileIndex, List<ProfileYaml> profileList)
+        {
+            SelectedProfileIndex = selectedProfileIndex;
+            ProfileList = profileList;
+        }
 
         public bool IsValid()
         {
+            if (SelectedProfileIndex < 0)
+                SelectedProfileIndex = 0;
+            if (SelectedProfileIndex - 1 >= ProfileList.Count)
+                SelectedProfileIndex = ProfileList.Count;
+
+            var index = SelectedProfileIndex > 0 ? SelectedProfileIndex - 1 : SelectedProfileIndex; // Because of Latest
+
             if (ProfileList == null)
                 return false;
 
             if (!ProfileList.Any())
                 return false;
 
-            if (ProfileList.Count <= SelectedProfileIndex)
+            if (ProfileList.Count <= index)
                 return false;
 
             if (SelectedProfileIndex < 0)
                 return false;
 
-            return ProfileList[SelectedProfileIndex].Name != null && ProfileList[SelectedProfileIndex].Version != null;
+            return ProfileList[index].Name != null && ProfileList[index].Version != null;
         }
     }
 
     internal class ProfileYaml
     {
-        public static ProfileYaml Default => new ProfileYaml(ProfileType.Game, "Latest", AsyncExtensions.RunSync(async () => await Profile.GetAvailableVersionsAsync(ProfileType.Game)).FirstOrDefault() ?? Profile.NoVersion, string.Empty);
-
-
         [YamlMember(Alias = "ProfileType")]
         public ProfileType ProfileType { get; private set; }
 

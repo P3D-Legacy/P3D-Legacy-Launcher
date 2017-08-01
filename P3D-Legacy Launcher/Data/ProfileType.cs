@@ -28,9 +28,6 @@ namespace P3D.Legacy.Launcher.Data
 
         private ProfileType(string name, string exe, string modFolder, string defaultLaunchArgs, Func<Version, bool> isSupportingGameJolt)
         {
-            var t = new ProfileFolder(name, this);
-            IList<ProfileType> y = new ProfileType[0];
-
             Name = name;
             Exe = exe;
             ModFolder = modFolder;
